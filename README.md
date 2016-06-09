@@ -2,7 +2,7 @@
 Quick Navigation
 ================================================================================
 
-Schnellnavigation ab REDAXO 5.0
+Schnellnavigation ab REDAXO 5.1.0
 
 
 ### Bugtracker

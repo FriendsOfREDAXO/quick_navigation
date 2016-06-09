@@ -4,6 +4,7 @@ Quick Navigation
 
 Schnellnavigation ab REDAXO 5.1.0
 
+![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
 ### Bugtracker
 

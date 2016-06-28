@@ -17,7 +17,7 @@ class QuickNavigation
         $clang = $ep->getParam('clang', 1);
         $category_id = $ep->getParam('category_id', 0);
         $article_id = $ep->getParam('article_id', 0);
-        
+
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
 
@@ -40,6 +40,10 @@ class QuickNavigation
 
         $droplistContext = rex_context::fromGet();
         $droplistContext->setParam('category_id', 0);
+
+        if (rex_be_controller::getCurrentPagePart(1) != 'structure' && rex_be_controller::getCurrentPagePart(1) != 'content') {
+            $droplistContext->setParam('page', 'structure');
+        }
 
         $button_label = '';
         $items = [];

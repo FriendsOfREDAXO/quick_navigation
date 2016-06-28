@@ -11,7 +11,5 @@
 
 /* Addon Parameter */
 if (rex::isBackend()) {
-    if (rex_be_controller::getCurrentPage() == 'structure' || rex_be_controller::getCurrentPage() == 'content/edit') {
-        rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
-    }
+    rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
 }

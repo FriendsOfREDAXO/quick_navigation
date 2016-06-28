@@ -13,6 +13,11 @@ class QuickNavigation
 {
     public static function get($ep)
     {
+
+        if (rex_be_controller::getCurrentPageObject()->isPopup()) {
+             return $ep->getSubject();
+        }
+        
         // ------------ Parameter
         $clang = $ep->getParam('clang', 1);
         $category_id = $ep->getParam('category_id', 0);

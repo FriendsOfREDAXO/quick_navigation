@@ -10,6 +10,8 @@
  */
 
 /* Addon Parameter */
-if (rex::isBackend()) {
+
+if (rex::isBackend() && rex::getUser()) {
     rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
 }
+

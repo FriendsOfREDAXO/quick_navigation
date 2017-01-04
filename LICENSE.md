@@ -21,3 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 +
+
+"THE BEER-WARE LICENSE" (Revision 42):
+<friendsof@redaxo.org> wrote this addon. As long as you retain this notice you
+can do whatever you want with this stuff. If we meet some day, and you think
+this stuff is worth it, you can buy us a beer in return. Friends Of REDAXO

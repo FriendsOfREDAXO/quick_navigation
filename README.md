@@ -26,3 +26,7 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 
 * http://www.redaxo.org
 * https://github.com/FriendsOfREDAXO
+
+**Projekt-Lead**
+
+Skerbis

@@ -29,4 +29,4 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 
 **Projekt-Lead**
 
-Thomas @skerbis
+[Thomas Skerbis](https://github.com/skerbis)

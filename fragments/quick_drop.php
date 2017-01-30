@@ -25,7 +25,7 @@
     </button>
     <?php endif; ?>
     
-	 <ul class="list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">
+	 <ul class="list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" style="min-width:300px;" role="menu">
     	
     	
         <?php if (isset($this->header) && $this->header != ''): ?>

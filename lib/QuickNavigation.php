@@ -79,8 +79,19 @@ class QuickNavigation
         $fragment->setVar('right', true, false);
         $fragment->setVar('class', 'pull-right', false);
         $droplist = $fragment->parse('core/dropdowns/dropdown.php');
+	
+		$formurl = rex_url::backendPage('content/edit',
+               ['mode' => 'edit',
+               'clang' => rex_clang::getCurrentId(),
+               'article_id' => '']);
+		
+		$quickout = '  <div class="col-sm-1 pull-right">
+		<form action="'.$formurl.'" method="post">
+            <input class="form-control" type="text" name="article_id" placeholder="ID" value="" />
+            </form>
+        </div>';
 
-        return $droplist . $ep->getSubject();
+        return $droplist . $quickout. $ep->getSubject();
 
     }
 }

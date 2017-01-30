@@ -31,7 +31,7 @@
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
            
-        <?php endif; ?> <input id="search" type="text" class="form-control input-lg" placeholder="" /><hr>
+        <?php endif; ?> <input id="search" type="text" class="form-control input" placeholder="" />
         <?php
         foreach ($this->items as $item) {
             echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="active"' : '') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
@@ -53,11 +53,8 @@
 			$(".list-group li").hide();
 			$(".list-group li").each(function(){
 				var current_keyword = $(this).text();
-				
-			    var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
-			    
-			
-				if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
+				 var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
+			    if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
 				$(this).show();    	 	
 				};
 				

@@ -78,7 +78,7 @@ class QuickNavigation
         $fragment->setVar('items', $items, false);
         $fragment->setVar('right', true, false);
         $fragment->setVar('class', 'pull-right', false);
-        $droplist = $fragment->parse('core/dropdowns/dropdown.php');
+        $droplist = $fragment->parse('quick_drop.php');
 	
 		$formurl = rex_url::backendPage('content/edit',
                ['mode' => 'edit',

@@ -25,13 +25,13 @@
     </button>
     <?php endif; ?>
     
-	 <ul class="list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" style="min-width:300px;" role="menu">
+	 <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">
     	
     	
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
            
-        <?php endif; ?> <input id="search" type="text" class="form-control input" placeholder="" />
+        <?php endif; ?> <input id="qsearch" type="text" class="form-control input" placeholder="Filter" />
         <?php
         foreach ($this->items as $item) {
             echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="active"' : '') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
@@ -44,28 +44,6 @@
             <li><?= $this->footer ?></li>
         <?php endif; ?>
     </ul>
-
-<script>
-	$(function(){
-	$('#search').keyup(function(){	
-		var current_query = $('#search').val();
-		if (current_query !== "") {
-			$(".list-group li").hide();
-			$(".list-group li").each(function(){
-				var current_keyword = $(this).text();
-				 var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
-			    if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
-				$(this).show();    	 	
-				};
-				
-			});    	
-		} else {
-			$(".list-group li").show();
-		};
-	});
-});
-	
-</script>
 
 <?php if (!$toolbar && !$group): ?>
 </div>

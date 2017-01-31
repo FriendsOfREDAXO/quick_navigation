@@ -25,9 +25,7 @@
     </button>
     <?php endif; ?>
     
-	 <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">
-    	
-    	
+	 <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">   	
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
            

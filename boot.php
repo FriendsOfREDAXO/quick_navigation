@@ -15,5 +15,6 @@
 if (rex::isBackend() && rex::getUser()) {
     rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
 }
+
 rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
- rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
+rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));

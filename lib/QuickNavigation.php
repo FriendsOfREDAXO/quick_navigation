@@ -87,7 +87,7 @@ class QuickNavigation
 		
 		$quickout = '  <div class="col-sm-1 pull-right">
 		<form action="'.$formurl.'" method="post">
-            <input class="form-control" type="text" name="article_id" placeholder="ID" value="" />
+            <input id="qnid" class="pull-right form-control" type="text" name="article_id" placeholder="ID" value="" />
             </form>
         </div>';
 

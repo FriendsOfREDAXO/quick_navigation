@@ -80,17 +80,18 @@ class QuickNavigation
         $fragment->setVar('right', true, false);
         $fragment->setVar('class', 'pull-right', false);
         $droplist = $fragment->parse('quick_drop.php');
-	
-		$formurl = rex_url::backendPage('content/edit',
-               ['mode' => 'edit',
-               'clang' => rex_clang::getCurrentId(),
-               'article_id' => '']);
-		
+	$formurl = rex_url::backendPage('content/edit',
+       ['mode' => 'edit',
+       'clang' => rex_clang::getCurrentId(),
+       'article_id' => '']);
+	$quickout = '';
+	if (rex::getUser()->hasPerm('quick_navi[idinput]')): 
 		$quickout = '  <div class="col-sm-1 pull-right">
 		<form action="'.$formurl.'" method="post">
             <input id="qnid" class="pull-right form-control" type="text" name="article_id" placeholder="ID" value="" />
             </form>
         </div>';
+        endif;
 
         return $droplist . $quickout. $ep->getSubject();
 

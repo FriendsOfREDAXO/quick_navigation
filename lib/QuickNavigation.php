@@ -69,6 +69,7 @@ class QuickNavigation
                 }
             }
             $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small>', $option->nodeValue);
+            $item['hreftitle'] = $option->nodeValue;
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
         }

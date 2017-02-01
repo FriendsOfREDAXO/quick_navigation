@@ -33,7 +33,7 @@
         <?php
         foreach ($this->items as $item) {
             echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="active"' : '') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
-            echo(isset($item['href']) && $item['href'] != '') ? '<a href="' . $item['href'] . '">' . $item['title'] . '</a>' : $item['title'];
+            echo(isset($item['href']) && $item['href'] != '') ? '<a href="' . $item['href'] . '"  title="'. $item['hreftitle'] .'"  >' . $item['title'] . '</a>' : $item['title'];
             echo ' </li>';
         }
         ?>

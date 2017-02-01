@@ -17,7 +17,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('quick_navi[idinput]');
 }
 
-if (rex::isBackend() && rex::getUser() && rex_perm::has('quick_navi[]')) {
+if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navi[]')) {
     rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
     rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
 	rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));

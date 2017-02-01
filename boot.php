@@ -11,9 +11,14 @@
 
 /* Addon Parameter */
 
-if (rex::isBackend() && rex::getUser()) {
-    rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
+// Addonrechte (permissions) registieren
+if (rex::isBackend() && is_object(rex::getUser())) {
+    rex_perm::register('quick_navi[]');
+    rex_perm::register('quick_navi[idinput]');
 }
 
-rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
-rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
+if (rex::isBackend() && rex::getUser() && rex_perm::has('quick_navi[]')) {
+    rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
+    rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
+	rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
+}

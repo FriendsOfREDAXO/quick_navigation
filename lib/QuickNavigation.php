@@ -21,9 +21,10 @@ class QuickNavigation
         $drophistory = '';
 		
         if (rex::getUser()->hasPerm('quick_navi[history]')): 
+        
         $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
                         FROM ' . rex::getTablePrefix() . 'article 
-                        ORDER BY updatedate DESC
+						ORDER BY updatedate DESC
                         LIMIT 15';
 		$datas = rex_sql::factory()->getArray($qry);
 		
@@ -31,15 +32,21 @@ class QuickNavigation
         
         foreach($datas as $data)
 		{
-		$date =  strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); 
-		
+		$langcode ='';
+		$lang = rex_clang::get($data['clang_id']);
+		$langcode = $lang->getCode();
+		if ($langcode)
+		{
+			$langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> '.$langcode.' - ';
+		}
+		$date =  strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); // Deutsches Datum
 		$link .= ' <li><a class="" href="
 		               '.rex_url::backendPage('content/edit',
 		               ['mode' => 'edit',
 		               'clang' => $data['clang_id'],
 		               'article_id' => $data['id']]).'">
-		               <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$data['name'].'<br>        
-		               <small>  '.$data['updateuser'].' - '.$date.'</small></a></li>';    
+		               '.$data['name'].'<br>        
+		               <small>'.$langcode.'<i class="fa fa-user" aria-hidden="true"></i> '.$data['updateuser'].' - '.$date.'</small></a></li>';    
 		}}
 
 		$drophistory  = '<div class="dropdown pull-right">
@@ -50,10 +57,8 @@ class QuickNavigation
 		</ul>
 		</div>';
 		
-		 endif;
-        
-        
-        
+		endif;
+ 
         
         // ------------ Parameter
         $clang = $ep->getParam('clang', 1);

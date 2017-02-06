@@ -43,7 +43,7 @@ class QuickNavigation
 			}}
 
 			$drophistory  = '<div class="dropdown pull-right">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-clock-o" aria-hidden="true"></i>
+			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-clock-o" aria-hidden="true"></i>
 			<span class="caret"></span></button>
 			<ul class="quicknavi dropdown-menu">
 			'.$link.'

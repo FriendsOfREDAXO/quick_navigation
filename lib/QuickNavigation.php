@@ -18,6 +18,39 @@ class QuickNavigation
              return $ep->getSubject();
         }
         
+        $drophistory = '';
+        if (rex::getUser()->hasPerm('quick_navi[history]')): 
+        
+        $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
+                        FROM ' . rex::getTablePrefix() . 'article
+                        GROUP BY id
+                        ORDER BY updatedate DESC
+                        LIMIT 15';
+		$datas = rex_sql::factory()->getArray($qry);
+		
+	if (count($datas)) {
+        
+		foreach($datas as $data)
+			{
+			$date =  strftime("%e. %B %Y", strtotime($data['updatedate'])); // Deutsches Datum
+			$link .= ' <li><a class="" href="
+				       '.rex_url::backendPage('content/edit',
+				       ['mode' => 'edit',
+				       'clang' => rex_clang::getCurrentId(),
+				       'article_id' => $data['id']]).'">
+				       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$data['name'].'<br>        
+				       <small>  '.$data['updateuser'].' - '.$date.'</small></a></li>';    
+			}}
+
+			$drophistory  = '<div class="dropdown pull-right">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-clock-o" aria-hidden="true"></i>
+			<span class="caret"></span></button>
+			<ul class="quicknavi dropdown-menu">
+			'.$link.'
+			</ul>
+			</div>';
+	 endif;
+        
         // ------------ Parameter
         $clang = $ep->getParam('clang', 1);
         $category_id = $ep->getParam('category_id', 0);
@@ -93,7 +126,7 @@ class QuickNavigation
         </div>';
         endif;
 
-        return $droplist . $quickout. $ep->getSubject();
+        return $drophistory . $droplist . $quickout. $ep->getSubject();
 
     }
 }

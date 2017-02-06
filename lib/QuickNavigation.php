@@ -32,7 +32,7 @@ class QuickNavigation
         
 		foreach($datas as $data)
 			{
-			$date =  strftime("%e. %B %Y", strtotime($data['updatedate'])); // Deutsches Datum
+			$date =  $date =  strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); 
 			$link .= ' <li><a class="" href="
 				       '.rex_url::backendPage('content/edit',
 				       ['mode' => 'edit',

@@ -15,6 +15,7 @@
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('quick_navi[]');
     rex_perm::register('quick_navi[idinput]');
+    rex_perm::register('quick_navi[history]');
 }
 
 if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navi[]')) {

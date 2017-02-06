@@ -6,7 +6,7 @@ Schnellnavigation ab REDAXO 5.1.0
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
-Die Quick Navigation stellt eine Kategorie-Schnellauswahl, Ein Artikel-ID-Eingabefeld sowie Eine Liste der zuletzt bearbeiteten Artikel zur Verfügung (last modified). Die Anzeige der sichtbaren Funktionen wird über die Rollen-Rechte definiert. 
+Die Quick Navigation stellt eine Kategorie-Schnellauswahl, ein Artikel-ID-Eingabefeld sowie eine Liste der zuletzt bearbeiteten Artikel zur Verfügung (last modified). Die Anzeige der sichtbaren Funktionen wird über die Rollen-Rechte definiert. 
 
 ### Bugtracker
 

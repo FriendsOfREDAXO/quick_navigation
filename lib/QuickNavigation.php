@@ -18,13 +18,13 @@ class QuickNavigation
              return $ep->getSubject();
         }
         
-        $drophistory = '';
+        $drophistory = $link = '';
 		
         if (rex::getUser()->hasPerm('quick_navi[history]')): 
         
         $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
                         FROM ' . rex::getTablePrefix() . 'article 
-						ORDER BY updatedate DESC
+			ORDER BY updatedate DESC
                         LIMIT 15';
 		$datas = rex_sql::factory()->getArray($qry);
 		

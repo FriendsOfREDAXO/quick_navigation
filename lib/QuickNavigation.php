@@ -18,7 +18,7 @@ class QuickNavigation
             return $ep->getSubject();
         }
 
-        $drophistory = $link = '';
+        $drophistory = $date = $link = '';
 
         if (rex::getUser()->hasPerm('quick_navi[history]')) {
             $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate

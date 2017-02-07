@@ -45,8 +45,8 @@ class QuickNavigation
                             ]
                         )
                     ];
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . '>' . $data['name'] . '<br /><small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
-                }
+                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['name'] . '">' . $data['name'] . '<br /><small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
+                  }
             }
 
             $drophistory =

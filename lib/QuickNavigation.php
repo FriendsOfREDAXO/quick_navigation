@@ -4,7 +4,7 @@
  * This file is part of the Quick Navigation package.
  *
  * @author (c) Friends Of REDAXO
- * @author <friendsof@redaxo.org>
+ * @author     <friendsof@redaxo.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,56 +15,54 @@ class QuickNavigation
     {
 
         if (rex_be_controller::getCurrentPageObject()->isPopup()) {
-             return $ep->getSubject();
+            return $ep->getSubject();
         }
-        
+
         $drophistory = $link = '';
-		
-        if (rex::getUser()->hasPerm('quick_navi[history]')): 
-        
-        $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
-                        FROM ' . rex::getTablePrefix() . 'article 
-			ORDER BY updatedate DESC
-                        LIMIT 15';
-		$datas = rex_sql::factory()->getArray($qry);
-		
-		if (count($datas)) {
-        
-        foreach($datas as $data)
-		{
-		$langcode ='';
-		$lang = rex_clang::get($data['clang_id']);
-		$langcode = $lang->getCode();
-		if ($langcode)
-		{
-			$langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> '.$langcode.' - ';
-		}
-		$date =  strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); // Deutsches Datum
-		$link .= ' <li><a class="" href="
-		               '.rex_url::backendPage('content/edit',
-		               ['mode' => 'edit',
-		               'clang' => $data['clang_id'],
-		               'article_id' => $data['id']]).'">
-		               '.$data['name'].'<br>        
-		               <small>'.$langcode.'<i class="fa fa-user" aria-hidden="true"></i> '.$data['updateuser'].' - '.$date.'</small></a></li>';    
-		}}
 
-		$drophistory  = '<div class="dropdown pull-right">
-		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-clock-o" aria-hidden="true"></i>
-		<span class="caret"></span></button>
-		<ul class="quicknavi dropdown-menu">
-		'.$link.'
-		</ul>
-		</div>';
-		
-		endif;
- 
-        
+        if (rex::getUser()->hasPerm('quick_navi[history]')) {
+            $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
+                    FROM ' . rex::getTable('article') . ' 
+                    ORDER BY updatedate DESC
+                    LIMIT 15';
+            $datas = rex_sql::factory()->getArray($qry);
+
+            if (count($datas)) {
+
+                foreach ($datas as $data) {
+                    $lang = rex_clang::get($data['clang_id']);
+                    $langcode = $lang->getCode();
+                    if ($langcode) {
+                        $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
+                    }
+                    $date = strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); // Deutsches Datum
+                    $attributes = [
+                        'href' => rex_url::backendPage('content/edit',
+                            [
+                                'mode' => 'edit',
+                                'clang' => $data['clang_id'],
+                                'article_id' => $data['id']
+                            ]
+                        )
+                    ];
+                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . '>' . $data['name'] . '<br /><small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
+                }
+            }
+
+            $drophistory =
+                '<div class="btn-group">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="quicknavi dropdown-menu dropdown-menu-right">
+                        ' . $link . '
+                    </ul>
+                </div>';
+        }
+
+
         // ------------ Parameter
-        $clang = $ep->getParam('clang', 1);
-        $category_id = $ep->getParam('category_id', 0);
-        $article_id = $ep->getParam('article_id', 0);
-
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
 
@@ -82,7 +80,7 @@ class QuickNavigation
         $category_select->setSelected($category_id);
         $select = $category_select->get();
         $doc = new DOMDocument();
-        $doc->loadHTML('<?xml encoding="UTF-8">' . $select);
+        $doc->loadHTML('<?xml encoding="UTF-8">'.$select);
         $options = $doc->getElementsByTagName('option');
 
         $droplistContext = rex_context::fromGet();
@@ -95,7 +93,6 @@ class QuickNavigation
         $button_label = '';
         $items = [];
         foreach ($options as $option) {
-            $value = '';
             $item = [];
             if ($option->hasAttributes()) {
                 foreach ($option->attributes as $attribute) {
@@ -120,22 +117,30 @@ class QuickNavigation
         $fragment->setVar('button_label', $button_label);
         $fragment->setVar('items', $items, false);
         $fragment->setVar('right', true, false);
-        $fragment->setVar('class', 'pull-right', false);
-        $droplist = $fragment->parse('quick_drop.php');
-	$formurl = rex_url::backendPage('content/edit',
-       ['mode' => 'edit',
-       'clang' => rex_clang::getCurrentId(),
-       'article_id' => '']);
-	$quickout = '';
-	if (rex::getUser()->hasPerm('quick_navi[idinput]')): 
-		$quickout = '  <div class="col-sm-1 pull-right">
-		<form action="'.$formurl.'" method="post">
-            <input id="qnid" class="pull-right form-control" type="text" name="article_id" placeholder="ID" value="" />
-            </form>
-        </div>';
-        endif;
+        $fragment->setVar('group', true, false);
+        $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
 
-        return $drophistory . $droplist . $quickout. $ep->getSubject();
+        $quickout = '';
+        if (rex::getUser()->hasPerm('quick_navi[idinput]')) {
+            $formurl = rex_url::backendPage(
+                'content/edit',
+                [
+                    'mode' => 'edit',
+                    'clang' => rex_clang::getCurrentId(),
+                    'article_id' => ''
+                ]
+            );
+            $quickout =
+                '<div class="btn-group">
+                    <form action="' . $formurl . '" method="post">
+                        <div class="input-group">
+                            <input class="form-control" id="qnid" type="text" name="article_id" placeholder="ID" value="" />
+                        </div>
+                    </form>
+                </div>';
+        }
+
+        return '<div class="btn-group pull-right">' . $quickout . $droplist . $drophistory . '</div>' . $ep->getSubject();
 
     }
 }

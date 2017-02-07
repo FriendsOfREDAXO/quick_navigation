@@ -22,7 +22,7 @@ class QuickNavigation
 
         if (rex::getUser()->hasPerm('quick_navi[history]')) {
             
-            if (rex::getUser()->hasPerm('quick_navi[own_articles]')) {
+            if (rex::getUser()->hasPerm('quick_navi[own_articles]') && !rex::getUser()->isAdmin()) {
         	
         	    $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
         		

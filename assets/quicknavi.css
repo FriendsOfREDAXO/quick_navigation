@@ -3,6 +3,13 @@
 	background: #fff;
 }
 
+#qsearch {
+	margin-bottom: 10px;
+	margin-right: 2%;
+	margin-left: 2%;
+	width: 96%;
+}
+
 .quicknavi {
 	min-width: 310px;
 	max-height: 400px;
@@ -10,6 +17,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+
 .quicknavi li a {
 	width: 300px;
 	white-space: nowrap;

@@ -34,9 +34,9 @@ class QuickNavigation
                     $langcode = $lang->getCode();
                     if ($langcode) {
                         $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
-                    }$
-                    $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
-                    $attributes = [
+                    }
+                   $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
+                   $attributes = [
                         'href' => rex_url::backendPage('content/edit',
                             [
                                 'mode' => 'edit',
@@ -46,7 +46,7 @@ class QuickNavigation
                         )
                     ];
                     $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['name'] . '">' . $data['name'] . '<br /><small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
-                  }
+                }
             }
 
             $drophistory =

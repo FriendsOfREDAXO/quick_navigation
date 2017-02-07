@@ -20,9 +20,9 @@ class QuickNavigation
 
         $drophistory = $date = $link = $where = '';
 
-        if (rex::getUser()->hasPerm('quick_navi[history]')) {
+        if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             
-            if (rex::getUser()->hasPerm('quick_navi[own_articles]') && !rex::getUser()->isAdmin()) {
+            if (rex::getUser()->hasPerm('quick_navigation[own_articles]') && !rex::getUser()->isAdmin()) {
         	
         	    $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
         		
@@ -134,7 +134,7 @@ class QuickNavigation
         $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
 
         $quickout = '';
-        if (rex::getUser()->hasPerm('quick_navi[idinput]')) {
+        if (rex::getUser()->hasPerm('quick_navigation[idinput]')) {
             $formurl = rex_url::backendPage(
                 'content/edit',
                 [

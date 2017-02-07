@@ -36,7 +36,7 @@ class QuickNavigation
             $datas = rex_sql::factory()->getArray($qry);
 
             if (!count($datas)) {
-			   $link .= '<li class="alert">'.rex_i18n::msg('quick_navi_no_entries').'</li>';
+			   $link .= '<li class="alert">'.rex_i18n::msg('quick_navigation_no_entries').'</li>';
 			}
             
             

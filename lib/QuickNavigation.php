@@ -18,15 +18,28 @@ class QuickNavigation
             return $ep->getSubject();
         }
 
-        $drophistory = $date = $link = '';
+        $drophistory = $date = $link = $where = '';
 
         if (rex::getUser()->hasPerm('quick_navi[history]')) {
+            
+            if (rex::getUser()->hasPerm('quick_navi[own_articles]')) {
+        	
+        	    $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
+        		
+        	}
+            
             $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
                     FROM ' . rex::getTable('article') . ' 
+                    '. $where .' 
                     ORDER BY updatedate DESC
                     LIMIT 15';
             $datas = rex_sql::factory()->getArray($qry);
 
+            if (!count($datas)) {
+			    $link .= '<li> Keine Ergebnisse </li>';
+			}
+            
+            
             if (count($datas)) {
 
                 foreach ($datas as $data) {

@@ -1,6 +1,6 @@
 perm_general_quick_navi[] = Quick Navi
-perm_general_quick_navi[idinput] = Quick Navi: Article-ID-Input
-perm_general_quick_navi[history] = Quick Navi: Last modified articles
-perm_general_quick_navi[own_articles] = Quick Navi: only own files
+perm_general_quick_navi[idinput] = Quick Navi: allow article ID Input
+perm_general_quick_navi[history] = Quick Navi: show last modified articles
+perm_general_quick_navi[own_articles] = Quick Navi: own files only
 
 quick_navi_no_entries = No erntries found

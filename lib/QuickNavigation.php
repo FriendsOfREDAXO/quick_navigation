@@ -34,8 +34,8 @@ class QuickNavigation
                     $langcode = $lang->getCode();
                     if ($langcode) {
                         $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
-                    }
-                    $date = strftime("%e. %B %Y - %R", strtotime($data['updatedate'])); // Deutsches Datum
+                    }$
+                    $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
                     $attributes = [
                         'href' => rex_url::backendPage('content/edit',
                             [

@@ -1,0 +1,6 @@
+perm_general_quick_navi[] = Quick Navi
+perm_general_quick_navi[idinput] = Quick Navi: Artikel-ID-Eingabe
+perm_general_quick_navi[history] = Quick Navi: Zuletzt bearbeitete Artikel
+perm_general_quick_navi[own_articles] = Quick Navi: Nur eigene Artikel anzeigen
+
+quick_navi_no_entries = Keine Einträge gefunden

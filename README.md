@@ -1,12 +1,22 @@
 
-Quick Navigation
+REDAXO-AddOn: Quick Navigation
 ================================================================================
 
 Schnellnavigation ab REDAXO 5.1.0
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
-Die Quick Navigation stellt eine Kategorie-Schnellauswahl, ein Artikel-ID-Eingabefeld sowie eine Liste der zuletzt bearbeiteten Artikel zur Verfügung (last modified). Die Anzeige der sichtbaren Funktionen wird über die Rollen-Rechte definiert. 
+### Beschreibung 
+
+Die Quick Navigation stellt eine Kategorie-Schnellauswahl, ein Artikel-ID-Eingabefeld sowie eine Liste der zuletzt bearbeiteten Artikel zur Verfügung (last modified). 
+
+Admins erhalten alle Funktionen. Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden.   
+
+### Installation
+
+1. Über Installer laden oder Zip-Datei im AddOn-Ordner entpacken, der Ordner muss „quick_navigation“ heißen.
+2. AddOn installieren und aktivieren.
+
 
 ### Bugtracker
 

@@ -16,6 +16,7 @@ Admins erhalten alle Funktionen. Für Redakteure kann die Verfügbarkeit der Fun
 
 1. Über Installer laden oder Zip-Datei im AddOn-Ordner entpacken, der Ordner muss „quick_navigation“ heißen.
 2. AddOn installieren und aktivieren.
+3. Rechte für Rollen anpassen
 
 
 ### Bugtracker

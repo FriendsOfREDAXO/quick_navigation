@@ -16,12 +16,11 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[idinput]');
     rex_perm::register('quick_navigation[history]');
-    rex_perm::register('quick_navigation[own_articles]');
-    
+    rex_perm::register('quick_navigation[own_articles]');   
 }
 
 if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigation[]')) {
     rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
-    rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
-	rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
+    rex_view::addCssFile($this->getAssetsUrl('quicknavi.css'));
+    rex_view::addJsFile($this->getAssetsUrl('quicknavi.js'));
 }

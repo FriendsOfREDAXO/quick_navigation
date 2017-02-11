@@ -23,4 +23,9 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	padding-top: 6px;
+	padding-bottom: 10px;
+}
+.quicknavi li small {
+	display: block;
 }

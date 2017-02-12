@@ -1,12 +1,12 @@
 $(function () {
-    quickmeneu_init();
+    quicknavi_filter_init();
     $(document).on('pjax:end', function() {
-       quickmeneu_init();
+       quicknavi_filter_init();
     });
 });	
 
 
-function quickmeneu_init() {
+function quicknavi_filter_init() {
 	$('#qsearch').keyup(function(){	
 		var current_query = $('#qsearch').val();
 		if (current_query !== "") {

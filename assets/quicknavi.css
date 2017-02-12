@@ -26,6 +26,7 @@
 	padding-top: 6px;
 	padding-bottom: 10px;
 }
-.quicknavi li small {
+
+.quicknavi.quickfiles li small {
 	display: block;
 }

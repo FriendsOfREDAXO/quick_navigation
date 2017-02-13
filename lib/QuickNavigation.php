@@ -19,7 +19,7 @@ class QuickNavigation
         }
         // Auslesen der Artikel-Liste
         $drophistory = new rex_fragment();
-        $drophistory = $drophistory->parse('quick_files.php');
+        $drophistory = $drophistory->parse('quick_articles.php');
         
         // ------------ Parameter
         $article_id = rex_request('article_id', 'int');

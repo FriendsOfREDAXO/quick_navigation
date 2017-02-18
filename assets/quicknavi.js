@@ -2,6 +2,15 @@ $(function () {
     quicknavi_filter_init();
     $(document).on('pjax:end', function() {
        quicknavi_filter_init();
+       var ctype = getUrlVars()["ctype"];
+       if (ctype)
+       {
+	   $(function() {
+	   $(".quicknavi a").attr('href', function(i, h) {
+	     return h + (h.indexOf('?') != -1 ? "&ctype="+ctype : "?ctype="+ctype);
+	   		});
+		});
+       }
     });
 });	
 
@@ -16,11 +25,20 @@ function quicknavi_filter_init() {
 				 var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
 			    if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
 				$(this).show();    	 	
-				};
+				}
 				
 			});    	
 		} else {
 			$(".quicknavi.list-group li").show();
-		};
+		}
 	});
-};
+}
+
+function getUrlVars() {
+var vars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+vars[key] = value;
+});
+return vars;
+}
+

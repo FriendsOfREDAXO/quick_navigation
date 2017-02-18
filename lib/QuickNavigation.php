@@ -19,6 +19,7 @@ class QuickNavigation
         }
         // Auslesen der Artikel-Liste
         $drophistory = new rex_fragment();
+        $drophistory->setVar('limit', '15');
         $drophistory = $drophistory->parse('quick_articles.php');
         
         // ------------ Parameter

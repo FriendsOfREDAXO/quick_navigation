@@ -1,6 +1,10 @@
 
 Quick Navigation - Changelog
 ================================================================================
+0.5.0 (18.02.2017)
+--------------------------------------------------------------------------------
+Minor style changes, outsourced history as aragment, prepare for Media
+
 0.4.0 (7.02.2017)
 --------------------------------------------------------------------------------
 Translation added, some style changes, right: own files only

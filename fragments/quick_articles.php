@@ -22,7 +22,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     FROM ' . rex::getTable('article') . ' 
                     '. $where .' 
                     ORDER BY updatedate DESC
-                    LIMIT 15';
+                    LIMIT '.$this->limit;
             $datas = rex_sql::factory()->getArray($qry);
 
             if (!count($datas)) {

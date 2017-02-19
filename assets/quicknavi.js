@@ -4,12 +4,10 @@ $(function () {
        quicknavi_filter_init();
        var ctype = getUrlVars()["ctype"];
        if (ctype)
-       {
-	   $(function() {
+       {  
 	   $(".quicknavi a").attr('href', function(i, h) {
 	     return h + (h.indexOf('?') != -1 ? "&ctype="+ctype : "?ctype="+ctype);
 	   		});
-		});
        }
     });
 });	

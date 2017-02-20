@@ -7,7 +7,7 @@ CTYPE on Links
 
 0.5.0 (18.02.2017)
 --------------------------------------------------------------------------------
-Minor style changes, outsourced history as aragment, prepare for Media
+Minor style changes, outsourced history as fragment
 
 0.4.0 (7.02.2017)
 --------------------------------------------------------------------------------

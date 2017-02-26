@@ -5,5 +5,5 @@ supportpage: https://github.com/friendsofredaxo/
 
 requires:
     packages:
-        structure/content: '>=2.1.0'
-    redaxo: '>=5.1.0'
+        structure/content: '^2.1.0'
+    redaxo: '^5.1.0'

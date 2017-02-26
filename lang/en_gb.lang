@@ -1,6 +1,6 @@
 perm_general_quick_navigation[] = Quick Navi
-perm_general_quick_navigation[idinput] = Quick Navi: allow article ID Input
-perm_general_quick_navigation[history] = Quick Navi: show last modified articles
-perm_general_quick_navigation[own_articles] = Quick Navi: modified articles: own articles only
+perm_general_quick_navigation[idinput] = Quick Navi: allow entering of article Ids
+perm_general_quick_navigation[history] = Quick Navi: recently edited articles
+perm_general_quick_navigation[own_articles] = Quick Navi: recently edited articles :: only own articles
 
 quick_navigation_no_entries = No entries found

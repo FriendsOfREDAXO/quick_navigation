@@ -20,11 +20,11 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $opener ='';
             $opener = rex_request('opener_input_field');
             
-            $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ORDER BY updatedate DESC LIMIT ' . $this->limit;
+            $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' '.$where.' ORDER BY updatedate DESC LIMIT ' . $this->limit;
             $datas = rex_sql::factory()->getArray($qry);
 
             if (!count($datas)) {
-			   $link .= '<li class="alert">'.rex_i18n::msg('quick_navigation_no_entries').'</li>';
+			   $link .= '<li class="malert">'.rex_i18n::msg('quick_navigation_no_entries').'</li>';
 			}
             
             

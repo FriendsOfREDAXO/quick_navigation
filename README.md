@@ -8,7 +8,7 @@ Schnellnavigation ab REDAXO 5.1.0
 
 ### Beschreibung 
 
-Die Quick Navigation stellt eine Kategorie-Schnellauswahl, ein Artikel-ID-Eingabefeld sowie eine Liste der zuletzt bearbeiteten Artikel zur Verfügung (last modified). 
+Die Quick Navigation stellt eine Kategorie-Schnellauswahl, ein Artikel-ID-Eingabefeld sowie eine Liste der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified). 
 
 Admins erhalten alle Funktionen. Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden.   
 

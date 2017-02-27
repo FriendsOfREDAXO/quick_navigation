@@ -17,7 +17,8 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         	    $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
         		
         	}
-            
+            $opener ='';
+            $opener = rex_request('opener_input_field');
             
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ORDER BY updatedate DESC LIMIT ' . $this->limit;
             $datas = rex_sql::factory()->getArray($qry);
@@ -37,6 +38,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                    $attributes = [
                         'href' => rex_url::backendPage('mediapool/media',
                             [
+                                'opener_input_field'=> $opener,
                                 'rex_file_category' => $data['category_id'],
                                 'file_id' => $data['id']
                             ]
@@ -49,7 +51,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 						 $entryname = $data['filename'];
 					}              
                     
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['filename'] . '">' . $entryname. '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
+                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['filename'] . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
                 }
             }
 ?>

@@ -21,6 +21,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 
 if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigation[]')) {
     rex_extension::register('PAGE_TITLE', 'QuickNavigation::get');
+    rex_extension::register('PAGE_TITLE', 'QuickNavigation::getmedia');
     rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
     rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
 }

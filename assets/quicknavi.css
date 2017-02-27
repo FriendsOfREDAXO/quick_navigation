@@ -30,6 +30,11 @@
 .quicknavi.quickfiles li small {
 	display: block;
 }
+
 .quicknavi li small.rex-primary-id {
 	display: inline;
+}
+
+.quickmedia {
+	margin-left: 1em;
 }

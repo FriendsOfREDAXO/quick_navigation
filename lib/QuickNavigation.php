@@ -11,6 +11,19 @@
  */
 class QuickNavigation
 {
+    // Media History
+  	 public static function getmedia($ep)
+    {
+
+		if (rex_be_controller::getCurrentPagePart(1) == 'mediapool')
+		{        // Auslesen der Artikel-Liste
+		        $drophistory = new rex_fragment();
+		        $drophistory->setVar('limit', '15');
+		        $drophistory = $drophistory->parse('quick_media.php');
+		        return '<div class="pull-right quickmedia clearfix">'.$drophistory . '</div>' . $ep->getSubject();
+		}
+    }
+    
     public static function get($ep)
     {
 

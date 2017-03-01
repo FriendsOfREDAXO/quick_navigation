@@ -58,7 +58,7 @@ class QuickNavigation
 
         $droplistContext = rex_context::fromGet();
         $droplistContext->setParam('category_id', 0);
-
+		$droplistContext->setParam('rex-api-call', 0);
         if (rex_be_controller::getCurrentPagePart(1) != 'structure' && rex_be_controller::getCurrentPagePart(1) != 'content') {
             $droplistContext->setParam('page', 'structure');
         }

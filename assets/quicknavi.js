@@ -1,5 +1,4 @@
-$(function () {
-    $(document).on('rex:ready', function() {
+$(document).on('rex:ready', function() {
        quicknavi_filter_init();
        var ctype = getUrlVars()["ctype"];
        if (ctype)
@@ -8,9 +7,7 @@ $(function () {
 	     return h + (h.indexOf('?') != -1 ? "&ctype="+ctype : "?ctype="+ctype);
 	   		});
        }
-    });
-});	
-
+});
 
 function quicknavi_filter_init() {
 	$('#qsearch').keyup(function(){	

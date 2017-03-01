@@ -1,6 +1,5 @@
 $(function () {
-    quicknavi_filter_init();
-    $(document).on('pjax:end', function() {
+    $(document).on('rex:ready', function() {
        quicknavi_filter_init();
        var ctype = getUrlVars()["ctype"];
        if (ctype)

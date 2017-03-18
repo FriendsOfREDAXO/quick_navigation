@@ -39,7 +39,7 @@
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
            
-        <?php endif; ?> <input id="qsearch" type="text" class="form-control input" placeholder="Filter" />
+        <?php endif; ?> <input id="qsearch" type="text" class="form-control input" autofocus placeholder="Filter" />
         <?php
         foreach ($this->items as $item) {
             echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="active"' : '') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';

@@ -16,6 +16,7 @@
 	max-width: 360px;
 	overflow-x: hidden;
 	overflow-y: auto;
+	-webkit-overflow-scrolling:touch;  
 }
 
 .quicknavi li a {

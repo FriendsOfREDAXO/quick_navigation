@@ -1,5 +1,8 @@
 $(document).on('rex:ready', function() {
        quicknavi_filter_init();
+       
+       
+       
        var ctype = getUrlVars()["ctype"];
        if (ctype)
        {  
@@ -7,6 +10,9 @@ $(document).on('rex:ready', function() {
 	     return h + (h.indexOf('?') != -1 ? "&ctype="+ctype : "?ctype="+ctype);
 	   		});
        }
+       
+       
+       
 });
 
 function quicknavi_filter_init() {
@@ -35,3 +41,21 @@ vars[key] = value;
 });
 return vars;
 }
+
+$(document).on('shown.bs.dropdown', function(event) {
+    var dropdown = $(event.target);
+    
+    dropdown.find('.dropdown-menu').attr('aria-expanded', true);
+    
+    setTimeout(function() {
+        dropdown.find('.dropdown-menu li:first-child #qsearch').focus();
+    }, 10);
+});
+
+$(document).on('hidden.bs.dropdown', function(event) {
+    var dropdown = $(event.target);
+     
+    dropdown.find('.dropdown-menu').attr('aria-expanded', false);
+
+    dropdown.find('.dropdown-toggle').focus();
+});

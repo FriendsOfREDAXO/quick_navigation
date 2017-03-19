@@ -13,8 +13,8 @@ function quicknavi_filter_init() {
 	$('#qsearch').keyup(function(){	
 		var current_query = $('#qsearch').val();
 		if (current_query !== "") {
-			$(".quicknavi.list-group li").hide();
-			$(".quicknavi.list-group li").each(function(){
+			$(".quicknavi.list-group li.quickitem").hide();
+			$(".quicknavi.list-group li.quickitem").each(function(){
 				var current_keyword = $(this).text();
 				 var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
 			    if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
@@ -23,7 +23,7 @@ function quicknavi_filter_init() {
 				
 			});    	
 		} else {
-			$(".quicknavi.list-group li").show();
+			$(".quicknavi.list-group li.quickitem").show();
 		}
 	});
 }
@@ -35,4 +35,3 @@ vars[key] = value;
 });
 return vars;
 }
-

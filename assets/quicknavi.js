@@ -44,6 +44,6 @@ $(document).on('shown.bs.dropdown', function(event) {
     dropdown.find('.dropdown-menu').attr('aria-expanded', true);
     
     setTimeout(function() {
-        dropdown.find('.dropdown-menu li:first-child input').focus();
+        dropdown.find('.dropdown-menu.quicknavi li:first-child input').focus();
     }, 10);
 });

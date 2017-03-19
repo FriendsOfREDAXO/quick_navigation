@@ -19,6 +19,10 @@
 	-webkit-overflow-scrolling:touch;  
 }
 
+.quicknavi .dropdown-header {
+padding:0;
+}
+
 .quicknavi li a {
 	width: 300px;
 	white-space: nowrap;

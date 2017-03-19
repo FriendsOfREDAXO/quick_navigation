@@ -87,6 +87,7 @@ class QuickNavigation
         }
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
+        $fragment->setVar('header', '<input id="qsearch" type="text" class="form-control input" autofocus placeholder="Filter" />',false);
         $fragment->setVar('button_label', $button_label);
         $fragment->setVar('items', $items, false);
         $fragment->setVar('right', true, false);

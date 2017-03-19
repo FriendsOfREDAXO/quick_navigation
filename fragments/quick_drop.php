@@ -39,10 +39,10 @@
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
            
-        <?php endif; ?> <input id="qsearch" type="text" class="form-control input" autofocus placeholder="Filter" />
+        <?php endif; ?> 
         <?php
         foreach ($this->items as $item) {
-            echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="active"' : '') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
+            echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="quickitem active"' : ' class="quickitem"') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
             echo(isset($item['href']) && $item['href'] != '') ? '<a href="' . $item['href'] . '"  title="'. $item['hreftitle'] .'"  >' . $item['title'] . '</a>' : $item['title'];
             echo ' </li>';
         }

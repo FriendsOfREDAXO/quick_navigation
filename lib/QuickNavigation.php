@@ -71,6 +71,15 @@ class QuickNavigation
                 foreach ($option->attributes as $attribute) {
                     if ($attribute->name == 'value') {
                         $value = $attribute->value;
+						$item['domain']='';
+						if(rex_addon::get('yrewrite')->isAvailable()) {
+							
+							$item['quickID']= $value;
+						    if (rex_yrewrite::getDomainByArticleId($item['quickID'])!="")
+							{ $item['domain'] = rex_yrewrite::getDomainByArticleId($item['quickID']); }
+						
+						}
+						
                         $droplistContext->setParam('category_id', $value);
                         $droplistContext->setParam('article_id', $value);
                         if ($attribute->value == $category_id) {
@@ -80,8 +89,10 @@ class QuickNavigation
                     }
                 }
             }
-            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small>', $option->nodeValue);
+			
+            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', $option->nodeValue);
             $item['hreftitle'] = $option->nodeValue;
+		
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
         }
@@ -118,3 +129,4 @@ class QuickNavigation
 
     }
 }
+

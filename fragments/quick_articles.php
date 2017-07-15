@@ -48,7 +48,17 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                             ]
                         )
                     ];
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['name'] . '">' . $data['name'] . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
+					
+			if(rex_addon::get('yrewrite')->isAvailable()) {
+					$domaintitle ='';
+				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="")
+					{ $domain = rex_yrewrite::getDomainByArticleId($data['id']); 
+					  $domaintitle = '<br>'.$domain; 
+					}
+
+				}
+					
+                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['name'] . '">' . $data['name'] . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . $domaintitle . '</small></a></li>';
                 }
             }
 ?>
@@ -66,3 +76,4 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         }
         
  ?>
+

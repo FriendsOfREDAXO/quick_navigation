@@ -53,7 +53,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 					$domaintitle ='';
 				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="")
 					{ $domain = rex_yrewrite::getDomainByArticleId($data['id']); 
-					  $domaintitle = '<br>'.$domain; 
+					  $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.$domain; 
 					}
 
 				}

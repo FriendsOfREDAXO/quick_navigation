@@ -4,7 +4,7 @@ Quick Navigation - Changelog
 
 1.1.2 (28.07.2017
 --------------------------------------------------------------------------------
-history shows domain-names only if there are more than the default and 1st entry
+history shows domains only if there are more than the default and 1st entry
 
 1.1.1 (25.07.2017
 --------------------------------------------------------------------------------

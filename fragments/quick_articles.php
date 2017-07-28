@@ -51,7 +51,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 					
 			if(rex_addon::get('yrewrite')->isAvailable()) {
 					$domaintitle ='';
-				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="")
+				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="" and count(rex_yrewrite::getDomains())>2)
 					{ $domain = rex_yrewrite::getDomainByArticleId($data['id']); 
 					  $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.$domain; 
 					}

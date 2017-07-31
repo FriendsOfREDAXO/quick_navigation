@@ -10,9 +10,6 @@
 	width: 96%;
 }
 
-.quicknavi-btn-group .watson-btn {
-	margin-right: 0;
-}
 
 .quicknavi {
 	min-width: 310px;
@@ -56,4 +53,9 @@
 /* hide default Watson-Button */
 li .watson-btn {
 	display: none!important;
+}
+
+/* Format Watson-Button */
+.quicknavi-btn-group .watson-btn {
+	margin-right: 0;
 }

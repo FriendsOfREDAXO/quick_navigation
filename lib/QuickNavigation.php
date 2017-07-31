@@ -125,8 +125,13 @@ class QuickNavigation
                     </form>
                 </div>';
         }
+        $watson = '';
+        if(rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0)==1) {
+       $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
+        }
+       
 
-        return '<div class="btn-group pull-right">' . $quickout . $droplist . $drophistory . '</div>' . $ep->getSubject();
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson. $quickout . $droplist . $drophistory . '</div>' . $ep->getSubject();
 
     }
 }

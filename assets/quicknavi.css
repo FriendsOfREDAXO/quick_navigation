@@ -6,8 +6,10 @@
 #qsearch {
 	margin-bottom: 10px;
 	margin-right: 2%;
-	margin-left: 2%;
+	/* margin-left: 2%; */
 	width: 96%;
+	position: fixed;
+	width: 100%;
 }
 
 
@@ -21,7 +23,8 @@
 }
 
 .quicknavi .dropdown-header {
-	padding: 0;
+    padding: 0;
+    margin-bottom: 3em;
 }
 
 .quicknavi li a {
@@ -59,3 +62,5 @@ li .watson-btn {
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
 }
+
+

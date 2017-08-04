@@ -11,14 +11,9 @@ $(document).on('rex:ready', function() {
 
 });
 
-$(document).on('shown.bs.dropdown', function(event) {
-    var dropdown = $(event.target);
-    
-    dropdown.find('.dropdown-menu').attr('aria-expanded', true);
-    
-    setTimeout(function() {
-        dropdown.find('.dropdown-menu.quicknavi li:first-child input').focus();
-    }, 10);
+$(document).on("shown.bs.dropdown", function() {
+   $(this).find(".dropdown-menu li.active a").focus();
+   $(this).find('.dropdown-menu.quicknavi li:first-child input').focus();
 });
 
 

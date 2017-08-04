@@ -38,7 +38,7 @@
 	 <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">   	
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
-           
+         <ul>  
         <?php endif; ?> 
         <?php
         foreach ($this->items as $item) {
@@ -51,8 +51,9 @@
             <li class="divider"></li>
             <li><?= $this->footer ?></li>
         <?php endif; ?>
-    </ul>
+    </ul> </ul>
 
 <?php if (!$toolbar && !$group): ?>
 </div>
 <?php endif;
+

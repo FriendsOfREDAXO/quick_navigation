@@ -6,17 +6,15 @@
 #qsearch {
 	margin-bottom: 10px;
 	margin-right: 2%;
-	/* margin-left: 2%; */
-	width: 96%;
 	position: fixed;
-	width: 100%;
+	max-width: 310px;
 }
 
 
 .quicknavi {
 	min-width: 310px;
 	max-height: 400px;
-	max-width: 360px;
+	max-width: 310px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;

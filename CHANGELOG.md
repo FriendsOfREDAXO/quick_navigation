@@ -2,6 +2,9 @@
 Quick Navigation - Changelog
 ================================================================================
 
+1.3.1 (07.08.2017)
+IE 11 - CSS fix
+
 1.3.0 (07.08.2017)
 Fixed search, focus on active Structure-Page
 

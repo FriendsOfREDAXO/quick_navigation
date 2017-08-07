@@ -13,19 +13,19 @@
 
 li.quickitem {
 list-style-type: none;
-padding-top: 0.5em;
-padding-bottom: 0.5em;
+padding-top: 0.4em;
+padding-bottom: 0.4em;
 }
 
 li.quickitem.active {
-background-color: #4F9BD7;
+background-color: #000;
 }
 
 li.quickitem.active a {
 color: #FFF;
 }
 
-.quicknavi ul {
+.quicknavi ul, .quickfiles {
 	min-width: 310px;
 	max-height: 400px;
 	max-width: 310px;
@@ -41,18 +41,22 @@ color: #FFF;
     margin-bottom: 0.5em;
 }
 
+.quickfiles.quicknavi a {}
+
 .quicknavi li a {
 	width: 300px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding-top: 6px;
-	padding-bottom: 10px;
-    color: #000;
-    padding-left: 3px;
-    padding-right: 3px;
-    
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-decoration: none;
+	display: block;
 }
+
+.quickfiles.quicknavi a { margin-bottom: 10px;}
 
 .quicknavi.quickfiles li small {
 	display: block;
@@ -80,3 +84,5 @@ li .watson-btn {
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
 }
+
+

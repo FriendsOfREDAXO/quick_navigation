@@ -12,20 +12,17 @@
 }
 
 li.quickitem {
-list-style-type: none;
-padding-top: 0.4em;
-padding-bottom: 0.4em;
+	list-style-type: none;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
 }
 
-li.quickitem.active {
-background-color: #000;
+li.quickitem.bg-primary a {
+	color: #FFF;
 }
 
-li.quickitem.active a {
-color: #FFF;
-}
-
-.quicknavi ul, .quickfiles {
+.quicknavi ul,
+.quickfiles {
 	min-width: 330px;
 	max-height: 400px;
 	max-width: 360px;
@@ -38,10 +35,9 @@ color: #FFF;
 }
 
 .quicknavi .dropdown-header {
-    padding: 0;
-    margin-bottom: 0.5em;
+	padding: 0;
+	margin-bottom: 0.5em;
 }
-
 
 .quicknavi li a {
 	width: 300px;
@@ -56,7 +52,7 @@ color: #FFF;
 	display: block;
 }
 
-.quickfiles.quicknavi a { 
+.quickfiles.quicknavi a {
 	margin-bottom: 10px;
 }
 
@@ -78,14 +74,12 @@ color: #FFF;
 	display: block;
 }
 /* hide default Watson-Button */
+
 li .watson-btn {
 	display: none!important;
 }
-
 /* Format Watson-Button */
+
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
 }
-
-
-

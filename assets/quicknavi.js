@@ -12,7 +12,7 @@ $(document).on('rex:ready', function() {
 });
 
 $(document).on("shown.bs.dropdown", function() {
-   $(this).find(".dropdown-menu li.active a").focus();
+   $(this).find(".dropdown-menu li.bg-primary a").focus();
    $(this).find('.dropdown-menu.quicknavi li:first-child input').focus();
 });
 

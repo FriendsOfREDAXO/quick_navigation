@@ -16,7 +16,6 @@ $(document).on("shown.bs.dropdown", function() {
    $(this).find('.dropdown-menu.quicknavi li:first-child input').focus();
 });
 
-
 function quicknavi_filter_init() {
 	$('#qsearch').keyup(function(){	
 		var current_query = $('#qsearch').val();

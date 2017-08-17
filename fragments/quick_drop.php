@@ -8,15 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
     $toolbar = isset($this->toolbar) && $this->toolbar ? true : false;
     $group = isset($this->group) && $this->group ? true : false;
 ?>
-
 <?php if (!$toolbar && !$group): ?>
 <div class="dropdown<?= (isset($this->block) ? ' btn-block' : '')?><?= ((isset($this->class) && $this->class != '') ? ' ' . $this->class : '') ?>">
 <?php endif; ?>
-
     <?php if ($toolbar): ?>
     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"<?= ((isset($this->disabled) && $this->disabled) ? ' disabled' : '') ?>>
     <?php else: ?>
@@ -34,15 +31,15 @@
     <?php else: ?>
     </button>
     <?php endif; ?>
-    
 	 <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">   	
         <?php if (isset($this->header) && $this->header != ''): ?>
             <li class="dropdown-header"><?= $this->header ?></li>
-         <ul>  
+        <li>
+        	<ul>  
         <?php endif; ?> 
         <?php
         foreach ($this->items as $item) {
-            echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="quickitem active"' : ' class="quickitem"') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
+            echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="quickitem bg-primary"' : ' class="quickitem"') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
             echo(isset($item['href']) && $item['href'] != '') ? '<a href="' . $item['href'] . '"  title="'. $item['hreftitle'] .'"  >' . $item['title'] . '</a>' : $item['title'];
             echo ' </li>';
         }
@@ -51,9 +48,9 @@
             <li class="divider"></li>
             <li><?= $this->footer ?></li>
         <?php endif; ?>
-    </ul> </ul>
-
+   		</ul> 
+   	</li>
+   </ul>
 <?php if (!$toolbar && !$group): ?>
 </div>
 <?php endif;
-

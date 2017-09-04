@@ -1,13 +1,8 @@
 <?php
 // Variablen initialisieren
-$content = $buttons = '';
+$content = $user = $buttons = '';
 $formElements = [];
 $n = [];
-
-
-
-
-
 // User-ID ermitteln
 $user =  rex::getUser()->getId();
 #dump($this->getConfig('quicknavi_favs'.$user));
@@ -19,9 +14,7 @@ if (rex_post('formsubmit', 'string') == '1') {
     echo rex_view::success($this->i18n('quicknavi_config_saved'));
 }
 $content .= '<fieldset><legend>' . $this->i18n('quicknavi_info') . '</legend>';
-
 // Kategorieauswahl 
-
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);

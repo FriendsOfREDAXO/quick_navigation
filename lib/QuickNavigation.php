@@ -35,9 +35,13 @@ class QuickNavigation
         $drophistory->setVar('limit', '15');
         $drophistory = $drophistory->parse('quick_articles.php');
         
+        $qlang= rex_request('clang', 'int');
+        if ($qlang==0) {
+        	$qlang = 1;
+        }
         
         $dropfavs = new rex_fragment();
-        $dropfavs->setVar('limit', '15');
+        $dropfavs->setVar('clang',$qlang);
         $dropfavs = $dropfavs->parse('quick_favs.php');
         
         // ------------ Parameter

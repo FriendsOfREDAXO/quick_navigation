@@ -21,6 +21,7 @@ if (count($datas)) {
                         'href' => rex_url::backendPage('content/edit',
                             [
                                 'page' => 'structure',
+                                'clang' => $this->clang,
                                 'category_id' => $data
                             ]
                         )

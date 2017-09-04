@@ -6,13 +6,20 @@ Schnellnavigation ab REDAXO 5.1.0
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
+### Features
+- Kategorie-Scnellauswahl
+- Filter nach Kategorienamen, Domain, Id
+- Id-Schnelleingabe
+- Historie der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
+- Personalisierte, individuelle Kategorie-Favoriten
+
 ### Beschreibung 
 
 Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Id-Eingabe sowie eine Liste der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
 
 Im Live-Filter kann nach Kategorien oder yrewrite-Domains gesucht werden. Gibt man eine Domain ein erhält man so schnell den Baum der jeweiligen Domain. 
 
-Favorisierte Kategorien können individuell in den Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. 
+Favorisierte Kategorien können individuell in den AddOn-instellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. 
 
 Quick Navigation ist über den Access-Key **m** erreichbar.
 

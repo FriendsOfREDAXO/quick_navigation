@@ -7,6 +7,7 @@ supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 page:
     title: 'Quick Navigation' # Werte die mit "translate:" beginnen, werden anhand der Sprachdatei Ã¼bersetzt. Der Addon-PrÃ¤fix (hier "demo_addon_") kann weggelassen werden.
     perm: quick_navigation[]
+    icon: rex-icon fa-star
     subpages:
         config: { title: 'translate:quicknavi_config' }
 
@@ -15,4 +16,3 @@ requires:
     packages:
         structure/content: '^2.1.0'
     redaxo: '^5.1.0'
-    

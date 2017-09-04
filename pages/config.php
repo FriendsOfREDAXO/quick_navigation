@@ -10,6 +10,7 @@ $n = [];
 
 // User-ID ermitteln
 $user =  rex::getUser()->getId();
+#dump($this->getConfig('quicknavi_favs'.$user));
 // Einstellungen speichern
 if (rex_post('formsubmit', 'string') == '1') {
     $this->setConfig(rex_post('config', [

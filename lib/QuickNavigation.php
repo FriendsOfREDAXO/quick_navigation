@@ -35,6 +35,11 @@ class QuickNavigation
         $drophistory->setVar('limit', '15');
         $drophistory = $drophistory->parse('quick_articles.php');
         
+        
+        $dropfavs = new rex_fragment();
+        $dropfavs->setVar('limit', '15');
+        $dropfavs = $dropfavs->parse('quick_favs.php');
+        
         // ------------ Parameter
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
@@ -131,7 +136,7 @@ class QuickNavigation
         }
        
 
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson. $quickout . $droplist . $drophistory . '</div>' . $ep->getSubject();
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson. $quickout . $droplist . $drophistory . $dropfavs . '</div>' . $ep->getSubject();
 
     }
 }

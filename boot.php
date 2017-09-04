@@ -25,3 +25,9 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
     rex_view::addCssFile($this->getAssetsUrl('quicknavi.css?v=' . $this->getVersion()));
     rex_view::addJsFile($this->getAssetsUrl('quicknavi.js?v=' . $this->getVersion()));
 }
+
+
+if (!$this->hasConfig()) {
+	$user =  rex::getUser()->getId();
+    $this->setConfig('quicknavi_favs'.$user,[]);
+}

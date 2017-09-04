@@ -1,9 +1,1 @@
-package: quick_navigation
-version: '1.3.5'
-author: 'Friends Of REDAXO'
-supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
-
-requires:
-    packages:
-        structure/content: '^2.1.0'
-    redaxo: '^5.1.0'
+package: quick_navigationversion: '1.4dev'author: 'Friends Of REDAXO'supportpage: https://github.com/FriendsOfREDAXO/quick_navigationpage:    title: 'Quick Navigation' # Werte die mit "translate:" beginnen, werden anhand der Sprachdatei Ã¼bersetzt. Der Addon-PrÃ¤fix (hier "demo_addon_") kann weggelassen werden.    perm: quick_navigation[]    subpages:        config: { title: 'translate:quicknavi_config' }requires:    packages:        structure/content: '^2.1.0'    redaxo: '^5.1.0'

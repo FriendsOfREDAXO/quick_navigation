@@ -1,4 +1,10 @@
+quicknavi_title = Quick Navigation
+quicknavi_config = Einstellungen
+quicknavi_general = Allgemein
+quicknavi_config_saved = Quicklinks gespeichert
+quicknavi_info = Quicklinks auswählen
 perm_general_quick_navigation[] = Quick Navi
+quicknavi_categories = Kategorien wählen
 perm_general_quick_navigation[idinput] = Quick Navi: Erlaube Artikel-ID-Eingabe
 perm_general_quick_navigation[history] = Quick Navi: Zuletzt bearbeitete Artikel und Medien
 perm_general_quick_navigation[own_articles] = Quick Navi: Zuletzt bearbeitete Artikel und Medien :: Ansicht nur eigene 

@@ -1,6 +1,1 @@
-perm_general_quick_navigation[] = Quick Navi
-perm_general_quick_navigation[idinput] = Quick Navi: allow entering of article Ids
-perm_general_quick_navigation[history] = Quick Navi: recently edited articles and media
-perm_general_quick_navigation[own_articles] = Quick Navi: recently edited articles :: only own articles and media
-
-quick_navigation_no_entries = No entries found
+perm_general_quick_navigation[] = Quick Naviperm_general_quick_navigation[idinput] = Quick Navi: allow entering of article Idsperm_general_quick_navigation[history] = Quick Navi: recently edited articles and mediaperm_general_quick_navigation[own_articles] = Quick Navi: recently edited articles :: only own articles and mediaquick_navigation_no_entries = No entries found

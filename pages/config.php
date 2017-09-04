@@ -48,7 +48,7 @@ $content .= $fragment->parse('core/form/container.php');
 // Save-Button
 $formElements = [];
 $n = [];
-$n['field'] = '<button class="btn btn-save rex-form-aligned" type="submit" name="save" value="' . $this->i18n('quicknavi_config_save') . '">' . $this->i18n('config_save') . '</button>';
+$n['field'] = '<button class="btn btn-save rex-form-aligned" type="submit" name="save" value="' . $this->i18n('quicknavi_config_save') . '">' . $this->i18n('quicknavi_config_save') . '</button>';
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);

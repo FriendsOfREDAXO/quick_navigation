@@ -38,7 +38,6 @@ if (count($datas)) {
                     </button>
                     <ul class="quickfiles quicknavi dropdown-menu dropdown-menu-right">
                         <?= $link ?>
-
                     </ul>
                 </div>
 <?php                 

@@ -106,18 +106,8 @@ class QuickNavigation
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
         }
-        $fragment = new rex_fragment();
-        $fragment->setVar('button_prefix', '');
-        $fragment->setVar('header', '<input id="qsearch" type="text" class="form-control input" autofocus placeholder="Filter" />',false);
-        $fragment->setVar('button_label', $button_label);
-        $fragment->setVar('items', $items, false);
-        $fragment->setVar('right', true, false);
-        $fragment->setVar('group', true, false);
-        $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
-
-        $quickout = '';
-        if (rex::getUser()->hasPerm('quick_navigation[idinput]')) {
-            $formurl = rex_url::backendPage(
+        
+          $formurl = rex_url::backendPage(
                 'content/edit',
                 [
                     'mode' => 'edit',
@@ -125,22 +115,23 @@ class QuickNavigation
                     'article_id' => ''
                 ]
             );
-            $quickout =
-                '<div class="btn-group">
-                    <form action="' . $formurl . '" method="post">
-                        <div class="input-group">
-                            <input class="form-control" id="qnid" type="text" name="article_id" placeholder="ID" value="" />
-                        </div>
-                    </form>
-                </div>';
-        }
+        
+        $fragment = new rex_fragment();
+        $fragment->setVar('button_prefix', '');
+        $fragment->setVar('header', ' <form action="' . $formurl . '" method="post"><input id="qsearch" name="article_id" type="text" class="form-control input" autofocus placeholder="Filter / Id" /></form>',false);
+        $fragment->setVar('button_label', $button_label);
+        $fragment->setVar('items', $items, false);
+        $fragment->setVar('right', true, false);
+        $fragment->setVar('group', true, false);
+        $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
+
         $watson = '';
         if(rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0)==1) {
        $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
        
 
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson. $quickout . $droplist . $drophistory . $dropfavs . '</div>' . $ep->getSubject();
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropfavs . '</div>' . $ep->getSubject();
 
     }
 }

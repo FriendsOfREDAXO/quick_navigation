@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '1.4dev'
+version: '2.0.0b'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 
@@ -9,8 +9,6 @@ page:
     icon: rex-icon fa-star
     subpages:
         config: { title: 'translate:quicknavi_config' }
-
-
 requires:
     packages:
         structure/content: '^2.1.0'

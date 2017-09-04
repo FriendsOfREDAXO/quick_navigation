@@ -1,7 +1,8 @@
 quicknavi_title = Quick Navigation
 quicknavi_config = Einstellungen
 quicknavi_general = Allgemein
-quicknavi_config_save = Favoriten gespeichert
+quicknavi_config_save = Speichern
+quicknavi_config_saved = Favoriten gespeichert
 quicknavi_info = Favoriten auswählen
 perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Kategorie-Auswahl

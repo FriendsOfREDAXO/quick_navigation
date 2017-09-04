@@ -7,7 +7,7 @@ Schnellnavigation ab REDAXO 5.1.0
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
 ### Features
-- Kategorie-Scnellauswahl
+- Kategorie-Schnellauswahl
 - Filter nach Kategorienamen, Domain, Id
 - Id-Schnelleingabe
 - Historie der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User

@@ -102,7 +102,10 @@ class QuickNavigation
             }
 			
             $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', $option->nodeValue);
+             $item['hreftitle'] = '';
+            if(rex_addon::get('yrewrite')->isAvailable()) {
             $item['hreftitle'] = $option->nodeValue.$item['domain-title'];
+            }
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
         }
@@ -135,4 +138,3 @@ class QuickNavigation
 
     }
 }
-

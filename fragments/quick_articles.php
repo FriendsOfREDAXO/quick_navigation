@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $link = $where = '';
+$drophistory = $date = $link = $where = $domaintitle ='';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             
             if (rex::getUser()->hasPerm('quick_navigation[own_articles]') && !rex::getUser()->isAdmin()) {
@@ -28,10 +28,8 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             if (!count($datas)) {
 			   $link .= '<li class="alert">'.rex_i18n::msg('quick_navigation_no_entries').'</li>';
 			}
-            
-            
-            if (count($datas)) {
 
+            if (count($datas)) {
                 foreach ($datas as $data) {
                     $lang = rex_clang::get($data['clang_id']);
                     $langcode = $lang->getCode();
@@ -50,7 +48,6 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     ];
 					
 			if(rex_addon::get('yrewrite')->isAvailable()) {
-					$domaintitle ='';
 				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="" and count(rex_yrewrite::getDomains())>2)
 					{ $domain = rex_yrewrite::getDomainByArticleId($data['id']); 
 					  $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.$domain; 
@@ -76,4 +73,3 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         }
         
  ?>
-

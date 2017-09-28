@@ -2,10 +2,11 @@ package: quick_navigation
 version: '2.0.2'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
+perm: quick_navigation[]
 
 page:
     title: 'Quick Navigation'
-    perm: quick_navigation[]
+    perm: quick_navigation_favs[]
     icon: rex-icon fa-star
     subpages:
         config: { title: 'translate:quicknavi_config' }

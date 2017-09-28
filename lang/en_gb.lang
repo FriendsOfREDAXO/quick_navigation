@@ -5,7 +5,6 @@ quicknavi_config_save = Save settings
 quicknavi_config_saved = Favorites saved
 quicknavi_info = Favorite selection
 perm_general_quick_navigation[] = Quick Navi
-perm_general_quick_navigation[favs]= Quick Navi: Favorite management
 quicknavi_categories = Category selection
 perm_general_quick_navigation[history] =  Quick Navi: recently edited articles and media
 perm_general_quick_navigation[own_articles] = Quick Navi: recently edited articles :: only own articles and media

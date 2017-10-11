@@ -14,21 +14,23 @@ $user =  rex::getUser()->getId();
 $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
 if (count($datas)) {
 
-                foreach ($datas as $data) {
+	foreach ($datas as $data) {
+			   if (rex_category::get($data)){
 				   $cat = rex_category::get($data);
 				   $catName = $cat->getName();
-                   $attributes = [
-                        'href' => rex_url::backendPage('content/edit',
-                            [
-                                'page' => 'structure',
-                                'clang' => $this->clang,
-                                'category_id' => $data
-                            ]
-                        )
-                    ];
+				   $attributes = [
+						'href' => rex_url::backendPage('content/edit',
+							[
+								'page' => 'structure',
+								'clang' => $this->clang,
+								'category_id' => $data
+							]
+						)
+					];
 
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $catName . '">' . $catName .'</a></li>';
-                }
+					$link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $catName . '">' . $catName .'</a></li>';
+			   }
+			}	   
             
 ?>
                 <div class="btn-group">
@@ -43,4 +45,5 @@ if (count($datas)) {
 <?php                 
 }
 ?>
+
 

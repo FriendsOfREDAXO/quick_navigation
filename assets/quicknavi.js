@@ -3,7 +3,7 @@ $(document).on('rex:ready', function() {
 
        var ctype = getUrlVars()["ctype"];
        if (ctype)
-       {  
+       {
 	   $(".quicknavi a").attr('href', function(i, h) {
 	     return h + (h.indexOf('?') != -1 ? "&ctype="+ctype : "?ctype="+ctype);
 	   		});
@@ -17,7 +17,15 @@ $(document).on("shown.bs.dropdown", function() {
 });
 
 function quicknavi_filter_init() {
-	$('#qsearch').keyup(function(){	
+    $('#qsearch').closest('form').submit(function (e) {
+        var input_val = $('#qsearch').val(),
+            suggestions = $(".quicknavi.list-group li.quickitem:visible");
+        if (!$.isNumeric(input_val) || !suggestions.length) {
+            e.stopImmediatePropagation();
+            return false;
+        }
+    });
+	$('#qsearch').keyup(function(){
 		var current_query = $('#qsearch').val();
 		if (current_query !== "") {
 			$(".quicknavi.list-group li.quickitem").hide();
@@ -25,10 +33,10 @@ function quicknavi_filter_init() {
 				var current_keyword = $(this).text();
 				 var upercase = current_query.substr(0,1).toUpperCase() + current_query.substr(1);
 			    if ((current_keyword.indexOf(current_query) >=0) ||  (current_keyword.indexOf(upercase) >=0)) {
-				$(this).show();    	 	
+				$(this).show();
 				}
-				
-			});    	
+
+			});
 		} else {
 			$(".quicknavi.list-group li.quickitem").show();
 		}

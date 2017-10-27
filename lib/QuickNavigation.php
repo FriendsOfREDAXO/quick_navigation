@@ -104,7 +104,7 @@ class QuickNavigation
             $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', rex_escape($option->nodeValue));
             $item['hreftitle'] = '';
             if(rex_addon::get('yrewrite')->isAvailable()) {
-            $item['hreftitle'] = $option->nodeValue.$item['domain-title'];
+            $item['hreftitle'] = rex_escape($option->nodeValue).$item['domain-title'];
             }
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
@@ -133,7 +133,6 @@ class QuickNavigation
        $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
        
-
         return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropfavs . '</div>' . $ep->getSubject();
 
     }

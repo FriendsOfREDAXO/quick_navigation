@@ -83,10 +83,10 @@ class QuickNavigation
 						$item['domain']='';
 						if(rex_addon::get('yrewrite')->isAvailable()) {
 							$item['domain-title'] ='';
-							$item['quickID']= $value;
+							$item['quickID'] = $value;
 						    if (rex_yrewrite::getDomainByArticleId($item['quickID'])!="")
 							{ $item['domain'] = rex_yrewrite::getDomainByArticleId($item['quickID']); 
-							  $item['domain-title'] = ' | '.$item['domain']; 
+							  $item['domain-title'] = ' | '.rex_escape($item['domain']); 
 							}
 						
 						}
@@ -101,8 +101,8 @@ class QuickNavigation
                 }
             }
 			
-            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', $option->nodeValue);
-             $item['hreftitle'] = '';
+            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', rex_escape($option->nodeValue));
+            $item['hreftitle'] = '';
             if(rex_addon::get('yrewrite')->isAvailable()) {
             $item['hreftitle'] = $option->nodeValue.$item['domain-title'];
             }

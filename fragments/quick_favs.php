@@ -17,7 +17,7 @@ if (count($datas)) {
 	foreach ($datas as $data) {
 			   if (rex_category::get($data)){
 				   $cat = rex_category::get($data);
-				   $catName = $cat->getName();
+				   $catName = rex_escape($cat->getName());
 				   $attributes = [
 						'href' => rex_url::backendPage('content/edit',
 							[
@@ -45,5 +45,3 @@ if (count($datas)) {
 <?php                 
 }
 ?>
-
-

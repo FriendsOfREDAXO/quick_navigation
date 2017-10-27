@@ -2,7 +2,7 @@
 REDAXO-AddOn: Quick Navigation
 ================================================================================
 
-Schnellnavigation ab REDAXO 5.3.0
+Schnellnavigation für REDAXO CMS
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 

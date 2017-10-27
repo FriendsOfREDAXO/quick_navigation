@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $entryname = $date = $link = $where = '';
+$drophistory = $filename = $entryname = $date = $link = $where = '';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             
             if (rex::getUser()->hasPerm('quick_navigation[own_articles]') && !rex::getUser()->isAdmin()) {
@@ -46,12 +46,13 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     ];
                     
                     if ($data['title']!='')
-					{ $entryname =   $data['title']; }  
+					{ $entryname =   rex_escape($data['title']); }  
 					else {
-						 $entryname = $data['filename'];
-					}              
+						 $entryname = rex_escape($data['filename']);
+					}  
+					$filename = rex_escape($data['filename']);
                     
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $data['filename'] . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . $data['updateuser'] . ' - ' . $date . '</small></a></li>';
+                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $filename . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
                 }
             }
 ?>

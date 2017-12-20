@@ -11,5 +11,5 @@ page:
         config: { title: 'translate:quicknavi_config' }
 requires:
     packages:
-        structure/content: '^2.1.0'
+        structure/content: '^2.1.1'
     redaxo: '^5.4.0'

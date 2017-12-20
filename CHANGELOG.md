@@ -2,6 +2,13 @@
 Quick Navigation - Changelog
 ================================================================================
 
+2.1.0 (20.12.2017)
+--------------------------------------------------------------------------------
+New: 
+- Quick YForm-Table-Selection + Quick Add dataset
+- Quick Add-Article in Favorites. 
+- Minor style fixes
+
 2.0.6 (27.10.2017)
 --------------------------------------------------------------------------------
 Security fix, uses rex_escape therfore min version of REDAXO: 5.4

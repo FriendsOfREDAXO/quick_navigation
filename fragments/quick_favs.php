@@ -18,6 +18,7 @@ if (count($datas)) {
 			   if (rex_category::get($data)){
 				   $cat = rex_category::get($data);
 				   $catName = rex_escape($cat->getName());
+				   $catId = rex_escape($cat->getId());
 				   $attributes = [
 						'href' => rex_url::backendPage('content/edit',
 							[
@@ -27,8 +28,16 @@ if (count($datas)) {
 							]
 						)
 					];
-
-					$link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $catName . '">' . $catName .'</a></li>';
+                    $addAttributes = [
+                        'href' => rex_url::backendPage('structure',
+                            [
+                                'category_id' => $catId,
+                                'clang' => $this->clang,
+                                'function' => 'add_art'
+                            ]
+                        )
+                    ];
+					$link .= '<li class="quicknavi_left"><a ' . rex_string::buildAttributes($attributes) . ' title="' . $catName . '">' . $catName .'</a></li><li class="quicknavi_right"><a ' . rex_string::buildAttributes($addAttributes) . ' title="'. $this->i18n("title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
 			   }
 			}	   
             

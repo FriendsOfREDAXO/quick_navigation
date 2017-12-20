@@ -8,5 +8,6 @@ perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Kategorie-Auswahl
 perm_general_quick_navigation[history] = Quick Navi: Zuletzt bearbeitete Artikel und Medien
 perm_general_quick_navigation[own_articles] = Quick Navi: Zuletzt bearbeitete Artikel und Medien :: Ansicht nur eigene 
-
+title_yform = Block hinzufügen bei: 
+title_favs = Artikel hinzufügen bei: 
 quick_navigation_no_entries = Keine Einträge gefunden

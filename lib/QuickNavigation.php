@@ -39,7 +39,17 @@ class QuickNavigation
         if ($qlang==0) {
         	$qlang = 1;
         }
+        // ------------ yForm
         
+        $dropyform = '';
+        if(rex_addon::get('yform')->isAvailable()) {
+	        $dropyform = new rex_fragment();
+	        $dropyform->setVar('clang',$qlang);
+	        $dropyform = $dropyform->parse('quick_yform.php');
+        }
+        
+        // ------------ favoriten
+        $dropfavs = '';
         $dropfavs = new rex_fragment();
         $dropfavs->setVar('clang',$qlang);
         $dropfavs = $dropfavs->parse('quick_favs.php');
@@ -133,7 +143,7 @@ class QuickNavigation
        $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
        
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropfavs . '</div>' . $ep->getSubject();
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropfavs . '</div>' . $ep->getSubject();
 
     }
 }

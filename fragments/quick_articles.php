@@ -46,6 +46,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                             ]
                         )
                     ];
+
 					
 			if(rex_addon::get('yrewrite')->isAvailable()) {
 				    if (rex_yrewrite::getDomainByArticleId($data['id'])!="" and count(rex_yrewrite::getDomains())>2)

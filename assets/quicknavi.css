@@ -25,7 +25,7 @@ li.quickitem.bg-primary a {
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	padding: 10px;
-	padding-top: 0;
+	padding-top: 10px;
 	margin-bottom: 10px;
 }
 
@@ -77,4 +77,19 @@ li .watson-btn {
 
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
+}
+.quicknavi_left {
+	width: 88%;
+	display: inline-block;
+}
+.dropdown-menu > .quicknavi_left > a {
+	width: 100%;
+}
+.quicknavi_right {
+	width: 12%;
+	display: inline-block;
+}
+.dropdown-menu > .quicknavi_right > a {
+	width: 100%;
+	text-align: center;	
 }

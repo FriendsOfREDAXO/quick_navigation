@@ -25,7 +25,7 @@ $user =  rex::getUser()->getId();
 $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$user);
 $skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, true, 'SORT_ASC', $categoryId);;
 if (count($skeds)) {
-		if($datas == '1') {
+		if($datas != '1') {
 			foreach($skeds as $sked) {
 			    	$skedId 				= rex_escape($sked['id']);
 					$sked_entry 			= rex_escape($sked['entry']);

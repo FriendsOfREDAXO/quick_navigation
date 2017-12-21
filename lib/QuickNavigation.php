@@ -40,13 +40,15 @@ class QuickNavigation
         	$qlang = 1;
         }
         // ------------ SKED
-        
         $dropsked = '';
-        if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
-	        $dropsked = new rex_fragment();
-	        $dropsked = $dropsked->parse('quick_sked.php');
-        }
-        
+        $sked_user =  rex::getUser()->getId();
+		$sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$sked_user);
+		if($sked_datas != '1') {
+	        if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
+		        $dropsked = new rex_fragment();
+		        $dropsked = $dropsked->parse('quick_sked.php');
+	        }
+		}
         // ------------ yForm
         
         $dropyform = '';

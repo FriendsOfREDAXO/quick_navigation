@@ -20,12 +20,11 @@ $today			= strtotime($start);
 $halfayear		= strtotime('+ 2 month', $today);
 $filter_date	= date("Y-m-d", $halfayear);
 
-$user =  rex::getUser()->getId();
 
-$datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$user);
-$skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, true, 'SORT_ASC', $categoryId);;
+
+$skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
+dump($skeds);
 if (count($skeds)) {
-		if($datas != '1') {
 			foreach($skeds as $sked) {
 			    	$skedId 				= rex_escape($sked['id']);
 					$sked_entry 			= rex_escape($sked['entry']);
@@ -49,6 +48,16 @@ if (count($skeds)) {
 								)
 							];
 					
+
+		
+					$link .= '<li class=""><a ' . rex_string::buildAttributes($attributes) . ' title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
+		
+				}
+			//		$addLink .= '<li class="quicknavi_right"><a type="button" class="btn btn-default' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i></a></li><li class="quicknavi_left"><a ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'">'.$this->i18n("sked_add_new_entry").'</a>';
+?>
+		   
+<?php  
+}
 					$addAtrributes = [
 								'href' => rex_url::backendPage('sked/entries',
 									[
@@ -56,15 +65,11 @@ if (count($skeds)) {
 									]
 								)
 							];
-		
-					$link .= '<li class=""><a ' . rex_string::buildAttributes($attributes) . ' title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
-		
-				}
-			//		$addLink .= '<li class="quicknavi_right"><a type="button" class="btn btn-default' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i></a></li><li class="quicknavi_left"><a ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'">'.$this->i18n("sked_add_new_entry").'</a>';
 					$addLink .= '<li class=""><a class="btn btn-default" ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"> &nbsp&nbsp'.$this->i18n("sked_add_new_entry").'</i></a></li>';
 		
+
 ?>
-		                <div class="btn-group">
+             <div class="btn-group">
 		                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 		                        <i class="fa fa-calendar" aria-hidden="true"></i>
 		                        <span class="caret"></span>
@@ -74,9 +79,3 @@ if (count($skeds)) {
 		                        <?= $link ?>
 		                    </ul>
 		                </div>
-<?php  
-		}
-	
-}
-
-

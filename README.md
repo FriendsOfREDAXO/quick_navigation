@@ -12,6 +12,7 @@ Schnellnavigation für REDAXO CMS
 - Id-Schnelleingabe
 - Historie der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
+- Settingsseite je User
 
 #### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
@@ -28,6 +29,7 @@ Favorisierte Kategorien können individuell in den AddOn-instellungen gepflegt w
 
 Quick Navigation integriert Funktionen auch anderer AddOns sofern diese installiert wurden. 
 Aktuell: YForm, Sked und Watson
+Der Sked-Button kann vom jeweiligen User ausgeblendet werden. 
 
 Quick Navigation ist über den Access-Key **m** erreichbar.
 

@@ -11,7 +11,12 @@ Schnellnavigation für REDAXO CMS
 - Filter nach Kategorienamen, Domain, Id
 - Id-Schnelleingabe
 - Historie der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
-- Personalisierte, individuelle Kategorie-Favoriten
+- Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
+
+#### AddOn-Integration 
+- YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
+- Sked-Support: Neuste Termine werden aufgelistet, ein Datensatz kann über direkt erstellt werden. 
+- Watson-Support: Quick Navigation bindet den Watson-Button ein. 
 
 ### Beschreibung 
 
@@ -19,7 +24,10 @@ Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Id-
 
 Im Live-Filter kann nach Kategorien oder yrewrite-Domains gesucht werden. Gibt man eine Domain ein erhält man so schnell den Baum der jeweiligen Domain. 
 
-Favorisierte Kategorien können individuell in den AddOn-instellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. 
+Favorisierte Kategorien können individuell in den AddOn-instellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
+
+Quick Navigation integriert Funktionen auch anderer AddOns sofern diese installiert wurden. 
+Aktuell: YForm, Sked und Watson
 
 Quick Navigation ist über den Access-Key **m** erreichbar.
 

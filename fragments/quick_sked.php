@@ -21,8 +21,9 @@ $halfayear		= strtotime('+ 2 month', $today);
 $filter_date	= date("Y-m-d", $halfayear);
 
 
-
 $skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
+//dump($skeds);
+
 if (count($skeds)) {
 			foreach($skeds as $sked) {
 			    	$skedId 				= rex_escape($sked['id']);
@@ -38,6 +39,9 @@ if (count($skeds)) {
 		    		$entry_end_time_date	= new DateTime($entry_end_time);
 		    		$sked_end_time          = rex_escape($entry_end_time_date->format('H:i'));
 		    		
+		    		$sked_color 			= rex_escape($sked_entry->category_color);
+
+		    		
 			    	$attributes = [
 								'href' => rex_url::backendPage('sked/entries',
 									[
@@ -49,7 +53,7 @@ if (count($skeds)) {
 					
 
 		
-					$link .= '<li class=""><a ' . rex_string::buildAttributes($attributes) . ' title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
+					$link .= '<li class="sked_border" style="border-color:'.$sked_color.'"><a ' . rex_string::buildAttributes($attributes) . ' title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
 		
 				}
 			//		$addLink .= '<li class="quicknavi_right"><a type="button" class="btn btn-default' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i></a></li><li class="quicknavi_left"><a ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'">'.$this->i18n("sked_add_new_entry").'</a>';

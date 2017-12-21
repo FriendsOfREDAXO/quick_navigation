@@ -2,7 +2,7 @@
 REDAXO-AddOn: Quick Navigation
 ================================================================================
 
-Schnellnavigation für REDAXO CMS
+Schnellnavigation und Werkzeugleiste für REDAXO CMS
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
@@ -10,7 +10,7 @@ Schnellnavigation für REDAXO CMS
 - Kategorie-Schnellauswahl
 - Filter nach Kategorienamen, Domain, Id
 - Id-Schnelleingabe
-- Historie der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
+- Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
 - Settingsseite je User
 
@@ -21,19 +21,20 @@ Schnellnavigation für REDAXO CMS
 
 ### Beschreibung 
 
-Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Id-Eingabe sowie eine Liste der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
+Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Kategorie-Id-Eingabe sowie eine Liste der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
 
-Im Live-Filter kann nach Kategorien oder yrewrite-Domains gesucht werden. Gibt man eine Domain ein erhält man so schnell den Baum der jeweiligen Domain. 
+Im Live-Filter kann nach Kategorien oder yrewrite-Domains gesucht werden. Gibt man eine Domain ein, erhält man schnell den Baum der jeweiligen Domain. 
 
-Favorisierte Kategorien können individuell in den AddOn-instellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
+Favorisierte Kategorien können individuell durch die Redakteure in den AddOn-Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
 
 Quick Navigation integriert Funktionen auch anderer AddOns sofern diese installiert wurden. 
 Aktuell: YForm, Sked und Watson
-Der Sked-Button kann vom jeweiligen User ausgeblendet werden. 
+Der Sked-Button kann durch die Redakteure ausgeblendet werden. 
 
 Quick Navigation ist über den Access-Key **m** erreichbar.
 
-Admins erhalten alle Funktionen. Für Redakteure kann die Verfügbarkeit einiger Funktionen über die Rollen-Rechte definiert werden.   
+Admins erhalten alle Funktionen. 
+Für Redakteure kann die Verfügbarkeit einiger Funktionen über die Rollen-Rechte definiert werden.   
 
 ### Installation
 
@@ -66,3 +67,14 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 **Projekt-Lead**
 
 [Thomas Skerbis](https://github.com/skerbis)
+
+**Credits**
+
+Danke an: 
+
+[Christian Gehrke](https://github.com/chrison94)
+
+**First Release**
+
+[Thomas Blum](https://github.com/tbaddade)
+

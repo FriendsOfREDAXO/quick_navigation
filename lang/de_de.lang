@@ -10,4 +10,7 @@ perm_general_quick_navigation[history] = Quick Navi: Zuletzt bearbeitete Artikel
 perm_general_quick_navigation[own_articles] = Quick Navi: Zuletzt bearbeitete Artikel und Medien :: Ansicht nur eigene 
 title_yform = Block hinzufügen bei: 
 title_favs = Artikel hinzufügen bei: 
+sked_add_new_entry = Neuen Sked-Eintrag anlegen
+quicknavi_sked = Sked Button einblenden?
+
 quick_navigation_no_entries = Keine Einträge gefunden

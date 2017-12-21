@@ -8,5 +8,9 @@ perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Category selection
 perm_general_quick_navigation[history] =  Quick Navi: recently edited articles and media
 perm_general_quick_navigation[own_articles] = Quick Navi: recently edited articles :: only own articles and media
+title_yform = Add block to: 
+title_favs = Add article to: 
+sked_add_new_entry = Create new sked entry
+quicknavi_sked = Show Sked Button?
 
 quick_navigation_no_entries = No entries found

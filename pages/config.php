@@ -40,14 +40,16 @@ $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/container.php');	
 
 // SKED Checkbox
-$formElements = [];
-$n = [];
-$n['label'] = '<label for="quicknavi-sked-checkbox">' . $this->i18n('quicknavi_sked') . '</label>';
-$n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_sked'.$user.']"' . (!empty($this->getConfig('quicknavi_sked'.$user)) && $this->getConfig('quicknavi_sked'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
-$formElements[] = $n;
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/checkbox.php');
+if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
+	$formElements = [];
+	$n = [];
+	$n['label'] = '<label for="quicknavi-sked-checkbox">' . $this->i18n('quicknavi_sked') . '</label>';
+	$n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_sked'.$user.']"' . (!empty($this->getConfig('quicknavi_sked'.$user)) && $this->getConfig('quicknavi_sked'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+	$formElements[] = $n;
+	$fragment = new rex_fragment();
+	$fragment->setVar('elements', $formElements, false);
+	$content .= $fragment->parse('core/form/checkbox.php');
+}
 
 // Save-Button
 $formElements = [];

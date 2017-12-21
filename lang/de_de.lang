@@ -11,6 +11,6 @@ perm_general_quick_navigation[own_articles] = Quick Navi: Zuletzt bearbeitete Ar
 title_yform = Block hinzufügen bei: 
 title_favs = Artikel hinzufügen bei: 
 sked_add_new_entry = Neuen Sked-Eintrag anlegen
-quicknavi_sked = Sked Button einblenden?
+quicknavi_sked = Sked Button ausblenden?
 
 quick_navigation_no_entries = Keine Einträge gefunden

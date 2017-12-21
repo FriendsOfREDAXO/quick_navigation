@@ -23,7 +23,6 @@ $filter_date	= date("Y-m-d", $halfayear);
 
 
 $skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
-dump($skeds);
 if (count($skeds)) {
 			foreach($skeds as $sked) {
 			    	$skedId 				= rex_escape($sked['id']);

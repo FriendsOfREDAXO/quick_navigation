@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '2.2.3'
+version: '2.2.4'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]
@@ -13,3 +13,6 @@ requires:
     packages:
         structure/content: '^2.1.0'
     redaxo: '^5.4.0'
+conflicts:
+    packages:
+        yform: '<2.0.0'    

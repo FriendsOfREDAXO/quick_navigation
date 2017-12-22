@@ -46,7 +46,17 @@ li.quickitem.bg-primary a {
 	text-decoration: none;
 	display: block;
 }
-
+.quicknavi li .quicknavi_left {
+	width: 88%;
+	display: block;
+	float: left;
+}
+.quicknavi li .quicknavi_right {
+	width: 12%;
+	display: block;
+	float: left;
+	padding-top: 8px;
+}
 .quickfiles.quicknavi a {
 	margin-bottom: 10px;
 }

@@ -6,6 +6,7 @@ Quick Navigation - Changelog
 2.2.4 (21.12.2017)
 --------------------------------------------------------------------------------
 New: Open History-Article on frontpage
+
 Bugfix: Prevent install when yform <2.0 is installed 
 
 2.2.3 (21.12.2017)

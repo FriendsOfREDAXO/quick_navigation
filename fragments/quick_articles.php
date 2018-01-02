@@ -56,7 +56,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 
 				}
 					$name = rex_escape($data['name']);
-                    $link .= '<li class=""><a class="quicknavi_left" ' . rex_string::buildAttributes($attributes) . ' title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a><span class="quicknavi_right"><a href="'.rex_getUrl($dataID).'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
+                    $link .= '<li class=""><a class="quicknavi_left" ' . rex_string::buildAttributes($attributes) . ' title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a><span class="quicknavi_right"><a href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
                 	
                 }
                 

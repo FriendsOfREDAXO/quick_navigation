@@ -8,8 +8,9 @@ perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Kategorie-Auswahl
 perm_general_quick_navigation[history] = Quick Navi: Zuletzt bearbeitete Artikel und Medien
 perm_general_quick_navigation[own_articles] = Quick Navi: Zuletzt bearbeitete Artikel und Medien :: Ansicht nur eigene 
-title_yform = Block hinzufügen bei: 
-title_favs = Artikel hinzufügen bei: 
+title_yform = Datensatz hinzufügen in: 
+title_favs = Artikel hinzufügen in: 
+title_eye = im Frontend öffnen
 sked_add_new_entry = Neuen Sked-Eintrag anlegen
 quicknavi_sked = Sked Button ausblenden?
 

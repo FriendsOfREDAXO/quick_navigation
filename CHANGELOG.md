@@ -2,6 +2,11 @@
 Quick Navigation - Changelog
 ================================================================================
 
+2.3.0
+--------------------------------------------------------------------------------
+Favorites now optional, should be activated on role definition
+Permission fix for favorites selection
+
 2.2.6 (07.01.2018)
 --------------------------------------------------------------------------------
 eaCe case sensitive changes

@@ -2,7 +2,7 @@
 Quick Navigation - Changelog
 ================================================================================
 
-2.3.0
+2.3.0 (19.01.2018)
 --------------------------------------------------------------------------------
 - Favorites now optional, should be activated on role definition
 - Permission fix for favorites selection

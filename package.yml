@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '2.2.7-dev'
+version: '2.3.0'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]
@@ -7,6 +7,7 @@ perm: quick_navigation[]
 page:
     title: 'Quick Navigation'
     icon: rex-icon fa-star
+    perm: quick_navigation[settings]
     subpages:
         config: { title: 'translate:quicknavi_config' }
 requires:

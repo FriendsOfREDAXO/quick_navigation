@@ -23,7 +23,7 @@ $content .= $fragment->parse('core/form/container.php');
 $formElements = [];
 $n = [];
 $n['label'] = '<label for="quicknavi-config-favs">' . $this->i18n('quicknavi_categories') . '</label>';
-$category_select = new rex_category_select(false, false, false, true);
+$category_select = new rex_category_select(false, false, true, true);
 $category_select->setName('config[quicknavi_favs'.$user.'][]');
 $category_select->setId('quicknavi-config-favs');
 $category_select->setSize('10');

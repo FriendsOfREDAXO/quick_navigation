@@ -9,18 +9,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class QuickNavigation
-{
-    // Media History
+
+// Media History
   	 public static function getmedia($ep)
     {
 
 		if (rex_be_controller::getCurrentPagePart(1) == 'mediapool')
 		{        // Auslesen der Artikel-Liste
+		        $subject = $ep->getSubject(); 
 		        $drophistory = new rex_fragment();
 		        $drophistory->setVar('limit', '15');
 		        $drophistory = $drophistory->parse('quick_media.php');
-		        return '<div class="pull-right quickmedia clearfix">'.$drophistory . '</div>' . $ep->getSubject();
+		        $button = '<div class="input-group-btn quickmedia clearfix">'.$drophistory . '</div><select name="rex_file_category"';
+		        $output = str_replace('<select name="rex_file_category"', $button, $subject);
+				return $output;
 		}
     }
     

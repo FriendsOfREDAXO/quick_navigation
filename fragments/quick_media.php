@@ -62,7 +62,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                         <span class="caret"></span>
                     </button>
-                    <ul class="quickfiles quicknavi dropdown-menu dropdown-menu-right">
+                    <ul class="quickfiles quicknavi dropdown-menu">
                         <?= $link ?>
                     </ul>
                 </div>

@@ -9,7 +9,6 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 ### Features
 - Kategorie-Schnellauswahl
 - Filter nach Kategorienamen, Domain, Id
-- Id-Schnelleingabe
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
 - Settingsseite je User
@@ -21,20 +20,20 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 
 ### Beschreibung 
 
-Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Kategorie-Id-Eingabe sowie eine Liste der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
+Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Listen der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
 
-Im Live-Filter kann nach Kategorien oder yrewrite-Domains gesucht werden. Gibt man eine Domain ein, erhält man schnell den Baum der jeweiligen Domain. 
+Im Live-Filter kann nach Kategorien, Autoren oder yrewrite-Domains gesucht werden. Gibt man z.B. eine Domain ein, erhält man schnell den Baum der jeweiligen Domain. 
 
 Favorisierte Kategorien können individuell durch die Redakteure in den AddOn-Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
 
-Quick Navigation integriert Funktionen auch anderer AddOns sofern diese installiert wurden. 
+Quick Navigation integriert Funktionen auch anderer AddOns, sofern diese installiert und aktiviert wurden. 
 Aktuell: YForm, Sked und Watson
 Der Sked-Button kann durch die Redakteure ausgeblendet werden. 
 
-Quick Navigation ist über den Access-Key **m** erreichbar.
+Die Quick Navigation ist über den Access-Key **m** erreichbar.
 
 Admins erhalten alle Funktionen. 
-Für Redakteure kann die Verfügbarkeit einiger Funktionen über die Rollen-Rechte definiert werden.   
+Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden. ES kann auch eingestellt werden, dass ein Redakteur nur seine eigenen Änderungen verfolgen kann.   
 
 ### Installation
 

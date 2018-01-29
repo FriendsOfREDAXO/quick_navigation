@@ -18,7 +18,7 @@ if (count($tables)) {
 	foreach($tables as $table) {
 		if ($table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
 	    	$table_name = rex_escape($table->getTableName());
-	    	$table_real_name = rex_escape($table->getName());
+	    	$table_real_name = rex_escape(rex_i18n::translate($table->getName()));
 	    	$table_id = rex_escape($table->getId());
 	    	$attributes = [
 						'href' => rex_url::backendPage('yform/manager/data_edit',
@@ -55,5 +55,6 @@ if (count($tables)) {
 <?php                 
 }
 ?>
+
 
 

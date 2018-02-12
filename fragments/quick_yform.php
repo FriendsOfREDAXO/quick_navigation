@@ -16,7 +16,7 @@ $tables = \rex_yform_manager_table::getAll();
 
 if (count($tables)) {
 	foreach($tables as $table) {
-		if ($table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
+		if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
 	    	$table_name = rex_escape($table->getTableName());
 	    	$table_real_name = rex_escape(rex_i18n::translate($table->getName()));
 	    	$table_id = rex_escape($table->getId());

@@ -11,7 +11,7 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 - Filter nach Kategorienamen, Domain, Id
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 
-#### Per User Settins
+#### Per User Settings
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
 - Offline-Kategorien können optional durch User ausgeblendet werden
 - Sked-Unterstützung kann abgeschaltet werden

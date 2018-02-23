@@ -79,7 +79,13 @@ class QuickNavigation
             $add_homepage = false;
         }
 
-        $category_select = new rex_category_select(false, false, true, $add_homepage);
+		$ignore = false;
+        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$sked_user)  == '1' )
+        {
+        	$ignore = true;
+        }
+        
+        $category_select = new rex_category_select($ignore, false, true, $add_homepage);
         $category_select->setName($select_name);
         $category_select->setSize('1');
         $category_select->setAttribute('onchange', 'this.form.submit();');

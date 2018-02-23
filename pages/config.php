@@ -10,6 +10,7 @@ if (rex_post('formsubmit', 'string') == '1') {
     $this->setConfig(rex_post('config', [
         ['quicknavi_favs'.$user, 'array[int]'],
         ['quicknavi_sked'.$user, 'int'],
+        ['quicknavi_ignoreoffline'.$user, 'int'],
     ]));
     echo rex_view::success($this->i18n('quicknavi_config_saved'));
 }
@@ -39,6 +40,19 @@ $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/container.php');	
 
+
+
+	$formElements = [];
+	$n = [];
+	$n['label'] = '<label for="quicknavi-sked-checkbox">' . $this->i18n('quicknavi_ignoreoffline') . '</label>';
+	$n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_ignoreoffline'.$user.']"' . (!empty($this->getConfig('quicknavi_ignoreoffline'.$user)) && $this->getConfig('quicknavi_ignoreoffline'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+	$formElements[] = $n;
+	$fragment = new rex_fragment();
+	$fragment->setVar('elements', $formElements, false);
+	$content .= $fragment->parse('core/form/checkbox.php');
+
+
+
 // SKED Checkbox
 if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
 	$formElements = [];
@@ -50,6 +64,16 @@ if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
 	$fragment->setVar('elements', $formElements, false);
 	$content .= $fragment->parse('core/form/checkbox.php');
 }
+
+
+
+
+
+
+
+
+
+
 
 // Save-Button
 $formElements = [];

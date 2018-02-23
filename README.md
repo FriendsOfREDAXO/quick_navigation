@@ -10,13 +10,16 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 - Kategorie-Schnellauswahl
 - Filter nach Kategorienamen, Domain, Id
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
+
+#### Per User Settins
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
-- Settingsseite je User
+- Offline-Kategorien können optional durch User ausgeblendet werden
+- Sked-Unterstützung kann abgeschaltet werden
 
 #### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
 - Sked-Support: Neuste Termine werden aufgelistet, ein Datensatz kann über direkt erstellt werden. 
-- Watson-Support: Quick Navigation bindet den Watson-Button ein. 
+- Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
 
 ### Beschreibung 
 

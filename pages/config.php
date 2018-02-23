@@ -39,9 +39,7 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/container.php');	
-
-
-
+// Ignore offline cats
 	$formElements = [];
 	$n = [];
 	$n['label'] = '<label for="quicknavi-sked-checkbox">' . $this->i18n('quicknavi_ignoreoffline') . '</label>';
@@ -64,16 +62,6 @@ if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
 	$fragment->setVar('elements', $formElements, false);
 	$content .= $fragment->parse('core/form/checkbox.php');
 }
-
-
-
-
-
-
-
-
-
-
 
 // Save-Button
 $formElements = [];

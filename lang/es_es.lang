@@ -14,5 +14,6 @@ title_favs = Agregar artículo en:
 title_eye = Abrir en la interfaz
 sked_add_new_entry = Crear una nueva entrada sombreada
 quicknavi_sked = ¿Ocultar botón oculto?
+quicknavi_ignoreoffline = Ignorar categorías sin conexión?
 
 quick_navigation_no_entries = No se encontraron entradas

@@ -5,6 +5,7 @@ Quick Navigation - Changelog
 2.4.1 (14.05.2018)
 --------------------------------------------------------------------------------
 Traducción en castellano Danke @nandes2062 
+
 Filter placeholder now in lng-file
 
 2.4.0 (23.02.2018)

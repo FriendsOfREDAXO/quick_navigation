@@ -1,6 +1,7 @@
 quicknavi_title = Quick Navigation
 quicknavi_config = Settings
 quicknavi_general = General
+quicknavi_placeholder = filter by category, id or domain
 quicknavi_config_save = Save settings
 quicknavi_config_saved = Favorites saved
 quicknavi_info = User Settings
@@ -15,5 +16,4 @@ title_eye = Frontend view of article:
 sked_add_new_entry = Create new sked entry
 quicknavi_sked = Show Sked Button?
 quicknavi_ignoreoffline = Ignore offline categories?
-
 quick_navigation_no_entries = No entries found

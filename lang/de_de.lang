@@ -1,6 +1,7 @@
 quicknavi_title = Quick Navigation
 quicknavi_config = Einstellungen
 quicknavi_general = Allgemein
+quicknavi_placeholder = Filtern nach Kategorie, ID oder Domain
 quicknavi_config_save = Speichern
 quicknavi_config_saved = Favoriten gespeichert
 quicknavi_info = Benutzereinstellungen
@@ -15,5 +16,4 @@ title_eye = im Frontend öffnen
 sked_add_new_entry = Neuen Sked-Eintrag anlegen
 quicknavi_sked = Sked Button ausblenden?
 quicknavi_ignoreoffline = Offline-Kategorien ignorieren?
-
 quick_navigation_no_entries = Keine Einträge gefunden

@@ -4,8 +4,10 @@ Quick Navigation - Changelog
 
 2.4.2 (01.06.2018)
 --------------------------------------------------------------------------------
-Fixes for REDAXO 5.6 - Danke @gharlan
+Compatibility fixes for REDAXO 5.6 - Danke @gharlan
+
 Traducción en castellano - Danke @nandes2062
+
 cs fixes
 
 2.4.1 (14.05.2018)

@@ -20,24 +20,20 @@ if (count($tables)) {
 	    	$table_name = rex_escape($table->getTableName());
 	    	$table_real_name = rex_escape(rex_i18n::translate($table->getName()));
 	    	$table_id = rex_escape($table->getId());
-	    	$attributes = [
-						'href' => rex_url::backendPage('yform/manager/data_edit',
-							[
-								'page' => 'yform/manager/data_edit',
-								'table_name' => $table_name
-							]
-						)
-					];
-			$addAtrributes = [
-						'href' => rex_url::backendPage('yform/manager/data_edit',
-							[
-								'page' => 'yform/manager/data_edit',
-								'table_name' => $table_name,
-								'func' => 'add'
-							]
-						)
-					];
-			$link .= '<li class="quicknavi_left"><a ' . rex_string::buildAttributes($attributes) . ' title="' . $table_name . '">' . $table_real_name .'</a></li><li class="quicknavi_right"><a ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("title_yform") .' '.  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+	    	$href = rex_url::backendPage('yform/manager/data_edit',
+                        [
+                            'page' => 'yform/manager/data_edit',
+                            'table_name' => $table_name
+                        ]
+                    );
+			$addHref = rex_url::backendPage('yform/manager/data_edit',
+                        [
+                            'page' => 'yform/manager/data_edit',
+                            'table_name' => $table_name,
+                            'func' => 'add'
+                        ]
+                    );
+			$link .= '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name .'</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="'. $this->i18n("title_yform") .' '.  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
 			$addLink .= '';
 
 		}

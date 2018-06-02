@@ -41,35 +41,31 @@ if (count($skeds)) {
 		    		
 		    		$sked_color 			= rex_escape($sked_entry->category_color);
 
-		    		
-			    	$attributes = [
-								'href' => rex_url::backendPage('sked/entries',
-									[
-										'func' => 'edit',
-										'id' => $skedId
-									]
-								)
-							];
-					
 
-		
-					$link .= '<li class="sked_border" style="border-color:'.$sked_color.'"><a ' . rex_string::buildAttributes($attributes) . ' title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
-		
+			    	$href = rex_url::backendPage('sked/entries',
+                            [
+                                'func' => 'edit',
+                                'id' => $skedId
+                            ]
+                        );
+
+
+
+					$link .= '<li class="sked_border" style="border-color:'.$sked_color.'"><a href="' . $href . '" title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
+
 				}
 			//		$addLink .= '<li class="quicknavi_right"><a type="button" class="btn btn-default' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i></a></li><li class="quicknavi_left"><a ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'">'.$this->i18n("sked_add_new_entry").'</a>';
 ?>
 		   
 <?php  
 }
-					$addAtrributes = [
-								'href' => rex_url::backendPage('sked/entries',
-									[
-										'func' => 'add'
-									]
-								)
-							];
-					$addLink .= '<li class=""><a class="btn btn-default" ' . rex_string::buildAttributes($addAtrributes) . ' title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"> &nbsp&nbsp'.$this->i18n("sked_add_new_entry").'</i></a></li>';
-		
+					$href = rex_url::backendPage('sked/entries',
+                            [
+                                'func' => 'add'
+                            ]
+                        );
+					$addLink .= '<li class=""><a class="btn btn-default" href="' . $href . '" title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"> &nbsp&nbsp'.$this->i18n("sked_add_new_entry").'</i></a></li>';
+
 
 ?>
              <div class="btn-group">

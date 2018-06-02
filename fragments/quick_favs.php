@@ -19,25 +19,21 @@ if (count($datas)) {
 				   $cat = rex_category::get($data);
 				   $catName = rex_escape($cat->getName());
 				   $catId = rex_escape($cat->getId());
-				   $attributes = [
-						'href' => rex_url::backendPage('content/edit',
-							[
-								'page' => 'structure',
-								'clang' => $this->clang,
-								'category_id' => $data
-							]
-						)
-					];
-                    $addAttributes = [
-                        'href' => rex_url::backendPage('structure',
+				   $href = rex_url::backendPage('content/edit',
+                            [
+                                'page' => 'structure',
+                                'clang' => $this->clang,
+                                'category_id' => $data
+                            ]
+                        );
+                    $addHref = rex_url::backendPage('structure',
                             [
                                 'category_id' => $catId,
                                 'clang' => $this->clang,
                                 'function' => 'add_art'
                             ]
-                        )
-                    ];
-					$link .= '<li class="quicknavi_left"><a ' . rex_string::buildAttributes($attributes) . ' title="' . $catName . '">' . $catName .'</a></li><li class="quicknavi_right"><a ' . rex_string::buildAttributes($addAttributes) . ' title="'. $this->i18n("title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                        );
+					$link .= '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName .'</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="'. $this->i18n("title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
 			   }
 			}	   
             

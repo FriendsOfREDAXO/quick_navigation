@@ -4,8 +4,6 @@ REDAXO-AddOn: Quick Navigation
 
 Schnellnavigation und Werkzeugleiste für REDAXO CMS
 
-![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
-
 ### Features
 - Kategorie-Schnellauswahl
 - Filter nach Kategorienamen, Domain, Id

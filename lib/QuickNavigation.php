@@ -13,21 +13,20 @@ class QuickNavigation
 {
     // Media History
 // Media History
-  	 public static function getmedia($ep)
+    public static function getmedia($ep)
     {
 
-		if (rex_be_controller::getCurrentPagePart(1) == 'mediapool')
-		{        // Auslesen der Artikel-Liste
-		        $subject = $ep->getSubject(); 
-		        $drophistory = new rex_fragment();
-		        $drophistory->setVar('limit', '15');
-		        $drophistory = $drophistory->parse('quick_media.php');
-		        $button = '<div class="input-group-btn quickmedia clearfix">'.$drophistory . '</div><select name="rex_file_category"';
-		        $output = str_replace('<select name="rex_file_category"', $button, $subject);
-				return $output;
-		}
+        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {        // Auslesen der Artikel-Liste
+                $subject = $ep->getSubject();
+                $drophistory = new rex_fragment();
+                $drophistory->setVar('limit', '15');
+                $drophistory = $drophistory->parse('quick_media.php');
+                $button = '<div class="input-group-btn quickmedia clearfix">'.$drophistory . '</div><select name="rex_file_category"';
+                $output = str_replace('<select name="rex_file_category"', $button, $subject);
+                return $output;
+        }
     }
-    
+
     public static function get($ep)
     {
 
@@ -38,36 +37,36 @@ class QuickNavigation
         $drophistory = new rex_fragment();
         $drophistory->setVar('limit', '15');
         $drophistory = $drophistory->parse('quick_articles.php');
-        
+
         $qlang= rex_request('clang', 'int');
         if ($qlang==0) {
-        	$qlang = 1;
+            $qlang = 1;
         }
         // ------------ SKED
         $dropsked = '';
         $sked_user =  rex::getUser()->getId();
-		$sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$sked_user);
-		if($sked_datas != '1') {
-	        if(rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
-		        $dropsked = new rex_fragment();
-		        $dropsked = $dropsked->parse('quick_sked.php');
-	        }
-		}
-        // ------------ yForm
-        
-        $dropyform = '';
-        if(rex_addon::get('yform')->isAvailable()) {
-	        $dropyform = new rex_fragment();
-	        $dropyform->setVar('clang',$qlang);
-	        $dropyform = $dropyform->parse('quick_yform.php');
+        $sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$sked_user);
+        if ($sked_datas != '1') {
+            if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
+                $dropsked = new rex_fragment();
+                $dropsked = $dropsked->parse('quick_sked.php');
+            }
         }
-        
+        // ------------ yForm
+
+        $dropyform = '';
+        if (rex_addon::get('yform')->isAvailable()) {
+            $dropyform = new rex_fragment();
+            $dropyform->setVar('clang', $qlang);
+            $dropyform = $dropyform->parse('quick_yform.php');
+        }
+
         // ------------ favoriten
         $dropfavs = '';
         $dropfavs = new rex_fragment();
-        $dropfavs->setVar('clang',$qlang);
+        $dropfavs->setVar('clang', $qlang);
         $dropfavs = $dropfavs->parse('quick_favs.php');
-        
+
         // ------------ Parameter
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
@@ -79,12 +78,11 @@ class QuickNavigation
             $add_homepage = false;
         }
 
-		$ignore = false;
-        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$sked_user)  == '1' )
-        {
-        	$ignore = true;
+        $ignore = false;
+        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$sked_user)  == '1') {
+            $ignore = true;
         }
-        
+
         $category_select = new rex_category_select($ignore, false, true, $add_homepage);
         $category_select->setName($select_name);
         $category_select->setSize('1');
@@ -97,7 +95,7 @@ class QuickNavigation
 
         $droplistContext = rex_context::fromGet();
         $droplistContext->setParam('category_id', 0);
-		$droplistContext->setParam('rex-api-call', 0);
+        $droplistContext->setParam('rex-api-call', 0);
         if (rex_be_controller::getCurrentPagePart(1) != 'structure' && rex_be_controller::getCurrentPagePart(1) != 'content') {
             $droplistContext->setParam('page', 'structure');
         }
@@ -110,17 +108,16 @@ class QuickNavigation
                 foreach ($option->attributes as $attribute) {
                     if ($attribute->name == 'value') {
                         $value = $attribute->value;
-						$item['domain']='';
-						if(rex_addon::get('yrewrite')->isAvailable()) {
-							$item['domain-title'] ='';
-							$item['quickID'] = $value;
-						    if (rex_yrewrite::getDomainByArticleId($item['quickID'])!="")
-							{ $item['domain'] = rex_yrewrite::getDomainByArticleId($item['quickID']); 
-							  $item['domain-title'] = ' | '.rex_escape($item['domain']); 
-							}
-						
-						}
-						
+                        $item['domain']='';
+                        if (rex_addon::get('yrewrite')->isAvailable()) {
+                            $item['domain-title'] ='';
+                            $item['quickID'] = $value;
+                            if (rex_yrewrite::getDomainByArticleId($item['quickID'])!="") {
+                                $item['domain'] = rex_yrewrite::getDomainByArticleId($item['quickID']);
+                                $item['domain-title'] = ' | '.rex_escape($item['domain']);
+                            }
+                        }
+
                         $droplistContext->setParam('category_id', $value);
                         $droplistContext->setParam('article_id', $value);
                         if ($attribute->value == $category_id) {
@@ -130,41 +127,40 @@ class QuickNavigation
                     }
                 }
             }
-			
+
             $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">'.$item['domain'].'</small>', rex_escape($option->nodeValue));
             $item['hreftitle'] = '';
-            if(rex_addon::get('yrewrite')->isAvailable()) {
-            $item['hreftitle'] = rex_escape($option->nodeValue).$item['domain-title'];
+            if (rex_addon::get('yrewrite')->isAvailable()) {
+                $item['hreftitle'] = rex_escape($option->nodeValue).$item['domain-title'];
             }
             $item['href'] = $droplistContext->getUrl();
             $items[] = $item;
         }
-        
+
           $formurl = rex_url::backendPage(
-                'content/edit',
-                [
+              'content/edit',
+              [
                     'mode' => 'edit',
                     'clang' => rex_clang::getCurrentId(),
                     'article_id' => ''
                 ]
-            );
-	$placeholder ='';
+          );
+        $placeholder ='';
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
-        $fragment->setVar('header', '<input id="qsearch" name="article_id" type="text" class="form-control input" autofocus placeholder="'.$placeholder.'" />',false);
-	$fragment->setVar('button_label', $button_label);
+        $fragment->setVar('header', '<input id="qsearch" name="article_id" type="text" class="form-control input" autofocus placeholder="'.$placeholder.'" />', false);
+        $fragment->setVar('button_label', $button_label);
         $fragment->setVar('items', $items, false);
         $fragment->setVar('right', true, false);
         $fragment->setVar('group', true, false);
         $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
 
         $watson = '';
-        if(rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0)==1) {
-       $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
+        if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0)==1) {
+            $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
-       
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . '</div>' . $ep->getSubject();
 
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . '</div>' . $ep->getSubject();
     }
 }

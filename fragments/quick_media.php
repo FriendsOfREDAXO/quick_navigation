@@ -35,24 +35,22 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     $entryname = '';
                    
                    $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
-                   $attributes = [
-                        'href' => rex_url::backendPage('mediapool/media',
+                   $href = rex_url::backendPage('mediapool/media',
                             [
                                 'opener_input_field'=> $opener,
                                 'rex_file_category' => $data['category_id'],
                                 'file_id' => $data['id']
                             ]
-                        )
-                    ];
-                    
+                        );
+
                     if ($data['title']!='')
 					{ $entryname =   rex_escape($data['title']); }  
 					else {
 						 $entryname = rex_escape($data['filename']);
 					}  
 					$filename = rex_escape($data['filename']);
-                    
-                    $link .= '<li><a ' . rex_string::buildAttributes($attributes) . ' title="' . $filename . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
+
+                    $link .= '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
                 }
             }
 ?>

@@ -1,6 +1,7 @@
 quicknavi_title = Snabbnavigation
 quicknavi_config = Inställningar
 quicknavi_general = Allmänt
+quicknavi_placeholder = Filtrera efter kategori, ID eller domän
 quicknavi_config_save = Spara
 quicknavi_config_saved = Favoriter sparades
 quicknavi_info = Välja ut favoriter
@@ -8,5 +9,11 @@ perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Kategori-urval
 perm_general_quick_navigation[history] = Quick Navi: Nyligen redigerade artiklar och media
 perm_general_quick_navigation[own_articles] = Quick Navi: Nyligen redigerade artiklar :: endast egna artiklar och media
-
+perm_general_quick_navigation[settings] = Quick navi: förvalta favoriter och inställningar
+title_yform = Tillfoga data i:
+title_favs = Tillfoga artikel i:
+title_eye = Öppna i frontend:
+sked_add_new_entry = Skapa nytt Sked-inlägg:
+quicknavi_sked = Dölj Sked-button?
+quicknavi_ignoreoffline = Ignorera offline-kategorierna?
 quick_navigation_no_entries = Inga inlägg hittades

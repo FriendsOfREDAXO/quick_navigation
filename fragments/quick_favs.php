@@ -12,7 +12,7 @@
 $drophistory = $date = $link = $where = '';
 $user =  rex::getUser()->getId();
 $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
-if (count($datas)) {
+if (is_array($datas)) {
     foreach ($datas as $data) {
         if (rex_category::get($data)) {
             $cat = rex_category::get($data);

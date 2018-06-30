@@ -12,7 +12,7 @@
 /* Addon Parameter */
 
 // Addonrechte (permissions) registieren
-if (rex::isBackend() && is_object(rex::getUser())) {
+if (rex::isBackend() && rex::getUser()) {
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[history]');
     rex_perm::register('quick_navigation[own_articles]');   

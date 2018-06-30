@@ -10,6 +10,9 @@ Quick Navigation - Changelog
 - fixed; Fav config will be set if not exists and a config exists
 - deleted: tranlations because of changed right setting
 - fixed: show yform botton only if tables are active and visible
+- some new code comments
+- css color changes
+
 
 2.4.2 (02.06.2018)
 --------------------------------------------------------------------------------

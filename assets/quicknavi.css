@@ -57,8 +57,9 @@ li.quickitem.bg-primary a {
 	float: left;
 	padding-top: 8px;
 }
-.quickfiles.quicknavi a {
+.quickfiles.quicknavi li a {
 	margin-bottom: 10px;
+    color:#4b9ad9;
 }
 
 .quicknavi.quickfiles li small {

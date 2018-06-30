@@ -1,9 +1,15 @@
+
 #qsearch {
 	margin-bottom: 0px;
 	margin-right: 2%;
 	margin-left: 2%;
 	max-width: 310px;
 	width: 96%;
+}
+
+.quicknavi-btn-group button { 
+    background-color: transparent; 
+    border: 0;
 }
 
 li.quickitem {
@@ -108,3 +114,4 @@ li .watson-btn {
 .sked_border {
 	border-left: 5px solid;
 }
+

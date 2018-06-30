@@ -11,7 +11,8 @@
 
 $drophistory = $filename = $entryname = $date = $link = $where = '';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
-    if (rex::getUser()->hasPerm('quick_navigation[own_articles]') && !rex::getUser()->isAdmin()) {
+    $were ='';
+    if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
         $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
     }
     $opener ='';
@@ -62,3 +63,4 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 </div>
 <?php
 }
+

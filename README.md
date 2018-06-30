@@ -36,7 +36,7 @@ Der Sked-Button kann durch die Redakteure ausgeblendet werden.
 Die Quick Navigation ist über den Access-Key **m** erreichbar.
 
 Admins erhalten alle Funktionen. 
-Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden. ES kann auch eingestellt werden, dass ein Redakteur nur seine eigenen Änderungen verfolgen kann.   
+Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden. Es kann auch eingestellt werden, dass ein Redakteur auch die Änderungen anderer User verfolgen kann.   
 
 ### Installation
 

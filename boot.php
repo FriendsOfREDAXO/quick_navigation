@@ -25,7 +25,13 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
     rex_view::addJsFile($this->getAssetsUrl('quicknavi.js'));
 }
 
+// Set Config for User if Config is noct set
 if (rex::isBackend() && rex::getUser() && !$this->hasConfig()) {
-    $user =  rex::getUser()->getId();
-    $this->setConfig('quicknavi_favs'.$user,[]);
+       $user =  rex::getUser()->getId();
+       $this->setConfig('quicknavi_favs'.$user,[]);
+}
+// Set Config for User if Config is for fav is not set
+if (rex::isBackend() && rex::getUser() && $this->hasConfig()  && !$this->hasConfig('quicknavi_favs'.$user)) {
+       $user =  rex::getUser()->getId();
+       $this->setConfig('quicknavi_favs'.$user,[]);
 }

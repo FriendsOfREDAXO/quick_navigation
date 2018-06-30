@@ -12,11 +12,12 @@
 $tables = $table_name = $table_real_name = $link = $table_id = $addLink = '';
 
 $tables = \rex_yform_manager_table::getAll();
-
+$active_table = false;
 
 if (count($tables)) {
     foreach ($tables as $table) {
         if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
+            $active_table = true;
             $table_name = rex_escape($table->getTableName());
             $table_real_name = rex_escape(rex_i18n::translate($table->getName()));
             $table_id = rex_escape($table->getId());
@@ -39,6 +40,7 @@ if (count($tables)) {
             $addLink .= '';
         }
     }
+    if ($active_table == true) {
 ?>
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -50,4 +52,5 @@ if (count($tables)) {
                     </ul>
                 </div>
 <?php
+                               }
 }

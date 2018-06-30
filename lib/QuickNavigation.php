@@ -11,12 +11,11 @@
  */
 class QuickNavigation
 {
-    // Media History
 // Media History
     public static function getmedia($ep)
     {
-
-        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {        // Auslesen der Artikel-Liste
+        // get media history from fragment
+        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {       
                 $subject = $ep->getSubject();
                 $drophistory = new rex_fragment();
                 $drophistory->setVar('limit', '15');
@@ -33,16 +32,18 @@ class QuickNavigation
         if (rex_be_controller::getCurrentPageObject()->isPopup()) {
             return $ep->getSubject();
         }
-        // Auslesen der Artikel-Liste
+        // get article history from fragment
         $drophistory = new rex_fragment();
         $drophistory->setVar('limit', '15');
         $drophistory = $drophistory->parse('quick_articles.php');
-
+        
+        // get requested language
         $qlang= rex_request('clang', 'int');
         if ($qlang==0) {
             $qlang = 1;
         }
-        // ------------ SKED
+        
+        // get data from sked AddOn from fragment
         $dropsked = '';
         $sked_user =  rex::getUser()->getId();
         $sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$sked_user);
@@ -52,8 +53,8 @@ class QuickNavigation
                 $dropsked = $dropsked->parse('quick_sked.php');
             }
         }
-        // ------------ yForm
-
+       
+        // get data from yForm AddOn from fragment
         $dropyform = '';
         if (rex_addon::get('yform')->isAvailable()) {
             $dropyform = new rex_fragment();
@@ -61,12 +62,13 @@ class QuickNavigation
             $dropyform = $dropyform->parse('quick_yform.php');
         }
 
-        // ------------ favoriten
+        // get favorites from fragment
         $dropfavs = '';
         $dropfavs = new rex_fragment();
         $dropfavs->setVar('clang', $qlang);
         $dropfavs = $dropfavs->parse('quick_favs.php');
 
+        // Generate category Quick Navi 
         // ------------ Parameter
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
@@ -145,6 +147,8 @@ class QuickNavigation
                     'article_id' => ''
                 ]
           );
+        
+        // get category quick navi from fragment
         $placeholder ='';
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
@@ -155,12 +159,14 @@ class QuickNavigation
         $fragment->setVar('right', true, false);
         $fragment->setVar('group', true, false);
         $droplist = '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
-
+        
+        // set watson button if addon is available and button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0)==1) {
             $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
-
+        
+        // generate output, possibly the best place for an ep
         return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . '</div>' . $ep->getSubject();
     }
 }

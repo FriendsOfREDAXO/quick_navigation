@@ -2,6 +2,14 @@
 Quick Navigation - Changelog
 ================================================================================
 
+2.5.0 (XX.XX.2018)
+--------------------------------------------------------------------------------
+PHP 7.2 count warning fixed
+Changed user right for history view. Should be new configured by admin
+Fav config will be set if not exists and a config exists
+deleted tranlations because of changed right setting
+
+
 2.4.2 (02.06.2018)
 --------------------------------------------------------------------------------
 Compatibility fixes for REDAXO 5.6 - Danke @gharlan

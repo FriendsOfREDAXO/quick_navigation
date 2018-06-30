@@ -15,7 +15,7 @@
 if (rex::isBackend() && rex::getUser()) {
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[history]');
-    rex_perm::register('quick_navigation[own_articles]');   
+    rex_perm::register('quick_navigation[all_changes]');   
 }
 
 if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigation[]')) {

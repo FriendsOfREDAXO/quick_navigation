@@ -4,7 +4,7 @@ Quick Navigation - Changelog
 
 2.5.0 (XX.XX.2018)
 --------------------------------------------------------------------------------
-- fixed: PHP 7.2 count warning fixed
+- fixed: PHP 7.2 count warning fixed https://github.com/FriendsOfREDAXO/quick_navigation/issues/75 
 - New and changed: user right for history view. Admin should reconfigure rights
   default view now: only own recently changed data
 - fixed; Fav config will be set if not exists and a config exists

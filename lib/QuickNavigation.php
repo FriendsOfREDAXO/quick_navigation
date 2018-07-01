@@ -32,7 +32,7 @@ class QuickNavigation
     public static function linkmap_list($ep)
     {
         // get catlist history from fragment
-        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {  
+        if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {  
                 // get complete quick navi cats from fragment 
                 $droplist = '';
                 $droplist = new rex_fragment();

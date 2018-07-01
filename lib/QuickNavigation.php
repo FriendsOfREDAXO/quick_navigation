@@ -102,7 +102,7 @@ class QuickNavigation
         $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
         
         // Output
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
+        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
     }
 }
 

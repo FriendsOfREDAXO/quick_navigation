@@ -20,7 +20,10 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
 - Sked-Support: Neuste Termine werden aufgelistet, ein Datensatz kann über direkt erstellt werden. 
 - Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
+
+### Für Developer
 - Für Developer stehen zwei Extension Point QUICK_NAVI_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons zur Verfügung 
+- Alle dargstellten Buttons werden durch Fragmente erzeugt und können leicht ausgetauscht werden. 
 
 ### Beschreibung 
 

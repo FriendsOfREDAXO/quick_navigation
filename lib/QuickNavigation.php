@@ -166,7 +166,9 @@ class QuickNavigation
             $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
         
-        // generate output, possibly the best place for an ep
-        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . '</div>' . $ep->getSubject();
+        // generate output ep for custom buttons after default set.
+        $custom_buttons ='';
+        $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
+        return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
     }
 }

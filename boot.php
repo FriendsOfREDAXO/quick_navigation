@@ -30,8 +30,4 @@ if (rex::isBackend() && rex::getUser() && !$this->hasConfig()) {
        $user =  rex::getUser()->getId();
        $this->setConfig('quicknavi_favs'.$user,[]);
 }
-// Set Config for User fav if not set
-if (rex::isBackend() && rex::getUser() && $this->hasConfig()  && !$this->hasConfig('quicknavi_favs'.$user)) {
-       $user =  rex::getUser()->getId();
-       $this->setConfig('quicknavi_favs'.$user,[]);
-}
+

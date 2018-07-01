@@ -7,7 +7,7 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
 ### Features
-- Kategorie-Schnellauswahl
+- Kategorie-Schnellauswahl und -Suche allgmein im Backend und in der Linkmap
 - Filter nach Kategorienamen, Domain, Id
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 

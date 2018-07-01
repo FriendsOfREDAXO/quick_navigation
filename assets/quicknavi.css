@@ -50,7 +50,7 @@ li.quickitem.bg-primary a {
 	padding-left: 10px;
 	padding-right: 10px;
 	text-decoration: none;
-	display: block;
+	display: block;line-height: 1em;
 }
 .quicknavi li .quicknavi_left {
 	width: 88%;
@@ -114,4 +114,5 @@ li .watson-btn {
 .sked_border {
 	border-left: 5px solid;
 }
+
 

@@ -13,6 +13,7 @@ Quick Navigation - Changelog
 - fixed: show yform botton only if tables are active and visible
 - some new code comments
 - css color changes
+- css buttons borderless and without background colors
 
 
 2.4.2 (02.06.2018)

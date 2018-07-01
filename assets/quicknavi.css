@@ -7,7 +7,7 @@
 	width: 96%;
 }
 
-.quicknavi-btn-group button { 
+.quicknavi-btn-group.transparent button { 
     background-color: transparent; 
     border: 0;
 }

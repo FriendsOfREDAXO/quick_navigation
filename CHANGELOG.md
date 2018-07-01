@@ -4,8 +4,8 @@ Quick Navigation - Changelog
 
 2.5.0 (01.07.2018)
 --------------------------------------------------------------------------------
-- New extension point QUICK_NAVI_CUSTOM to insert own buttons
-- New extension point QUICK_NAVI_CUSTOM_MEDIA to insert own buttons
+- New extension point QUICK_NAVI_CUSTOM to add own buttons
+- New extension point QUICK_NAVI_CUSTOM_MEDIA to add own buttons
 - fixed: PHP 7.2 count warning fixed https://github.com/FriendsOfREDAXO/quick_navigation/issues/75 
 - New and changed: user right for history view. Admin should reconfigure rights
   default view now: only own recently changed data

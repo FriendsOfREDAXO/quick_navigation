@@ -27,7 +27,7 @@ class QuickNavigation
                 return $output;
         }
     }
-    
+
 // linkmap catlist
     public static function linkmap_list($ep)
     {
@@ -38,7 +38,7 @@ class QuickNavigation
                 $droplist = new rex_fragment();
                 $droplist->setVar('mode', 'linkmap');
                 $droplist = $droplist->parse('quick_cats.php');
-                return $output;
+                return '<div class="btn-group quicknavi-btn-group pull-right">' . $droplist . '</div>' . $ep->getSubject();
         }
     }
 
@@ -105,4 +105,5 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
     }
 }
+
 

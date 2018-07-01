@@ -71,11 +71,11 @@ class QuickNavigation
         $dropfavs->setVar('clang', $qlang);
         $dropfavs = $dropfavs->parse('quick_favs.php');
 
-        // get complete quick navi from fragment 
+        // get complete quick navi cats from fragment 
         $droplist = '';
         $droplist = new rex_fragment();
         $droplist->setVar('clang', $qlang);
-        $droplist = $droplist->parse('quick_navi.php');
+        $droplist = $droplist->parse('quick_cats.php');
 
         // set watson button if addon is available and button is active
         $watson = '';

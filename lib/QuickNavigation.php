@@ -12,7 +12,7 @@
 class QuickNavigation
 {
 // Media History
-    public static function getmedia($ep)
+    public static function media_history($ep)
     {
         // get media history from fragment
         if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {       
@@ -24,6 +24,20 @@ class QuickNavigation
                 $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', $custom_media));
                 $button = $custom_media_buttons.'<div class="input-group-btn quickmedia clearfix">'.$drophistory . '</div><select name="rex_file_category"';
                 $output = str_replace('<select name="rex_file_category"', $button, $subject);
+                return $output;
+        }
+    }
+    
+// linkmap catlist
+    public static function linkmap_list($ep)
+    {
+        // get catlist history from fragment
+        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {  
+                // get complete quick navi cats from fragment 
+                $droplist = '';
+                $droplist = new rex_fragment();
+                $droplist->setVar('mode', 'linkmap');
+                $droplist = $droplist->parse('quick_cats.php');
                 return $output;
         }
     }
@@ -75,6 +89,7 @@ class QuickNavigation
         // get complete quick navi cats from fragment 
         $droplist = '';
         $droplist = new rex_fragment();
+        $droplist->setVar('mode', 'structure');
         $droplist = $droplist->parse('quick_cats.php');
         
         // get article history from fragment

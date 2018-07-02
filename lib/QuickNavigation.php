@@ -20,7 +20,7 @@ class QuickNavigation
                 $drophistory = new rex_fragment();
                 $drophistory->setVar('limit', '15');
                 $drophistory = $drophistory->parse('quick_media.php');
-                $custom_media_buttons ='';
+                $custom_media_buttons = $custom_media = '';
                 $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', $custom_media));
                 $button = $custom_media_buttons.'<div class="input-group-btn quickmedia clearfix">'.$drophistory . '</div><select name="rex_file_category"';
                 $output = str_replace('<select name="rex_file_category"', $button, $subject);

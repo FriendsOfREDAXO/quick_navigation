@@ -12,6 +12,14 @@
     border: 0;
 }
 
+.quicknavi-btn-group.linkmapbt button {
+border-radius: 0;
+height: 38px;
+border-left: 0;
+border-color: #dedede;
+}
+
+
 li.quickitem {
 	list-style-type: none;
 	padding-top: 0.4em;

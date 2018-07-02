@@ -2,12 +2,12 @@
 Quick Navigation - Changelog
 ================================================================================
 
-3.0.0-dev (XX.07.2018)
+3.0.0 (02.07.2018)
 --------------------------------------------------------------------------------
 - changed: cats dropdown as fragment, so it can be easy replaced
 - changed: rename of methods
 - new: cats fragment got a mode var
-- new: linkmap support
+- new: linkmap with cat select
 
 2.5.0 (01.07.2018)
 --------------------------------------------------------------------------------

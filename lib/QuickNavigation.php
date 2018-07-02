@@ -38,7 +38,7 @@ class QuickNavigation
                 $droplist = new rex_fragment();
                 $droplist->setVar('mode', 'linkmap');
                 $droplist = $droplist->parse('quick_cats.php');
-                return '<div class="btn-group quicknavi-btn-group pull-right">' . $droplist . '</div>' . $ep->getSubject();
+                return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . '</div>' . $ep->getSubject();
         }
     }
 

@@ -98,7 +98,7 @@ class QuickNavigation
         $drophistory = $drophistory->parse('quick_articles.php');
 
         // generate output ep for custom buttons after default set.
-        $custom_buttons ='';
+        $custom_buttons = $custom ='';
         $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
         
         // Output

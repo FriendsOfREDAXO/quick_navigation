@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $link = $where = $domaintitle ='';
+$drophistory = $date = $link = $where = $domaintitle = $status_css ='';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
     $were ='';
     if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
         $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
     }
 
-            $qry = 'SELECT id, parent_id, clang_id, startarticle, name, updateuser, updatedate
+            $qry = 'SELECT id, status, parent_id, clang_id, startarticle, name, updateuser, updatedate
                     FROM ' . rex::getTable('article') . ' 
                     '. $where .' 
                     ORDER BY updatedate DESC
@@ -35,6 +35,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             if ($langcode) {
                 $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
             }
+
             $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
             $href = rex_url::backendPage(
                 'content/edit',
@@ -53,8 +54,12 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 }
             }
             $name = rex_escape($data['name']);
-
-            $link .= '<li class=""><a class="quicknavi_left" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a><span class="quicknavi_right"><a href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
+            if ($data['status']== '0')
+                {
+                $status_css = " qn_offline";
+            }
+            $link .= '<li class=""><a class="quicknavi_left" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a><span class="quicknavi_right"><a class="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
+            $status_css = '';
         }
     }
 ?>
@@ -70,4 +75,5 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 </div>
 <?php
 }
+
 

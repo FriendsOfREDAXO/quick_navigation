@@ -96,6 +96,7 @@ class QuickNavigation
         $dropfavs = '';
         $dropfavs = new rex_fragment();
         $dropfavs->setVar('clang', $qlang);
+        $droplist->setVar('mode', 'linkmap');
         $dropfavs = $dropfavs->parse('quick_favs.php');
 
         // get complete quick navi cats from fragment 

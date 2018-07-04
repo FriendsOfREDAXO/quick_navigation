@@ -15,6 +15,7 @@ if ($mode == '')
     {
     $mode ='structure';
 }
+
 $user =  rex::getUser()->getId();
 $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
  if ($datas && count($datas) >= 1) {

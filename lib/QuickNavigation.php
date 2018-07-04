@@ -38,7 +38,13 @@ class QuickNavigation
                 $droplist = new rex_fragment();
                 $droplist->setVar('mode', 'linkmap');
                 $droplist = $droplist->parse('quick_cats.php');
-                return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . '</div>' . $ep->getSubject();
+            
+                $favs = '';
+                $favs = new rex_fragment();
+                $favs->setVar('mode', 'linkmap');
+                $favs = $favs->parse('quick_favs.php');
+
+                return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $favs .'</div>' . $ep->getSubject();
         }
     }
 
@@ -105,5 +111,3 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
     }
 }
-
-

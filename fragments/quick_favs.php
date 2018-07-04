@@ -9,7 +9,12 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $link = $where = '';
+$drophistory = $mode = $date = $link = $where = '';
+$mode = $this->mode;
+if ($mode == '')
+    {
+    $mode ='structure';
+}
 $user =  rex::getUser()->getId();
 $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
  if ($datas && count($datas) >= 1) {
@@ -21,7 +26,7 @@ $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
             $href = rex_url::backendPage(
                 'content/edit',
                 [
-                  'page' => 'structure',
+                  'page' => $mode,
                   'clang' => $this->clang,
                   'category_id' => $data
                 ]
@@ -34,7 +39,10 @@ $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
                   'function' => 'add_art'
                 ]
             );
-            $link .= '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName .'</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="'. $this->i18n("title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+            $link .= '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName .'</a></li>';
+            if ($mode =='structure') {
+                $link .= '<li class="quicknavi_right"><a href="' . $addHref . '" title="'. $this->i18n("title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+            } 
         }
     }
 
@@ -50,3 +58,4 @@ $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
                 </div>
 <?php
 }
+

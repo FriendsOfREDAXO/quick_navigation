@@ -33,18 +33,21 @@ class QuickNavigation
     {
         // get catlist history from fragment
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {  
-                // get complete quick navi cats from fragment 
-                $droplist = '';
+                $droplist = $favs = $qlang = '';    
+                // Check if language is set 
+                $qlang = rex_request('clang', 'int');
+                if ($qlang == 0 || $qlang =='' ) {
+                    $qlang = 1;
+                }
+                // get complete quick navi cats from fragment
                 $droplist = new rex_fragment();
                 $droplist->setVar('mode', 'linkmap');
-                $droplist = $droplist->parse('quick_cats.php');
-                
+                $droplist = $droplist->parse('quick_cats.php');                
 
-                $favs = '';
+                // get favs from fragment
                 $favs = new rex_fragment();
                 $favs->setVar('mode', 'linkmap');
-                // Language set to 1 because of missing multilanguage Support v.5.6
-                $favs->setVar('clang', '1');
+                $favs->setVar('clang', $qlang);
                 $favs = $favs->parse('quick_favs.php');
 
                 return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $favs .'</div>' . $ep->getSubject();
@@ -114,3 +117,6 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
     }
 }
+
+
+

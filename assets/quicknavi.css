@@ -7,6 +7,8 @@
 	width: 96%;
 }
 
+
+
 .quicknavi-btn-group.transparent button { 
     background-color: transparent; 
     border: 0;
@@ -76,6 +78,11 @@ li.quickitem.bg-primary a {
     color:#4b9ad9;
 }
 
+
+.quickfiles.quicknavi li a.qn_offline {
+    color: #d9534f;
+}
+
 .quicknavi.quickfiles li small {
 	display: block;
 }
@@ -122,5 +129,3 @@ li .watson-btn {
 .sked_border {
 	border-left: 5px solid;
 }
-
-

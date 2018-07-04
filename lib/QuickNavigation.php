@@ -38,10 +38,13 @@ class QuickNavigation
                 $droplist = new rex_fragment();
                 $droplist->setVar('mode', 'linkmap');
                 $droplist = $droplist->parse('quick_cats.php');
-            
+                
+
                 $favs = '';
                 $favs = new rex_fragment();
                 $favs->setVar('mode', 'linkmap');
+                // Language set to 1 because of missing multilanguage Support v.5.6
+                $favs->setVar('clang', '1');
                 $favs = $favs->parse('quick_favs.php');
 
                 return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $favs .'</div>' . $ep->getSubject();

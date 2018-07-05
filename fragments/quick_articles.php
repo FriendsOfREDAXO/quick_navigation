@@ -9,7 +9,8 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $link = $where = $domaintitle = $status_css ='';
+$drophistory = $date = $link = $where = $domaintitle;
+$status_css = ' qn_online';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
     $were ='';
     if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -58,12 +59,13 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 {
                 $status_css = " qn_offline";
             }
-            $link .= '<li class=""><a class="quicknavi_left" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a><span class="quicknavi_right"><a class="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
-            $status_css = '';
+            $link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
+            $link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
+            $status_css = ' qn_online';
         }
     }
 ?>
-            
+
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -75,5 +77,3 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 </div>
 <?php
 }
-
-

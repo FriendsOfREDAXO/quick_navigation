@@ -8,7 +8,6 @@
 }
 
 
-
 .quicknavi-btn-group.transparent button { 
     background-color: transparent; 
     border: 0;
@@ -74,14 +73,25 @@ li.quickitem.bg-primary a {
 	padding-top: 8px;
 }
 .quickfiles.quicknavi li a {
-	margin-bottom: 10px;
+    padding-top: 10px;
+	padding-bottom: 10px;
     color:#4b9ad9;
 }
 
+.quickfiles.quicknavi li a small {padding-top: 4px; color: #333;}
+
+.quickfiles.quicknavi li a.qn_online {
+    color:#4b9ad9;
+    border-left: 3px solid #3bb594; 
+    padding-bottom: 10px;
+}
 
 .quickfiles.quicknavi li a.qn_offline {
-    color: #d9534f;
+    opacity: 0.6;
+    border-left: 3px solid #ccc;
 }
+
+.quickfiles.quicknavi li .quicknavi_right a.qn_online, .quickfiles.quicknavi li .quicknavi_right a.qn_offline { border: 0;}
 
 .quicknavi.quickfiles li small {
 	display: block;
@@ -129,3 +139,5 @@ li .watson-btn {
 .sked_border {
 	border-left: 5px solid;
 }
+
+

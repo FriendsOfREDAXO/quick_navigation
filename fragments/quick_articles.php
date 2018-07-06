@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $link = $where = $domaintitle;
+$drophistory = $date = $link = $where = $domaintitle = '';
 $status_css = ' qn_online';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
     $were ='';

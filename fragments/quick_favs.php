@@ -10,10 +10,14 @@
  */
 
 $drophistory = $mode = $date = $link = $where = '';
-$mode = $this->mode;
-if ($mode == '')
+
+if (!$this->mode;)
     {
     $mode ='structure';
+}
+else
+{
+    $mode = $this->mode;
 }
 
 $user =  rex::getUser()->getId();

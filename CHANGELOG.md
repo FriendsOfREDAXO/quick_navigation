@@ -5,6 +5,7 @@ Quick Navigation - Changelog
 3.3.0 (07.07.2018)
 --------------------------------------------------------------------------------
 New: Pick and preview recently added or changed articles in linkmap (history)
+
 Added legend to readme
 
 3.2.1 (06.07.2018)

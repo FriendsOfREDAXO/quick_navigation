@@ -33,7 +33,7 @@
 	{
 		// get catlist history from fragment
 		if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {  
-			$droplist = $favs = $qlang = '';    
+			$droplist = $favs = $drophistory = $qlang = '';    
 			// Check if language is set 
 			$qlang = rex_request('clang', 'int');
 			if ($qlang == 0 || $qlang =='' ) {
@@ -49,7 +49,6 @@
 			$favs->setVar('mode', 'linkmap');
 			$favs->setVar('clang', $qlang);
 			$favs = $favs->parse('quick_favs.php');
-
 
 			// get article history from fragment
 			$drophistory = new rex_fragment();

@@ -2,6 +2,10 @@
 Quick Navigation - Changelog
 ================================================================================
 
+3.3.0 (07.07.2018)
+--------------------------------------------------------------------------------
+New: Pick and preview recently added or changed articles in linkmap (history) 
+
 3.2.1 (06.07.2018)
 --------------------------------------------------------------------------------
 New: shows status of recently added or changed articles

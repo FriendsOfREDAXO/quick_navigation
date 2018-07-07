@@ -12,9 +12,13 @@
 $drophistory = $date = $name = $mode = $link = $where = $domaintitle = '';
 $status_css = ' qn_online';
 $mode = $this->mode;
-if ($mode == '')
+if (!$this->mode)
+    {
+    $mode ='structure';
+}
+else
 {
-	$mode ='structure';
+    $mode = $this->mode;
 }
 
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {

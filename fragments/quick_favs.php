@@ -11,7 +11,7 @@
 
 $drophistory = $mode = $date = $link = $where = '';
 
-if (!$this->mode;)
+if (!$this->mode)
     {
     $mode ='structure';
 }

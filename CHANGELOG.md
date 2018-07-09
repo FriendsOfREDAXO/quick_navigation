@@ -2,6 +2,10 @@
 Quick Navigation - Changelog
 ================================================================================
 
+3.4.0-dev (XX.07.2018)
+--------------------------------------------------------------------------------
+New: ExtensionPoint for custom linkmap butttons
+
 3.3.1 (07.07.2018)
 --------------------------------------------------------------------------------
 New: Pick and preview recently added or changed articles in linkmap (history)

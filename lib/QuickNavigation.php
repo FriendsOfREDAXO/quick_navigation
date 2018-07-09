@@ -56,7 +56,11 @@
 			$drophistory->setVar('mode', 'linkmap');
 			$drophistory = $drophistory->parse('quick_articles.php');
 
-			return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $drophistory . $favs .'</div>' . $ep->getSubject();
+		        // generate output ep for custom buttons after default set.
+		        $custom_linkmap_buttons = $custom ='';
+		        $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
+
+			return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $drophistory . $favs . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
 		}
 	}
 

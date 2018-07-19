@@ -2,9 +2,10 @@
 Quick Navigation - Changelog
 ================================================================================
 
-3.4.0-dev (XX.07.2018)
+3.4.0 (XX.07.2018)
 --------------------------------------------------------------------------------
 New: ExtensionPoint for custom linkmap butttons
+Changed: index.php now uses includeCurrentPageSubPath - thx @christophboecker
 
 3.3.1 (07.07.2018)
 --------------------------------------------------------------------------------

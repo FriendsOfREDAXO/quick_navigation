@@ -1,7 +1,7 @@
 quicknavi_title = Quick Navigation
 quicknavi_config = Einstellungen
 quicknavi_general = Allgemein
-quicknavi_placeholder = Filtern nach Kategorie, ID oder Domain
+quicknavi_placeholder = Filtern nach Kategoriename/-ID oder Domain
 quicknavi_config_save = Speichern
 quicknavi_config_saved = Favoriten gespeichert
 quicknavi_info = Benutzereinstellungen

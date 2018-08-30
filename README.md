@@ -22,7 +22,7 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 - Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
 
 ### Für Developer
-- Für Developer stehen zwei Extension Point QUICK_NAVI_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons zur Verfügung 
+- Für Developer stehen drei Extension Points QUICK_NAVI_CUSTOM, QUICK_LINKMAP_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons oder Dropdowns zur Verfügung 
 - Alle dargstellten Buttons werden durch Fragmente erzeugt und können leicht ausgetauscht werden. 
 
 ### Beschreibung 

@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '3.4.1'
+version: '3.4.2-dev'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]

@@ -7,8 +7,8 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
 ### Features
-- Kategorie-Schnellauswahl und -Suche allgmein im Backend und in der Linkmap
-- Filter nach Kategorienamen, Domain, Id
+- Kategorie-Schnellauswahl im Backend und in der Linkmap
+- Filter nach Kategorienamen, Domain und Kategorie-id
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 
 #### Per User Settings
@@ -29,7 +29,7 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 
 Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Listen der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
 
-Im Live-Filter kann nach Kategorien, Autoren oder yrewrite-Domains gesucht werden. Gibt man z.B. eine Domain ein, erhält man schnell den Baum der jeweiligen Domain. 
+Im Live-Filter kann nach Kategorien, Autoren oder yrewrite-Domains gefiltert werden. Gibt man z.B. eine Domain ein, erhält man schnell den Baum der jeweiligen Domain. 
 
 Favorisierte Kategorien können individuell durch die Redakteure in den AddOn-Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
 
@@ -57,8 +57,7 @@ Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte d
 
 ### Bugtracker
 
-Du hast einen Fehler gefunden oder ein nettes Feature parat? [Lege ein Issue an](https://github.com/FriendsOfREDAXO/quick_navigation/issues). Bevor du ein neues Issue erstellts, suche bitte ob bereits eines mit deinem Anliegen existiert und lese die [Issue Guidelines (englisch)](https://github.com/necolas/issue-guidelines) von [Nicolas Gallagher](https://github.com/necolas/).
-
+Du hast einen Fehler gefunden oder ein nettes Feature parat? [Lege bitte ein Issue an]
 
 ### Changelog
 

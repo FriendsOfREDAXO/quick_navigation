@@ -98,14 +98,12 @@
 		}
 
 		// get favorites from fragment
-		$dropfavs = '';
 		$dropfavs = new rex_fragment();
 		$dropfavs->setVar('clang', $qlang);
 		$dropfavs->setVar('mode', 'structure');
 		$dropfavs = $dropfavs->parse('quick_favs.php');
 
 		// get complete quick navi cats from fragment 
-		$droplist = '';
 		$droplist = new rex_fragment();
 		$droplist->setVar('mode', 'structure');
 		$droplist = $droplist->parse('quick_cats.php');
@@ -117,7 +115,7 @@
 		$drophistory = $drophistory->parse('quick_articles.php');
 
 		// generate output ep for custom buttons after default set.
-		$custom_buttons = $custom ='';
+		$custom ='';
 		$custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
 
 		// Output

@@ -1,7 +1,7 @@
 $(document).on('rex:ready', function() {
     var root = $("#rex-quicknavigation-structure");
     if (root) {
-        $.get(root.data('url')).done(function(quickNav) {
+        $.post(root.data('url')).done(function(quickNav) {
             root.html(quickNav);
         });
     }

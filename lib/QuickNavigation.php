@@ -66,7 +66,6 @@
 
 	public static function get($ep)
 	{
-		$qn_user ='';
 		$qn_user =  rex::getUser()->getId();
 
 		if (rex_be_controller::getCurrentPageObject()->isPopup()) {

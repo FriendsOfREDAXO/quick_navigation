@@ -64,13 +64,9 @@
 		}
 	}
 
-	public static function get($ep)
+	public static function get()
 	{
 		$qn_user =  rex::getUser()->getId();
-
-		if (rex_be_controller::getCurrentPageObject()->isPopup()) {
-			return $ep->getSubject();
-		}
 
 		// get requested language
 		$qlang= rex_request('clang', 'int');
@@ -125,6 +121,6 @@
 		$custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
 
 		// Output
-		return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>' . $ep->getSubject();
+		return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>';
 	}
 }

@@ -1,4 +1,13 @@
 $(document).on('rex:ready', function() {
+    var root = $("#rex-quicknavigation-structure");
+    if (root) {
+        $.get(root.data('url')).done(function(quickNav) {
+            root.html(quickNav);
+        });
+    }
+});
+
+$(document).on('rex:ready', function() {
 	quicknavi_filter_init();
 
 	var ctype = getUrlVars()["ctype"];

@@ -23,7 +23,7 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
         if (rex_be_controller::getCurrentPageObject()->isPopup()) {
             return $ep->getSubject();
         }
-        return '<div id="rex-quicknavigation-structure" data-url="'. rex_url::currentBackendPage(rex_api_quicknavigation_render::getUrlParams()) .'"></div>';
+        return '<div id="rex-quicknavigation-structure" data-url="'. rex_url::currentBackendPage(rex_api_quicknavigation_render::getUrlParams()) .'"></div>'. $ep->getSubject();
     });
     rex_extension::register('PAGE_TITLE_SHOWN', 'QuickNavigation::linkmap_list');
     rex_extension::register('MEDIA_LIST_TOOLBAR', 'QuickNavigation::media_history');

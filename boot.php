@@ -23,7 +23,16 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
         if (rex_be_controller::getCurrentPageObject()->isPopup()) {
             return $ep->getSubject();
         }
-        return '<div id="rex-quicknavigation-structure" data-url="'. rex_url::currentBackendPage(rex_api_quicknavigation_render::getUrlParams()) .'"></div>'. $ep->getSubject();
+        $clang = rex_request('clang', 'int');
+        $category_id = rex_request('category_id', 'int');
+        $article_id = rex_request('article_id', 'int');
+
+        $params = [
+            'clang' => $clang,
+            'category_id' => $category_id,
+            'article_id' => $article_id
+        ];
+        return '<div id="rex-quicknavigation-structure" data-url="'. rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) .'"></div>'. $ep->getSubject();
     });
     rex_extension::register('PAGE_TITLE_SHOWN', 'QuickNavigation::linkmap_list');
     rex_extension::register('MEDIA_LIST_TOOLBAR', 'QuickNavigation::media_history');

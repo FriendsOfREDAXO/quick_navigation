@@ -24,6 +24,7 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
             return $ep->getSubject();
         }
         $clang = rex_request('clang', 'int');
+        $clang = rex_clang::exists($clang) ? $clang : rex_clang::getStartId();
         $category_id = rex_request('category_id', 'int');
         $article_id = rex_request('article_id', 'int');
 

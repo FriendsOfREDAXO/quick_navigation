@@ -1,9 +1,5 @@
 <?php
-/**
- * @package redaxo\structure
- *
- * @internal
- */
+
 class rex_api_quicknavigation_render extends rex_api_function
 {
     public function execute()

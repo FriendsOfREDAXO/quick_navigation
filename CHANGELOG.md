@@ -4,7 +4,7 @@ Quick Navigation - Changelog
 
 3.5.0 (28.10.2018)
 --------------------------------------------------------------------------------
-Performance boodst by @staabm
+Performance boost by @staabm
 
 watson button needs watson >= 2.1.0
 

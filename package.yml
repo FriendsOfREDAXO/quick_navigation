@@ -16,4 +16,5 @@ requires:
     redaxo: '^5.4.0'
 conflicts:
     packages:
-        yform: '<2.0.0'    
+        yform: '<2.0.0'
+        watson: '<2.1.0'

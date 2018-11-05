@@ -11,7 +11,7 @@
 
 $drophistory = $date = $name = $mode = $link = $where = $domaintitle = '';
 $status_css = ' qn_online';
-$mode = $this->mode;
+
 if (!isset($this->mode))
     {
     $mode ='structure';

@@ -7,10 +7,6 @@
         $category_id = rex_request('category_id', 'int', $article_id);
         $select_name = 'category_id';
         $add_homepage = true;
-        if (rex_be_controller::getCurrentPagePart(1) == 'content') {
-            $select_name = 'article_id';
-            $add_homepage = false;
-        }
 
         $ignore = false;
         if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$qn_user)  == '1') {

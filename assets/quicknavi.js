@@ -7,19 +7,15 @@ $(document).on('rex:ready', function() {
     }
 });
 
-$(document).on('rex:ready', function() {
-	quicknavi_filter_init();
 
-	var ctype = getUrlVars()["ctype"];
+$(document).on("shown.bs.dropdown", function() {
+    quicknavi_filter_init();
+    	var ctype = getUrlVars()["ctype"];
 	if (ctype) {
 		$(".quicknavi a").attr('href', function(i, h) {
 			return h + (h.indexOf('?') != -1 ? "&ctype=" + ctype : "?ctype=" + ctype);
 		});
 	}
-
-});
-
-$(document).on("shown.bs.dropdown", function() {
 	$(this).find(".dropdown-menu li.bg-primary a").focus();
 	$(this).find('.dropdown-menu.quicknavi li:first-child input').focus();
 });

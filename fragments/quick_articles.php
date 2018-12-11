@@ -74,6 +74,10 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 			{
 				$status_css = " qn_offline";
 			}
+			if ($data['status']== '2')
+			{
+				$status_css = " qn_gesperrt";
+			}
 			$link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
 			$link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
 			$status_css = ' qn_online';

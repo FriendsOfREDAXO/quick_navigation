@@ -69,11 +69,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 					$domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.rex_escape($domain);
 				}
 			}
-
-			if ($data['status']== '0')
-			{
-				$status_css = " qn_offline";
-			}
+                        $status_css == 'qn_status_'.$data['status'];
 			$link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
 			$link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
 			$status_css = ' qn_online';

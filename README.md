@@ -25,6 +25,31 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 - Für Developer stehen drei Extension Points QUICK_NAVI_CUSTOM, QUICK_LINKMAP_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons oder Dropdowns zur Verfügung 
 - Alle dargstellten Buttons werden durch Fragmente erzeugt und können leicht ausgetauscht werden. 
 
+Beispiel:
+
+in die boot.php des Project-AddOns:
+
+```php
+rex_extension::register('QUICK_NAVI_CUSTOM', ['my_quickbutton','makebutton'], rex_extension::LATE);    
+```
+
+my_quickbutton.php in lib Ordner des Projekt-AddOns ablegen
+
+```php   
+
+class my_quickbutton {
+    public static function makebutton($ep) {
+
+        $subject = $ep->getSubject();
+        $subject .='<div class="btn-group">';
+        $subject .='<button>Hallo Welt<button>';
+        $subject .='</div>';
+        return $subject ;
+    }
+}
+```
+
+
 ### Beschreibung 
 
 Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Listen der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).

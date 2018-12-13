@@ -91,7 +91,7 @@ li.quickitem.bg-primary a {
     border-left: 3px solid #ccc;
 }
 
-.quickfiles.quicknavi li .quicknavi_right a.qn_online, .quickfiles.quicknavi li .quicknavi_right a.qn_offline { border: 0;}
+.quickfiles.quicknavi li .quicknavi_right a.qn_online, .quickfiles.quicknavi li .quicknavi_right a.qn_status_0 { border: 0;}
 
 .quicknavi.quickfiles li small {
 	display: block;

@@ -108,7 +108,7 @@ eaCe case sensitive changes
 
 https://github.com/FriendsOfREDAXO/quick_navigation/issues/53
 
-2.2.5 (02.12.2018)
+2.2.5 (02.01.2018)
 --------------------------------------------------------------------------------
 Added some title attributes
 
@@ -160,7 +160,7 @@ Bugfixes
 
 2.0.0 (05.09.2017)
 --------------------------------------------------------------------------------
-- ID-Input relaced
+- ID-Input replaced
 - Favorites 
 
 1.3.5 (04.09.2017)

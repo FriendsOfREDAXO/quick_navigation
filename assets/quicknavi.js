@@ -17,11 +17,6 @@ $(document).on("shown.bs.dropdown", function() {
         });
     }
 
-    $('.quicknavi').hover(function() {
-
-    });
-
-
     $(this).find(".dropdown-menu li.bg-primary a").focus();
 
     $('#qsearch').delay(200).fadeIn(function() {

@@ -25,7 +25,7 @@ $(document).on("shown.bs.dropdown", function() {
     $(this).find(".dropdown-menu li.bg-primary a").focus();
 
     $('#qsearch').delay(200).fadeIn(function() {
-        $('.dropdown-menu.quicknavi li:first-child input').delay(3500).focus();
+        $('.dropdown-menu.quicknavi li:first-child input').focus();
     });
 
 });

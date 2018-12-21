@@ -8,6 +8,7 @@ quicknavi_info = Välja ut favoriter
 perm_general_quick_navigation[] = Quick Navi
 quicknavi_categories = Kategori-urval
 perm_general_quick_navigation[history] = Quick Navi: Nyligen redigerade artiklar och media
+perm_general_quick_navigation[all_changes] = Quick Navi: Lista nyligen redigerade data av alla användare
 perm_general_quick_navigation[settings] = Quick navi: förvalta favoriter och inställningar
 title_yform = Tillfoga data i:
 title_favs = Tillfoga artikel i:

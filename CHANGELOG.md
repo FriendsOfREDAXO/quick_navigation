@@ -5,6 +5,7 @@ Quick Navigation - Changelog
 3.5.4 (15.12.2018)
 --------------------------------------------------------------------------------
 update: Traducción en castellano @nandes2062
+
 update: Svensk översättning @interweave-media 
 
 3.5.3 (15.12.2018)

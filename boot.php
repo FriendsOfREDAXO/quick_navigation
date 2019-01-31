@@ -31,7 +31,8 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
         $params = [
             'clang' => $clang,
             'category_id' => $category_id,
-            'article_id' => $article_id
+            'article_id' => $article_id,
+            'buster' => time()
         ];
         return '<div id="rex-quicknavigation-structure" data-url="'. rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) .'"></div>'. $ep->getSubject();
     });

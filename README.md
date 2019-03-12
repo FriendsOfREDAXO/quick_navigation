@@ -1,31 +1,30 @@
 
-REDAXO-AddOn: Quick Navigation
-================================================================================
+# REDAXO-AddOn: Quick Navigation
 
 Schnellnavigation und Werkzeugleiste für REDAXO CMS
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
-### Features
+## Features
 - Kategorie-Schnellauswahl im Backend und in der Linkmap
 - Filter nach Kategorienamen, Domain und Kategorie-id
 - Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
 
-#### Per User Settings
+### Per User Settings
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
 - Offline-Kategorien können optional durch User ausgeblendet werden
 - Sked-Unterstützung kann abgeschaltet werden
 
-#### AddOn-Integration 
+### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
 - Sked-Support: Neuste Termine werden aufgelistet, ein Datensatz kann direkt erstellt werden. 
 - Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
 
-### Für Developer
+## Für Developer
 - Für Developer stehen drei Extension Points QUICK_NAVI_CUSTOM, QUICK_LINKMAP_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons oder Dropdowns zur Verfügung 
 - Alle dargstellten Buttons werden durch Fragmente erzeugt und können leicht ausgetauscht werden. 
 
-Beispiel:
+### Beispiel:
 
 in die boot.php des Project-AddOns:
 
@@ -50,7 +49,7 @@ class my_quickbutton {
 ```
 
 
-### Beschreibung 
+## Beschreibung 
 
 Die Quick Navigation stellt eine Kategorie-Schnellauswahl mit Filterfeld und Listen der zuletzt bearbeiteten Artikel und Medien zur Verfügung (last modified).
 
@@ -67,33 +66,33 @@ Die Quick Navigation ist über den Access-Key **m** erreichbar.
 Admins erhalten alle Funktionen. 
 Für Redakteure kann die Verfügbarkeit der Funktionen über die Rollen-Rechte definiert werden. Es kann auch eingestellt werden, dass ein Redakteur auch die Änderungen anderer User verfolgen kann.   
 
-### Legende
+## Legende
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navi_legend.png)
 
 
 
-### Installation
+## Installation
 
 1. Über Installer laden oder Zip-Datei im AddOn-Ordner entpacken, der Ordner muss „quick_navigation“ heißen.
 2. AddOn installieren und aktivieren.
 3. Rechte für Rollen anpassen
 
 
-### Bugtracker
+## Bugtracker
 
 Du hast einen Fehler gefunden oder ein nettes Feature parat? [Lege bitte ein Issue an]
 
-### Changelog
+## Changelog
 
 siehe [CHANGELOG.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/master/CHANGELOG.md)
 
-### Lizenz
+## Lizenz
 
 siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/master/LICENSE.md)
 
 
-### Autor
+## Autor
 
 **Friends Of REDAXO**
 
@@ -113,4 +112,5 @@ Danke an:
 **First Release**
 
 [Thomas Blum](https://github.com/tbaddade)
+
 

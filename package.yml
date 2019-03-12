@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '3.5.5-dev'
+version: '3.5.6-dev'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]
@@ -10,6 +10,8 @@ page:
     perm: quick_navigation[settings]
     subpages:
         config: { title: 'translate:quicknavi_config' }
+        help:  
+             { title: 'translate:video_help',  icon: rex-icon fa-question-circle, subPath: README.md} 
 requires:
     packages:
         structure/content: '^2.1.0'

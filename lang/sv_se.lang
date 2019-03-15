@@ -1,4 +1,6 @@
 quicknavi_title = Snabbnavigation
+quicknavi_help = Hjälp
+quicknavi_help = Snabbnavigation
 quicknavi_config = Inställningar
 quicknavi_general = Allmänt
 quicknavi_placeholder = Filtrera efter kategori, ID eller domän

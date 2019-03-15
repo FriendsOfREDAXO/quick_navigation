@@ -1,4 +1,5 @@
 quicknavi_title = Quick Navigation
+quicknavi_help = Help
 quicknavi_config = Settings
 quicknavi_general = General
 quicknavi_placeholder = filter by categoryname/-id or domain

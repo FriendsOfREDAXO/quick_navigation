@@ -11,7 +11,7 @@ page:
     subpages:
         config: { title: 'translate:quicknavi_config' }
         help:  
-             { title: 'translate:video_help',  icon: rex-icon fa-question-circle, subPath: README.md} 
+             { title: 'translate:help',  icon: rex-icon fa-question-circle, subPath: README.md} 
 requires:
     packages:
         structure/content: '^2.1.0'

@@ -5,6 +5,7 @@ Quick Navigation - Changelog
 3.5.7 (15.03.2019)
 --------------------------------------------------------------------------------
 Fixed: Translations
+
 Fixed: README for AutoToc
 
 3.5.5 (31.01.2019)

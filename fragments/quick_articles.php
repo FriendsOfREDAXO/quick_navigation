@@ -63,9 +63,11 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 			}
 
 			if (rex_addon::get('yrewrite')->isAvailable()) {
-				if (rex_yrewrite::getDomainByArticleId($data['id'])!="" and count(rex_yrewrite::getDomains())>2) {
+				if (count(rex_yrewrite::getDomains())>2) {
 					$domain = rex_yrewrite::getDomainByArticleId($data['id']);
-					$domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.rex_escape($domain);
+					if ($domain) {
+					        $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.rex_escape($domain);
+					}
 				}
 			}
                         $status_css = ' qn_status_'.$data['status'];

@@ -11,14 +11,13 @@
 
 /* Addon Parameter */
 
-// Addonrechte (permissions) registieren
 if (rex::isBackend() && rex::getUser()) {
+// Addonrechte (permissions) registieren    
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[history]');
     rex_perm::register('quick_navigation[all_changes]');   
-}
 
-if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigation[]')) {
+if (rex::getUser()->hasPerm('quick_navigation[]')) {
     rex_extension::register('PAGE_TITLE', function($ep) {
         if (rex_be_controller::getCurrentPageObject()->isPopup()) {
             return $ep->getSubject();
@@ -43,8 +42,8 @@ if (rex::isBackend() && rex::getUser() && rex::getUser()->hasPerm('quick_navigat
 }
 
 // Set Config for User fav if Config is not set
-if (rex::isBackend() && rex::getUser() && !$this->hasConfig()) {
+if (!$this->hasConfig()) {
        $user =  rex::getUser()->getId();
        $this->setConfig('quicknavi_favs'.$user,[]);
 }
-
+}    

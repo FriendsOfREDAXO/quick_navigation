@@ -20,6 +20,16 @@ else
     $mode = $this->mode;
 }
 
+
+if ($mode =='minibar') {
+
+    $icon_prefix ='rex-minibar-icon--fa rex-minibar-icon--';
+
+   }
+else {
+     $icon_prefix ='fa ';
+}
+
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 	$were ='';
 	if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -71,12 +81,13 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 				}
 			}
                         $status_css = ' qn_status_'.$data['status'];
-			$link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
-			$link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="fa fa-eye" aria-hidden="true"></i></a></span></li>';
+			$link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="'. $icon_prefix.'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
+			$link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="'. $icon_prefix.'fa-eye" aria-hidden="true"></i></a></span></li>';
 		}
 	}
-	?>
 
+        if ($mode !='minibar') {
+        ?>    
 		<div class="btn-group">
 		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 		<i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -86,5 +97,9 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 		<?= $link ?>
 		</ul>
 		</div>
-		<?php
-}
+		<?php }
+        else { ?><ul class="minibar-quickfiles">
+		<?= $link ?>
+		</ul>
+<?php } }
+

@@ -10,7 +10,6 @@
  */
 
 /* Addon Parameter */
-
 if (rex::isBackend() && rex::getUser()) {
 // Addonrechte (permissions) registieren    
     rex_perm::register('quick_navigation[]');
@@ -47,3 +46,10 @@ if (!$this->hasConfig()) {
        $this->setConfig('quicknavi_favs'.$user,[]);
 }
 }    
+/* Minibar */
+if(rex::isFrontend() && rex::getUser()) 
+{
+ if (rex_addon::get('minibar')->isAvailable() && rex_minibar::getInstance()->get()) {
+     rex_minibar::getInstance()->addElement(new rex_minibar_quicknavi_history());
+  }
+}

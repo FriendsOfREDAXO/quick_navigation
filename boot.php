@@ -46,10 +46,11 @@ if (!$this->hasConfig()) {
        $this->setConfig('quicknavi_favs'.$user,[]);
 }
 }    
+
 /* Minibar */
-if(rex::isFrontend() && rex::getUser()) 
+if(rex::!isBackend() && rex::getUser() && rex_addon::get('minibar')->isAvailable()) 
 {
- if (rex_addon::get('minibar')->isAvailable() && rex_minibar::getInstance()->get()) {
-     rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi_history());
-  }
-}
+  rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi());
+
+ }
+

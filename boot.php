@@ -50,6 +50,6 @@ if (!$this->hasConfig()) {
 if(rex::isFrontend() && rex::getUser()) 
 {
  if (rex_addon::get('minibar')->isAvailable() && rex_minibar::getInstance()->get()) {
-     rex_minibar::getInstance()->addElement(new rex_minibar_quicknavi_history());
+     rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi_history());
   }
 }

@@ -2,7 +2,7 @@
 /**
  * @package redaxo\core\minibar
  */
-class rex_minibar_quicknavi_history extends rex_minibar_element
+class rex_minibar_element_quicknavi_history extends rex_minibar_element
 {
     public function render()
     {

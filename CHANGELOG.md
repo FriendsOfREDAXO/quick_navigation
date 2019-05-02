@@ -5,6 +5,7 @@ Quick Navigation - Changelog
 3.6.0 (XX.XX.2019)
 --------------------------------------------------------------------------------
 new: Article history for minibar, if AddOn available
+
 replaces: $this by rex_addon::get('quick_navigation')
 
 

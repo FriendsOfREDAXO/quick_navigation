@@ -41,7 +41,7 @@ if (rex::getUser()->hasPerm('quick_navigation[]')) {
 }
 
 // Set Config for User fav if Config is not set
-if (!$this->hasConfig()) {
+if (!rex_addon::get('quick_navigation')->hasConfig()) {
        $user =  rex::getUser()->getId();
        rex_addon::get('quick_navigation')->setConfig('quicknavi_favs'.$user,[]);
 }

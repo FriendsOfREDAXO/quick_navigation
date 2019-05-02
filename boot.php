@@ -36,19 +36,18 @@ if (rex::getUser()->hasPerm('quick_navigation[]')) {
     });
     rex_extension::register('PAGE_TITLE_SHOWN', 'QuickNavigation::linkmap_list');
     rex_extension::register('MEDIA_LIST_TOOLBAR', 'QuickNavigation::media_history');
-    rex_view::addCssFile($this->getAssetsUrl('quicknavi.css'));
-    rex_view::addJsFile($this->getAssetsUrl('quicknavi.js'));
+    rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
+    rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
 }
 
 // Set Config for User fav if Config is not set
 if (!$this->hasConfig()) {
        $user =  rex::getUser()->getId();
-       $this->setConfig('quicknavi_favs'.$user,[]);
+       rex_addon::get('quick_navigation')->setConfig('quicknavi_favs'.$user,[]);
 }
 }    
 /* Minibar */
 if(!rex::isBackend() && rex_addon::get('minibar')->isAvailable()) 
 {
   rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi());
-
 }

@@ -47,7 +47,8 @@ if (!rex_addon::get('quick_navigation')->hasConfig()) {
 }
 }    
 /* Minibar */
-if(rex::isFrontend() && rex::getUser() && rex_addon::get('minibar')->isAvailable()) 
+if(rex::isFrontend() && rex_addon::get('minibar')->isAvailable()) 
 {
   rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi());
 }
+

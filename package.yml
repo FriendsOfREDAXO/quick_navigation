@@ -15,7 +15,7 @@ page:
 requires:
     packages:
         structure/content: '^2.1.0'
-    redaxo: '^5.5.0'
+    redaxo: '^5.7.0'
 conflicts:
     packages:
         yform: '<2.0.0'

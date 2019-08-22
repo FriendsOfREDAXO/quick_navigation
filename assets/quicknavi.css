@@ -7,11 +7,6 @@
 	width: 96%;
 }
 
-
-.quicknavi-btn-group.transparent button { 
-    background-color: transparent; 
-}
-
 .quicknavi-btn-group.linkmapbt button {
 border-radius: 0;
 height: 38px;

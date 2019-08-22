@@ -39,7 +39,6 @@ if (rex::getUser()->hasPerm('quick_navigation[]')) {
     rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
 }
-
 // Set Config for User fav if Config is not set
 if (!rex_addon::get('quick_navigation')->hasConfig()) {
        $user =  rex::getUser()->getId();

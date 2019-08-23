@@ -7,6 +7,22 @@
 	width: 96%;
 }
 
+
+.quicknavi-btn-group.transparent .btn-default {
+    background-color: #eef0f3;
+    border: 1px solid #dfe3e9;
+}
+
+.quicknavi-btn-group.transparent .btn-default:hover,
+.quicknavi-btn-group.transparent .btn-default:active,
+.quicknavi-btn-group.transparent .btn-default:focus,
+.quicknavi-btn-group.transparent .btn-group.open .dropdown-toggle {
+    background-color: #fff;
+    border-color: #dfe3e9;
+    box-shadow: none;
+}
+
+
 .quicknavi-btn-group.linkmapbt button {
 border-radius: 0;
 height: 38px;
@@ -27,14 +43,14 @@ li.quickitem.bg-primary a {
 
 .quicknavi ul,
 .quickfiles {
-	min-width: 330px;
+	min-width: 350px;
 	max-height: 400px;
 	max-width: 360px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	padding: 10px;
-	padding-top: 10px;
+	padding: 0px;
+	padding-top: 0px;
 	margin-bottom: 10px;
 }
 
@@ -44,7 +60,7 @@ li.quickitem.bg-primary a {
 }
 
 .quicknavi li a {
-	width: 300px;
+	width: 350px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -55,6 +71,7 @@ li.quickitem.bg-primary a {
 	text-decoration: none;
 	display: block;line-height: 1em;
 }
+
 .quicknavi li .quicknavi_left {
 	width: 88%;
 	display: block;
@@ -76,13 +93,13 @@ li.quickitem.bg-primary a {
 
 .quickfiles.quicknavi li a.qn_status_1 {
     color:#4b9ad9;
-    border-left: 3px solid #3bb594; 
+    border-left: 8px solid #3bb594; 
     padding-bottom: 10px;
 }
 
 .quickfiles.quicknavi li a.qn_status_0 {
     opacity: 0.6;
-    border-left: 3px solid #ccc;
+    border-left: 8px solid #ccc;
 }
 
 .quickfiles.quicknavi li .quicknavi_right a.qn_status_1, .quickfiles.quicknavi li .quicknavi_right a.qn_status_0 { border: 0;}
@@ -133,4 +150,5 @@ li .watson-btn {
 .sked_border {
 	border-left: 5px solid;
 }
+
 

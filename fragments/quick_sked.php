@@ -64,7 +64,7 @@ if (count($skeds)) {
                                 'func' => 'add'
                             ]
                     );
-                    $addLink .= '<li class=""><a class="btn btn-default" href="' . $href . '" title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"> &nbsp&nbsp'.$this->i18n("sked_add_new_entry").'</i></a></li>';
+                    $addLink .= '<li class=""><a class="btn btn-default" href="' . $href . '" title="'. $this->i18n("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp'.$this->i18n("sked_add_new_entry").'</a></li>';
 
 
 ?>

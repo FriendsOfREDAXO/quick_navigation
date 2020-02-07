@@ -16,6 +16,8 @@ requires:
     packages:
         structure/content: '^2.1.0'
     redaxo: '^5.7.0'
+    php:
+        version: '^7.1'    
 conflicts:
     packages:
         yform: '<2.0.0'

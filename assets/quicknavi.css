@@ -5,7 +5,12 @@
 	margin-left: 2%;
 	width: 96%;
 }
+/* Fix for hopping button */
+.quicknavi-btn-group .watson-btn,
+.quicknavi-btn-group .watson-btn:active {
+    margin-right: 0px;
 
+}
 
 .quicknavi-btn-group.transparent .btn-default {
     background-color: #eef0f3;

@@ -8,7 +8,7 @@ Schnellnavigation und Werkzeugleiste für REDAXO CMS
 ## Features
 - Kategorie-Schnellauswahl im Backend und in der Linkmap
 - Filter nach Kategorienamen, Domain und Kategorie-id
-- Historie mit Frontendlinks der zuletzt bearbeiteten Artikel und Medien, etsprechend Sprache und User
+- Zuletzt geänderte Artikel(auch im Frontend/minibar) und Medien, entsprechend Sprache und User 
 
 ### Per User Settings
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel

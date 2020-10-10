@@ -11,6 +11,28 @@
 
 $drophistory = $filename = $entryname = $date = $link = $where = '';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
+    $file_id = rex_request('file_id', 'int');
+    $quick_file_nav = '';
+    if ($file_id) {
+        $quick_file = rex_sql::factory();
+        $quick_file->setQuery('select * from ' . rex::getTablePrefix() . 'media where id=?', [$file_id]);
+    
+        $quick_file_before = rex_sql::factory();
+        $quick_file_before->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = '. $quick_file->getValue('category_id') .' AND updatedate > ? ORDER BY updatedate LIMIT 1', [$quick_file->getValue('updatedate')]);
+
+        $quick_file_after = rex_sql::factory();
+        $quick_file_after->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = '. $quick_file->getValue('category_id') .' AND updatedate < ? ORDER BY updatedate DESC LIMIT 1', [$quick_file->getValue('updatedate')]);
+
+        if ($quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
+        } elseif ($quick_file_before->getRows() == 1 && !$quick_file_after->getRows() == 1) {
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a>';
+        } elseif (!$quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
+        }
+    }
+
+    
     $were ='';
     if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
         $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
@@ -49,10 +71,10 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 
             $link .= '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname. '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
         }
-    }
-?>
+    } ?>
 
                 <div class="btn-group">
+					<?php echo $quick_file_nav ?>
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                         <span class="caret"></span>
@@ -63,4 +85,3 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 </div>
 <?php
 }
-

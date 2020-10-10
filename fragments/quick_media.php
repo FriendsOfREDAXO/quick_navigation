@@ -8,8 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-$opener ='';
-$opener = rex_request('opener_input_field');
 
 $drophistory = $filename = $entryname = $date = $link = $where = '';
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
@@ -26,11 +24,11 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         $quick_file_after->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = '. $quick_file->getValue('category_id') .' AND updatedate < ? ORDER BY updatedate DESC LIMIT 1', [$quick_file->getValue('updatedate')]);
 
         if ($quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge('rex_file_category' => $data['category_id'], ['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge('rex_file_category' => $data['category_id'],['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
         } elseif ($quick_file_before->getRows() == 1 && !$quick_file_after->getRows() == 1) {
-            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge('rex_file_category' => $data['category_id'], ['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a>';
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-left"></span></a>';
         } elseif (!$quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge('rex_file_category' => $data['category_id'], ['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
+            $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="'.rex_url::currentBackendPage(array_merge(['file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])).'"><span class="fa fa-chevron-right"></span></a>';
         }
     }
 
@@ -39,7 +37,8 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
     if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
         $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
     }
- 
+    $opener ='';
+    $opener = rex_request('opener_input_field');
 
     $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' '.$where.' ORDER BY updatedate DESC LIMIT ' . $this->limit;
     $datas = rex_sql::factory()->getArray($qry);

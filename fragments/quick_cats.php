@@ -1,6 +1,5 @@
-<?php 
-
- // Generate category Quick Navi 
+<?php
+ // Generate category Quick Navi
         // ------------ Parameter
         $qn_user =  rex::getUser()->getId();
         $article_id = rex_request('article_id', 'int');
@@ -13,7 +12,7 @@
             $ignore = true;
         }
 
-        $category_select = new rex_category_select($ignore, false, true, $add_homepage);
+        $category_select = new rex_category_select($ignore, false, true, true);
         $category_select->setName($select_name);
         $category_select->setSize('1');
         $category_select->setAttribute('onchange', 'this.form.submit();');
@@ -50,6 +49,10 @@
 
                         $droplistContext->setParam('category_id', $value);
                         $droplistContext->setParam('article_id', $value);
+                        if ($value=='0') {
+                            $droplistContext->setParam('page', 'structure');
+                        }
+
                         if ($attribute->value == $category_id) {
                             $button_label = str_replace("\xC2\xA0", '', $option->nodeValue);
                             $item['active'] = true;

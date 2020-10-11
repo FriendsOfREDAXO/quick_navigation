@@ -86,7 +86,8 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         // Objekt der aktuellen Kategorie laden
         $cat = rex_category::getCurrent();
         $current_id = rex_request('article_id');
-        if ($cat && $current_id && $current_id != 0) {
+        $page = rex_request('page');
+           if ( $page != "structure"  && $cat && $current_id && $current_id != 0){
             // alle Artikel aus der aktuellen Kategorie laden
             $article = $cat->getArticles(true);
             if (is_array($article)) {

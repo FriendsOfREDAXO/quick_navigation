@@ -60,6 +60,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     [
                     'mode' => 'edit',
                     'clang' => $data['clang_id'],
+	            'category_id' => $data['parent_id'],
                     'article_id' => $data['id']
                 ]
                 );

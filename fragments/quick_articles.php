@@ -89,7 +89,6 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 
         // aktuellen Artikel ermitteln
         $current_id = rex_request('article_id');
-        $current_article = rex_article::get($current_id);
 
         // alle Artikel aus der aktuellen Kategorie laden
         $article = $cat->getArticles(true);

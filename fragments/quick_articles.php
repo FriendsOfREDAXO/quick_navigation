@@ -83,16 +83,12 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         $predecessor = '';
         $successor = '';
         $article_stack[] = array();
-
         // Objekt der aktuellen Kategorie laden
-        $cat = rex_category::get(rex_request('category_id'));
-        if ($cat) {
-            // aktuellen Artikel ermitteln
-            $current_id = rex_request('article_id');
-
+        $cat = rex_category::getCurrent();
+        $current_id = rex_request('article_id');
+        if ($cat && $current_id && $current_id != 0) {
             // alle Artikel aus der aktuellen Kategorie laden
             $article = $cat->getArticles(true);
-
             if (is_array($article)) {
                 // Artikelreihenfolge in eine Array schreiben
                 foreach ($article as $var) {
@@ -129,10 +125,6 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     'article_id' => $next_id
                 ]
                             );
-
-
-
-
                             $successor = '
 
                     <a class="btn btn-default" href="'.$href_next.'">

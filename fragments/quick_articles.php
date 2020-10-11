@@ -86,106 +86,107 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 
         // Objekt der aktuellen Kategorie laden
         $cat = rex_category::get(rex_request('category_id'));
+        if ($cat) {
+            // aktuellen Artikel ermitteln
+            $current_id = rex_request('article_id');
 
-        // aktuellen Artikel ermitteln
-        $current_id = rex_request('article_id');
+            // alle Artikel aus der aktuellen Kategorie laden
+            $article = $cat->getArticles(true);
 
-        // alle Artikel aus der aktuellen Kategorie laden
-        $article = $cat->getArticles(true);
+            if (is_array($article)) {
+                // Artikelreihenfolge in eine Array schreiben
+                foreach ($article as $var) {
+                    // Startartikel werden ignoriert
 
-        if (is_array($article)) {
-            // Artikelreihenfolge in eine Array schreiben
-            foreach ($article as $var) {
-                // Startartikel werden ignoriert
+                    $article_stack[] = $var->getId();
+                }
 
-                $article_stack[] = $var->getId();
-            }
-
-            $i = 0;
-            // Zahl der Artikel ermitteln
-            $catcount = count($article_stack);
-            foreach ($article_stack as $var) {
-                if ($var == $current_id) {
-                    $successor = '
+                $i = 0;
+                // Zahl der Artikel ermitteln
+                $catcount = count($article_stack);
+                foreach ($article_stack as $var) {
+                    if ($var == $current_id) {
+                        $successor = '
 
                         <button class="btn btn-default" disabled>
                            <span class="fa fa-chevron-right"> 
                         </button>
                     ';
-                    if ($i+1 < $catcount) {
-                        // ID des nachfolgenden Artikels ermitteln
-                        $next_id = $article_stack[$i+1];
+                        if ($i+1 < $catcount) {
+                            // ID des nachfolgenden Artikels ermitteln
+                            $next_id = $article_stack[$i+1];
 
-                        // Artikel-Objekt holen, um den Namen des vorhergehenden Artikels zu ermitteln,
-                        // danach Link schreiben
-                        $article = rex_article::get($next_id);
+                            // Artikel-Objekt holen, um den Namen des vorhergehenden Artikels zu ermitteln,
+                            // danach Link schreiben
+                            $article = rex_article::get($next_id);
                 
-                        $href_next = rex_url::backendPage(
-                            'content/edit',
-                            [
+                            $href_next = rex_url::backendPage(
+                                'content/edit',
+                                [
                     'mode' => 'edit',
                     'clang' => $data['clang_id'],
                     'category_id' => rex_request('category_id'),
                     'article_id' => $next_id
                 ]
-                        );
+                            );
 
 
 
 
-                        $successor = '
+                            $successor = '
 
                     <a class="btn btn-default" href="'.$href_next.'">
                       <span class="fa fa-chevron-right"> 
                     </a>
                 ';
-                    }
+                        }
 
-                    // und das Ganze nochmal für den vorhergehenden Artikel
-                    if ($i-1 > -1) {
-                        $prev_id = $article_stack[$i-1];
+                        // und das Ganze nochmal für den vorhergehenden Artikel
+                        if ($i-1 > -1) {
+                            $prev_id = $article_stack[$i-1];
                 
-                        $href_prev = rex_url::backendPage(
-                            'content/edit',
-                            [
+                            $href_prev = rex_url::backendPage(
+                                'content/edit',
+                                [
                     'mode' => 'edit',
                     'clang' => $data['clang_id'],
                     'category_id' => rex_request('category_id'),
                     'article_id' => $prev_id
                 ]
-                        );
+                            );
 
-                        if ($i < $catcount) {
-                            $article = rex_article::get($prev_id);
+                            if ($i < $catcount) {
+                                $article = rex_article::get($prev_id);
 
 
-                            $predecessor = '
+                                $predecessor = '
 
                         <button class="btn btn-default" disabled>
                            <span class="fa fa-chevron-left"> 
                         </button>
                     ';
 
-                            if ($article) {
-                                $predecessor = '
+                                if ($article) {
+                                    $predecessor = '
 
                         <a class="btn btn-default" href="'.$href_prev.'">
                            <span class="fa fa-chevron-left"> 
                         </a>
                     ';
+                                }
                             }
                         }
                     }
+                    $i++;
                 }
-                $i++;
             }
-        }
-        $vz = '
+            $vz = '
 
     '.$predecessor.'
 
     '.$successor.'
-'; ?>   
+';
+        } ?>   
 		<div class="btn-group"><?= $vz ?>
 		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 		<i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -201,4 +202,3 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 		</ul>
 <?php }
 }
-

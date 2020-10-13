@@ -89,23 +89,18 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         $current_id = rex_request('article_id');
         $page = rex_request('page');
            if ( $page != "structure"  && $cat && $current_id && $current_id != 0){
-            // alle Artikel aus der aktuellen Kategorie laden
-            $article = $cat->getArticles(true);
+            $article = $cat->getArticles(false);
             if (is_array($article)) {
                 // Artikelreihenfolge in eine Array schreiben
                 foreach ($article as $var) {
-                    // Startartikel werden ignoriert
-
                     $article_stack[] = $var->getId();
                 }
-
                 $i = 0;
                 // Zahl der Artikel ermitteln
                 $catcount = count($article_stack);
                 foreach ($article_stack as $var) {
                     if ($var == $current_id) {
                         $successor = '
-
                         <button class="btn btn-default" disabled>
                            <span class="fa fa-chevron-right"> 
                         </button>
@@ -113,7 +108,6 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                         if ($i+1 < $catcount) {
                             // ID des nachfolgenden Artikels ermitteln
                             $next_id = $article_stack[$i+1];
-
                             // Artikel-Objekt holen, um den Namen des vorhergehenden Artikels zu ermitteln,
                             // danach Link schreiben
                             $article = rex_article::get($next_id);

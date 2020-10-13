@@ -129,7 +129,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                             );
                             $successor = '
 
-                    <a class="btn btn-default" href="'.$href_next.'">
+                    <a class="btn btn-default" title="'.$article->getName().'" href="'.$href_next.'">
                       <span class="fa fa-chevron-right"> 
                     </a>
                 ';
@@ -163,7 +163,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                                 if ($article) {
                                     $predecessor = '
 
-                        <a class="btn btn-default" href="'.$href_prev.'">
+                        <a class="btn btn-default" title="'.$article->getName().'" href="'.$href_prev.'">
                            <span class="fa fa-chevron-left"> 
                         </a>
                     ';
@@ -196,3 +196,4 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 		</ul>
 <?php }
 }
+

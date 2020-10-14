@@ -60,7 +60,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                     [
                     'mode' => 'edit',
                     'clang' => $data['clang_id'],
-	            'category_id' => $data['parent_id'],
+                'category_id' => $data['parent_id'],
                     'article_id' => $data['id']
                 ]
                 );
@@ -86,10 +86,16 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         $article_stack[] = array();
         // Objekt der aktuellen Kategorie laden
         $cat = rex_category::getCurrent();
+        if ($cat) {
+            $article = $cat->getArticles(false);
+        } else {
+            $article  =  rex_article::getRootArticles();
+        }
+
+
         $current_id = rex_request('article_id');
         $page = rex_request('page');
-           if ( $page != "structure"  && $cat && $current_id && $current_id != 0){
-            $article = $cat->getArticles(false);
+        if ($page != "structure"  && $article  && $current_id) {
             if (is_array($article)) {
                 // Artikelreihenfolge in eine Array schreiben
                 foreach ($article as $var) {
@@ -190,4 +196,3 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 		</ul>
 <?php }
 }
-

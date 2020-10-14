@@ -91,9 +91,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
         } else {
             $article  =  rex_article::getRootArticles();
         }
-
-
-        $current_id = rex_request('article_id');
+       $current_id = rex_request('article_id');
         $page = rex_request('page');
         if ($page != "structure"  && $article  && $current_id) {
             if (is_array($article)) {

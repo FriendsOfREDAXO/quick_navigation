@@ -176,7 +176,8 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 
     '.$successor.'
 ';
-            } ?>   
+            } }
+?>   
 		<div class="btn-group"><?= $vz ?>
 		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 		<i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -192,4 +193,4 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 		<?= $link ?>
 		</ul>
 <?php }
-}
+

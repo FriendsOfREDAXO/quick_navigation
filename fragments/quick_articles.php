@@ -178,7 +178,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
 ';
             } }
 ?>   
-		<div class="btn-group"><?= $vz ?>
+		<div class="btn-group"><?= $vz ?? '' ?>
 		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 		<i class="fa fa-clock-o" aria-hidden="true"></i>
 		<span class="caret"></span>

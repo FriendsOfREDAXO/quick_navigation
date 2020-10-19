@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $name = $mode = $link = $where = $domaintitle = $status_css = '';
+$drophistory = $date = $name = $mode = $link = $where = $domaintitle = $status_css = $vz ='';
 
 if (!isset($this->mode)) {
     $mode ='structure';

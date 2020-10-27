@@ -1,5 +1,6 @@
 <?php
-    /**
+
+/**
  * This file is part of the Quick Navigation package.
  *
  * @author (c) Friends Of REDAXO
@@ -9,34 +10,34 @@
  * file that was distributed with this source code.
  */
 
-$drophistory = $date = $name = $mode = $link = $where = $domaintitle = $status_css = $vz ='';
+$drophistory = $date = $name = $mode = $link = $where = $domaintitle = $status_css = $vz = '';
 
 if (!isset($this->mode)) {
-    $mode ='structure';
+    $mode = 'structure';
 } else {
     $mode = $this->mode;
 }
 
-if ($mode =='minibar') {
-    $icon_prefix ='rex-minibar-icon--fa rex-minibar-icon--';
+if ($mode == 'minibar') {
+    $icon_prefix = 'rex-minibar-icon--fa rex-minibar-icon--';
 } else {
-    $icon_prefix ='fa ';
+    $icon_prefix = 'fa ';
 }
 if (rex::getUser()->hasPerm('quick_navigation[history]')) {
-    $were ='';
+    $were = '';
     if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
-        $where = 'WHERE updateuser="'.rex::getUser()->getValue('login').'"';
+        $where = 'WHERE updateuser="' . rex::getUser()->getValue('login') . '"';
     }
 
     $qry = 'SELECT id, status, parent_id, clang_id, startarticle, name, updateuser, updatedate
                     FROM ' . rex::getTable('article') . ' 
-                    '. $where .' 
+                    ' . $where . ' 
                     ORDER BY updatedate DESC
-                    LIMIT '.$this->limit;
+                    LIMIT ' . $this->limit;
     $datas = rex_sql::factory()->getArray($qry);
 
     if (!count($datas)) {
-        $link .= '<li class="alert">'.rex_i18n::msg('quick_navigation_no_entries').'</li>';
+        $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
     }
 
     if (count($datas)) {
@@ -50,36 +51,36 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $name = rex_escape($data['name']);
             $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
 
-            if ($mode =='linkmap') {
-                $href = "javascript:insertLink('redaxo://".$dataID."','".$name." [".$dataID."]');";
+            if ($mode == 'linkmap') {
+                $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . " [" . $dataID . "]');";
             } else {
                 $href = rex_url::backendPage(
                     'content/edit',
                     [
-                    'mode' => 'edit',
-                    'clang' => $data['clang_id'],
-                'category_id' => $data['parent_id'],
-                    'article_id' => $data['id']
-                ]
+                        'mode' => 'edit',
+                        'clang' => $data['clang_id'],
+                        'category_id' => $data['parent_id'],
+                        'article_id' => $data['id']
+                    ]
                 );
             }
 
             if (rex_addon::get('yrewrite')->isAvailable()) {
-                if (count(rex_yrewrite::getDomains())>2) {
+                if (count(rex_yrewrite::getDomains()) > 2) {
                     $domain = rex_yrewrite::getDomainByArticleId($data['id']);
                     if ($domain) {
-                        $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> '.rex_escape($domain);
+                        $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
                     }
                 }
             }
-            $status_css = ' qn_status_'.$data['status'];
-            $link .= '<li class=""><a class="quicknavi_left '. $status_css .'" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="'. $icon_prefix.'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
-            $link .= '<span class="quicknavi_right"><a class ="'. $status_css .'" href="'.rex_getUrl($dataID).'" title="'.  $name . ' '. $this->i18n("title_eye") .'" target="blank"><i class="'. $icon_prefix.'fa-eye" aria-hidden="true"></i></a></span></li>';
+            $status_css = ' qn_status_' . $data['status'];
+            $link .= '<li class=""><a class="quicknavi_left ' . $status_css . '" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="' . $icon_prefix . 'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
+            $link .= '<span class="quicknavi_right"><a class ="' . $status_css . '" href="' . rex_getUrl($dataID) . '" title="' .  $name . ' ' . $this->i18n("title_eye") . '" target="blank"><i class="' . $icon_prefix . 'fa-eye" aria-hidden="true"></i></a></span></li>';
         }
     }
 
-    if ($mode !='minibar') {
-        if (rex_be_controller::getCurrentPage()=='content/edit') {
+    if ($mode != 'minibar') {
+        if (rex_be_controller::getCurrentPage() == 'content/edit') {
             $predecessor = '';
             $successor = '';
             $article_stack[] = array();
@@ -107,42 +108,42 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                            <span class="fa fa-chevron-right"> 
                         </button>
                     ';
-                            if ($i+1 < $catcount) {
+                            if ($i + 1 < $catcount) {
                                 // ID des nachfolgenden Artikels ermitteln
-                                $next_id = $article_stack[$i+1];
+                                $next_id = $article_stack[$i + 1];
                                 // Artikel-Objekt holen, um den Namen des vorhergehenden Artikels zu ermitteln,
                                 // danach Link schreiben
                                 $article = rex_article::get($next_id);
-                
+
                                 $href_next = rex_url::backendPage(
                                     'content/edit',
                                     [
-                    'mode' => 'edit',
-                    'clang' => $data['clang_id'],
-                    'category_id' => rex_request('category_id'),
-                    'article_id' => $next_id
-                ]
+                                        'mode' => 'edit',
+                                        'clang' => $data['clang_id'],
+                                        'category_id' => rex_request('category_id'),
+                                        'article_id' => $next_id
+                                    ]
                                 );
                                 $successor = '
 
-                    <a class="btn btn-default" title="'.$article->getName().'" href="'.$href_next.'">
+                    <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_next . '">
                       <span class="fa fa-chevron-right"> 
                     </a>
                 ';
                             }
 
                             // und das Ganze nochmal für den vorhergehenden Artikel
-                            if ($i-1 > -1) {
-                                $prev_id = $article_stack[$i-1];
-                
+                            if ($i - 1 > -1) {
+                                $prev_id = $article_stack[$i - 1];
+
                                 $href_prev = rex_url::backendPage(
                                     'content/edit',
                                     [
-                    'mode' => 'edit',
-                    'clang' => $data['clang_id'],
-                    'category_id' => rex_request('category_id'),
-                    'article_id' => $prev_id
-                ]
+                                        'mode' => 'edit',
+                                        'clang' => $data['clang_id'],
+                                        'category_id' => rex_request('category_id'),
+                                        'article_id' => $prev_id
+                                    ]
                                 );
 
                                 if ($i < $catcount) {
@@ -159,7 +160,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                                     if ($article) {
                                         $predecessor = '
 
-                        <a class="btn btn-default" title="'.$article->getName().'" href="'.$href_prev.'">
+                        <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_prev . '">
                            <span class="fa fa-chevron-left"> 
                         </a>
                     ';
@@ -172,25 +173,25 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                 }
                 $vz = '
 
-    '.$predecessor.'
+    ' . $predecessor . '
 
-    '.$successor.'
+    ' . $successor . '
 ';
-            } }
-?>   
-		<div class="btn-group"><?= $vz ?? '' ?>
-		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-		<i class="fa fa-clock-o" aria-hidden="true"></i>
-		<span class="caret"></span>
-		</button>
-		<ul class="quickfiles quicknavi dropdown-menu dropdown-menu-right">
-		<?= $link ?>
-		</ul>
-		</div>
-		<?php
+            }
         }
+?>
+        <div class="btn-group"><?= $vz ?>
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                <span class="caret"></span>
+            </button>
+            <ul class="quickfiles quicknavi dropdown-menu dropdown-menu-right">
+                <?= $link ?>
+            </ul>
+        </div>
+    <?php
     } else { ?><ul class="minibar-quickfiles">
-		<?= $link ?>
-		</ul>
-<?php }
-
+            <?= $link ?>
+        </ul>
+<?php   }
+}

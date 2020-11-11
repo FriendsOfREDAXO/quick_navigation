@@ -6,12 +6,10 @@ $article_id = rex_request('article_id', 'int');
 $category_id = rex_request('category_id', 'int', $article_id);
 $select_name = 'category_id';
 $add_homepage = true;
-
 if (rex_be_controller::getCurrentPagePart(1) == 'content') {
     $select_name = 'article_id';
     $add_homepage = true;
 }
-
 $ignore = false;
 if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user)  == '1') {
     $ignore = true;
@@ -25,7 +23,6 @@ $select = $category_select->get();
 $doc = new DOMDocument();
 $doc->loadHTML('<?xml encoding="UTF-8">' . $select);
 $options = $doc->getElementsByTagName('option');
-
 $droplistContext = rex_context::fromGet();
 $droplistContext->setParam('rex-api-call', 0);
 $button_label = '';
@@ -45,13 +42,15 @@ foreach ($options as $option) {
                         $item['domain-title'] = ' | ' . rex_escape($item['domain']);
                     }
                 }
-
                 $droplistContext->setParam('category_id', $value);
                 $droplistContext->setParam('article_id', $value);
                 if ($value == '0') {
                     $droplistContext->setParam('page', 'structure');
                 } else {
                     $droplistContext->setParam('page', rex_request('page', 'string'));
+                    if (rex_be_controller::getCurrentPagePart(1) != $this->mode && rex_be_controller::getCurrentPagePart(1) != 'content') {
+                        $droplistContext->setParam('page', $this->mode);
+                    }
                 }
                 if ($attribute->value == $category_id) {
                     $button_label = str_replace("\xC2\xA0", '', $option->nodeValue);

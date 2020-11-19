@@ -115,3 +115,4 @@ Danke an:
 [Thomas Blum](https://github.com/tbaddade)
 
 
+<img src="https://socialify.git.ci/FriendsOfREDAXO/quick_navigation/image?description=1&font=Raleway&forks=1&issues=1&language=1&logo=https%3A%2F%2Favatars0.githubusercontent.com%2Fu%2F19146931%3Fs%3D200%26v%3D4&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Light" alt="quick_navigation" width="640" height="320" />

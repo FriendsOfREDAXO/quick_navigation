@@ -73,7 +73,7 @@ $placeholder = '';
 $placeholder = rex_i18n::msg('quicknavi_placeholder');
 $fragment = new rex_fragment();
 $fragment->setVar('button_prefix', '');
-$fragment->setVar('header', '<input id="qsearch" name="article_id" type="text" class="form-control input" autofocus placeholder="' . $placeholder . '" />', false);
+$fragment->setVar('header', '<input id="qsearch" name="article_id" type="search" class="form-control input" autofocus placeholder="' . $placeholder . '" />', false);
 $fragment->setVar('button_label', $button_label);
 $fragment->setVar('items', $items, false);
 $fragment->setVar('right', true, false);

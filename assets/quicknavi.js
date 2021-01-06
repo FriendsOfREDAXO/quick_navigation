@@ -19,15 +19,15 @@ $(document).on("shown.bs.dropdown", function() {
 
     $(this).find(".dropdown-menu li.bg-primary a").focus();
 
-    $('#qsearch').delay(200).fadeIn(function() {
+    $('#qsearch input').delay(200).fadeIn(function() {
         $('.dropdown-menu.quicknavi li:first-child input').focus();
     });
 
 });
 
 function quicknavi_filter_init() {
-    $('#qsearch').keyup(function() {
-        var current_query = $('#qsearch').val();
+    $('#qsearch input').keyup(function() {
+        var current_query = $('#qsearch input').val();
         if (current_query !== "") {
             $(".quicknavi.list-group li.quickitem").hide();
             $(".quicknavi.list-group li.quickitem").each(function() {

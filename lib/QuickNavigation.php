@@ -141,8 +141,13 @@ class QuickNavigation
         $placeholder = '';
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
+        $fragment->setVar('id', 'qsearch');
+        $fragment->setVar('placeholder', $placeholder);
+        $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
+        $searchbar  = $fragment->parse('core/form/searchfield.php');     
+        
+        $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
-        $fragment->setVar('header', '<input id="qsearch" name="article_id" type="search" class="form-control input" autofocus placeholder="' . $placeholder . '" />', false);
         $fragment->setVar('header', $searchbar, false);
         $fragment->setVar('button_label', $button_label);
         $fragment->setVar('items', $items, false);
@@ -208,3 +213,4 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>';
     }
 }
+

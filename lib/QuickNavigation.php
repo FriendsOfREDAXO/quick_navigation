@@ -65,7 +65,7 @@ class QuickNavigation
     }
 
 
-    public static function get_cats($mode)
+    public static function get_cats($mode = 'structure')
     {
 
         // Generate category Quick Navi
@@ -190,11 +190,6 @@ class QuickNavigation
         $dropfavs->setVar('clang', $qlang);
         $dropfavs->setVar('mode', 'structure');
         $dropfavs = $dropfavs->parse('quick_favs.php');
-
-        // get complete quick navi cats from fragment 
-        $droplist = new rex_fragment();
-        $droplist->setVar('mode', 'structure');
-        $droplist = $droplist->parse('quick_cats.php');
 
         $droplist = QuickNavigation::get_cats('structure');
 

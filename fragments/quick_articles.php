@@ -119,7 +119,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                                     'content/edit',
                                     [
                                         'mode' => 'edit',
-                                        'clang' => $data['clang_id'],
+                                        'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
                                         'article_id' => $next_id
                                     ]
@@ -140,7 +140,7 @@ if (rex::getUser()->hasPerm('quick_navigation[history]')) {
                                     'content/edit',
                                     [
                                         'mode' => 'edit',
-                                        'clang' => $data['clang_id'],
+                                        'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
                                         'article_id' => $prev_id
                                     ]

@@ -10,6 +10,7 @@ $(document).on('rex:ready', function() {
 
 $(document).on("shown.bs.dropdown", function() {
     quicknavi_filter_init();
+    searchfield_init('#qsearch');
     var ctype = getUrlVars()["ctype"];
     if (ctype) {
         $(".quicknavi a").attr('href', function(i, h) {

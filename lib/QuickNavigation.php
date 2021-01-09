@@ -144,7 +144,7 @@ class QuickNavigation
         $fragment->setVar('id', 'qsearch');
         $fragment->setVar('placeholder', $placeholder);
         $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
-        $searchbar  = $fragment->parse('core/form/searchfield.php');     
+        $searchbar  = $fragment->parse('core/form/search.php');     
         
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');

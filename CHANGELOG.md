@@ -2,6 +2,12 @@
 Quick Navigation - Changelog
 ================================================================================
 
+4.0.0 (XX.XX.XXXX) 
+--------------------------------------------------------------------------------
+Logik der Kategorieliste wieder in die Class verschoben
+Suchfeld wird über das search fragment ausgegeben
+
+
 3.9.5 (09.12.2020)
 --------------------------------------------------------------------------------
 Install-Fix for PHP8

@@ -4,8 +4,10 @@ Quick Navigation - Changelog
 
 4.0.0 (XX.XX.XXXX) 
 --------------------------------------------------------------------------------
-Logik der Kategorieliste wieder in die Class verschoben
-Suchfeld wird über das search fragment ausgegeben
+- Logik der Kategorieliste wieder in die Class verschoben
+
+- Suchfeld wird über das search fragment ausgegeben
+Ab: REDAXO 5.12
 
 
 3.9.5 (09.12.2020)

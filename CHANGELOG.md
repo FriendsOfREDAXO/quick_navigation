@@ -8,7 +8,7 @@ Quick Navigation - Changelog
 
 - Suchfeld wird über das search fragment ausgegeben
 
-Ab: REDAXO 5.12
+- benötigt: REDAXO >=5.12
 
 
 3.9.5 (09.12.2020)

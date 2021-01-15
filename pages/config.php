@@ -1,5 +1,5 @@
 <?php
-// Variablen initialisieren
+$package = rex_addon::get('quick_navigation');
 $content = $user = $buttons = '';
 $formElements = [];
 $n = [];
@@ -7,14 +7,14 @@ $n = [];
 $user =  rex::getUser()->getId();
 // Einstellungen speichern
 if (rex_post('formsubmit', 'string') == '1') {
-    rex_addon::get('quick_navigation')->setConfig(rex_post('config', [
+    $package->setConfig(rex_post('config', [
         ['quicknavi_favs'.$user, 'array[int]'],
         ['quicknavi_sked'.$user, 'int'],
         ['quicknavi_ignoreoffline'.$user, 'int'],
     ]));
-    echo rex_view::success(rex_addon::get('quick_navigation')->i18n('quicknavi_config_saved'));
+    echo rex_view::success($package->i18n('quicknavi_config_saved'));
 }
-$content .= '<fieldset><legend>' . rex_addon::get('quick_navigation')->i18n('quicknavi_info') . '</legend>';
+$content .= '<fieldset><legend>' . $package->i18n('quicknavi_info') . '</legend>';
 // Kategorieauswahl
 $formElements[] = $n;
 $fragment = new rex_fragment();
@@ -23,7 +23,7 @@ $content .= $fragment->parse('core/form/container.php');
 // Kategorienauswahl
 $formElements = [];
 $n = [];
-$n['label'] = '<label for="quicknavi-config-favs">' . rex_addon::get('quick_navigation')->i18n('quicknavi_categories') . '</label>';
+$n['label'] = '<label for="quicknavi-config-favs">' . $package->i18n('quicknavi_categories') . '</label>';
 $category_select = new rex_category_select(false, false, true, true);
 $category_select->setName('config[quicknavi_favs'.$user.'][]');
 $category_select->setId('quicknavi-config-favs');
@@ -33,7 +33,7 @@ $category_select->setAttribute('class', 'selectpicker show-menu-arrow form-contr
 $category_select->setAttribute('data-actions-box', 'false');
 $category_select->setAttribute('data-live-search', 'true');
 $category_select->setAttribute('data-size', '15');
-$category_select->setSelected(rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user));
+$category_select->setSelected($package->getConfig('quicknavi_favs'.$user));
 $n['field'] = $category_select->get();
 $formElements[] = $n;
 $fragment = new rex_fragment();
@@ -42,8 +42,8 @@ $content .= $fragment->parse('core/form/container.php');
 // Ignore offline cats
     $formElements = [];
     $n = [];
-    $n['label'] = '<label for="quicknavi-sked-checkbox">' . rex_addon::get('quick_navigation')->i18n('quicknavi_ignoreoffline') . '</label>';
-    $n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_ignoreoffline'.$user.']"' . (!empty(rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$user)) && rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+    $n['label'] = '<label for="quicknavi-sked-checkbox">' . $package->i18n('quicknavi_ignoreoffline') . '</label>';
+    $n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_ignoreoffline'.$user.']"' . (!empty($package->getConfig('quicknavi_ignoreoffline'.$user)) && $package->getConfig('quicknavi_ignoreoffline'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
     $formElements[] = $n;
     $fragment = new rex_fragment();
     $fragment->setVar('elements', $formElements, false);
@@ -55,8 +55,8 @@ $content .= $fragment->parse('core/form/container.php');
 if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
     $formElements = [];
     $n = [];
-    $n['label'] = '<label for="quicknavi-sked-checkbox">' . rex_addon::get('quick_navigation')->i18n('quicknavi_sked') . '</label>';
-    $n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_sked'.$user.']"' . (!empty(rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$user)) && rex_addon::get('quick_navigation')->getConfig('quicknavi_sked'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+    $n['label'] = '<label for="quicknavi-sked-checkbox">' . $package->i18n('quicknavi_sked') . '</label>';
+    $n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_sked'.$user.']"' . (!empty($package->getConfig('quicknavi_sked'.$user)) && $package->getConfig('quicknavi_sked'.$user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
     $formElements[] = $n;
     $fragment = new rex_fragment();
     $fragment->setVar('elements', $formElements, false);
@@ -66,7 +66,7 @@ if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) 
 // Save-Button
 $formElements = [];
 $n = [];
-$n['field'] = '<button class="btn btn-save rex-form-aligned" type="submit" name="save" value="' . rex_addon::get('quick_navigation')->i18n('quicknavi_config_save') . '">' . rex_addon::get('quick_navigation')->i18n('quicknavi_config_save') . '</button>';
+$n['field'] = '<button class="btn btn-save rex-form-aligned" type="submit" name="save" value="' . $package->i18n('quicknavi_config_save') . '">' . $package->i18n('quicknavi_config_save') . '</button>';
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
@@ -79,7 +79,7 @@ $buttons = '
 // Ausgabe Formular
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
-$fragment->setVar('title', rex_addon::get('quick_navigation')->i18n('quicknavi_general'));
+$fragment->setVar('title', $package->i18n('quicknavi_general'));
 $fragment->setVar('body', $content, false);
 $fragment->setVar('buttons', $buttons, false);
 $output = $fragment->parse('core/page/section.php');

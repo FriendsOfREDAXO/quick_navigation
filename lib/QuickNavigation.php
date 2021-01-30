@@ -4,7 +4,7 @@
  * This file is part of the Quick Navigation package.
  *
  * @author (c) Friends Of REDAXO
- * @author  <friendsof@redaxo.org>
+ * @author     <friendsof@redaxo.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -259,6 +259,50 @@ class QuickNavigation
         }
     }
 
+
+    public static function get_yformtables()
+    {
+        $table_name = $table_real_name = $link = $table_id ='';
+
+        $tables = \rex_yform_manager_table::getAll();
+        $active_table = false;
+
+        if (count($tables)) {
+            $ytables = [];
+            foreach ($tables as $table) {
+                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
+                    $active_table = true;
+                    $table_name = rex_escape($table->getTableName());
+                    $table_real_name = rex_escape(rex_i18n::translate($table->getName()));
+                    $table_id = rex_escape($table->getId());
+                    $href = rex_url::backendPage(
+                        'yform/manager/data_edit',
+                        [
+                            'page' => 'yform/manager/data_edit',
+                            'table_name' => $table_name
+                        ]
+                    );
+                    $addHref = rex_url::backendPage(
+                        'yform/manager/data_edit',
+                        [
+                            'page' => 'yform/manager/data_edit',
+                            'table_name' => $table_name,
+                            'func' => 'add'
+                        ]
+                    );
+                    $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name .'</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="'. rex_i18n::msg("title_yform") .' '.  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                }
+            }
+            if ($active_table == true) {
+                $fragment = new rex_fragment();
+                $fragment->setVar('items', $ytables, false);
+                $fragment->setVar('icon', 'fa fa-table');
+                return $fragment->parse('quick_button.php');
+            }
+        }
+    }
+
+
     public static function get()
     {
         $qn_user =  rex::getUser()->getId();
@@ -279,11 +323,10 @@ class QuickNavigation
             }
         }
 
-        // AddOn specific :: get data from yForm AddOn from fragment
+        // AddOn specific :: get data from yForm AddOn
         $dropyform = '';
         if (rex_addon::get('yform')->isAvailable()) {
-            $dropyform = new rex_fragment();
-            $dropyform = $dropyform->parse('quick_yform.php');
+            $dropyform = self::get_yformtables();
         }
 
         // AddOn specific :: set watson button if addon is available and button is active
@@ -291,9 +334,9 @@ class QuickNavigation
         if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0) == 1) {
             $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
-
-
+        // get user favorites
         $dropfavs = self::get_favs('structure');
+        // get categories
         $droplist = self::get_cats('structure');
 
         // get article history from fragment

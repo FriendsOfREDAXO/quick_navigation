@@ -4,11 +4,11 @@ Quick Navigation - Changelog
 
 4.0.0 (XX.XX.XXXX) 
 --------------------------------------------------------------------------------
-- Logik der Kategorieliste wieder in die Class verschoben
-
-- Suchfeld wird über das search fragment ausgegeben
-
-- benötigt: REDAXO >=5.12
+- Logic of the listings moved to the Class
+- old fragments removed 
+- New: fragment quick_button for button output
+- Search field output via the core search fragment
+- requires: REDAXO >=5.12
 
 
 3.9.5 (09.12.2020)
@@ -17,7 +17,7 @@ Install-Fix for PHP8
 
 3.9.4 (13.11.2020)
 --------------------------------------------------------------------------------
-Kategorien blättern  Next / previous category, some fixes
+Browse categories  Next / previous category, some fixes
 
 3.8.0 (10.10.2020)
 --------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ replaces: $this by rex_addon::get('quick_navigation')
 
 3.5.8 (23.03.2019)
 --------------------------------------------------------------------------------
-Doppelte Ermittlung via yrewrite vermeiden thx @staabm
+Avoid double detection via yrewrite thx @staabm
 
 
 3.5.7 (15.03.2019)

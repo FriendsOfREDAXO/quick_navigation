@@ -1,4 +1,5 @@
 <div class="btn-group">
+     <?= (isset($this->prepend) ? $this->prepend : '')?>
      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
      <i class="<?= (isset($this->icon) ? $this->icon : 'fa fa-bullseye')?>" aria-hidden="true"></i>
      <span class="caret"></span>

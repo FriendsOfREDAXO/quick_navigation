@@ -34,21 +34,12 @@ class QuickNavigation
         // get catlist history from fragment
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
             $droplist = $favs = $drophistory = $qlang = '';
-            // Check if language is set 
+            // Check if language is set
             $qlang = rex_request('clang', 'int');
             if ($qlang == 0 || $qlang == '') {
                 $qlang = 1;
             }
-            // get complete quick navi cats from fragment
-            $droplist = new rex_fragment();
-            $droplist->setVar('mode', 'linkmap');
-            $droplist = $droplist->parse('quick_cats.php');
-
-            // get favs from fragment
-            $favs = new rex_fragment();
-            $favs->setVar('mode', 'linkmap');
-            $favs->setVar('clang', $qlang);
-            $favs = $favs->parse('quick_favs.php');
+            $droplist = QuickNavigation::get_favs('linkmap');
 
             // get article history from fragment
             $drophistory = new rex_fragment();
@@ -144,7 +135,7 @@ class QuickNavigation
         $fragment->setVar('id', 'qsearch');
         $fragment->setVar('placeholder', $placeholder);
         $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
-        $searchbar  = $fragment->parse('core/form/search.php');     
+        $searchbar  = $fragment->parse('core/form/search.php');
         
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
@@ -156,6 +147,46 @@ class QuickNavigation
         return '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
     }
 
+    public static function get_favs($mode = 'structure')
+    {
+        $user =  rex::getUser()->getId();
+        $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs'.$user);
+        if ($datas && count($datas) >= 1) {
+            $items= [];
+            $clang = rex_request('clang', 'int');
+            foreach ($datas as $data) {
+                if (rex_category::get($data)) {
+                    $cat = rex_category::get($data);
+                    $catName = rex_escape($cat->getName());
+                    $catId = rex_escape($cat->getId());
+                    $href = rex_url::backendPage(
+                        'content/edit',
+                        [
+                  'page' => $mode,
+                  'clang' => $clang,
+                  'category_id' => $data
+                ]
+                    );
+                    $addHref = rex_url::backendPage(
+                        'structure',
+                        [
+                  'category_id' => $catId,
+                  'clang' => $clang,
+                  'function' => 'add_art'
+                ]
+                    );
+                    $items[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName .'</a></li>';
+                    if ($mode =='structure') {
+                        $items[] = '<li class="quicknavi_right"><a href="' . $addHref . '" title="'. rex_i18n::msg("quicknavi_title_favs") .' '.  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                    }
+                }
+            }
+            $fragment = new rex_fragment();
+            $fragment->setVar('items', $items, false);
+            $fragment->setVar('icon', 'fa fa-star-o');
+            return $fragment->parse('quick_button.php');
+        }
+    }
 
 
     public static function get()
@@ -191,12 +222,8 @@ class QuickNavigation
             $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';
         }
 
-        // get favorites from fragment
-        $dropfavs = new rex_fragment();
-        $dropfavs->setVar('clang', $qlang);
-        $dropfavs->setVar('mode', 'structure');
-        $dropfavs = $dropfavs->parse('quick_favs.php');
 
+        $dropfavs = QuickNavigation::get_favs('structure');
         $droplist = QuickNavigation::get_cats('structure');
 
         // get article history from fragment

@@ -253,6 +253,7 @@ class QuickNavigation
                 }
             }
             $fragment = new rex_fragment();
+            $fragment->setVar('prepend',$quick_file_nav, false);
             $fragment->setVar('items', $media, false);
             $fragment->setVar('icon', 'fa fa-clock-o');
             return $fragment->parse('quick_button.php');

@@ -13,7 +13,7 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
     public function render()
     {    
         // get article history from fragment
-	$drophistory = QuickNavigation::get_article_history('minibar',8)
+	$drophistory = QuickNavigation::get_article_history('minibar',8);
         return
         '
         <style>

@@ -318,7 +318,7 @@ class QuickNavigation
                 return $fragment->parse('quick_button.php');
             } else {
                 return '<ul class="minibar-quickfiles">
-            '. $link.'  
+            '. $minibar.'  
         </ul>';
             }
         }

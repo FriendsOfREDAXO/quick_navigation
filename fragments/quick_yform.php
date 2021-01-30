@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-$tables = $table_name = $table_real_name = $link = $table_id = $addLink = '';
+$tables = $table_name = $table_real_name = $link = $table_id;
 
 $tables = \rex_yform_manager_table::getAll();
 $active_table = false;
@@ -37,7 +37,6 @@ if (count($tables)) {
                         ]
             );
             $link .= '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name .'</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="'. $this->i18n("title_yform") .' '.  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
-            $addLink .= '';
         }
     }
     if ($active_table == true) {

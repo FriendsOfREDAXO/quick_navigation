@@ -316,7 +316,7 @@ class QuickNavigation
                 $fragment->setVar('icon', 'fa fa-clock-o');
                 return $fragment->parse('quick_button.php');
             } else {
-                return '<ul class="minibar-quickfiles">
+                return '<ul class="minibar-quicknavi-items">
             '. $minibar.'  
         </ul>';
             }

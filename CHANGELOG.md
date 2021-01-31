@@ -9,6 +9,7 @@ Quick Navigation - Changelog
 - New: fragment quick_button for button output
 - Search field output via the core search fragment
 - requires: REDAXO >=5.12
+- changed some css definitions
 
 
 3.9.5 (09.12.2020)

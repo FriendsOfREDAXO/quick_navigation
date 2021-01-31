@@ -10,6 +10,6 @@ class rex_api_quicknavigation_render extends rex_api_function
 
     public function requiresCsrfProtection()
     {
-        return true;
+        return false;
     }
 }

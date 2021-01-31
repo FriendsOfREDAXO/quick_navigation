@@ -481,7 +481,67 @@ class QuickNavigation
         }
     }
 
+    public static function get_sked_history()
+    {
+        $skeds = $categoryId = $filter_date = $skedID =  $start = $addLink = $filter_date = $today = $halfayear = '';
 
+        $filter_date    = ("Y-m-d");
+        $categoryId     = null;
+        $start          = date("Y-m-d");
+        $today          = strtotime($start);
+        $halfayear      = strtotime('+ 2 month', $today);
+        $filter_date    = date("Y-m-d", $halfayear);
+
+
+        $skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
+
+        if (count($skeds)) {
+            $link = [];
+            foreach ($skeds as $sked) {
+                $skedId                 = rex_escape($sked['id']);
+                $sked_entry             = rex_escape($sked['entry']);
+                $sked_name              = rex_escape($sked_entry->entry_name);
+                $sked_start_date        = rex_escape(rex_formatter::strftime(strtotime($sked_entry->entry_start_date->format('d.m.Y')), 'date'));
+                $sked_end_date          = rex_escape(rex_formatter::strftime(strtotime($sked_entry->entry_end_date->format('d.m.Y')), 'date'));
+                $entry_start_time       = $sked_entry->entry_start_time;
+                $entry_start_time_date  = new DateTime($entry_start_time);
+                $sked_start_time        = rex_escape($entry_start_time_date->format('H:i'));
+
+                $entry_end_time         = $sked_entry->entry_end_time;
+                $entry_end_time_date    = new DateTime($entry_end_time);
+                $sked_end_time          = rex_escape($entry_end_time_date->format('H:i'));
+
+                $sked_color             = rex_escape($sked_entry->category_color);
+
+
+                $href = rex_url::backendPage(
+                    'sked/entries',
+                    [
+                'func' => 'edit',
+                'id' => $skedId
+            ]
+                );
+
+
+
+                $link[] = '<li class="sked_border" style="border-color:'.$sked_color.'"><a href="' . $href . '" title="' . $sked_name  . '">' . $sked_name .'<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time .'</small></a></li>';
+            }
+        }
+        $href = rex_url::backendPage(
+            'sked/entries',
+            [
+                                'func' => 'add'
+                            ]
+        );
+    
+        $addLink = '<li class=""><a class="btn btn-default" href="' . $href . '" title="'. rex_i18n::msg("sked_add_new_entry") .'"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp'.rex_i18n::msg("sked_add_new_entry").'</a></li>';
+    
+        $fragment = new rex_fragment();
+        $fragment->setVar('link', $addLink, false);
+        $fragment->setVar('items', $links, false);
+        $fragment->setVar('icon', 'fa fa-calendar');
+        return $fragment->parse('quick_button.php');
+    }
     public static function get()
     {
         $qn_user =  rex::getUser()->getId();
@@ -497,8 +557,7 @@ class QuickNavigation
         $sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked' . $qn_user);
         if ($sked_datas != '1') {
             if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
-                $dropsked = new rex_fragment();
-                $dropsked = $dropsked->parse('quick_sked.php');
+                $dropsked = self::get_sked_history();
             }
         }
 

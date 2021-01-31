@@ -14,7 +14,7 @@ class QuickNavigation
     // Media History
     public static function media_history($ep)
     {
-        // get media history from fragment
+        // get media history
         if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
             $subject = $ep->getSubject();
             $drophistory = self::get_media();
@@ -29,7 +29,7 @@ class QuickNavigation
     // linkmap catlist
     public static function linkmap_list($ep)
     {
-        // get catlist history from fragment
+        // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
             $droplist = $favs = $drophistory = $qlang = '';
             // Check if language is set
@@ -43,7 +43,6 @@ class QuickNavigation
             // generate output ep for custom buttons after default set.
             $custom_linkmap_buttons = $custom = '';
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
-
             return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $drophistory . $favs . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
     }
@@ -552,7 +551,13 @@ class QuickNavigation
             $qlang = 1;
         }
 
-        // AddOn specific :: get data from sked AddOn from fragment
+        // AddOn specific :: get data from yForm AddOn
+        $dropyform = '';
+        if (rex_addon::get('yform')->isAvailable()) {
+            $dropyform = self::get_yformtables();
+        }
+        
+        // AddOn specific :: get data from sked AddOn
         $dropsked = '';
         $sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked' . $qn_user);
         if ($sked_datas != '1') {
@@ -560,14 +565,8 @@ class QuickNavigation
                 $dropsked = self::get_sked_history();
             }
         }
-
-        // AddOn specific :: get data from yForm AddOn
-        $dropyform = '';
-        if (rex_addon::get('yform')->isAvailable()) {
-            $dropyform = self::get_yformtables();
-        }
-
-        // AddOn specific :: set watson button if addon is available and button is active
+        
+        // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0) == 1) {
             $watson = '<div class="btn-group"><button class="btn btn-default watson-btn">Watson</button></div>';

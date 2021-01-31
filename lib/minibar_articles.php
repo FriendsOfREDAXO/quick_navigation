@@ -17,7 +17,7 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
         return
         '
         <style>
-        ul.minibar-quicknavi-items{display:block;font-size:16px;padding:0;margin:0;min-width:300px}.minibar-quickfiles li{display:block;margin:0;line-height:16px}.minibar-quicknavi-items small{clear:both;display:block;color:#ccc;font-size:10px}.quicknavi_left{width:88%;display:inline-block}.minibar-quickfiles li a.quicknavi_left.qn_status_1{color:#4b9ad9;border-left:3px solid #3bb594;padding-bottom:10px}.minibar-quickfiles li a.quicknavi_left.qn_status_0{opacity:.6;border-left:3px solid #ccc}.minibar-quickfiles .quicknavi_right{width:12%;display:inline-block}.minibar-quicknavi-items a{color:#fff;text-decoration:none;padding-left:5px;padding-bottom:7px}
+        ul.minibar-quicknavi-items{display:block;font-size:16px;padding:0;margin:0;min-width:300px}.minibar-quicknavi-items li{display:block;margin:0;line-height:16px}.minibar-quicknavi-items small{clear:both;display:block;color:#ccc;font-size:10px}.quicknavi_left{width:88%;display:inline-block}.minibar-quickfiles li a.quicknavi_left.qn_status_1{color:#4b9ad9;border-left:3px solid #3bb594;padding-bottom:10px}.minibar-quickfiles li a.quicknavi_left.qn_status_0{opacity:.6;border-left:3px solid #ccc}.minibar-quickfiles .quicknavi_right{width:12%;display:inline-block}.minibar-quicknavi-items a{color:#fff;text-decoration:none;padding-left:5px;padding-bottom:7px}
         </style>
         <div class="rex-minibar-item">
             <span class="rex-minibar-icon">

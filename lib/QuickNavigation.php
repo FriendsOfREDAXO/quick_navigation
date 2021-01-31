@@ -538,7 +538,7 @@ class QuickNavigation
     
         $fragment = new rex_fragment();
         $fragment->setVar('link', $addLink, false);
-        $fragment->setVar('items', $links, false);
+        $fragment->setVar('items', $link, false);
         $fragment->setVar('icon', 'fa fa-calendar');
         return $fragment->parse('quick_button.php');
     }

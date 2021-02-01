@@ -6,10 +6,12 @@
      </button>
      <ul class="quicknavi-items quicknavi dropdown-menu dropdown-menu-right">
      <?= (isset($this->link) ? $this->link : '')?>
-     <?php foreach ($this->items as $item) {
-     echo $item;
-     }?>
+     <?php 
+    if (isset($this->items) && count($this->items))
+        {    
+            foreach ($this->items as $item) {
+                echo $item;
+            }
+         }?>
      </ul>
 </div>
-
-

@@ -37,8 +37,9 @@ class QuickNavigation
             if ($qlang == 0 || $qlang == '') {
                 $qlang = 1;
             }
-            $droplist = self::get_favs('linkmap');
-            $drophistory = self::get_article_history('linkmap');
+            $droplist = self::get_cats('linkmap');
+			$favs = self::get_favs('linkmap');
+			$drophistory = self::get_article_history('linkmap');
 
             // generate output ep for custom buttons after default set.
             $custom_linkmap_buttons = $custom = '';

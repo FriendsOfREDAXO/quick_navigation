@@ -53,8 +53,8 @@ $content .= $fragment->parse('core/form/checkbox.php');
 // Enable / Disable article directions
 $formElements = [];
 $n = [];
-$n['label'] = '<label for="quicknavi-sked-checkbox">' . $package->i18n('quicknavi_artdirections') . '</label>';
-$n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_artdirections' . $user . ']"' . (!empty($package->getConfig('quicknavi_artdirections' . $user)) && $package->getConfig('quicknavi_artdirections' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$n['label'] = '<label for="quicknavi-article-checkbox">' . $package->i18n('quicknavi_artdirections') . '</label>';
+$n['field'] = '<input type="checkbox" id="quicknavi-article-checkbox" name="config[quicknavi_artdirections' . $user . ']"' . (!empty($package->getConfig('quicknavi_artdirections' . $user)) && $package->getConfig('quicknavi_artdirections' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);

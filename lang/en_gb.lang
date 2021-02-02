@@ -17,4 +17,5 @@ title_eye = Frontend view of article:
 sked_add_new_entry = Create new sked entry
 quicknavi_sked = Show Sked Button?
 quicknavi_ignoreoffline = Ignore offline categories?
+quicknavi_artdirections = Disable article browsing? 
 quick_navigation_no_entries = No entries found

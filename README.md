@@ -109,5 +109,7 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 **Credits**
 
 First Release: [Thomas Blum](https://github.com/tbaddade)
+
 Performance Optimierung: [Markus Staab](https://github.com/staabm) 
+
 Sked integration: [Christian Gehrke](https://github.com/chrison94)

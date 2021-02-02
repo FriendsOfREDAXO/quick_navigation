@@ -9,11 +9,13 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 - Kategorie-Schnellauswahl im Backend und in der Linkmap
 - Filter nach Kategorienamen, Domain und Kategorie-id
 - Zuletzt geänderte Artikel(auch im Frontend/minibar) und Medien, entsprechend Sprache und User 
+- Blättern durch Artikel und Medien
 
 ### Per User Settings
 - Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
 - Offline-Kategorien können optional durch User ausgeblendet werden
 - Sked-Unterstützung kann abgeschaltet werden
+- Artikelblättern kann deaktiviert werden
 
 ### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen

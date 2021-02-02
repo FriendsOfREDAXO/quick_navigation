@@ -210,8 +210,12 @@ class QuickNavigation
             }
 
             if ($mode != 'minibar') {
-
-                $article_directions = self::article_directions();
+                $qn_user =  rex::getUser()->getId();
+                if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $qn_user)  == '1') {
+                    $article_directions = '';
+                } else {
+                    $article_directions = self::article_nav();
+                }
                 $fragment = new rex_fragment();
                 $fragment->setVar('prepend', $article_directions, false);
                 $fragment->setVar('items', $links, false);
@@ -226,7 +230,7 @@ class QuickNavigation
     }
 
 
-    public static function article_directions()
+    public static function article_nav()
     {
         $article_directions = '';
         if (rex_be_controller::getCurrentPage() == 'content/edit') {
@@ -330,6 +334,13 @@ class QuickNavigation
         }
         return $article_directions;
     }
+
+
+
+
+
+
+
 
 
     public static function get_favs($mode = 'structure')

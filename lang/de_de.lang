@@ -16,5 +16,6 @@ title_favs = Artikel hinzufügen in:
 title_eye = im Frontend öffnen
 sked_add_new_entry = Neuen Sked-Eintrag anlegen
 quicknavi_sked = Sked Button ausblenden?
+quicknavi_artdirections = Artikelblättern deaktivieren? 
 quicknavi_ignoreoffline = Offline-Kategorien ignorieren?
 quick_navigation_no_entries = Keine Einträge gefunden

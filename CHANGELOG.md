@@ -10,6 +10,7 @@ Quick Navigation - Changelog
 - Search field output via the core search fragment
 - requires: REDAXO >=5.12
 - changed some css definitions
+- New: Setting enable/disbale article browsing
 
 
 3.9.5 (09.12.2020)

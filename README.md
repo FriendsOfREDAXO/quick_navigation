@@ -6,13 +6,13 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 
 ## Features
-- Kategorie-Schnellauswahl im Backend und in der Linkmap
+- Kategorie-Schnellauswahl übergreifend im Backend inkl. Linkmap
 - Filter nach Kategorienamen, Domain und Kategorie-id
-- Zuletzt geänderte Artikel(auch im Frontend/minibar) und Medien, entsprechend Sprache und User 
+- Zuletzt geänderte Artikel(auch in /minibar/linkmap) und Medien, entsprechend Sprache und User 
 - Blättern durch Artikel und Medien
 
 ### Per User Settings
-- Personalisierte, individuelle Kategorie-Favoriten mit Direktlinks zur Erstellung neuer Artikel
+- Individuelle Kategorie-Favoriten in der Struktur und der Linkmap
 - Offline-Kategorien können optional durch User ausgeblendet werden
 - Sked-Unterstützung kann abgeschaltet werden
 - Artikelblättern kann deaktiviert werden

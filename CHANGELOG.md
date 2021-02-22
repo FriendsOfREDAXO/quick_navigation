@@ -4,13 +4,15 @@ Quick Navigation - Changelog
 
 4.0.0 (XX.XX.XXXX) 
 --------------------------------------------------------------------------------
-- Logic of the listings moved to the Class
+- Logic moved form fragments to php class
 - old fragments removed 
 - New: fragment quick_button for button output
 - Search field output via the core search fragment
 - requires: REDAXO >=5.12
 - changed some css definitions
 - New: Setting enable/disbale article browsing
+- interweave-media and @gharlan Svensk översättning
+
 
 
 3.9.5 (09.12.2020)

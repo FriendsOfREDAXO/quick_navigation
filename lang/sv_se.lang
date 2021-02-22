@@ -1,5 +1,4 @@
 quicknavi_title = Snabbnavigation
-quicknavi_help = Hjälp
 quicknavi_help = Snabbnavigation
 quicknavi_config = Inställningar
 quicknavi_general = Allmänt
@@ -17,5 +16,6 @@ title_favs = Tillfoga artikel i:
 title_eye = Öppna i frontend:
 sked_add_new_entry = Skapa nytt Sked-inlägg:
 quicknavi_sked = Dölj Sked-button?
+quicknavi_artdirections = Deaktivera artikelbläddring?
 quicknavi_ignoreoffline = Ignorera offline-kategorierna?
 quick_navigation_no_entries = Inga inlägg hittades

@@ -120,7 +120,6 @@ li.quickitem.bg-primary a {
 
 li .watson-btn {
 	display: none!important;
-	height: 36px;
 }
 /* Format Watson-Button */
 
@@ -132,6 +131,7 @@ li .watson-btn {
 }
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
+	height: 36px;
 }
 .quicknavi_left {
 	width: 88%;

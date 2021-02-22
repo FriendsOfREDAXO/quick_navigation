@@ -120,6 +120,7 @@ li.quickitem.bg-primary a {
 
 li .watson-btn {
 	display: none!important;
+	height: 36px;
 }
 /* Format Watson-Button */
 

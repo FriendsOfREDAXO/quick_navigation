@@ -25,7 +25,7 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 
 ## Für Developer
 - Für Developer stehen drei Extension Points QUICK_NAVI_CUSTOM, QUICK_LINKMAP_CUSTOM und QUICK_NAVI_CUSTOM_MEDIA zur Einschleusung eigener Buttons oder Dropdowns zur Verfügung 
-- Alle dargstellten Buttons werden durch Fragmente erzeugt und können leicht ausgetauscht werden. 
+
 
 ### Beispiel:
 

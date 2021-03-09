@@ -43,8 +43,8 @@ $content .= $fragment->parse('core/form/container.php');
 // Ignore offline cats
 $formElements = [];
 $n = [];
-$n['label'] = '<label for="quicknavi-sked-checkbox">' . $package->i18n('quicknavi_ignoreoffline') . '</label>';
-$n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_ignoreoffline' . $user . ']"' . (!empty($package->getConfig('quicknavi_ignoreoffline' . $user)) && $package->getConfig('quicknavi_ignoreoffline' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$n['label'] = '<label for="quicknavi-forcal-checkbox">' . $package->i18n('quicknavi_ignoreoffline') . '</label>';
+$n['field'] = '<input type="checkbox" id="quicknavi-forcal-checkbox" name="config[quicknavi_ignoreoffline' . $user . ']"' . (!empty($package->getConfig('quicknavi_ignoreoffline' . $user)) && $package->getConfig('quicknavi_ignoreoffline' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
@@ -60,12 +60,12 @@ $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/checkbox.php');
 
-// SKED Checkbox
-if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
+// forcal Checkbox
+if (rex_addon::get('forcal')->isAvailable() && rex::getUser()->hasPerm('forcal[]')) {
     $formElements = [];
     $n = [];
-    $n['label'] = '<label for="quicknavi-sked-checkbox">' . $package->i18n('quicknavi_sked') . '</label>';
-    $n['field'] = '<input type="checkbox" id="quicknavi-sked-checkbox" name="config[quicknavi_sked' . $user . ']"' . (!empty($package->getConfig('quicknavi_sked' . $user)) && $package->getConfig('quicknavi_sked' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+    $n['label'] = '<label for="quicknavi-forcal-checkbox">' . $package->i18n('quicknavi_forcal') . '</label>';
+    $n['field'] = '<input type="checkbox" id="quicknavi-forcal-checkbox" name="config[quicknavi_forcal' . $user . ']"' . (!empty($package->getConfig('quicknavi_forcal' . $user)) && $package->getConfig('quicknavi_forcal' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
     $formElements[] = $n;
     $fragment = new rex_fragment();
     $fragment->setVar('elements', $formElements, false);

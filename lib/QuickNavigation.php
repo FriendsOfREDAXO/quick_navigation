@@ -167,8 +167,8 @@ class QuickNavigation
                 $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
+            $links = [];
             if (count($datas)) {
-                $links = [];
                 foreach ($datas as $data) {
                     $dataID = rex_escape($data['id']);
                     $lang = rex_clang::get($data['clang_id']);

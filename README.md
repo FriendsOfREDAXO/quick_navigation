@@ -110,8 +110,8 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 
 First Release: [Thomas Blum](https://github.com/tbaddade)
 
-Performance Optimierung: [Markus Staab](https://github.com/staabm) 
+Performance-Optimierung: [Markus Staab](https://github.com/staabm) 
 
 "FOR Calendar"-Integration: [Christian Gehrke](https://github.com/chrison94)
 
-"Bugfixes / Testing": [Hirbod](https://github.com/hirbod)
+"Bugfixes / Testing": [Hirbod](https://github.com/hirbod), [Marco Hanke](https://github.com/marcohanke)

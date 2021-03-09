@@ -7,7 +7,7 @@
      <ul class="quicknavi-items quicknavi dropdown-menu dropdown-menu-right">
      <?= (isset($this->link) ? $this->link : '')?>
      <?php 
-    if (isset($this->items) && count($this->items))
+    if (isset($this->items) && is_array($this->items))
         {    
             foreach ($this->items as $item) {
                 echo $item;

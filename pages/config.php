@@ -9,7 +9,7 @@ $user =  rex::getUser()->getId();
 if (rex_post('formsubmit', 'string') == '1') {
     $package->setConfig(rex_post('config', [
         ['quicknavi_favs' . $user, 'array[int]'],
-        ['quicknavi_sked' . $user, 'int'],
+        ['quicknavi_forcal' . $user, 'int'],
         ['quicknavi_ignoreoffline' . $user, 'int'],
         ['quicknavi_artdirections' . $user, 'int'],
     ]));

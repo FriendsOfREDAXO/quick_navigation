@@ -113,3 +113,5 @@ First Release: [Thomas Blum](https://github.com/tbaddade)
 Performance Optimierung: [Markus Staab](https://github.com/staabm) 
 
 "FOR Calendar"-Integration: [Christian Gehrke](https://github.com/chrison94)
+
+"Bugfixes / Testing": [Hirbod](https://github.com/hirbod)

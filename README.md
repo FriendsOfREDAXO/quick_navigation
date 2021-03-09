@@ -14,12 +14,12 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 ### Per User Settings
 - Individuelle Kategorie-Favoriten in der Struktur und der Linkmap
 - Offline-Kategorien können optional durch User ausgeblendet werden
-- Sked-Unterstützung kann abgeschaltet werden
+- "FOR Calendar"-Unterstützung kann abgeschaltet werden
 - Artikelblättern kann deaktiviert werden
 
 ### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
-- Sked-Support: Neuste Termine werden aufgelistet, ein Datensatz kann direkt erstellt werden. 
+- "FOR Calendar"-Support: Neuste Termine werden aufgelistet, ein Datensatz kann direkt erstellt werden. 
 - Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
 - Artikel-Historie in der Minibar
 
@@ -61,8 +61,8 @@ Im Live-Filter kann nach Kategorien, Autoren oder yrewrite-Domains gefiltert wer
 Favorisierte Kategorien können individuell durch die Redakteure in den AddOn-Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
 
 Quick Navigation integriert Funktionen auch anderer AddOns, sofern diese installiert und aktiviert wurden. 
-Aktuell: YForm, Sked und Watson
-Der Sked-Button kann durch die Redakteure ausgeblendet werden. 
+Aktuell: YForm, FOR Calendar und Watson
+Der "FOR Calendar"-Button kann durch die Redakteure ausgeblendet werden. 
 
 Die Quick Navigation ist über den Access-Key **m** erreichbar.
 
@@ -112,4 +112,4 @@ First Release: [Thomas Blum](https://github.com/tbaddade)
 
 Performance Optimierung: [Markus Staab](https://github.com/staabm) 
 
-Sked integration: [Christian Gehrke](https://github.com/chrison94)
+"FOR Calendar"-Integration: [Christian Gehrke](https://github.com/chrison94)

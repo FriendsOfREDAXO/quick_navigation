@@ -504,9 +504,9 @@ class QuickNavigation
         }
     }
 
-    public static function get_sked_history()
+    public static function get_cal_history()
     {
-        $skeds = $categoryId = $filter_date = $skedID =  $start = $addLink = $filter_date = $today = $halfayear = '';
+        $forcals = $categoryId = $filter_date = $forcalID =  $start = $addLink = $filter_date = $today = $halfayear = '';
 
         $filter_date    = ("Y-m-d");
         $categoryId     = null;
@@ -516,48 +516,48 @@ class QuickNavigation
         $filter_date    = date("Y-m-d", $halfayear);
 
 
-        $skeds =  \Sked\Handler\SkedHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
+        $forcals =  \forCal\Handler\ForCalHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
         $link = [];
-        if (count($skeds)) {
+        if (count($forcals)) {
 
-            foreach ($skeds as $sked) {
-                $skedId                 = rex_escape($sked['id']);
-                $sked_entry             = rex_escape($sked['entry']);
-                $sked_name              = rex_escape($sked_entry->entry_name);
-                $sked_start_date        = rex_escape(rex_formatter::strftime(strtotime($sked_entry->entry_start_date->format('d.m.Y')), 'date'));
-                $sked_end_date          = rex_escape(rex_formatter::strftime(strtotime($sked_entry->entry_end_date->format('d.m.Y')), 'date'));
-                $entry_start_time       = $sked_entry->entry_start_time;
+            foreach ($forcals as $forcal) {
+                $forcalId                 = rex_escape($forcal['id']);
+                $forcal_entry             = rex_escape($forcal['entry']);
+                $forcal_name              = rex_escape($forcal_entry->entry_name);
+                $forcal_start_date        = rex_escape(rex_formatter::strftime(strtotime($forcal_entry->entry_start_date->format('d.m.Y')), 'date'));
+                $forcal_end_date          = rex_escape(rex_formatter::strftime(strtotime($forcal_entry->entry_end_date->format('d.m.Y')), 'date'));
+                $entry_start_time       = $forcal_entry->entry_start_time;
                 $entry_start_time_date  = new DateTime($entry_start_time);
-                $sked_start_time        = rex_escape($entry_start_time_date->format('H:i'));
+                $forcal_start_time        = rex_escape($entry_start_time_date->format('H:i'));
 
-                $entry_end_time         = $sked_entry->entry_end_time;
+                $entry_end_time         = $forcal_entry->entry_end_time;
                 $entry_end_time_date    = new DateTime($entry_end_time);
-                $sked_end_time          = rex_escape($entry_end_time_date->format('H:i'));
+                $forcal_end_time          = rex_escape($entry_end_time_date->format('H:i'));
 
-                $sked_color             = rex_escape($sked_entry->category_color);
+                $forcal_color             = rex_escape($forcal_entry->category_color);
 
 
                 $href = rex_url::backendPage(
-                    'sked/entries',
+                    'forcal/entries',
                     [
                         'func' => 'edit',
-                        'id' => $skedId
+                        'id' => $forcalId
                     ]
                 );
 
 
 
-                $link[] = '<li class="sked_border" style="border-color:' . $sked_color . '"><a href="' . $href . '" title="' . $sked_name  . '">' . $sked_name . '<small>' . $sked_start_date . ' bis ' . $sked_end_date . ' - ' . $sked_start_time . ' bis ' . $sked_end_time . '</small></a></li>';
+                $link[] = '<li class="forcal_border" style="border-color:' . $forcal_color . '"><a href="' . $href . '" title="' . $forcal_name  . '">' . $forcal_name . '<small>' . $forcal_start_date . ' bis ' . $forcal_end_date . ' - ' . $forcal_start_time . ' bis ' . $forcal_end_time . '</small></a></li>';
             }
         }
         $href = rex_url::backendPage(
-            'sked/entries',
+            'forcal/entries',
             [
                 'func' => 'add'
             ]
         );
 
-        $addLink = '<li class=""><a class="btn btn-default" href="' . $href . '" title="' . rex_i18n::msg("sked_add_new_entry") . '"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp' . rex_i18n::msg("sked_add_new_entry") . '</a></li>';
+        $addLink = '<li class=""><a class="btn btn-default" href="' . $href . '" title="' . rex_i18n::msg("forcal_add_new_entry") . '"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp' . rex_i18n::msg("forcal_add_new_entry") . '</a></li>';
 
         $fragment = new rex_fragment();
         $fragment->setVar('link', $addLink, false);
@@ -583,12 +583,12 @@ class QuickNavigation
             $dropyform = self::get_yformtables();
         }
 
-        // AddOn specific :: get data from sked AddOn
-        $dropsked = '';
-        $sked_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_sked' . $qn_user);
-        if ($sked_datas != '1') {
-            if (rex_addon::get('sked')->isAvailable() && rex::getUser()->hasPerm('sked[]')) {
-                $dropsked = self::get_sked_history();
+        // AddOn specific :: get data from FOR calendar AddOn
+        $dropforcal = '';
+        $forcal_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_forcal' . $qn_user);
+        if ($forcal_datas != '1') {
+            if (rex_addon::get('forcal')->isAvailable() && rex::getUser()->hasPerm('forcal[]')) {
+                $dropforcal = self::get_cal_history();
             }
         }
 
@@ -609,6 +609,6 @@ class QuickNavigation
         $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
 
         // Output
-        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropsked . $dropfavs . $custom_buttons . '</div>';
+        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropforcal . $dropfavs . $custom_buttons . '</div>';
     }
 }

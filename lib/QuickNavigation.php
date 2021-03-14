@@ -557,7 +557,7 @@ class QuickNavigation
             ]
         );
 
-        $addLink = '<li class=""><a class="btn btn-default" href="' . $href . '" title="' . rex_i18n::msg("forcal_add_new_entry") . '"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp' . rex_i18n::msg("forcal_add_new_entry") . '</a></li>';
+        $addLink = '<li class=""><a class="btn btn-default "accesskey="e" href="' . $href . '" title="' . rex_i18n::msg("forcal_add_new_entry") . '"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp' . rex_i18n::msg("forcal_add_new_entry") . '</a></li>';
 
         $fragment = new rex_fragment();
         $fragment->setVar('link', $addLink, false);

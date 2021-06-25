@@ -38,8 +38,8 @@ class QuickNavigation
                 $qlang = 1;
             }
             $droplist = self::get_cats('linkmap');
-			$favs = self::get_favs('linkmap');
-			$drophistory = self::get_article_history('linkmap');
+            $favs = self::get_favs('linkmap');
+            $drophistory = self::get_article_history('linkmap');
 
             // generate output ep for custom buttons after default set.
             $custom_linkmap_buttons = $custom = '';
@@ -468,11 +468,19 @@ class QuickNavigation
 
         $tables = \rex_yform_manager_table::getAll();
         $active_table = false;
+        $yform = rex_addon::get('yform');
+        if (version_compare($yform->getVersion(), '4.0.0-beta1', '>=')) {
+            $yperm = '_edit';
+        }
 
         if (count($tables)) {
             $ytables = [];
             foreach ($tables as $table) {
-                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table')->hasPerm($table->getTableName())) {
+
+                $_csrf_key = $table->getCSRFKey();
+                $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
+
+                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm)->hasPerm($table->getTableName())) {
                     $active_table = true;
                     $table_name = rex_escape($table->getTableName());
                     $table_real_name = rex_escape(rex_i18n::translate($table->getName()));
@@ -489,10 +497,11 @@ class QuickNavigation
                         [
                             'page' => 'yform/manager/data_edit',
                             'table_name' => $table_name,
-                            'func' => 'add'
+                            'func' => 'add',
+                            '_csrf_token' => $_csrf_params['_csrf_token']
                         ]
                     );
-                    $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name . '</a></li><li class="quicknavi_right"><a href="' . $addHref . '" title="' . rex_i18n::msg("title_yform") . ' ' .  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                    $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name . '</a></li><li class="quicknavi_right"><a href="' . $addHref  . '" title="' . rex_i18n::msg("title_yform") . ' ' .  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
                 }
             }
             if ($active_table == true) {

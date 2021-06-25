@@ -4,7 +4,8 @@ Quick Navigation - Changelog
 
 5.1.0 (xx.xx.2021)
 --------------------------------------------------------------------------------
-- yForm 4.x fix perm
+- yForm 4.x support added
+- yForm 4.x fix perm 
 - yform 4.x added csrf for add new dataset 
 
 5.0.0 (27.03.2021)

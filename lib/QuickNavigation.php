@@ -469,8 +469,9 @@ class QuickNavigation
         $tables = \rex_yform_manager_table::getAll();
         $active_table = false;
         $yform = rex_addon::get('yform');
+        $yperm_suffix = '';
         if (version_compare($yform->getVersion(), '4.0.0-beta1', '>=')) {
-            $yperm = '_edit';
+            $yperm_suffix = '_edit';
         }
 
         if (count($tables)) {
@@ -480,7 +481,7 @@ class QuickNavigation
                 $_csrf_key = $table->getCSRFKey();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
-                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm)->hasPerm($table->getTableName())) {
+                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
                     $active_table = true;
                     $table_name = rex_escape($table->getTableName());
                     $table_real_name = rex_escape(rex_i18n::translate($table->getName()));

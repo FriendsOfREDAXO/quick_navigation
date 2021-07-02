@@ -478,7 +478,7 @@ class QuickNavigation
             $ytables = [];
             foreach ($tables as $table) {
 
-                $_csrf_key = $table->getCSRFKey();
+                $_csrf_key = 'table_field-'.$table->getTableName();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
                 if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {

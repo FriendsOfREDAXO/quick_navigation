@@ -382,7 +382,7 @@ class QuickNavigation
             if (count($items)) {
                 $fragment->setVar('items', $items, false);
             }
-            $fragment->setVar('icon', 'fa fa-star-o');
+            $fragment->setVar('icon', 'fa fa-star');
             return $fragment->parse('quick_button.php');
         }
     }

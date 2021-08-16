@@ -44,7 +44,7 @@ Browse categories  Next / previous category, some fixes
 
 3.7.1 (09.10.2019)
 --------------------------------------------------------------------------------
-cosmetic fix for sked button
+cosmetic fix for calendar button
 
 3.7.0 (09.10.2019)
 --------------------------------------------------------------------------------
@@ -212,8 +212,8 @@ Article-ID-Input removed. Please use watson.
 2.2.2 (21.12.2017)
 --------------------------------------------------------------------------------
 New: 
-- Sked integration
-- Added new Setting for Sked
+- calendar integration
+- Added new Setting for calendar
 
 2.1.1 (20.12.2017)
 --------------------------------------------------------------------------------

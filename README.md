@@ -1,7 +1,7 @@
 
 # REDAXO-AddOn: Quick Navigation
 
-Backend- und Frontend-Schnellnavigation für REDAXO CMS
+Backend and frontend quick navigation for REDAXO cms
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
 

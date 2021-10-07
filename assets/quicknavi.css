@@ -3,26 +3,27 @@
 	margin-bottom: 0px;
 }
 
-.quicknavi-btn-group.transparent .btn-default {
-    background-color: #eef0f3;
-    border: 1px solid #dfe3e9;
+.quicknavi-btn-group {
+    background-color: transparent;
 }
 
-.quicknavi-btn-group.transparent .btn-default:hover,
-.quicknavi-btn-group.transparent .btn-default:active,
-.quicknavi-btn-group.transparent .btn-default:focus,
-.quicknavi-btn-group.transparent .btn-group.open .dropdown-toggle {
-    background-color: #fff;
-    border-color: #dfe3e9;
-    box-shadow: none;
+.quicknavi-btn-group .btn-group
+{
+	border: 1px solid rgba(155,155,155,0.1);
 }
+
+.quicknavi-btn-group.transparent .btn-default,
+.quicknavi-btn-group.transparent .btn-group.open .dropdown-toggle {
+    border: 0;
+	border-radius: 0;
+}
+
 
 
 .quicknavi-btn-group.linkmapbt button {
 border-radius: 0;
 height: 40px;
-border-left: 0;
-border-color: #dedede;
+border: 0;
 }
 
 
@@ -131,7 +132,7 @@ li .watson-btn {
 }
 .quicknavi-btn-group .watson-btn {
 	margin-right: 0;
-	height: 36px;
+	height: 34px;
 }
 .quicknavi_left {
 	width: 88%;
@@ -152,5 +153,3 @@ li .watson-btn {
 .forcal_border {
 	border-left: 5px solid;
 }
-
-

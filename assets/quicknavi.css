@@ -85,7 +85,7 @@ li.quickitem.bg-primary a {
     color:#4b9ad9;
 }
 
-.quicknavi-items.quicknavi li a small {padding-top: 4px; color: #333;}
+.quicknavi-items.quicknavi li a small {padding-top: 4px;}
 
 .quicknavi-items.quicknavi li a.qn_status_1 {
     color:#4b9ad9;
@@ -153,3 +153,6 @@ li .watson-btn {
 .forcal_border {
 	border-left: 5px solid;
 }
+
+
+

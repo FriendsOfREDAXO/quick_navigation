@@ -10,6 +10,7 @@ Backend and frontend quick navigation for REDAXO cms
 - Filter by category name, domain and category id
 - Last modified articles(also in /minibar/linkmap) and media, corresponding to language and user 
 - Browse through articles and media
+- Supports dark-theme on REDAXO >= 5.13
 
 ### Per User Settings
 - Individual category favorites in structure and linkmap

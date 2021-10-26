@@ -10,6 +10,7 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 - Filter nach Kategorienamen, Domain und Kategorie-id
 - Zuletzt geänderte Artikel(auch in /minibar/linkmap) und Medien, entsprechend Sprache und User 
 - Blättern durch Artikel und Medien
+- Unterstützt das Dark-Theme in REDAXO >= 5.13
 
 ### Per User Settings
 - Individuelle Kategorie-Favoriten in der Struktur und der Linkmap

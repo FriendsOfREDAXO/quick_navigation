@@ -481,7 +481,7 @@ class QuickNavigation
                 $_csrf_key = 'table_field-'.$table->getTableName();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
-                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
+                if (!$table->isHidden() && $table->isActive() && $table->isGranted('VIEW', rex::getUser())) {
                     $active_table = true;
                     $table_name = rex_escape($table->getTableName());
                     $table_real_name = rex_escape(rex_i18n::translate($table->getName()));

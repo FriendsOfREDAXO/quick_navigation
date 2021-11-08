@@ -470,7 +470,7 @@ class QuickNavigation
         $active_table = false;
         $yform = rex_addon::get('yform');
         $yperm_suffix = '';
-        if (version_compare($yform->getVersion(), '4.0.0-beta1', '>=')) {
+        if (version_compare($yform->getVersion(), '4.0.0-dev', '>=')) {
             $yperm_suffix = '_edit';
         }
 

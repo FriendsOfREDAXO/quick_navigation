@@ -70,6 +70,7 @@ class QuickNavigation
         if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user)  == '1') {
             $ignore = true;
         }
+        $select_name = 'category_id';
         $category_select = new rex_category_select($ignore, false, true, $add_homepage);
         $category_select->setName($select_name);
         $category_select->setSize('1');

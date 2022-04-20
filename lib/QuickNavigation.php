@@ -56,8 +56,11 @@ class QuickNavigation
         // ------------ Parameter
         $qn_user =  rex::getUser()->getId();
         $article_id = rex_request('article_id', 'int');
-        $category_id = rex_request('category_id', 'int', $article_id);
-        $select_name = 'category_id';
+        $category_id = rex_request('category_id', 'int',$article_id);
+        if ($article_id!= 0)
+        {    
+        $category_id = rex_article::get($article_id)->getCategoryId();
+        }
         $add_homepage = true;
         if (rex_be_controller::getCurrentPagePart(1) == 'content') {
             $select_name = 'article_id';
@@ -622,3 +625,4 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropforcal . $dropfavs . $custom_buttons . '</div>';
     }
 }
+

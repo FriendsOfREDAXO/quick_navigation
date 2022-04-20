@@ -61,6 +61,7 @@ class QuickNavigation
         {    
         $category_id = rex_article::get($article_id)->getCategoryId();
         }
+        $select_name = 'category_id';
         $add_homepage = true;
         if (rex_be_controller::getCurrentPagePart(1) == 'content') {
             $select_name = 'article_id';
@@ -70,7 +71,6 @@ class QuickNavigation
         if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user)  == '1') {
             $ignore = true;
         }
-        $select_name = 'category_id';
         $category_select = new rex_category_select($ignore, false, true, $add_homepage);
         $category_select->setName($select_name);
         $category_select->setSize('1');

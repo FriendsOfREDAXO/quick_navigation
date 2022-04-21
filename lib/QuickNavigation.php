@@ -57,7 +57,7 @@ class QuickNavigation
         $qn_user =  rex::getUser()->getId();
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int',$article_id);
-        if ($article_id!= 0)
+        if ($article = rex_article::get($article_id))
         {    
         $category_id = rex_article::get($article_id)->getCategoryId();
         }

@@ -2,8 +2,10 @@
 Quick Navigation - Changelog
 ================================================================================
 
-5.3.0 (XX.XX.2022)
-News CSS Styles by: Thomas Blum
+5.3.0 (21.04.2022)
+-------------------------------------------------------------------------------- 
+New CSS Styles by: Thomas Blum
+Fixed: Aktiv-Status konnte nicht gehalten werden bei diversen Aktionen
 
 5.2.1 (07.11.2021)
 --------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 
 Backend and frontend quick navigation for REDAXO cms
 
-![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation.png)
+![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quick_navigation_screen.png)
 
 ## Features
 - Category quick selection across the backend incl. linkmap

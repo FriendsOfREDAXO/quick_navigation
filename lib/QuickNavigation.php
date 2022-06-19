@@ -181,8 +181,7 @@ class QuickNavigation
                         $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
                     }
                     $name = rex_escape($data['name']);
-                    $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
-
+                    $date = rex_formatter::intlDateTime($data['updatedate']);
                     if ($mode == 'linkmap') {
                         $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . " [" . $dataID . "]');";
                     } else {
@@ -436,8 +435,7 @@ class QuickNavigation
             if (count($datas)) {
                 foreach ($datas as $data) {
                     $entryname = '';
-
-                    $date = rex_formatter::strftime(strtotime($data['updatedate']), 'datetime');
+                    $date = rex_formatter::intlDateTime(strtotime($data['updatedate']);
                     $href = rex_url::backendPage(
                         'mediapool/media',
                         [
@@ -538,8 +536,8 @@ class QuickNavigation
                 $forcalId                 = rex_escape($forcal['id']);
                 $forcal_entry             = rex_escape($forcal['entry']);
                 $forcal_name              = rex_escape($forcal_entry->entry_name);
-                $forcal_start_date        = rex_escape(rex_formatter::strftime(strtotime($forcal_entry->entry_start_date->format('d.m.Y')), 'date'));
-                $forcal_end_date          = rex_escape(rex_formatter::strftime(strtotime($forcal_entry->entry_end_date->format('d.m.Y')), 'date'));
+                $forcal_start_date        = rex_formatter::intlDate(strtotime($forcal_entry->entry_start_date->format('d.m.Y')));
+                $forcal_end_date          = rex_formatter::intlDate(strtotime($forcal_entry->entry_end_date->format('d.m.Y')));
                 $entry_start_time       = $forcal_entry->entry_start_time;
                 $entry_start_time_date  = new DateTime($entry_start_time);
                 $forcal_start_time        = rex_escape($entry_start_time_date->format('H:i'));

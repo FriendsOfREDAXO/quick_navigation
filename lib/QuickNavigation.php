@@ -181,7 +181,7 @@ class QuickNavigation
                         $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
                     }
                     $name = rex_escape($data['name']);
-                    $date = rex_formatter::intlDateTime($data['updatedate']);
+                    $date = rex_formatter::intlDateTime($data['updatedate']));
                     if ($mode == 'linkmap') {
                         $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . " [" . $dataID . "]');";
                     } else {

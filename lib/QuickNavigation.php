@@ -530,7 +530,7 @@ class QuickNavigation
         $filter_date    = date("Y-m-d", $halfayear);
 
 
-        $forcals =  \forCal\Handler\ForCalHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
+        $forcals =  \forCal\Handler\forCalHandler::getEntries($start, $filter_date, false, 'SORT_ASC', $categoryId);
         $link = [];
         if (count($forcals)) {
 

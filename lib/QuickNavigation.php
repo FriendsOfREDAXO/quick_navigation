@@ -12,7 +12,10 @@
 class QuickNavigation
 {
     // Media History
-    public static function media_history(object $ep): ?string
+    /**
+     * @param rex_extension_point<string> $ep 
+     */
+    public static function media_history(rex_extension_point $ep): ?string
     {
         // get media history
         if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
@@ -28,7 +31,10 @@ class QuickNavigation
     }
 
     // linkmap catlist
-    public static function linkmap_list(object $ep): ?string
+    /**
+     * @param rex_extension_point<string> $ep 
+     */
+    public static function linkmap_list(rex_extension_point $ep): ?string
     {
         // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {

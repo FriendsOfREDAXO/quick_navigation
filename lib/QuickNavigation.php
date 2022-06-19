@@ -435,7 +435,7 @@ class QuickNavigation
             if (count($datas)) {
                 foreach ($datas as $data) {
                     $entryname = '';
-                    $date = rex_formatter::intlDateTime(strtotime($data['updatedate']);
+                    $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
                     $href = rex_url::backendPage(
                         'mediapool/media',
                         [

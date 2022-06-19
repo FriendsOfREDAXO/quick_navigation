@@ -12,7 +12,7 @@
 class QuickNavigation
 {
     // Media History
-    public static function media_history($ep)
+    public static function media_history(object $ep): ?string
     {
         // get media history
         if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
@@ -24,10 +24,11 @@ class QuickNavigation
             $output = str_replace('<select name="rex_file_category"', $button, $subject);
             return $output;
         }
+        return null;
     }
 
     // linkmap catlist
-    public static function linkmap_list($ep)
+    public static function linkmap_list(object $ep): ?string
     {
         // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
@@ -46,20 +47,20 @@ class QuickNavigation
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
             return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $droplist . $drophistory . $favs . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
+        return null;
     }
 
 
-    public static function get_cats($mode = 'structure')
+    public static function get_cats(string $mode = 'structure'): string
     {
 
         // Generate category Quick Navi
         // ------------ Parameter
         $qn_user =  rex::getUser()->getId();
         $article_id = rex_request('article_id', 'int');
-        $category_id = rex_request('category_id', 'int',$article_id);
-        if ($article = rex_article::get($article_id))
-        {    
-        $category_id = rex_article::get($article_id)->getCategoryId();
+        $category_id = rex_request('category_id', 'int', $article_id);
+        if ($article = rex_article::get($article_id)) {
+            $category_id = rex_article::get($article_id)->getCategoryId();
         }
         $select_name = 'category_id';
         $add_homepage = true;
@@ -144,7 +145,7 @@ class QuickNavigation
         return '<div class="btn-group">' . $fragment->parse('quick_drop.php') . '</div>';
     }
 
-    public static function get_article_history($mode = 'structure', $limit = 15)
+    public static function get_article_history(string $mode = 'structure', int $limit = 15): ?string
     {
         $drophistory = $date = $name = $link = $minibar = $where = $domaintitle = $status_css = $article_directions = '';
 
@@ -231,10 +232,11 @@ class QuickNavigation
         </ul>';
             }
         }
+        return null;
     }
 
 
-    public static function article_nav()
+    public static function article_nav(): string
     {
         $article_directions = '';
         if (rex_be_controller::getCurrentPage() == 'content/edit') {
@@ -347,7 +349,7 @@ class QuickNavigation
 
 
 
-    public static function get_favs($mode = 'structure')
+    public static function get_favs(string $mode = 'structure'): ?string
     {
         $user =  rex::getUser()->getId();
         $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs' . $user);
@@ -388,9 +390,10 @@ class QuickNavigation
             $fragment->setVar('icon', 'fa fa-star');
             return $fragment->parse('quick_button.php');
         }
+        return null;
     }
 
-    public static function get_media($limit = 15)
+    public static function get_media(int $limit = 15): ?string
     {
         $filename = $entryname = $date = $link = $where = '';
         $opener = '';
@@ -461,10 +464,11 @@ class QuickNavigation
             $fragment->setVar('icon', 'fa fa-clock-o');
             return $fragment->parse('quick_button.php');
         }
+        return null;
     }
 
 
-    public static function get_yformtables()
+    public static function get_yformtables(): ?string
     {
         $table_name = $table_real_name = $link = $table_id = '';
 
@@ -480,7 +484,7 @@ class QuickNavigation
             $ytables = [];
             foreach ($tables as $table) {
 
-                $_csrf_key = 'table_field-'.$table->getTableName();
+                $_csrf_key = 'table_field-' . $table->getTableName();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
                 if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
@@ -514,9 +518,10 @@ class QuickNavigation
                 return $fragment->parse('quick_button.php');
             }
         }
+        return null;
     }
 
-    public static function get_cal_history()
+    public static function get_cal_history(): ?string
     {
         $forcals = $categoryId = $filter_date = $forcalID =  $start = $addLink = $filter_date = $today = $halfayear = '';
 
@@ -579,7 +584,7 @@ class QuickNavigation
         $fragment->setVar('icon', 'fa fa-calendar');
         return $fragment->parse('quick_button.php');
     }
-    public static function get()
+    public static function get(): string
     {
         $qn_user =  rex::getUser()->getId();
 
@@ -624,4 +629,3 @@ class QuickNavigation
         return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . $droplist . $drophistory . $dropyform . $dropforcal . $dropfavs . $custom_buttons . '</div>';
     }
 }
-

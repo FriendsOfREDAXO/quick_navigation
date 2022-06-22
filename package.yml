@@ -17,7 +17,7 @@ requires:
         structure/content: '^2.1.0'
     redaxo: '^5.13.0'
     php:
-        version: '>=7.1, <9'
+        version: '>=7.3, <9'
 conflicts:
     packages:
         yform: '<2.0.0'

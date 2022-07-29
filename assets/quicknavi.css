@@ -124,16 +124,6 @@ li .watson-btn {
 }
 /* Format Watson-Button */
 
-/* Fix for hopping button */
-.quicknavi-btn-group .watson-btn,
-.quicknavi-btn-group .watson-btn:active {
-    margin-right: 0px;
-
-}
-.quicknavi-btn-group .watson-btn {
-	margin-right: 0;
-	height: 36px;
-}
 .quicknavi_left {
 	width: 88%;
 	display: inline-block;

@@ -618,7 +618,7 @@ class QuickNavigation
         // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0) == 1) {
-            $watson = '<div class="btn-group"><button class="btn btn-default"><i title="watson" aria-hidden="true" class="rex-icon fa-user-secret"></i></button></div>';
+            $watson = '<div class="btn-group"><button class="btn btn-default watson-btn"><i title="watson" aria-hidden="true" class="rex-icon fa-search"></i></button></div>';
         }
         // get user favorites
         $dropfavs = self::get_favs('structure');

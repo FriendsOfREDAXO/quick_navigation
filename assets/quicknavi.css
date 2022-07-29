@@ -19,12 +19,10 @@
 }
 
 .quicknavi-btn-group  .watson-btn {
-    display: inline-block; 
+    display: inline-block;
     margin-right: inherit;
-    padding: inherit; 
-    background-color: inherit; 
-    border: inherit; 
-    vertical-align: middle; 
+    padding: 6px;
+    background-color: transparent;
 }
 
 

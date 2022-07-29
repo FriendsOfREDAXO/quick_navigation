@@ -18,6 +18,14 @@
 	border-radius: 0;
 }
 
+.watson-btn {
+    display: inline-block; 
+    margin-right: inherit;
+    padding: inherit; 
+    background-color: inherit; 
+    border: inherit; 
+    vertical-align: middle; 
+}
 
 
 .quicknavi-btn-group.linkmapbt button {

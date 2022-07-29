@@ -18,7 +18,7 @@
 	border-radius: 0;
 }
 
-.quicknavi .watson-btn {
+.quicknavi-btn-group  .watson-btn {
     display: inline-block; 
     margin-right: inherit;
     padding: inherit; 

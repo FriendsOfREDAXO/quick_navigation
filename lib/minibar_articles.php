@@ -38,7 +38,7 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
 
     public function getOrientation()
     {
-        return rex_minibar_element::RIGHT;
+        return rex_minibar_element::LEFT;
     }
 }
 

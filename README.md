@@ -20,7 +20,6 @@ Backend and frontend quick navigation for REDAXO cms
 
 ### AddOn integration 
 - YForm table selection with direct links to create a record in the selected table.
-- "FOR Calendar" support: newest appointments are listed, a record can be created directly. 
 - Watson support: Quick Navigation incorporates the Watson button (if enabled in watson). 
 - Article history in the minibar
 
@@ -62,8 +61,7 @@ In live filter you can filter by categories, authors or yrewrite domains. For ex
 Favorite categories can be maintained individually by the editors in the AddOn settings. The favorites list only appears when favorites have been selected. New articles can be created directly via the (+) symbol next to the category. 
 
 Quick Navigation incorporates functions of other AddOns as well, provided they have been installed and activated. 
-Current: YForm, FOR Calendar and Watson
-The "FOR Calendar" button can be disabled by the editors. 
+Current: YForm, Watson
 
 The Quick Navigation is accessible via the access key **m**.
 
@@ -107,7 +105,5 @@ Found a bug or got a nice feature? [Please create an issue]
 First Release: [Thomas Blum](https://github.com/tbaddade)
 
 Performance Optimization:  [Markus Staab](https://github.com/staabm) 
-
-"FOR Calendar" integration: [Christian Gehrke](https://github.com/chrison94)
 
 "Bugfixes / Testing": [Hirbod](https://github.com/hirbod), [Marco Hanke](https://github.com/marcohanke)

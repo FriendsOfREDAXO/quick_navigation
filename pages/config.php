@@ -9,7 +9,6 @@ $user =  rex::getUser()->getId();
 if (rex_post('formsubmit', 'string') == '1') {
     $package->setConfig(rex_post('config', [
         ['quicknavi_favs' . $user, 'array[int]'],
-        ['quicknavi_forcal' . $user, 'int'],
         ['quicknavi_ignoreoffline' . $user, 'int'],
         ['quicknavi_artdirections' . $user, 'int'],
     ]));
@@ -59,18 +58,6 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/checkbox.php');
-
-// forcal Checkbox
-if (rex_addon::get('forcal')->isAvailable() && rex::getUser()->hasPerm('forcal[]')) {
-    $formElements = [];
-    $n = [];
-    $n['label'] = '<label for="quicknavi-forcal-checkbox">' . $package->i18n('quicknavi_forcal') . '</label>';
-    $n['field'] = '<input type="checkbox" id="quicknavi-forcal-checkbox" name="config[quicknavi_forcal' . $user . ']"' . (!empty($package->getConfig('quicknavi_forcal' . $user)) && $package->getConfig('quicknavi_forcal' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
-    $formElements[] = $n;
-    $fragment = new rex_fragment();
-    $fragment->setVar('elements', $formElements, false);
-    $content .= $fragment->parse('core/form/checkbox.php');
-}
 
 // Save-Button
 $formElements = [];

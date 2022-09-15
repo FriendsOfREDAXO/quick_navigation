@@ -20,7 +20,6 @@ Backend- und Frontend-Schnellnavigation für REDAXO CMS
 
 ### AddOn-Integration 
 - YForm-Tabellen-Auswahl mit Direktlinks um einen Datensatz in der ausgewählten Tabelle zu erstellen
-- "FOR Calendar"-Support: Neuste Termine werden aufgelistet, ein Datensatz kann direkt erstellt werden. 
 - Watson-Support: Quick Navigation bindet den Watson-Button ein (sofern in watson aktiviert). 
 - Artikel-Historie in der Minibar
 
@@ -62,8 +61,7 @@ Im Live-Filter kann nach Kategorien, Autoren oder yrewrite-Domains gefiltert wer
 Favorisierte Kategorien können individuell durch die Redakteure in den AddOn-Einstellungen gepflegt werden. Die Favoritenliste erscheint erst, wenn Favoriten ausgewählt wurden. Über das (+)-Symbol neben der Kategorie können direkt neue Artikel erstellt werden. 
 
 Quick Navigation integriert Funktionen auch anderer AddOns, sofern diese installiert und aktiviert wurden. 
-Aktuell: YForm, FOR Calendar und Watson
-Der "FOR Calendar"-Button kann durch die Redakteure ausgeblendet werden. 
+Aktuell: YForm und Watson
 
 Die Quick Navigation ist über den Access-Key **m** erreichbar.
 
@@ -108,7 +106,5 @@ siehe [LICENSE.md](https://github.com/FriendsOfREDAXO/quick_navigation/blob/mast
 First Release: [Thomas Blum](https://github.com/tbaddade)
 
 Performance-Optimierung: [Markus Staab](https://github.com/staabm) 
-
-"FOR Calendar"-Integration: [Christian Gehrke](https://github.com/chrison94)
 
 "Bugfixes / Testing": [Hirbod](https://github.com/hirbod), [Marco Hanke](https://github.com/marcohanke)

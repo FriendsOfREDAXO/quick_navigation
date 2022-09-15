@@ -1,5 +1,7 @@
 <?php
 
+use Watson\Foundation\Watson;
+
 /**
  * This file is part of the Quick Navigation package.
  *
@@ -13,7 +15,7 @@ class QuickNavigation
 {
     // Media History
     /**
-     * @param rex_extension_point<string> $ep 
+     * @param rex_extension_point<string> $ep
      */
     public static function media_history(rex_extension_point $ep): ?string
     {
@@ -32,7 +34,7 @@ class QuickNavigation
 
     // linkmap catlist
     /**
-     * @param rex_extension_point<string> $ep 
+     * @param rex_extension_point<string> $ep
      */
     public static function linkmap_list(rex_extension_point $ep): ?string
     {
@@ -617,9 +619,14 @@ class QuickNavigation
 
         // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
-        if (rex_addon::get('watson')->isAvailable() and rex_config::get('watson', 'toggleButton', 0) == 1) {
-            $watson = '<div class="btn-group"><button class="btn btn-default watson-btn"><i title="watson" aria-hidden="true" class="rex-icon fa-search"></i></button></div>';
+        if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {
+            if (rex_version::compare(rex_addon::get('watson')->getVersion(), '2.3.0', '>=')) {
+                $watson = '<div class="btn-group">'.Watson::getToggleButton(['class' => 'btn btn-default watson-btn']).'</div>';
+            } else {
+                $watson = '<div class="btn-group"><button class="btn btn-default watson-btn"><i title="watson" aria-hidden="true" class="rex-icon fa-search"></i></button></div>';
+            }
         }
+
         // get user favorites
         $dropfavs = self::get_favs('structure');
         // get categories

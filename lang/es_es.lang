@@ -14,7 +14,5 @@ perm_general_quick_navigation[settings] = Navegación: Administrar favoritos y c
 title_yform = Agregar registro en:
 title_favs = Agregar artículo en:
 title_eye = Abrir en la interfaz
-forcal_add_new_entry = Crear una nueva entrada sombreada
-quicknavi_forcal = ¿Ocultar botón oculto?
 quicknavi_ignoreoffline = Ignorar categorías sin conexión?
 quick_navigation_no_entries = No se encontraron entradas

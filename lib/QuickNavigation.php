@@ -549,7 +549,7 @@ class QuickNavigation
         // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {
-            if (rex_version::compare(rex_addon::get('watson')->getVersion(), '2.3.0', '>=')) {
+            if (rex_version::compare(rex_addon::get('watson')->getVersion(), '2.3.0-beta1', '>=')) {
                 $watson = '<div class="btn-group">'.Watson::getToggleButton(['class' => 'btn btn-default watson-btn']).'</div>';
             } else {
                 $watson = '<div class="btn-group"><button class="btn btn-default watson-btn"><i title="watson" aria-hidden="true" class="rex-icon fa-search"></i></button></div>';

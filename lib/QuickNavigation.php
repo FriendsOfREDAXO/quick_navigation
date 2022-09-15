@@ -546,15 +546,6 @@ class QuickNavigation
             $dropyform = self::get_yformtables();
         }
 
-        // AddOn specific :: get data from FOR calendar AddOn
-        $dropforcal = '';
-        $forcal_datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_forcal' . $qn_user);
-        if ($forcal_datas != '1') {
-            if (rex_addon::get('forcal')->isAvailable() && rex::getUser()->hasPerm('forcal[]')) {
-                $dropforcal = self::get_cal_history();
-            }
-        }
-
         // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {

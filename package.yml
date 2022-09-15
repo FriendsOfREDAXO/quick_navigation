@@ -22,6 +22,7 @@ conflicts:
     packages:
         yform: '<2.0.0'
         watson: '<2.1.0'
+        forcal: '<3.6.0'
 installer_ignore:
     - .github
     - .gitignore

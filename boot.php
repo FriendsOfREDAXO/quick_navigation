@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-if (rex::isBackend() && rex::getUser() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
+if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     // Addonrechte (permissions) registieren    
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[history]');

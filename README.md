@@ -52,7 +52,7 @@ class my_quickbutton {
 ```
 
 
-## Beschreibung 
+## Description 
 
 The Quick Navigation provides a category quick selection with a filter field and lists of the last edited articles and media (last modified).
 

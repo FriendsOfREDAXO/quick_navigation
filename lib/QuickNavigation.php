@@ -187,7 +187,7 @@ class QuickNavigation
                     $lang = rex_clang::get($data['clang_id']);
                     $langcode = $lang->getCode();
                     if ($langcode) {
-                        $langcode = '<i class="fa fa-flag-o" aria-hidden="true"></i> ' . $langcode . ' - ';
+                        $langcode = '<i class="fa fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
                     }
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
@@ -232,7 +232,7 @@ class QuickNavigation
                 $fragment = new rex_fragment();
                 $fragment->setVar('prepend', $article_directions, false);
                 $fragment->setVar('items', $links, false);
-                $fragment->setVar('icon', 'fa fa-clock-o');
+                $fragment->setVar('icon', 'fa fa-clock');
                 return $fragment->parse('quick_button.php');
             } else {
                 return '<ul class="minibar-quicknavi-items">
@@ -469,7 +469,7 @@ class QuickNavigation
             $fragment = new rex_fragment();
             $fragment->setVar('prepend', $quick_file_nav, false);
             $fragment->setVar('items', $media, false);
-            $fragment->setVar('icon', 'fa fa-clock-o');
+            $fragment->setVar('icon', 'fa fa-clock');
             return $fragment->parse('quick_button.php');
         }
         return null;

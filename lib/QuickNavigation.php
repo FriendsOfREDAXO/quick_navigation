@@ -187,7 +187,7 @@ class QuickNavigation
                     $lang = rex_clang::get($data['clang_id']);
                     $langcode = $lang->getCode();
                     if ($langcode) {
-                        $langcode = '<i class="fa fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
+                        $langcode = '<i class="' . $icon_prefix . 'fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
                     }
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
@@ -209,7 +209,7 @@ class QuickNavigation
                         if (count(rex_yrewrite::getDomains()) > 2) {
                             $domain = rex_yrewrite::getDomainByArticleId($data['id']);
                             if ($domain) {
-                                $domaintitle = '<br><i class="fa fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
+                                $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
                             }
                         }
                     }

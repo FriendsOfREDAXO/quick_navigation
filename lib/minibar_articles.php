@@ -21,7 +21,7 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
         </style>
         <div class="rex-minibar-item">
             <span class="rex-minibar-icon">
-                <i class="rex-minibar-icon--fa rex-minibar-icon--fa-clock-o"></i>
+                <i class="rex-minibar-icon--fa rex-minibar-icon--fa-clock"></i>
             </span>
             <span class="rex-minibar-value">
             &nbsp;

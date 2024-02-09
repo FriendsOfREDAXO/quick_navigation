@@ -125,7 +125,7 @@ class QuickNavigation
                     }
                 }
             }
-            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">' . $item['domain'] . '</small>', rex_escape($option->nodeValue));
+            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">' . rex_escape($item['domain']) . '</small>', rex_escape($option->nodeValue));
             $item['hreftitle'] = '';
             if (rex_addon::get('yrewrite')->isAvailable()) {
                 $item['hreftitle'] = rex_escape($option->nodeValue) . $item['domain-title'];

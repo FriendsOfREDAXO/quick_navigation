@@ -33,8 +33,8 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
             ];
             return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
-        rex_extension::register('PAGE_TITLE_SHOWN', 'QuickNavigation::linkmap_list');
-        rex_extension::register('MEDIA_LIST_TOOLBAR', 'QuickNavigation::media_history');
+         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigation::linkmap_list(...));
+        rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigation::media_history(...));
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
     }

@@ -48,12 +48,12 @@ class StructureArray
             $backendContext->setParam('article_id', $category_id);
             $domainName = '';
             if (rex_addon::get('yrewrite')->isAvailable()) {
-                $domainName = rex_yrewrite::getDomainByArticleId($category_id)->getName();
+                $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($category_id)->getName());
             }
 
             $categoriesArray[] = [
                 'id' => $category->getId(),
-                'name' => $category->getName(),
+                'name' => rex_escape($category->getName()),
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
                 'children' => $this->generateBackendNavArray($clangId, $ignoreOffline, $category->getId())

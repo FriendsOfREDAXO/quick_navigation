@@ -50,11 +50,11 @@ class StructureArray
                 continue;
             }
             $categoryId = $category->getId();
-            $backendContext->setParam('category_id', $category_id);
-            $backendContext->setParam('article_id', $category_id);
+            $backendContext->setParam('category_id', $categoryId);
+            $backendContext->setParam('article_id', $categoryId);
             $domainName = '';
             if (rex_addon::get('yrewrite')->isAvailable()) {
-                $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($category_id)->getName());
+                $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($categoryId)->getName());
             }
             $current = false;
             if ($categoryId == $currentId)
@@ -67,7 +67,7 @@ class StructureArray
                 'current' => $current;
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
-                'children' => $this->generateBackendNavArray($clangId, $ignoreOffline, $category->getId())
+                'children' => $this->getArray($clangId, $ignoreOffline, $category->getId())
             ];
         }
 

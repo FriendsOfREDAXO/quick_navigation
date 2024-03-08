@@ -19,6 +19,12 @@ class StructureArray
         $backendContext->setParam('page', rex_request('page', 'string'));
         $backendContext->setParam('clang', $clangId);
 
+        $articleId = rex_request('article_id', 'int');
+        $currentId = rex_request('category_id', 'int', $articleId);
+        if ($article = rex_article::get($articleId)) {
+            $currentId = rex_article::get($articleId)->getCategoryId();
+        }
+
         $categoriesArray = [];
         $categories = [];
 
@@ -43,17 +49,22 @@ class StructureArray
             if (!$user->getComplexPerm('structure')->hasCategoryPerm($category->getId())) {
                 continue;
             }
-            $category_id = $category->getId();
+            $categoryId = $category->getId();
             $backendContext->setParam('category_id', $category_id);
             $backendContext->setParam('article_id', $category_id);
             $domainName = '';
             if (rex_addon::get('yrewrite')->isAvailable()) {
                 $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($category_id)->getName());
             }
-
+            $current = false;
+            if ($categoryId == $currentId)
+            {
+                $current = true;
+            }
             $categoriesArray[] = [
                 'id' => $category->getId(),
-                'name' => rex_escape($category->getName()),
+                'name' => $categoryId,
+                'current' => $current;
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
                 'children' => $this->generateBackendNavArray($clangId, $ignoreOffline, $category->getId())

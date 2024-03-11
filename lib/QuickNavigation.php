@@ -3,13 +3,13 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use rex;
-use rex_category;
 use rex_addon;
+use rex_category;
+use rex_clang; 
 use rex_context;
 use rex_request;
 use rex_url;
 use rex_yrewrite;
-use rex_clang; // Füge die rex_clang-Klasse hinzu
 
 class StructureArray
 {

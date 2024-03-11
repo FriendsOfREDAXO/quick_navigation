@@ -3,47 +3,29 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use rex;
-use rex_addon;
 use rex_category;
-use rex_clang; 
+use rex_addon;
 use rex_context;
 use rex_request;
-use rex_url;
 use rex_yrewrite;
 
 class StructureArray
 {
-    public function getArray($ignoreOffline = true, $includeHome = true, $clangId = null, $parentId = null): array
+    public function getArray($clangId = 1, $ignoreOffline = true, $parentId = null): array
     {
-        if ($clangId === null) {
-            $clangId = rex_clang::getCurrentId(); 
-        }
-
         $user = rex::getUser();
         $backendContext = rex_context::fromGet();
         $backendContext->setParam('rex-api-call', 0);
-        $backendContext->setParam('page', 'structure');
+        $backendContext->setParam('page', rex_request('page', 'string'));
         $backendContext->setParam('clang', $clangId);
 
         $articleId = rex_request('article_id', 'int');
         $currentId = rex_request('category_id', 'int', $articleId);
         if ($article = rex_article::get($articleId)) {
-            $currentId = $article->getCategoryId();
+            $currentId = rex_article::get($articleId)->getCategoryId();
         }
 
         $categoriesArray = [];
-
-        if ($includeHome) {
-            $categoriesArray[] = [
-                'id' => 0,
-                'name' => 'Home',
-                'current' => $currentId === 0,
-                'domain' => '',
-                'url' => rex_url::backendPage('structure', ['clang' => $clangId]),
-                'children' => []
-            ];
-        }
-
         $categories = [];
 
         if ($parentId === null) {
@@ -74,15 +56,18 @@ class StructureArray
             if (rex_addon::get('yrewrite')->isAvailable()) {
                 $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($categoryId)->getName());
             }
-            $current = $categoryId == $currentId;
-
+            $current = false;
+            if ($categoryId == $currentId)
+            {
+                $current = true;
+            }
             $categoriesArray[] = [
                 'id' => $category->getId(),
-                'name' => $category->getName(),
-                'current' => $current,
+                'name' => $categoryId,
+                'current' => $current;
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
-                'children' => $this->getArray($ignoreOffline, false, $clangId, $category->getId())
+                'children' => $this->getArray($clangId, $ignoreOffline, $category->getId())
             ];
         }
 

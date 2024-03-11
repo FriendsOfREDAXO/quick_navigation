@@ -16,7 +16,7 @@ class StructureArray
     public function getArray($ignoreOffline = true, $includeHome = true, $clangId = null, $parentId = null): array
     {
         if ($clangId === null) {
-            $clangId = rex_clang::getCurrentId(); // Setze die aktuelle Sprach-ID, wenn keine übergeben wurde
+            $clangId = rex_clang::getCurrentId(); 
         }
 
         $user = rex::getUser();
@@ -82,7 +82,7 @@ class StructureArray
                 'current' => $current,
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
-                'children' => $this->getArray($clangId, $ignoreOffline, $category->getId(), false)
+                'children' => $this->getArray($ignoreOffline, false, $clangId, $category->getId())
             ];
         }
 

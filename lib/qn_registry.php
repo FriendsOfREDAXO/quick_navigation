@@ -26,7 +26,7 @@ class ButtonRegistry
             $class = "FriendsOfRedaxo\\QuickNavigation\\Buttons\\" . $item['class'];
             if (class_exists($class)) {
                 $button = new $class(...$item['params']);
-                if ($button instanceof ButtonInterface && method_exists($button, 'getButton')) {
+                if (method_exists($button, 'getButton')) {
                     $resultString .= $button->getButton();
                 }
             }

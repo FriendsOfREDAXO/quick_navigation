@@ -12,7 +12,12 @@ class ButtonRegistry
 
     public static function getButtonsOutput(): string
     {
-        // Sort by priority
+        // Überprüfen, ob Buttons registriert wurden
+        if (empty(self::$buttons)) {
+            return ''; 
+        }
+        
+        // Sort by prio
         usort(self::$buttons, function ($a, $b) {
             return $a['priority'] <=> $b['priority'];
         });

@@ -20,7 +20,7 @@ class ButtonRegistry
         $resultString = '';
         foreach (self::$buttons as $item) {
             $button = $item['button'];
-            if (method_exists($button, 'get')) {
+            if (method_exists($button, 'getButton')) {
                 $resultString .= $button->getButton();
             }
         }

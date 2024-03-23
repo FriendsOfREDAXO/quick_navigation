@@ -21,7 +21,7 @@ class ButtonRegistry
         foreach (self::$buttons as $item) {
             $button = $item['button'];
             if (method_exists($button, 'get')) {
-                $resultString .= $button->get();
+                $resultString .= $button->getButton();
             }
         }
         return $resultString;

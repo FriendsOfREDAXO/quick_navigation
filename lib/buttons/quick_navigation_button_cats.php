@@ -15,7 +15,11 @@ use rex_yrewrite;
 
 class CatsButton
 {
-    public function generateBackendNavArray($clangId = null, $ignoreOffline = true, $parentId = null, $includeHome = true): array
+    /**
+     * @return array<mixed>
+     */
+
+    public function generateBackendNavArray(?int $clangId = null, bool $ignoreOffline = true, ?int $parentId = null, bool $includeHome = true): array
     {
         $user = rex::getUser();
         if ($clangId === null) {
@@ -60,7 +64,7 @@ class CatsButton
             }
         } else {
             if ($parentCategory = rex_category::get($parentId, $clangId)) {
-                $categories = $parentCategory->getChildren($ignoreOffline, $clangId);
+                $categories = $parentCategory->getChildren($ignoreOffline);
             }
         }
 
@@ -89,8 +93,13 @@ class CatsButton
 
         return $categoriesArray;
     }
+    /**
+     * @param  array<mixed> $categoriesArray
+     * @param int $depth
+     * @return string
+     */
 
-    public function renderCategoriesAsList($categoriesArray, $depth = 0): string
+    public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
     {
         if (empty($categoriesArray)) {
             return ''; // Keine Kategorien zu rendern

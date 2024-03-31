@@ -35,6 +35,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $userId) != '1') {
         ButtonRegistry::registerButton(new ArticleNavButton(), 10);
     }
+
     ButtonRegistry::registerButton(new CatsButton(), 20);
     ButtonRegistry::registerButton(new ArticleHistory('structure', 4), 30);
 
@@ -48,8 +49,10 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
             if (rex_be_controller::getCurrentPageObject()->isPopup()) {
                 return $ep->getSubject();
             }
+
             $clang = rex_request('clang', 'int');
             $clang = rex_clang::exists($clang) ? $clang : rex_clang::getStartId();
+
             $category_id = rex_request('category_id', 'int');
             $article_id = rex_request('article_id', 'int');
 

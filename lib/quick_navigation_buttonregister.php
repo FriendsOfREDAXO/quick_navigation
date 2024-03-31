@@ -1,4 +1,5 @@
 <?php
+
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonInterface;
@@ -6,7 +7,7 @@ use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonInterface;
 class ButtonRegistry
 {
     /**
-     * @var array<array{instance: mixed, priority: int}> An array that contains button instances and their priorities.
+     * @var array<array{instance: mixed, priority: int}> an array that contains button instances and their priorities
      */
     protected static array $buttons = [];
 
@@ -14,7 +15,8 @@ class ButtonRegistry
      * Registers a button with an optional priority.
      * Lower priority values cause the button to appear earlier in the list.
      */
-    public static function registerButton(Buttons\ButtonInterface $buttonInstance, int $priority = 10): void {
+    public static function registerButton(Buttons\ButtonInterface $buttonInstance, int $priority = 10): void
+    {
         self::$buttons[] = ['instance' => $buttonInstance, 'priority' => $priority];
     }
 
@@ -33,6 +35,7 @@ class ButtonRegistry
             // Since all instances implement ButtonInterface, it's guaranteed that get() exists.
             $resultString .= $button['instance']->get();
         }
+
         return $resultString;
     }
 }

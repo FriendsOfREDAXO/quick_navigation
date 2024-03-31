@@ -11,6 +11,7 @@
         foreach ($this->items as $item) {
             echo $item;
         }
-    }?>
+    }
+?>
      </ul>
 </div>

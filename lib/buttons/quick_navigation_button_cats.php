@@ -1,4 +1,5 @@
 <?php
+
 namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
 use rex;
@@ -14,20 +15,19 @@ use rex_yrewrite;
 
 class CatsButton
 {
-
-    function generateBackendNavArray($clangId = null, $ignoreOffline = true, $parentId = null, $includeHome = true): array
+    public function generateBackendNavArray($clangId = null, $ignoreOffline = true, $parentId = null, $includeHome = true): array
     {
         $user = rex::getUser();
         if ($clangId === null) {
-            $clangId = rex_clang::getCurrentId(); 
+            $clangId = rex_clang::getCurrentId();
         }
         $backendContext = rex_context::fromGet();
         $backendContext->setParam('rex-api-call', 0);
         $backendContext->setParam('page', 'structure');
         $backendContext->setParam('clang', $clangId);
 
-        $articleId = \rex_request('article_id', 'int');
-        $currentId = \rex_request('category_id', 'int', $articleId);
+        $articleId = rex_request('article_id', 'int');
+        $currentId = rex_request('category_id', 'int', $articleId);
         if ($article = rex_article::get($articleId)) {
             $currentId = $article->getCategoryId();
         }
@@ -36,12 +36,12 @@ class CatsButton
 
         if ($includeHome) {
             $categoriesArray[] = [
-                'id' => 0, 
+                'id' => 0,
                 'name' => 'home',
                 'current' => $currentId === 0,
-                'domain' => '', 
+                'domain' => '',
                 'url' => rex_url::backendPage('structure', ['clang' => $clangId]),
-                'children' => [], 
+                'children' => [],
             ];
         }
 
@@ -83,14 +83,14 @@ class CatsButton
                 'current' => $current,
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
-                'children' => self::generateBackendNavArray($clangId, $ignoreOffline, $category->getId(), false), 
+                'children' => self::generateBackendNavArray($clangId, $ignoreOffline, $category->getId(), false),
             ];
         }
 
         return $categoriesArray;
     }
 
-    public function renderCategoriesAsList($categoriesArray, $depth = 0)
+    public function renderCategoriesAsList($categoriesArray, $depth = 0): string
     {
         if (empty($categoriesArray)) {
             return ''; // Keine Kategorien zu rendern
@@ -98,7 +98,7 @@ class CatsButton
         $html = '<ul>';
         foreach ($categoriesArray as $item) {
             $current = '';
-            if (true === $item['current']) {
+            if ($item['current'] === true) {
                 $current = ' bg-primary';
             }
             // Hinzufügen von 3 Leerzeichen je Ebene
@@ -112,8 +112,7 @@ class CatsButton
             }
             $html .= '</li>';
         }
-        $html .= '</ul>';
-        return $html;
+        return $html . '</ul>';
     }
 
     public function get(): string
@@ -127,8 +126,6 @@ class CatsButton
         $categoriesArray = self::generateBackendNavArray($currentClangId, $ignoreOffline, null); // Argumente nach Bedarf anpassen
 
         $html = self::renderCategoriesAsList($categoriesArray);
-
-        $placeholder = '';
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
         $fragment->setVar('id', 'qsearch');

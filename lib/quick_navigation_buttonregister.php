@@ -1,4 +1,5 @@
 <?php
+
 namespace FriendsOfRedaxo\QuickNavigation;
 
 class ButtonRegistry
@@ -12,20 +13,18 @@ class ButtonRegistry
      * @param mixed $buttonInstance Instanz des Buttons
      * @param int $priority Priorität des Buttons
      */
-    public static function registerButton($buttonInstance, $priority = 10)
+    public static function registerButton($buttonInstance, $priority = 10): void
     {
         self::$buttons[] = ['instance' => $buttonInstance, 'priority' => $priority];
     }
 
     /**
      * Gibt die Buttons sortiert nach ihrer Priorität aus.
-     *
-     * @return string
      */
     public static function getButtonsOutput(): string
     {
         // Sortiert die Buttons basierend auf ihrer Priorität
-        usort(self::$buttons, function ($a, $b) {
+        usort(self::$buttons, static function (array $a, array $b): int {
             return $a['priority'] <=> $b['priority'];
         });
 

@@ -1,12 +1,15 @@
 <?php
+
 namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
 use rex_article;
 use rex_be_controller;
 use rex_category;
 use rex_clang;
-use rex_request;
 use rex_url;
+
+use function count;
+use function is_array;
 
 class ArticleNavButton
 {
@@ -16,13 +19,13 @@ class ArticleNavButton
         if (rex_be_controller::getCurrentPage() == 'content/edit') {
             $predecessor = '';
             $successor = '';
-            $article_stack = array();
+            $article_stack = [];
             // Objekt der aktuellen Kategorie laden
             $cat = rex_category::getCurrent();
             if ($cat) {
                 $article = $cat->getArticles(false);
             } else {
-                $article  = rex_article::getRootArticles();
+                $article = rex_article::getRootArticles();
             }
             $current_id = rex_request('article_id');
             if ($article && $current_id) {
@@ -38,7 +41,7 @@ class ArticleNavButton
                         if ($var == $current_id) {
                             $successor = '
         <button class="btn btn-default" disabled>
-           <span class="fa fa-chevron-right"> 
+           <span class="fa fa-chevron-right">
         </button>
     ';
                             if ($i + 1 < $catcount) {
@@ -54,13 +57,13 @@ class ArticleNavButton
                                         'mode' => 'edit',
                                         'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
-                                        'article_id' => $next_id
+                                        'article_id' => $next_id,
                                     ]
                                 );
                                 $successor = '
 
     <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_next . '">
-      <span class="fa fa-chevron-right"> 
+      <span class="fa fa-chevron-right">
     </a>
 ';
                             }
@@ -74,7 +77,7 @@ class ArticleNavButton
                                         'mode' => 'edit',
                                         'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
-                                        'article_id' => $prev_id
+                                        'article_id' => $prev_id,
                                     ]
                                 );
 
@@ -84,7 +87,7 @@ class ArticleNavButton
                                     $predecessor = '
 
         <button class="btn btn-default" disabled>
-           <span class="fa fa-chevron-left"> 
+           <span class="fa fa-chevron-left">
         </button>
     ';
 
@@ -92,14 +95,14 @@ class ArticleNavButton
                                         $predecessor = '
 
         <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_prev . '">
-           <span class="fa fa-chevron-left"> 
+           <span class="fa fa-chevron-left">
         </a>
     ';
                                     }
                                 }
                             }
                         }
-                        $i++;
+                        ++$i;
                     }
                 }
                 $article_directions = '

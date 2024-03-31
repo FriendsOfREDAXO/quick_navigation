@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-    $toolbar = isset($this->toolbar) && $this->toolbar ? true : false;
-    $group = isset($this->group) && $this->group ? true : false;
+$toolbar = isset($this->toolbar) && $this->toolbar;
+$group = isset($this->group) && $this->group;
 ?>
 <?php if (!$toolbar && !$group) : ?>
-<div class="dropdown<?= (isset($this->block) ? ' btn-block' : '')?><?= ((isset($this->class) && $this->class != '') ? ' ' . $this->class : '') ?>">
+<div class="dropdown<?= isset($this->block) ? ' btn-block' : ''?><?= (isset($this->class) && $this->class != '') ? ' ' . $this->class : '' ?>">
 <?php endif; ?>
     <?php if ($toolbar) : ?>
-    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"<?= ((isset($this->disabled) && $this->disabled) ? ' disabled' : '') ?>>
+    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"<?= (isset($this->disabled) && $this->disabled) ? ' disabled' : '' ?>>
     <?php else : ?>
-    <button class="btn btn-default<?= (isset($this->block) ? ' btn-block' : '')?> dropdown-toggle" accesskey="m" type="button" data-toggle="dropdown"<?= ((isset($this->disabled) && $this->disabled) ? ' disabled' : '') ?>>
+    <button class="btn btn-default<?= isset($this->block) ? ' btn-block' : ''?> dropdown-toggle" accesskey="m" type="button" data-toggle="dropdown"<?= (isset($this->disabled) && $this->disabled) ? ' disabled' : '' ?>>
     <?php endif; ?>
         <?php if (isset($this->button_prefix) && $this->button_prefix != '') : ?>
         <?= $this->button_prefix ?>
@@ -31,24 +31,24 @@
     <?php else : ?>
     </button>
     <?php endif; ?>
-     <ul class="quicknavi list-group dropdown-menu<?= (isset($this->right) ? ' dropdown-menu-right' : '')?><?= (isset($this->block) ? ' btn-block' : '')?>" role="menu">    
+     <ul class="quicknavi list-group dropdown-menu<?= isset($this->right) ? ' dropdown-menu-right' : ''?><?= isset($this->block) ? ' btn-block' : ''?>" role="menu">
         <?php if (isset($this->header) && $this->header != '') : ?>
             <li class="dropdown-header"><?= $this->header ?></li>
         <li>
-            <ul>  
-        <?php endif; ?> 
+            <ul>
+        <?php endif; ?>
         <?php
         foreach ($this->items as $item) {
             echo '<li' . ((isset($item['active']) && $item['active']) ? ' class="quickitem bg-primary"' : ' class="quickitem"') . (isset($item['attributes']) ? ' ' . trim($item['attributes']) : '') . '>';
             echo(isset($item['href']) && $item['href'] != '') ? '<a href="' . $item['href'] . '"  title="'. $item['hreftitle'] .'"  >' . $item['title'] . '</a>' : $item['title'];
             echo ' </li>';
         }
-        ?>
+?>
         <?php if (isset($this->footer) && $this->footer != '') : ?>
             <li class="divider"></li>
             <li><?= $this->footer ?></li>
         <?php endif; ?>
-        </ul> 
+        </ul>
     </li>
    </ul>
 <?php if (!$toolbar && !$group) : ?>

@@ -10,10 +10,10 @@ class rex_api_quicknavigation_render extends rex_api_function
      *
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         rex_response::sendContent(QuickNavigation::get(), 'text/html');
-        exit();
+        exit;
     }
 
     /**

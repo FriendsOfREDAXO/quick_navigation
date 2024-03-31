@@ -1,10 +1,11 @@
 <?php
+
 $package = rex_addon::get('quick_navigation');
 $content = $user = $buttons = '';
 $formElements = [];
 $n = [];
 // User-ID ermitteln
-$user =  rex::getUser()->getId();
+$user = rex::getUser()->getId();
 // Einstellungen speichern
 if (rex_post('formsubmit', 'string') == '1') {
     $package->setConfig(rex_post('config', [

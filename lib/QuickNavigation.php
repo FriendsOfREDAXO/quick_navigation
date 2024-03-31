@@ -26,8 +26,7 @@ class QuickNavigation
             $custom_media_buttons = $custom_media = '';
             $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', $custom_media));
             $button = $custom_media_buttons . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div><select name="rex_file_category"';
-            $output = str_replace('<select name="rex_file_category"', $button, $subject);
-            return $output;
+            return str_replace('<select name="rex_file_category"', $button, $subject);
         }
         return null;
     }
@@ -58,13 +57,11 @@ class QuickNavigation
         return null;
     }
 
-
     public static function get_cats(string $mode = 'structure'): string
     {
-
         // Generate category Quick Navi
         // ------------ Parameter
-        $qn_user =  rex::getUser()->getId();
+        $qn_user = rex::getUser()->getId();
         $article_id = rex_request('article_id', 'int');
         $category_id = rex_request('category_id', 'int', $article_id);
         if ($article = rex_article::get($article_id)) {
@@ -77,7 +74,7 @@ class QuickNavigation
             $add_homepage = true;
         }
         $ignore = false;
-        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user)  == '1') {
+        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user) == '1') {
             $ignore = true;
         }
         $category_select = new rex_category_select($ignore, false, true, $add_homepage);
@@ -103,7 +100,7 @@ class QuickNavigation
                         if (rex_addon::get('yrewrite')->isAvailable()) {
                             $item['domain-title'] = '';
                             $item['quickID'] = $value;
-                            if (rex_yrewrite::getDomainByArticleId($item['quickID']) != "") {
+                            if (rex_yrewrite::getDomainByArticleId($item['quickID']) != '') {
                                 $item['domain'] = rex_yrewrite::getDomainByArticleId($item['quickID']);
                                 $item['domain-title'] = ' | ' . rex_escape($item['domain']);
                             }
@@ -125,7 +122,7 @@ class QuickNavigation
                     }
                 }
             }
-            $item['title'] = preg_replace('/\[([0-9]+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">' . rex_escape($item['domain']) . '</small>', rex_escape($option->nodeValue));
+            $item['title'] = preg_replace('/\[(\d+)\]$/', '<small class="rex-primary-id">$1</small><br><small class="hidden">' . rex_escape($item['domain']) . '</small>', rex_escape($option->nodeValue));
             $item['hreftitle'] = '';
             if (rex_addon::get('yrewrite')->isAvailable()) {
                 $item['hreftitle'] = rex_escape($option->nodeValue) . $item['domain-title'];
@@ -141,7 +138,7 @@ class QuickNavigation
         $fragment->setVar('id', 'qsearch');
         $fragment->setVar('placeholder', $placeholder);
         $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
-        $searchbar  = $fragment->parse('core/form/search.php');
+        $searchbar = $fragment->parse('core/form/search.php');
 
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
@@ -157,12 +154,7 @@ class QuickNavigation
     {
         $drophistory = $date = $name = $link = $minibar = $where = $domaintitle = $status_css = $article_directions = '';
 
-
-        if ($mode == 'minibar') {
-            $icon_prefix = 'rex-minibar-icon--fa rex-minibar-icon--';
-        } else {
-            $icon_prefix = 'fa ';
-        }
+        $icon_prefix = $mode == 'minibar' ? 'rex-minibar-icon--fa rex-minibar-icon--' : 'fa ';
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $were = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -170,18 +162,18 @@ class QuickNavigation
             }
 
             $qry = 'SELECT id, status, parent_id, clang_id, startarticle, name, updateuser, updatedate
-                    FROM ' . rex::getTable('article') . ' 
-                    ' . $where . ' 
+                    FROM ' . rex::getTable('article') . '
+                    ' . $where . '
                     ORDER BY updatedate DESC
                     LIMIT ' . $limit;
             $datas = rex_sql::factory()->getArray($qry);
 
-            if (!count($datas)) {
+            if (count($datas) === 0) {
                 $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
             $links = [];
-            if (count($datas)) {
+            if (count($datas) > 0) {
                 foreach ($datas as $data) {
                     $dataID = rex_escape($data['id']);
                     $lang = rex_clang::get($data['clang_id']);
@@ -192,7 +184,7 @@ class QuickNavigation
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
                     if ($mode == 'linkmap') {
-                        $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . " [" . $dataID . "]');";
+                        $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . ' [' . $dataID . "]');";
                     } else {
                         $href = rex_url::backendPage(
                             'content/edit',
@@ -200,17 +192,15 @@ class QuickNavigation
                                 'mode' => 'edit',
                                 'clang' => $data['clang_id'],
                                 'category_id' => $data['parent_id'],
-                                'article_id' => $data['id']
+                                'article_id' => $data['id'],
                             ]
                         );
                     }
 
-                    if (rex_addon::get('yrewrite')->isAvailable()) {
-                        if (count(rex_yrewrite::getDomains()) > 2) {
-                            $domain = rex_yrewrite::getDomainByArticleId($data['id']);
-                            if ($domain) {
-                                $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
-                            }
+                    if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 2) {
+                        $domain = rex_yrewrite::getDomainByArticleId($data['id']);
+                        if ($domain) {
+                            $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
                         }
                     }
                     $status_css = ' qn_status_' . $data['status'];
@@ -223,8 +213,8 @@ class QuickNavigation
             }
 
             if ($mode != 'minibar') {
-                $qn_user =  rex::getUser()->getId();
-                if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $qn_user)  == '1') {
+                $qn_user = rex::getUser()->getId();
+                if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $qn_user) == '1') {
                     $article_directions = '';
                 } else {
                     $article_directions = self::article_nav();
@@ -234,15 +224,13 @@ class QuickNavigation
                 $fragment->setVar('items', $links, false);
                 $fragment->setVar('icon', 'fa fa-clock');
                 return $fragment->parse('quick_button.php');
-            } else {
-                return '<ul class="minibar-quicknavi-items">
-            ' . $minibar . '  
-        </ul>';
             }
+            return '<ul class="minibar-quicknavi-items">
+            ' . $minibar . '
+        </ul>';
         }
         return null;
     }
-
 
     public static function article_nav(): string
     {
@@ -250,16 +238,12 @@ class QuickNavigation
         if (rex_be_controller::getCurrentPage() == 'content/edit') {
             $predecessor = '';
             $successor = '';
-            $article_stack[] = array();
+            $article_stack[] = [];
             // Objekt der aktuellen Kategorie laden
             $cat = rex_category::getCurrent();
-            if ($cat) {
-                $article = $cat->getArticles(false);
-            } else {
-                $article  =  rex_article::getRootArticles();
-            }
+            $article = $cat ? $cat->getArticles(false) : rex_article::getRootArticles();
             $current_id = rex_request('article_id');
-            if ($article  && $current_id) {
+            if ($article && $current_id) {
                 if (is_array($article)) {
                     // Artikelreihenfolge in eine Array schreiben
                     foreach ($article as $var) {
@@ -272,7 +256,7 @@ class QuickNavigation
                         if ($var == $current_id) {
                             $successor = '
         <button class="btn btn-default" disabled>
-           <span class="fa fa-chevron-right"> 
+           <span class="fa fa-chevron-right">
         </button>
     ';
                             if ($i + 1 < $catcount) {
@@ -288,13 +272,13 @@ class QuickNavigation
                                         'mode' => 'edit',
                                         'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
-                                        'article_id' => $next_id
+                                        'article_id' => $next_id,
                                     ]
                                 );
                                 $successor = '
 
     <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_next . '">
-      <span class="fa fa-chevron-right"> 
+      <span class="fa fa-chevron-right">
     </a>
 ';
                             }
@@ -309,18 +293,17 @@ class QuickNavigation
                                         'mode' => 'edit',
                                         'clang' => rex_clang::getCurrentId(),
                                         'category_id' => rex_request('category_id'),
-                                        'article_id' => $prev_id
+                                        'article_id' => $prev_id,
                                     ]
                                 );
 
                                 if ($i < $catcount) {
                                     $article = rex_article::get($prev_id);
 
-
                                     $predecessor = '
 
         <button class="btn btn-default" disabled>
-           <span class="fa fa-chevron-left"> 
+           <span class="fa fa-chevron-left">
         </button>
     ';
 
@@ -328,14 +311,14 @@ class QuickNavigation
                                         $predecessor = '
 
         <a class="btn btn-default" title="' . $article->getName() . '" href="' . $href_prev . '">
-           <span class="fa fa-chevron-left"> 
+           <span class="fa fa-chevron-left">
         </a>
     ';
                                     }
                                 }
                             }
                         }
-                        $i++;
+                        ++$i;
                     }
                 }
                 $article_directions = '
@@ -349,17 +332,9 @@ class QuickNavigation
         return $article_directions;
     }
 
-
-
-
-
-
-
-
-
     public static function get_favs(string $mode = 'structure'): ?string
     {
-        $user =  rex::getUser()->getId();
+        $user = rex::getUser()->getId();
         $datas = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs' . $user);
         if ($datas && count($datas) >= 1) {
             $items = [];
@@ -374,7 +349,7 @@ class QuickNavigation
                         [
                             'page' => $mode,
                             'clang' => $clang,
-                            'category_id' => $data
+                            'category_id' => $data,
                         ]
                     );
                     $addHref = rex_url::backendPage(
@@ -382,17 +357,17 @@ class QuickNavigation
                         [
                             'category_id' => $catId,
                             'clang' => $clang,
-                            'function' => 'add_art'
+                            'function' => 'add_art',
                         ]
                     );
                     $items[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName . '</a></li>';
                     if ($mode == 'structure') {
-                        $items[] = '<li class="quicknavi_right"><a href="' . $addHref . '" title="' . rex_i18n::msg("quicknavi_title_favs") . ' ' .  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                        $items[] = '<li class="quicknavi_right"><a href="' . $addHref . '" title="' . rex_i18n::msg('quicknavi_title_favs') . ' ' .  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
                     }
                 }
             }
             $fragment = new rex_fragment();
-            if (count($items)) {
+            if ($items !== []) {
                 $fragment->setVar('items', $items, false);
             }
             $fragment->setVar('icon', 'fa fa-star');
@@ -420,14 +395,13 @@ class QuickNavigation
                 $quick_file_after->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = ' . $quick_file->getValue('category_id') . ' AND updatedate < ? ORDER BY updatedate DESC LIMIT 1', [$quick_file->getValue('updatedate')]);
 
                 if ($quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>';
+                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-right"></span></a>';
                 } elseif ($quick_file_before->getRows() == 1 && !$quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a>';
+                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-left"></span></a>';
                 } elseif (!$quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>';
+                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-right"></span></a>';
                 }
             }
-
 
             $were = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -439,11 +413,11 @@ class QuickNavigation
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ' . $where . ' ORDER BY updatedate DESC LIMIT ' . $limit;
             $datas = rex_sql::factory()->getArray($qry);
             $media = [];
-            if (!count($datas)) {
+            if (count($datas) === 0) {
                 $media[] = '<li class="malert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
-            if (count($datas)) {
+            if (count($datas) > 0) {
                 foreach ($datas as $data) {
                     $entryname = '';
                     $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
@@ -452,15 +426,11 @@ class QuickNavigation
                         [
                             'opener_input_field' => $opener,
                             'rex_file_category' => $data['category_id'],
-                            'file_id' => $data['id']
+                            'file_id' => $data['id'],
                         ]
                     );
 
-                    if ($data['title'] != '') {
-                        $entryname =   rex_escape($data['title']);
-                    } else {
-                        $entryname = rex_escape($data['filename']);
-                    }
+                    $entryname = $data['title'] != '' ? rex_escape($data['title']) : rex_escape($data['filename']);
                     $filename = rex_escape($data['filename']);
 
                     $media[] = '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname . '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
@@ -475,7 +445,6 @@ class QuickNavigation
         return null;
     }
 
-
     public static function get_yformtables(): ?string
     {
         $table_name = $table_real_name = $link = $table_id = '';
@@ -488,10 +457,9 @@ class QuickNavigation
             $yperm_suffix = '_edit';
         }
 
-        if (count($tables)) {
+        if (count($tables) > 0) {
             $ytables = [];
             foreach ($tables as $table) {
-
                 $_csrf_key = 'table_field-' . $table->getTableName();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
@@ -504,7 +472,7 @@ class QuickNavigation
                         'yform/manager/data_edit',
                         [
                             'page' => 'yform/manager/data_edit',
-                            'table_name' => $table_name
+                            'table_name' => $table_name,
                         ]
                     );
                     $addHref = rex_url::backendPage(
@@ -513,10 +481,10 @@ class QuickNavigation
                             'page' => 'yform/manager/data_edit',
                             'table_name' => $table_name,
                             'func' => 'add',
-                            '_csrf_token' => $_csrf_params['_csrf_token']
+                            '_csrf_token' => $_csrf_params['_csrf_token'],
                         ]
                     );
-                    $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name . '</a></li><li class="quicknavi_right"><a href="' . $addHref  . '" title="' . rex_i18n::msg("title_yform") . ' ' .  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
+                    $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name . '</a></li><li class="quicknavi_right"><a href="' . $addHref  . '" title="' . rex_i18n::msg('title_yform') . ' ' .  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
                 }
             }
             if ($active_table == true) {
@@ -529,10 +497,9 @@ class QuickNavigation
         return null;
     }
 
-
     public static function get(): string
     {
-        $qn_user =  rex::getUser()->getId();
+        $qn_user = rex::getUser()->getId();
 
         // get requested language
         $qlang = rex_request('clang', 'int');
@@ -549,7 +516,7 @@ class QuickNavigation
         // AddOn specific :: set watson button if addon is available and show button is active
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {
-        $watson = '<div class="btn-group">'.Watson::getToggleButton(['class' => 'btn btn-default watson-btn']).'</div>';
+            $watson = '<div class="btn-group">'.Watson::getToggleButton(['class' => 'btn btn-default watson-btn']).'</div>';
         }
 
         // get user favorites

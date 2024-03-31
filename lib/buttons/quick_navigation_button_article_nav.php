@@ -11,7 +11,7 @@ use rex_url;
 use function count;
 use function is_array;
 
-class ArticleNavButton
+class ArticleNavButton implements ButtonInterface
 {
     public function get(): string
     {

@@ -4,7 +4,10 @@ namespace FriendsOfRedaxo\QuickNavigation;
 
 class ButtonRegistry
 {
-    protected static $buttons = [];
+    /**
+     * @var array<array{instance: mixed, priority: int}> Ein Array, das Button-Instanzen und ihre Prioritäten enthält.
+     */
+    protected static array $buttons = [];
 
     /**
      * Registriert einen Button mit einer optionalen Priorität.
@@ -13,7 +16,7 @@ class ButtonRegistry
      * @param mixed $buttonInstance Instanz des Buttons
      * @param int $priority Priorität des Buttons
      */
-    public static function registerButton($buttonInstance, $priority = 10): void
+    public static function registerButton($buttonInstance, int $priority = 10): void
     {
         self::$buttons[] = ['instance' => $buttonInstance, 'priority' => $priority];
     }

@@ -6,9 +6,10 @@
 class rex_api_quicknavigation_render extends rex_api_function
 {
     /**
-     * Executes the API function and sends the quick navigation HTML as the response.
+     * Executes the API function.
+     * @return rex_api_result The result of the api-function
      */
-    public function execute(): void
+    public function execute()
     {
         rex_response::sendContent(FriendsOfRedaxo\QuickNavigation\QuickNavigation::get(), 'text/html');
         exit;

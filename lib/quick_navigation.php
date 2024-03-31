@@ -14,10 +14,11 @@ use rex_sql;
 use rex_url;
 use Watson\Foundation\Watson;
 
-use function count;
-
 class QuickNavigation
 {
+    /**
+     * @param rex_extension_point<string> $ep
+     */
     public static function media_history(rex_extension_point $ep): ?string
     {
         if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
@@ -38,7 +39,7 @@ class QuickNavigation
     {
         // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
-            $droplist = $favs = $drophistory = $qlang = '';
+            $custom = $drophistory = $qlang = '';
             // Check if language is set
             $qlang = rex_request('clang', 'int');
             if ($qlang == 0 || $qlang == '') {
@@ -47,7 +48,7 @@ class QuickNavigation
             $history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);
             $drophistory = $history->get();
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
-            return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' .  $drophistory . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
+            return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $drophistory . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
         return null;
     }

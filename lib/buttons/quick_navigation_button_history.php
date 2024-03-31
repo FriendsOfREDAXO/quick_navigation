@@ -16,8 +16,8 @@ use function count;
 
 class ArticleHistory
 {
-    protected $mode;
-    protected $limit;
+    protected string $mode;
+    protected int $limit;
 
     public function __construct(string $mode = 'structure', int $limit = 15)
     {

@@ -17,6 +17,7 @@ use function count;
 class ArticleHistory implements ButtonInterface
 {
     protected string $mode;
+
     protected int $limit;
 
     public function __construct(string $mode = 'structure', int $limit = 15)
@@ -28,13 +29,19 @@ class ArticleHistory implements ButtonInterface
 
     public function get(): string
     {
-        $date = $name = $link = $minibar = $where = $domaintitle = $status_css = '';
-
+        $date = '';
+        $name = '';
+        $link = '';
+        $minibar = '';
+        $where = '';
+        $domaintitle = '';
+        $status_css = '';
         if ($this->mode == 'minibar') {
             $icon_prefix = 'rex-minibar-icon--fa rex-minibar-icon--';
         } else {
             $icon_prefix = 'fa ';
         }
+
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $were = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -64,6 +71,7 @@ class ArticleHistory implements ButtonInterface
                             $langcode = '<i class="' . $icon_prefix . 'fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
                         }
                     }
+
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
                     if ($this->mode == 'linkmap') {
@@ -88,6 +96,7 @@ class ArticleHistory implements ButtonInterface
                             }
                         }
                     }
+
                     $status_css = ' qn_status_' . $data['status'];
                     $link .= '<li class=""><a class="quicknavi_left ' . $status_css . '" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="' . $icon_prefix . 'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
                     $link .= '<span class="quicknavi_right"><a class ="' . $status_css . '" href="' . rex_getUrl($dataID) . '" title="' . $name . ' ' . rex_i18n::msg('quick_navigation_title_eye') . '" target="blank"><i class="' . $icon_prefix . 'fa-eye" aria-hidden="true"></i></a></span></li>';
@@ -96,16 +105,19 @@ class ArticleHistory implements ButtonInterface
                     $link = '';
                 }
             }
+
             if ($this->mode != 'minibar') {
                 $fragment = new rex_fragment();
                 $fragment->setVar('items', $links, false);
                 $fragment->setVar('icon', 'fa fa-clock');
                 return $fragment->parse('quick_button.php');
             }
+
             return '<ul class="minibar-quicknavi-items">
             ' . $minibar . '
         </ul>';
         }
+
         return '';
     }
 }

@@ -18,13 +18,13 @@ class CatsButton implements ButtonInterface
     /**
      * @return array<mixed>
      */
-
-    public function generateBackendNavArray(?int $clangId = null, bool $ignoreOffline = true, ?int $parentId = null, bool $includeHome = true): array
+    public function generateBackendNavArray(int $clangId = null, bool $ignoreOffline = true, int $parentId = null, bool $includeHome = true): array
     {
         $user = rex::getUser();
         if ($clangId === null) {
             $clangId = rex_clang::getCurrentId();
         }
+
         $backendContext = rex_context::fromGet();
         $backendContext->setParam('rex-api-call', 0);
         $backendContext->setParam('page', 'structure');
@@ -72,6 +72,7 @@ class CatsButton implements ButtonInterface
             if (!$user->getComplexPerm('structure')->hasCategoryPerm($category->getId())) {
                 continue;
             }
+
             $categoryId = $category->getId();
             $backendContext->setParam('category_id', $categoryId);
             $backendContext->setParam('article_id', $categoryId);
@@ -79,6 +80,7 @@ class CatsButton implements ButtonInterface
             if (rex_addon::get('yrewrite')->isAvailable()) {
                 $domainName = rex_escape(rex_yrewrite::getDomainByArticleId($categoryId)->getName());
             }
+
             $current = $categoryId == $currentId;
 
             $categoriesArray[] = [
@@ -93,23 +95,23 @@ class CatsButton implements ButtonInterface
 
         return $categoriesArray;
     }
+
     /**
      * @param  array<mixed> $categoriesArray
-     * @param int $depth
-     * @return string
      */
-
     public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
     {
         if (empty($categoriesArray)) {
             return ''; // Keine Kategorien zu rendern
         }
+
         $html = '<ul>';
         foreach ($categoriesArray as $item) {
             $current = '';
             if ($item['current'] === true) {
                 $current = ' bg-primary';
             }
+
             // Hinzufügen von 3 Leerzeichen je Ebene
             $indentation = str_repeat('&nbsp;&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
             $html .= '<li class="quickitem">';
@@ -119,8 +121,10 @@ class CatsButton implements ButtonInterface
                 // Erhöhe die Tiefe um 1 für die Kinder
                 $html .= self::renderCategoriesAsList($item['children'], $depth + 1);
             }
+
             $html .= '</li>';
         }
+
         return $html . '</ul>';
     }
 
@@ -131,6 +135,7 @@ class CatsButton implements ButtonInterface
         if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user) == '1') {
             $ignoreOffline = true;
         }
+
         $currentClangId = rex_clang::getCurrentId();
         $categoriesArray = self::generateBackendNavArray($currentClangId, $ignoreOffline, null); // Argumente nach Bedarf anpassen
 
@@ -140,6 +145,7 @@ class CatsButton implements ButtonInterface
         $fragment->setVar('id', 'qsearch');
         $fragment->setVar('placeholder', $placeholder);
         $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
+
         $searchbar = $fragment->parse('core/form/search.php');
 
         $fragment = new rex_fragment();

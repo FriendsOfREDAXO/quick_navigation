@@ -27,6 +27,7 @@ class ArticleNavButton implements ButtonInterface
             } else {
                 $article = rex_article::getRootArticles();
             }
+
             $current_id = rex_request('article_id');
             if ($article && $current_id) {
                 if (is_array($article)) {
@@ -34,6 +35,7 @@ class ArticleNavButton implements ButtonInterface
                     foreach ($article as $var) {
                         $article_stack[] = $var->getId();
                     }
+
                     $i = 0;
                     // Zahl der Artikel ermitteln
                     $catcount = count($article_stack);
@@ -102,9 +104,11 @@ class ArticleNavButton implements ButtonInterface
                                 }
                             }
                         }
+
                         ++$i;
                     }
                 }
+
                 $article_directions = '
 
 ' . $predecessor . '
@@ -113,6 +117,7 @@ class ArticleNavButton implements ButtonInterface
 ';
             }
         }
+
         return $article_directions;
     }
 }

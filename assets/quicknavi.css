@@ -34,27 +34,27 @@
 }
 
 li.quickitem {
-  list-style-type: none;
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
+    list-style-type: none;
 }
 
-li.quickitem.bg-primary a {
-  color: #FFF;
-}
+
 
 .quicknavi ul,
 .quicknavi-items {
-  min-width: 350px;
-  max-height: 400px;
-  max-width: 360px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0px;
-  padding-top: 0px;
-  margin-bottom: 10px;
+    min-width: 350px;
+    max-height: 400px;
+    max-width: 360px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+
 }
+
+
+
 
 .quicknavi-items li { border-bottom: 1px solid rgba(100,100,100,0.2);}
 
@@ -69,19 +69,28 @@ li.quickitem.bg-primary a {
   margin-bottom: 0.5em;
 }
 
-.quicknavi li a {
+.quicknavi li a{
   width: 350px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding-top: 3px;
   padding-bottom: 3px;
-  padding-left: 10px;
+  padding-left: 15px;
   padding-right: 10px;
   text-decoration: none;
   display: block;
   line-height: 1em;
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
+
+.quicknavi li ul a {
+	font-size: 1.4rem;
+	font-weight: normal;
+}
+
 
 .quicknavi li .quicknavi_left {
   width: 88%;
@@ -97,13 +106,18 @@ li.quickitem.bg-primary a {
 }
 
 
-.quicknavi-items.quicknavi li a {
+.quicknavi li a {
   padding-top: 10px;
   padding-bottom: 10px;
     color: var(--qn-primary-color);
 }
 
-.quicknavi-items.quicknavi li a small {
+li.quickitem a.bg-primary {
+  color: #FFF;
+}
+
+
+.quicknavi li a small {
   padding-top: 4px;
 }
 

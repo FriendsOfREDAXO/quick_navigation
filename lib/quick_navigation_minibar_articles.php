@@ -11,9 +11,10 @@
 class rex_minibar_element_quicknavi extends rex_minibar_element
 {
     public function render()
-    {
+    {    
         // get article history from fragment
-        $drophistory = QuickNavigation::get_article_history('minibar', 8);
+	 $his = new FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('minibar', 10);
+		$drophistory = $his->get();
         return
         '
         <style>
@@ -31,7 +32,7 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
             <div class="rex-minibar-info-group">
              '.$drophistory.'
             </div>
-
+           
         </div>
         ';
     }
@@ -41,3 +42,5 @@ class rex_minibar_element_quicknavi extends rex_minibar_element
         return rex_minibar_element::LEFT;
     }
 }
+
+

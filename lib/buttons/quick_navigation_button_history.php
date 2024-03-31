@@ -14,7 +14,7 @@ use rex_yrewrite;
 
 use function count;
 
-class ArticleHistory
+class ArticleHistory implements ButtonInterface
 {
     protected string $mode;
     protected int $limit;

@@ -8,11 +8,13 @@ use rex_be_controller;
 use rex_extension;
 use rex_extension_point;
 use rex_formatter;
+use rex_fragment;
 use rex_i18n;
 use rex_sql;
 use rex_url;
-use rex_fragment;
 use Watson\Foundation\Watson;
+
+use function count;
 
 class QuickNavigation
 {
@@ -23,13 +25,12 @@ class QuickNavigation
             $drophistory = self::get_media();
             $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', ''));
             $button = $custom_media_buttons . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div><select name="rex_file_category"';
-            $output = str_replace('<select name="rex_file_category"', $button, $subject);
-            return $output;
+            return str_replace('<select name="rex_file_category"', $button, $subject);
         }
         return null;
     }
 
-     // linkmap catlist
+    // linkmap catlist
     /**
      * @param rex_extension_point<string> $ep
      */
@@ -43,11 +44,8 @@ class QuickNavigation
             if ($qlang == 0 || $qlang == '') {
                 $qlang = 1;
             }
-			$history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);
+            $history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);
             $drophistory = $history->get();
-
-            // generate output ep for custom buttons after default set.
-            $custom_linkmap_buttons = $custom = '';
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
             return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' .  $drophistory . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
@@ -56,8 +54,7 @@ class QuickNavigation
 
     public static function get_media(int $limit = 15): ?string
     {
-        $filename = $entryname = $date  = $where = '';
-        $opener = '';
+        $filename = $entryname = $date = $where = '';
         $opener = rex_request('opener_input_field');
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $file_id = rex_request('file_id', 'int');
@@ -85,7 +82,6 @@ class QuickNavigation
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
                 $where = 'WHERE updateuser="' . rex::getUser()->getValue('login') . '"';
             }
-            $opener = '';
             $opener = rex_request('opener_input_field');
 
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ' . $where . ' ORDER BY updatedate DESC LIMIT ' . $limit;
@@ -129,7 +125,7 @@ class QuickNavigation
 
     public static function get(): string
     {
-        $qlang = \rex_request('clang', 'int');
+        $qlang = rex_request('clang', 'int');
         if ($qlang == 0) {
             $qlang = 1;
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
 use rex;
@@ -11,9 +12,10 @@ use rex_sql;
 use rex_url;
 use rex_yrewrite;
 
+use function count;
+
 class ArticleHistory
 {
-
     protected $mode;
     protected $limit;
 
@@ -26,7 +28,6 @@ class ArticleHistory
 
     public function get(): string
     {
-
         $date = $name = $link = $minibar = $where = $domaintitle = $status_css = '';
 
         if ($this->mode == 'minibar') {
@@ -54,7 +55,7 @@ class ArticleHistory
             $links = [];
             if (count($datas)) {
                 foreach ($datas as $data) {
-                    $dataID = \rex_escape($data['id']);
+                    $dataID = rex_escape($data['id']);
                     $langcode = '';
                     $lang = rex_clang::get($data['clang_id']);
                     if ($lang !== null) {
@@ -66,7 +67,7 @@ class ArticleHistory
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
                     if ($this->mode == 'linkmap') {
-                        $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . " [" . $dataID . "]');";
+                        $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . ' [' . $dataID . "]');";
                     } else {
                         $href = rex_url::backendPage(
                             'content/edit',
@@ -100,11 +101,10 @@ class ArticleHistory
                 $fragment->setVar('items', $links, false);
                 $fragment->setVar('icon', 'fa fa-clock');
                 return $fragment->parse('quick_button.php');
-            } else {
-                return '<ul class="minibar-quicknavi-items">
+            }
+            return '<ul class="minibar-quicknavi-items">
             ' . $minibar . '
         </ul>';
-            }
         }
         return '';
     }

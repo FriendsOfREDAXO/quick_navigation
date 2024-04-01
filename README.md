@@ -1,5 +1,5 @@
 
-# Quick Navigation 7
+# Quick Navigation 7 for Redaxo
 
 Work in Progress
 

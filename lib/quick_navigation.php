@@ -14,8 +14,6 @@ use rex_sql;
 use rex_url;
 
 use function count;
-use function rex_escape;
-use function rex_request;
 
 class QuickNavigation
 {
@@ -57,7 +55,7 @@ class QuickNavigation
             $history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);
             $drophistory = $history->get();
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
-            return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $drophistory .  $catsbutton_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
+            return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $drophistory . $catsbutton_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
 
         return null;
@@ -65,39 +63,17 @@ class QuickNavigation
 
     public static function get_media(int $limit = 15): ?string
     {
-        $filename = '';
-        $entryname = '';
-        $date = '';
-        $where = '';
         $opener = rex_request('opener_input_field');
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $file_id = rex_request('file_id', 'int');
-            $quick_file_nav = '';
-            if ($file_id) {
-                $quick_file = rex_sql::factory();
-                $quick_file->setQuery('select * from ' . rex::getTablePrefix() . 'media where id=?', [$file_id]);
 
-                $quick_file_before = rex_sql::factory();
-                $quick_file_before->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = ' . $quick_file->getValue('category_id') . ' AND updatedate > ? ORDER BY updatedate LIMIT 1', [$quick_file->getValue('updatedate')]);
-
-                $quick_file_after = rex_sql::factory();
-                $quick_file_after->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = ' . $quick_file->getValue('category_id') . ' AND updatedate < ? ORDER BY updatedate DESC LIMIT 1', [$quick_file->getValue('updatedate')]);
-
-                if ($quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a> - <a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>';
-                } elseif ($quick_file_before->getRows() == 1 && !$quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a>';
-                } elseif (!$quick_file_before->getRows() == 1 && $quick_file_after->getRows() == 1) {
-                    $quick_file_nav = '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>';
-                }
-            }
+            // Verwendung der neuen Funktion zur Generierung der quick_file_nav
+            $quick_file_nav = self::generateQuickFileNav($file_id, $opener);
 
             $where = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
                 $where = 'WHERE updateuser="' . rex::getUser()->getValue('login') . '"';
             }
-
-            $opener = rex_request('opener_input_field');
 
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ' . $where . ' ORDER BY updatedate DESC LIMIT ' . $limit;
             $datas = rex_sql::factory()->getArray($qry);
@@ -106,29 +82,20 @@ class QuickNavigation
                 $media[] = '<li class="malert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
-            if (count($datas)) {
-                foreach ($datas as $data) {
-                    $entryname = '';
-                    $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
-                    $href = rex_url::backendPage(
-                        'mediapool/media',
-                        [
-                            'opener_input_field' => $opener,
-                            'rex_file_category' => $data['category_id'],
-                            'file_id' => $data['id'],
-                        ]
-                    );
+            foreach ($datas as $data) {
+                $entryname = $data['title'] != '' ? rex_escape($data['title']) : rex_escape($data['filename']);
+                $filename = rex_escape($data['filename']);
+                $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
+                $href = rex_url::backendPage(
+                    'mediapool/media',
+                    [
+                        'opener_input_field' => $opener,
+                        'rex_file_category' => $data['category_id'],
+                        'file_id' => $data['id'],
+                    ]
+                );
 
-                    if ($data['title'] != '') {
-                        $entryname = rex_escape($data['title']);
-                    } else {
-                        $entryname = rex_escape($data['filename']);
-                    }
-
-                    $filename = rex_escape($data['filename']);
-
-                    $media[] = '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname . '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
-                }
+                $media[] = '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname . '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
             }
 
             $fragment = new rex_fragment();
@@ -141,10 +108,32 @@ class QuickNavigation
         return null;
     }
 
-    public static function get(): string
+    protected static function generateQuickFileNav(int $file_id, string $opener): string
     {
-        $custom = '';
-        $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
-        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . $custom_buttons . '</div>';
+        $quick_file_nav = '';
+        if ($file_id) {
+            $quick_file = rex_sql::factory();
+            $quick_file->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE id = ?', [$file_id]);
+
+            $quick_file_before = rex_sql::factory();
+            $quick_file_before->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = ? AND updatedate > ? ORDER BY updatedate LIMIT 1', [$quick_file->getValue('category_id'), $quick_file->getValue('updatedate')]);
+
+            $quick_file_after = rex_sql::factory();
+            $quick_file_after->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE category_id = ? AND updatedate < ? ORDER BY updatedate DESC LIMIT 1', [$quick_file->getValue('category_id'), $quick_file->getValue('updatedate')]);
+
+            // Link für "Zurück" Button, aktiv oder deaktiviert
+            $backButton = $quick_file_before->getRows() == 1
+                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a>'
+                : '<a class="btn btn-default rex-form-aligned disabled"><span class="fa fa-chevron-left"></span></a>';
+
+            // Link für "Vorwärts" Button, aktiv oder deaktiviert
+            $forwardButton = $quick_file_after->getRows() == 1
+                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>'
+                : '<a class="btn btn-default rex-form-aligned disabled"><span class="fa fa-chevron-right"></span></a>';
+
+            // Kombinieren der Buttons mit einem Trennzeichen
+            $quick_file_nav = $backButton . ' - ' . $forwardButton;
+        }
+        return $quick_file_nav;
     }
 }

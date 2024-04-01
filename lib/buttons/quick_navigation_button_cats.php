@@ -101,7 +101,7 @@ class CatsButton implements ButtonInterface
     public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
     {
         if (empty($categoriesArray)) {
-            return ''; // Keine Kategorien zu rendern
+            return ''; // nothing to render
         }
 
         $html = '<ul>';
@@ -111,13 +111,13 @@ class CatsButton implements ButtonInterface
                 $current = ' bg-primary';
             }
 
-            // Hinzufügen von 3 Leerzeichen je Ebene
+            // add indentation
             $indentation = str_repeat('&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
             $html .= '<li class="quickitem">';
-            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . '</a>';
+            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">('.htmlspecialchars($item['id']).')</small><small class="hidden">'.htmlspecialchars($item['domain']).'</small></a>';
 
             if (!empty($item['children'])) {
-                // Erhöhe die Tiefe um 1 für die Kinder
+                // get children
                 $html .= self::renderCategoriesAsList($item['children'], $depth + 1);
             }
 

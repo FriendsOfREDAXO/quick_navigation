@@ -55,8 +55,6 @@ li.quickitem {
 }
 
 
-
-
 .quicknavi-items li { border-bottom: 1px solid rgba(100,100,100,0.2);}
 
 .quicknavi-items li:after {
@@ -97,6 +95,11 @@ li.quickitem {
 .quicknavi li a.quicklink:hover {
     background-color: rgba(62, 138, 201, 0.12);
    
+}
+
+.quicknavi li a.bg-primary.quicklink:hover {
+  background-color: rgb(22, 49, 71);
+ 
 }
 
 .quicknavi li a.quicklink:focus {

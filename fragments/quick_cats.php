@@ -4,8 +4,6 @@
  * basierend auf den Daten von generateBackendNavArray.
  */
 
-// Funktion zum rekursiven Rendern der Kategorien und ihrer Unterkategorien
-
 $toolbar = isset($this->toolbar) && $this->toolbar ? true : false;
 $group = isset($this->group) && $this->group ? true : false;
 // Anfang der Struktur

@@ -15,6 +15,7 @@ use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory;
 use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleNavButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\CatsButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\WatsonButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\YformButton;
 use rex;
 use rex_addon;
 use rex_api_quicknavigation_render;
@@ -39,6 +40,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     ButtonRegistry::registerButton(new WatsonButton(), 20);
     ButtonRegistry::registerButton(new CatsButton(), 30);
     ButtonRegistry::registerButton(new ArticleHistory('structure', 20), 30);
+    ButtonRegistry::registerButton(new YformButton(), 40);
 
     // Addonrechte (permissions) registieren
     rex_perm::register('quick_navigation[]');

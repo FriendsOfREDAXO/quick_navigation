@@ -3,7 +3,7 @@
 
 Work in Progress
 
-Complete refactor of the classic QuickNavigation 
+Complete rewrite of the classic QuickNavigation 
 
 Fearures: 
 - Structure navigation with live search

@@ -152,7 +152,7 @@ class CatsButton implements ButtonInterface
         $fragment->setVar('button_prefix', '');
         $fragment->setVar('header', $searchbar, false);
         $fragment->setVar('button_label', 'Quick');
-        $fragment->setVar('items', $html, false);
+        $fragment->setVar('content', $html, false);
         $fragment->setVar('right', true, false);
         $fragment->setVar('icon', 'fa fa-clock');
         $fragment->setVar('group', true, false);

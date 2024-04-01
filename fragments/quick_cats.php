@@ -25,7 +25,7 @@ if (!$toolbar && !$group) : ?>
 ?>
 
             <?php if (isset($this->button_label) && $this->button_label != '') : ?>
-            <?= ' <b>' . $this->button_label . '</b>' ?>
+            <?= ' <b><i title="'.$this->button_label.'" class="fa fa-folder-tree"></i></b>' ?>
             <?php endif;
 ?>
             <span class="caret"></span>

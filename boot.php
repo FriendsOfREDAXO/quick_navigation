@@ -38,7 +38,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     }
     ButtonRegistry::registerButton(new WatsonButton(), 20);
     ButtonRegistry::registerButton(new CatsButton(), 30);
-    ButtonRegistry::registerButton(new ArticleHistory('structure', 4), 40);
+    ButtonRegistry::registerButton(new ArticleHistory('structure', 20), 30);
 
     // Addonrechte (permissions) registieren
     rex_perm::register('quick_navigation[]');

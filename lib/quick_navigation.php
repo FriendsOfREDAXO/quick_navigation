@@ -13,6 +13,8 @@ use rex_sql;
 use rex_url;
 
 use function count;
+use function rex_request;
+use function rex_escape;
 
 class QuickNavigation
 {
@@ -43,7 +45,7 @@ class QuickNavigation
             $custom = '';
             $drophistory = '';
             // Check if language is set
-            $qlang = rex_request('clang', 'int');
+            $qlang rex_request('clang', 'int');
             if ($qlang == 0 || $qlang == '') {
                 $qlang = 1;
             }

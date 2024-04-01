@@ -15,9 +15,9 @@ page:
 requires:
     packages:
         structure/content: '^2.1.0'
-    redaxo: '^5.13.0'
+    redaxo: '^5.15.0'
     php:
-        version: '>=7.4, <9'
+        version: '>=8.1, <9'
 conflicts:
     packages:
         yform: '<2.0.0'

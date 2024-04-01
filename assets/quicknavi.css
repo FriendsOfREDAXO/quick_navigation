@@ -59,7 +59,7 @@ li.quickitem {
 }
 
 
-.quicknavi-items li { border-bottom: 1px solid rgba(100,100,100,0.2);}
+.quicknavi-items li {   border-bottom: 1px solid rgba(0,0,0,0.03);}
 
 .quicknavi-items li:after {
     content: "";
@@ -86,7 +86,7 @@ li.quickitem {
   line-height: 1em;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+
   -webkit-transition:all 0.3s ease;
   -moz-transition:all 0.3s ease-in-out;
   -o-transition:all 0.3s ease-in-out;

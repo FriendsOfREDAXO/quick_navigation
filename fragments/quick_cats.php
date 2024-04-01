@@ -44,7 +44,7 @@ if (!$toolbar && !$group) : ?>
  ?>
 
         <?php
-        // Start des Renderns
+        // Ausgabe
         if (isset($this->items)) {
             echo $this->items;
         }

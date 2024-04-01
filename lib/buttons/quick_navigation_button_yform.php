@@ -2,14 +2,16 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
+use rex;
 use rex_addon;
-use rex_yform_manager_table;
 use rex_csrf_token;
+use rex_fragment;
 use rex_i18n;
 use rex_url;
-use rex_fragment;
-use function rex_escape;
+use rex_yform_manager_table;
 
+use function count;
+use function rex_escape;
 
 class YformButton implements ButtonInterface
 {
@@ -18,7 +20,7 @@ class YformButton implements ButtonInterface
         if (!rex_addon::get('yform')->isAvailable()) {
             return '';
         }
-        $table_name = $table_real_name =  $href = $addHref = '';
+        $table_name = $table_real_name = $href = $addHref = '';
         $tables = rex_yform_manager_table::getAll();
         $active_table = false;
         $yform = rex_addon::get('yform');
@@ -33,7 +35,7 @@ class YformButton implements ButtonInterface
                 $_csrf_key = 'table_field-' . $table->getTableName();
                 $_csrf_params = rex_csrf_token::factory($_csrf_key)->getUrlParams();
 
-                if (!$table->isHidden() && $table->isActive() && \rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
+                if (!$table->isHidden() && $table->isActive() && rex::getUser()->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
                     $active_table = true;
                     $table_name = rex_escape($table->getTableName());
                     $table_real_name = rex_escape(rex_i18n::translate($table->getName()));

@@ -3,7 +3,6 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use rex;
-use rex_addon;
 use rex_be_controller;
 use rex_extension;
 use rex_extension_point;
@@ -12,7 +11,6 @@ use rex_fragment;
 use rex_i18n;
 use rex_sql;
 use rex_url;
-use Watson\Foundation\Watson;
 
 use function count;
 
@@ -139,11 +137,6 @@ class QuickNavigation
 
     public static function get(): string
     {
-        $watson = '';
-        if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {
-            $watson = '<div class="btn-group">' . Watson::getToggleButton(['class' => 'btn btn-default watson-btn']) . '</div>';
-        }
-
-        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . $watson . ButtonRegistry::getButtonsOutput() . '</div>';
+        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . '</div>';
     }
 }

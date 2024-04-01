@@ -63,7 +63,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
                 'article_id' => $article_id,
                 'buster' => time(),
             ];
-            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) . '"></div>' . rex_escape($ep->getSubject());
+            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigation::linkmap_list(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigation::media_history(...));

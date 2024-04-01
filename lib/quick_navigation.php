@@ -45,7 +45,7 @@ class QuickNavigation
             $custom = '';
             $drophistory = '';
             // Check if language is set
-            $qlang rex_request('clang', 'int');
+            $qlang = rex_request('clang', 'int',0);
             if ($qlang == 0 || $qlang == '') {
                 $qlang = 1;
             }

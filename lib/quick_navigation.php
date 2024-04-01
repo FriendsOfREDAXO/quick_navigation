@@ -139,11 +139,6 @@ class QuickNavigation
 
     public static function get(): string
     {
-        $qlang = rex_request('clang', 'int');
-        if ($qlang == 0) {
-            $qlang = 1;
-        }
-
         $watson = '';
         if (rex_addon::get('watson')->isAvailable() && Watson::getToggleButtonStatus()) {
             $watson = '<div class="btn-group">' . Watson::getToggleButton(['class' => 'btn btn-default watson-btn']) . '</div>';

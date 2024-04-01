@@ -85,6 +85,23 @@ li.quickitem {
   font-size: 1.6rem;
   font-weight: bold;
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  -webkit-transition:all 0.3s ease;
+  -moz-transition:all 0.3s ease-in-out;
+  -o-transition:all 0.3s ease-in-out;
+  -ms-transition:all 0.3s ease-in-out;
+  transition:all 0.3s ease-in-out;
+  padding-left:20px;
+}
+
+
+.quicknavi li a.quicklink:hover {
+    background-color: rgba(62, 138, 201, 0.12);
+   
+}
+
+.quicknavi li a.quicklink:focus {
+  background-color:#2a81c7;
+  color: #FFF;
 }
 
 .quicknavi li ul a {

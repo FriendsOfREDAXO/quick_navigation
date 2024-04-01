@@ -15,6 +15,6 @@ Fearures:
 
 ToDo: 
 - new button for Yform
-- new structure Naviation for linkmap
+- new structure Navigation for linkmap
 - media and linkmap buttons as separarted classes
   

@@ -4,7 +4,7 @@
   --qn-status2: #e74c3c;
   --qn-status-default: #ccc;   
   --qn-background-color: transparent;
-  --qn-watson-btn-background-color: transparent;
+  --qn-watson-btn-background-color: #fff;
   --qn-border-color: rgba(155, 155, 155, 0.1);
   --qn-border-width: 0;
   --gn-border-status-width: 5px;   
@@ -19,6 +19,7 @@
 
 .quicknavi-btn-group .btn-group {
   border: var(--qn-border-width) solid var(--qn-border-color);
+    
 }
 
 .quicknavi-btn-group.transparent .btn-default,

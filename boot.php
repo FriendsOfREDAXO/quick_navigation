@@ -36,9 +36,9 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $userId) != '1') {
         ButtonRegistry::registerButton(new ArticleNavButton(), 10);
     }
-    ButtonRegistry::registerButton(new WatsonButton(), 15);
-    ButtonRegistry::registerButton(new CatsButton(), 20);
-    ButtonRegistry::registerButton(new ArticleHistory('structure', 4), 30);
+    ButtonRegistry::registerButton(new WatsonButton(), 20);
+    ButtonRegistry::registerButton(new CatsButton(), 30);
+    ButtonRegistry::registerButton(new ArticleHistory('structure', 4), 40);
 
     // Addonrechte (permissions) registieren
     rex_perm::register('quick_navigation[]');

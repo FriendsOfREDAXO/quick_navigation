@@ -40,7 +40,7 @@ class CatsButton implements ButtonInterface
         if ($includeHome) {
             $categoriesArray[] = [
                 'id' => 0,
-                'name' => 'home',
+                'name' => rex_i18n::msg('root_level'),
                 'current' => $currentId === 0,
                 'domain' => '',
                 'url' => rex_url::backendPage('structure', ['clang' => $clangId]),

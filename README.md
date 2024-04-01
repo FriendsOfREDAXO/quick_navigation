@@ -11,6 +11,7 @@ Fearures:
 - Article history
 - minibar article history
 - Linkmap article history
+- Linkmap structure navigation
 - Buttonregistry to easy register buttons sorted by prio
 
 ToDo: 

@@ -113,9 +113,9 @@ class CatsButton implements ButtonInterface
             }
 
             // Hinzufügen von 3 Leerzeichen je Ebene
-            $indentation = str_repeat('&nbsp;&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
+            $indentation = str_repeat('&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
             $html .= '<li class="quickitem">';
-            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . htmlspecialchars($item['name']) . '</a>';
+            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . '</a>';
 
             if (!empty($item['children'])) {
                 // Erhöhe die Tiefe um 1 für die Kinder
@@ -151,10 +151,10 @@ class CatsButton implements ButtonInterface
         $fragment = new rex_fragment();
         $fragment->setVar('button_prefix', '');
         $fragment->setVar('header', $searchbar, false);
-        $fragment->setVar('button_label', 'Quick');
+        $fragment->setVar('button_label', rex_i18n::msg('quicknavi_title'));
         $fragment->setVar('content', $html, false);
-        $fragment->setVar('right', true, false);
-        $fragment->setVar('icon', 'fa fa-clock');
+        $fragment->setVar('right', false, false);
+        $fragment->setVar('icon', 'fa-regular fa-folder-tree');
         $fragment->setVar('group', true, false);
 
         return '<div class="btn-group">' . $fragment->parse('quick_cats.php') . '</div>';

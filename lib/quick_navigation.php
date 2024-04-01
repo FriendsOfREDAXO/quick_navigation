@@ -143,6 +143,8 @@ class QuickNavigation
 
     public static function get(): string
     {
-        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . '</div>';
+        $custom = '';
+        $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
+        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . $custom_buttons . '</div>';
     }
 }

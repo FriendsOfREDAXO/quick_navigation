@@ -45,8 +45,8 @@ if (!$toolbar && !$group) : ?>
 
         <?php
         // Ausgabe
-        if (isset($this->items)) {
-            echo $this->items;
+        if (isset($this->content)) {
+            echo $this->content;
         }
 ?>
 

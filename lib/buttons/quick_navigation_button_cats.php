@@ -101,7 +101,7 @@ class CatsButton implements ButtonInterface
     public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
     {
         if (empty($categoriesArray)) {
-            return ''; // nothing to render
+            return ''; // Keine Kategorien zu rendern
         }
 
         $html = '<ul>';
@@ -117,7 +117,7 @@ class CatsButton implements ButtonInterface
             $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">('.htmlspecialchars($item['id']).')</small><small class="hidden">'.htmlspecialchars($item['domain']).'</small></a>';
 
             if (!empty($item['children'])) {
-                // get children
+                // Erhöhe die Tiefe um 1 für die Kinder
                 $html .= self::renderCategoriesAsList($item['children'], $depth + 1);
             }
 
@@ -151,7 +151,7 @@ class CatsButton implements ButtonInterface
         $fragment->setVar('button_prefix', '');
         $fragment->setVar('header', $searchbar, false);
         $fragment->setVar('button_label', rex_i18n::msg('quicknavi_title'));
-        $fragment->setVar('content', $html, false);
+        $fragment->setVar('content', '<ul class="quicknavi-items">'.$html.'</ul>', false);
         $fragment->setVar('right', false, false);
         $fragment->setVar('icon', 'fa-regular fa-folder-tree');
         $fragment->setVar('group', true, false);

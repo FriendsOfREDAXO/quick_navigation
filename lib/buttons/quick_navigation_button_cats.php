@@ -27,7 +27,6 @@ class CatsButton implements ButtonInterface
 
         $backendContext = rex_context::fromGet();
         $backendContext->setParam('rex-api-call', 0);
-        $backendContext->setParam('page', 'structure');
         $backendContext->setParam('clang', $clangId);
 
         $articleId = rex_request('article_id', 'int');

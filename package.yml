@@ -14,8 +14,8 @@ page:
              { title: 'translate:quicknavi_help',  icon: rex-icon fa-question-circle, subPath: README.md} 
 requires:
     packages:
-        structure/content: '^2.1.0'
-    redaxo: '^5.15.0'
+        structure/content: '^2.17.0'
+    redaxo: '^5.17.0'
     php:
         version: '>=8.1, <9'
 conflicts:

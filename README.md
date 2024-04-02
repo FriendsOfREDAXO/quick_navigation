@@ -12,9 +12,10 @@ Features:
 - minibar article history
 - Linkmap article history
 - Linkmap structure navigation
-- Buttonregistry to easy register buttons sorted by prio
+- Buttonregistry to easy register buttons sorted by prio in structure view
+- extension points to add classic buttons to structure, linkmap, mediapool
 - Category favorites
-- YForm menu
+- YForm quick navigation
 
 ## Description 
 

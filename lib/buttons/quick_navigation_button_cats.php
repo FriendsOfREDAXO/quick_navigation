@@ -46,7 +46,7 @@ class CatsButton implements ButtonInterface
                 'id' => 0,
                 'name' => rex_i18n::msg('root_level'),
                 'current' => $currentId === 0,
-                'domain' => '',
+                'domain' => 'default',
                 'url' => rex_url::backendPage('structure', ['clang' => $clangId]),
                 'children' => [],
             ];
@@ -116,7 +116,7 @@ class CatsButton implements ButtonInterface
             // add indentation
             $indentation = str_repeat('&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
             $html .= '<li class="quickitem">';
-            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">(' . htmlspecialchars($item['id']) . ')</small><small class="hidden">' . htmlspecialchars($item['domain']) . '</small></a>';
+            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '" title="Domain: '. htmlspecialchars($item['domain']).'">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">(' . htmlspecialchars($item['id']) . ')</small><small class="hidden">' . htmlspecialchars($item['domain']) . '</small></a>';
 
             if (!empty($item['children'])) {
                 // Erhöhe die Tiefe um 1 für die Kinder

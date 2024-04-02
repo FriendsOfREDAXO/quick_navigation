@@ -134,6 +134,7 @@ class QuickNavigation
             // Kombinieren der Buttons mit einem Trennzeichen
             $quick_file_nav = $backButton . ' - ' . $forwardButton;
         }
+
         return $quick_file_nav;
     }
 

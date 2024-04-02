@@ -49,13 +49,16 @@ class FavsButton implements ButtonInterface
                     }
                 }
             }
+
             $fragment = new rex_fragment();
             if ($items !== []) {
                 $fragment->setVar('items', $items, false);
             }
+
             $fragment->setVar('icon', 'fa-regular fa-star');
             return $fragment->parse('quick_button.php');
         }
+
         return '';
     }
 }

@@ -20,7 +20,11 @@ class YformButton implements ButtonInterface
         if (!rex_addon::get('yform')->isAvailable()) {
             return '';
         }
-        $table_name = $table_real_name = $href = $addHref = '';
+
+        $table_name = '';
+        $table_real_name = '';
+        $href = '';
+        $addHref = '';
         $tables = rex_yform_manager_table::getAll();
         $active_table = false;
         $yform = rex_addon::get('yform');
@@ -58,6 +62,7 @@ class YformButton implements ButtonInterface
                     $ytables[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $table_name . '">' . $table_real_name . '</a></li><li class="quicknavi_right"><a href="' . $addHref  . '" title="' . rex_i18n::msg('title_yform') . ' ' .  $table_name . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
                 }
             }
+
             if ($active_table == true) {
                 $fragment = new rex_fragment();
                 $fragment->setVar('items', $ytables, false);
@@ -65,6 +70,7 @@ class YformButton implements ButtonInterface
                 return $fragment->parse('quick_button.php');
             }
         }
+
         return '';
     }
 }

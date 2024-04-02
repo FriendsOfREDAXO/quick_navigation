@@ -12,9 +12,11 @@ class WatsonButton implements ButtonInterface
         if (!rex_addon::get('watson')->isAvailable()) {
             return '';
         }
+
         if (!Watson::getToggleButtonStatus()) {
             return '';
         }
+
         return '<div class="btn-group">' . Watson::getToggleButton(['class' => 'btn btn-default watson-btn']) . '</div>';
     }
 }

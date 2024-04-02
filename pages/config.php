@@ -1,7 +1,9 @@
 <?php
 
 $package = rex_addon::get('quick_navigation');
-$content = $user = $buttons = '';
+$content = '';
+$user = '';
+$buttons = '';
 $formElements = [];
 $n = [];
 // User-ID ermitteln
@@ -15,6 +17,7 @@ if (rex_post('formsubmit', 'string') == '1') {
     ]));
     echo rex_view::success($package->i18n('quicknavi_config_saved'));
 }
+
 $content .= '<fieldset><legend>' . $package->i18n('quicknavi_info') . '</legend>';
 // Kategorieauswahl
 $formElements[] = $n;

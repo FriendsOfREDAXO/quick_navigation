@@ -29,8 +29,8 @@ use rex_perm;
 use rex_url;
 use rex_view;
 
-rex_api_function::register('quicknavigation_api', QuickNavigationApi::class);
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
+    rex_api_function::register('quicknavigation_api', QuickNavigationApi::class);
     rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
 

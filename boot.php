@@ -25,7 +25,6 @@ use rex_be_controller;
 use rex_clang;
 use rex_extension;
 use rex_minibar;
-use rex_minibar_element_quicknavi;
 use rex_perm;
 use rex_url;
 use rex_view;

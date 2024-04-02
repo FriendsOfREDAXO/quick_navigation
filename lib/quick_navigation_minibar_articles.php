@@ -8,12 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace FriendsOfRedaxo\QuickNavigation;
+
+use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory;
+use rex_minibar_element;
+use rex_response;
+
 class rex_minibar_element_quicknavi extends rex_minibar_element
 {
     public function render()
     {
         // get article history from fragment
-        $his = new FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('minibar', 10);
+        $his = new ArticleHistory('minibar', 10);
         $drophistory = $his->get();
         $nonce = rex_response::getNonce();
         return

@@ -5,7 +5,7 @@
 
 Complete rewrite of the classic QuickNavigation 
 
-Fearures: 
+Features: 
 - Structure navigation with live search
 - Media history
 - Article history

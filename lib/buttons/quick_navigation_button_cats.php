@@ -28,7 +28,11 @@ class CatsButton implements ButtonInterface
         $backendContext = rex_context::fromGet();
         $backendContext->setParam('rex-api-call', 0);
         $backendContext->setParam('clang', $clangId);
-
+        if ($backendContext->getParam('page') !== 'content/edit') {
+            if ($backendContext->getParam('page') !== 'linkmap') {
+                $backendContext->setParam('page', 'structure');
+            }
+        }
         $articleId = rex_request('article_id', 'int');
         $currentId = rex_request('category_id', 'int', $articleId);
         if ($article = rex_article::get($articleId)) {
@@ -112,7 +116,7 @@ class CatsButton implements ButtonInterface
             // add indentation
             $indentation = str_repeat('&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
             $html .= '<li class="quickitem">';
-            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">('.htmlspecialchars($item['id']).')</small><small class="hidden">'.htmlspecialchars($item['domain']).'</small></a>';
+            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">(' . htmlspecialchars($item['id']) . ')</small><small class="hidden">' . htmlspecialchars($item['domain']) . '</small></a>';
 
             if (!empty($item['children'])) {
                 // Erhöhe die Tiefe um 1 für die Kinder
@@ -149,7 +153,7 @@ class CatsButton implements ButtonInterface
         $fragment->setVar('button_prefix', '');
         $fragment->setVar('header', $searchbar, false);
         $fragment->setVar('button_label', rex_i18n::msg('quicknavi_title'));
-        $fragment->setVar('content', '<ul class="quicknavi-items">'.$html.'</ul>', false);
+        $fragment->setVar('content', '<ul class="quicknavi-items">' . $html . '</ul>', false);
         $fragment->setVar('right', false, false);
         $fragment->setVar('icon', 'fa-regular fa-folder-tree');
         $fragment->setVar('group', true, false);

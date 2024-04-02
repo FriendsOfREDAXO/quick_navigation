@@ -19,7 +19,7 @@ use FriendsOfRedaxo\QuickNavigation\Buttons\WatsonButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\YformButton;
 use rex;
 use rex_addon;
-use rex_api_quicknavigation_render;
+use rex_api_function;
 use rex_backend_login;
 use rex_be_controller;
 use rex_clang;
@@ -29,6 +29,7 @@ use rex_perm;
 use rex_url;
 use rex_view;
 
+rex_api_function::register('quicknavigation_api', QuickNavigationApi::class);
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
@@ -66,7 +67,8 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
                 'article_id' => $article_id,
                 'buster' => time(),
             ];
-            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + rex_api_quicknavigation_render::getUrlParams()) . '"></div>' . $ep->getSubject();
+
+            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + QuickNavigationApi::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigation::linkmap_list(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigation::media_history(...));

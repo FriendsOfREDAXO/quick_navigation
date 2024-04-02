@@ -78,7 +78,7 @@ class QuickNavigation
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ' . $where . ' ORDER BY updatedate DESC LIMIT ' . $limit;
             $datas = rex_sql::factory()->getArray($qry);
             $media = [];
-            if (!count($datas)) {
+            if (count($datas) === 0) {
                 $media[] = '<li class="malert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
@@ -111,7 +111,7 @@ class QuickNavigation
     protected static function generateQuickFileNav(int $file_id, string $opener): string
     {
         $quick_file_nav = '';
-        if ($file_id) {
+        if ($file_id !== 0) {
             $quick_file = rex_sql::factory();
             $quick_file->setQuery('SELECT * FROM ' . rex::getTablePrefix() . 'media WHERE id = ?', [$file_id]);
 
@@ -123,12 +123,12 @@ class QuickNavigation
 
             // Link für "Zurück" Button, aktiv oder deaktiviert
             $backButton = $quick_file_before->getRows() == 1
-                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-left"></span></a>'
+                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_before->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-left"></span></a>'
                 : '<a class="btn btn-default rex-form-aligned disabled"><span class="fa fa-chevron-left"></span></a>';
 
             // Link für "Vorwärts" Button, aktiv oder deaktiviert
             $forwardButton = $quick_file_after->getRows() == 1
-                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(array_merge(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')])) . '"><span class="fa fa-chevron-right"></span></a>'
+                ? '<a class="btn btn-default rex-form-aligned" href="' . rex_url::currentBackendPage(['opener_input_field' => $opener, 'file_id' => $quick_file_after->getValue('id'), 'rex_file_category' => $quick_file->getValue('category_id')]) . '"><span class="fa fa-chevron-right"></span></a>'
                 : '<a class="btn btn-default rex-form-aligned disabled"><span class="fa fa-chevron-right"></span></a>';
 
             // Kombinieren der Buttons mit einem Trennzeichen

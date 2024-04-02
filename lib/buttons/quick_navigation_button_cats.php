@@ -61,10 +61,8 @@ class CatsButton implements ButtonInterface
             } else {
                 $categories = rex_category::getRootCategories($ignoreOffline, $clangId);
             }
-        } else {
-            if ($parentCategory = rex_category::get($parentId, $clangId)) {
-                $categories = $parentCategory->getChildren($ignoreOffline);
-            }
+        } elseif ($parentCategory = rex_category::get($parentId, $clangId)) {
+            $categories = $parentCategory->getChildren($ignoreOffline);
         }
 
         foreach ($categories as $category) {
@@ -100,7 +98,7 @@ class CatsButton implements ButtonInterface
      */
     public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
     {
-        if (empty($categoriesArray)) {
+        if ($categoriesArray === []) {
             return ''; // Keine Kategorien zu rendern
         }
 

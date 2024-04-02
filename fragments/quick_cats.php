@@ -4,8 +4,8 @@
  * basierend auf den Daten von generateBackendNavArray.
  */
 
-$toolbar = isset($this->toolbar) && $this->toolbar ? true : false;
-$group = isset($this->group) && $this->group ? true : false;
+$toolbar = isset($this->toolbar) && $this->toolbar;
+$group = isset($this->group) && $this->group;
 // Anfang der Struktur
 if (!$toolbar && !$group) : ?>
 <div class="dropdown<?= isset($this->block) ? ' btn-block' : '' ?><?= (isset($this->class) && $this->class != '') ? ' ' . $this->class : '' ?>">

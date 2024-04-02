@@ -36,11 +36,7 @@ class ArticleHistory implements ButtonInterface
         $where = '';
         $domaintitle = '';
         $status_css = '';
-        if ($this->mode == 'minibar') {
-            $icon_prefix = 'rex-minibar-icon--fa rex-minibar-icon--';
-        } else {
-            $icon_prefix = 'fa ';
-        }
+        $icon_prefix = $this->mode === 'minibar' ? 'rex-minibar-icon--fa rex-minibar-icon--' : 'fa ';
 
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $were = '';
@@ -55,12 +51,12 @@ class ArticleHistory implements ButtonInterface
                     LIMIT ' . $this->limit;
             $datas = rex_sql::factory()->getArray($qry);
 
-            if (!count($datas)) {
+            if (count($datas) === 0) {
                 $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
             }
 
             $links = [];
-            if (count($datas)) {
+            if (count($datas) > 0) {
                 foreach ($datas as $data) {
                     $dataID = rex_escape($data['id']);
                     $langcode = '';
@@ -74,7 +70,7 @@ class ArticleHistory implements ButtonInterface
 
                     $name = rex_escape($data['name']);
                     $date = rex_formatter::intlDateTime($data['updatedate']);
-                    if ($this->mode == 'linkmap') {
+                    if ($this->mode === 'linkmap') {
                         $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . ' [' . $dataID . "]');";
                     } else {
                         $href = rex_url::backendPage(
@@ -88,12 +84,10 @@ class ArticleHistory implements ButtonInterface
                         );
                     }
 
-                    if (rex_addon::get('yrewrite')->isAvailable()) {
-                        if (count(rex_yrewrite::getDomains()) > 2) {
-                            $domain = rex_yrewrite::getDomainByArticleId($data['id']);
-                            if ($domain) {
-                                $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
-                            }
+                    if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 2) {
+                        $domain = rex_yrewrite::getDomainByArticleId($data['id']);
+                        if ($domain) {
+                            $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
                         }
                     }
 
@@ -106,7 +100,7 @@ class ArticleHistory implements ButtonInterface
                 }
             }
 
-            if ($this->mode != 'minibar') {
+            if ($this->mode !== 'minibar') {
                 $fragment = new rex_fragment();
                 $fragment->setVar('items', $links, false);
                 $fragment->setVar('icon', 'fa fa-clock');

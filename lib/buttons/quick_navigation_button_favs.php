@@ -44,7 +44,7 @@ class FavsButton implements ButtonInterface
                         ]
                     );
                     $items[] = '<li class="quicknavi_left"><a href="' . $href . '" title="' . $catName . '">' . $catName . '</a></li>';
-                    if ($mode == 'structure') {
+                    if ($mode === 'structure') {
                         $items[] = '<li class="quicknavi_right"><a href="' . $addHref . '" title="' . rex_i18n::msg('quicknavi_title_favs') . ' ' .  $catName . '"><i class="fa fa-plus" aria-hidden="true"></i></a></li>';
                     }
                 }

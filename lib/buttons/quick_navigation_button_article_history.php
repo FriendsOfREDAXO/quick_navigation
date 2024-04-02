@@ -93,7 +93,7 @@ class ArticleHistory implements ButtonInterface
 
                     $status_css = ' qn_status_' . $data['status'];
                     $link .= '<li class=""><a class="quicknavi_left ' . $status_css . '" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="' . $icon_prefix . 'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
-                    $link .= '<span class="quicknavi_right"><a class ="' . $status_css . '" href="' . rex_getUrl($dataID) . '" title="' . $name . ' ' . rex_i18n::msg('quick_navigation_title_eye') . '" target="blank"><i class="' . $icon_prefix . 'fa-eye" aria-hidden="true"></i></a></span></li>';
+                    $link .= '<span class="quicknavi_right"><a class ="' . $status_css . '" href="' . rex_getUrl($dataID) . '" title="' . $name . ' ' . rex_i18n::msg('title_eye'). '" target="frontend"><i class="' . $icon_prefix . 'fa-eye" aria-hidden="true"></i></a></span></li>';
                     $links[] = $link;
                     $minibar .= $link;
                     $link = '';

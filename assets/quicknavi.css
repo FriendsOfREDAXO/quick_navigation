@@ -172,7 +172,9 @@ li.quickitem a.bg-primary {
 .quicknavi-items.quicknavi li .quicknavi_right a.qn_status_1,
 .quicknavi-items.quicknavi li .quicknavi_right a.qn_status_2,
 .quicknavi-items.quicknavi li .quicknavi_right a.qn_status_0 {
-  border: var(--qn-border-width);
+    border: var(--qn-border-width);
+    padding-left: 10px;
+
 }
 
 .quicknavi.quicknavi-items li small {

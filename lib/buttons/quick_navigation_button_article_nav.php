@@ -32,7 +32,7 @@ class ArticleNavButton implements ButtonInterface
                     $article_stack[] = $article->getId();
                 }
 
-                $index = array_search($current_id, $article_stack, true);
+                $index = array_search($current_id, $article_stack);
                 if ($index !== false) {
                     // Vorherigen Artikel aktivieren, wenn möglich
                     if ($index - 1 >= 0) {

@@ -9,7 +9,7 @@ class rex_api_quicknavigation_render
      *
      * @return string
      */
-    public function getUrlParams(): string
+    public static function getUrlParams(): string
     {
        return '';
     }

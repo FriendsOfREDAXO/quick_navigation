@@ -1,5 +1,15 @@
 <?php
 
+namespace FriendsOfRedaxo\QuickNavigation;
+
+use rex_addon;
+use rex;
+use rex_view;
+use rex_fragment;
+use rex_category_select;
+use rex_url;
+
+
 $package = rex_addon::get('quick_navigation');
 $content = '';
 $user = '';

@@ -2,13 +2,12 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
-use rex_addon;
 use rex;
-use rex_view;
-use rex_fragment;
+use rex_addon;
 use rex_category_select;
+use rex_fragment;
 use rex_url;
-
+use rex_view;
 
 $package = rex_addon::get('quick_navigation');
 $content = '';

@@ -23,7 +23,7 @@ conflicts:
         yform: '<2.0.0'
         watson: '<2.3.0'
         forcal: '<3.7.0'
-        quick_navigation: '<7.0.1'
+        quick_navigation: '<7.0.0'
 installer_ignore:
     - .github
     - .gitignore

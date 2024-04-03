@@ -1,16 +1,28 @@
 <?php
+
 /**
- * Ensures rex_api_quicknavigation_render is available on update
+ * API function for rendering the quick navigation menu.
  */
-class rex_api_quicknavigation_render
+class rex_api_quicknavigation_render extends rex_api_function
 {
     /**
-     * dummy for updates
+     * Executes the API function and sends the quick navigation HTML as the response.
      *
-     * @return string
+     * @return void
      */
-    public static function getUrlParams(): string
+    public function execute(): void
     {
-       return '';
+        rex_response::sendContent(QuickNavigation::get(), 'text/html');
+        exit;
+    }
+
+    /**
+     * Indicates that this API function does not require CSRF protection.
+     *
+     * @return bool
+     */
+    public function requiresCsrfProtection()
+    {
+        return false;
     }
 }

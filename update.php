@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API function for rendering the quick navigation menu.
+ * API function for rendering the quick navigation menu. Only used for update from prior versions.
  */
 class rex_api_quicknavigation_render extends rex_api_function
 {

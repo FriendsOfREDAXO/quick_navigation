@@ -4,6 +4,7 @@ namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
 use rex;
 use rex_addon;
+use rex_plugin;
 use rex_csrf_token;
 use rex_fragment;
 use rex_i18n;

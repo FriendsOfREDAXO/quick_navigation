@@ -17,10 +17,9 @@ class YformButton implements ButtonInterface
 {
     public function get(): string
     {
-        if (!rex_addon::get('yform')->isAvailable()) {
+        if (!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'manager')->isAvailable()) {
             return '';
         }
-
         $table_name = '';
         $table_real_name = '';
         $href = '';

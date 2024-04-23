@@ -217,8 +217,13 @@ li.quickitem a.bg-primary {
 }
 
 .dropdown-menu > .quicknavi_right > a {
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    text-overflow: unset;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    background: #eeeeee20;
+
 }
 
 .forcal_border {

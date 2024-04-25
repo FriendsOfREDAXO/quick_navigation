@@ -153,7 +153,7 @@ class CatsButton implements ButtonInterface
         $fragment->setVar('button_prefix', '');
         $fragment->setVar('header', $searchbar, false);
         $fragment->setVar('button_label', rex_i18n::msg('quicknavi_title'));
-        $fragment->setVar('content', '<ul class="quicknavi-items">' . $html . '</ul>', false);
+        $fragment->setVar('content', '<li><ul class="quicknavi-items">' . $html . '</ul></li>', false);
         $fragment->setVar('right', false, false);
         $fragment->setVar('icon', 'fa-regular fa-folder-tree');
         $fragment->setVar('group', true, false);

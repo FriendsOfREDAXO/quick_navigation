@@ -97,11 +97,11 @@ li.quickitem {
   padding-left:20px;
 }
 
-.quicknavi li a.quicklink{
+.quicknavi li ul li a.quicklink{
 font-weight: bold;
 }
 
-.quicknavi li ul li a.quicklink{
+.quicknavi li ul li ul li a.quicklink{
     font-weight: 300;
     border-bottom: 1px solid rgba(0,0,0,0.03);
 

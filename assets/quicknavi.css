@@ -59,7 +59,10 @@ li.quickitem {
 }
 
 
-.quicknavi-items li {   border-bottom: 1px solid rgba(0,0,0,0.03);}
+.quicknavi-items li {
+  
+
+}
 
 .quicknavi-items li:after {
     content: "";
@@ -99,8 +102,10 @@ font-weight: bold;
 }
 
 .quicknavi li ul li a.quicklink{
-  font-weight: 300;
-  }
+    font-weight: 300;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+
+}
 
 .quicknavi li a.quicklink:hover {
     background-color: rgba(62, 138, 201, 0.12);
@@ -222,7 +227,7 @@ li.quickitem a.bg-primary {
     text-align: center;
     padding-left: 0;
     padding-right: 0;
-    background: #eeeeee20;
+    background: #eeeeee10;
 
 }
 

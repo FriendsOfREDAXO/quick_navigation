@@ -3,6 +3,8 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonRegistry;
+
 use rex;
 use rex_be_controller;
 use rex_extension;

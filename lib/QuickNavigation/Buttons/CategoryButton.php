@@ -13,7 +13,7 @@ use rex_i18n;
 use rex_url;
 use rex_yrewrite;
 
-class CatsButton implements ButtonInterface
+class CategoryButton implements ButtonInterface
 {
     /**
      * @return array<mixed>

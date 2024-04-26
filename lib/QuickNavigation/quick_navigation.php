@@ -2,7 +2,7 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
-use FriendsOfRedaxo\QuickNavigation\Buttons\CatsButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
 use rex;
 use rex_be_controller;
 use rex_extension;
@@ -49,7 +49,7 @@ class QuickNavigation
                 $qlang = 1;
             }
 
-            $catsbutton = new catsButton();
+            $catsbutton = new CategoryButton();
             $catsbutton_output = $catsbutton->get();
 
             $history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);

@@ -1,5 +1,5 @@
 package: quick_navigation
-version: '7.0.4'
+version: '8.0.0-dev'
 author: 'Friends Of REDAXO'
 supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]
@@ -23,7 +23,7 @@ conflicts:
         yform: '<2.0.0'
         watson: '<2.3.0'
         forcal: '<3.7.0'
-        quick_navigation: '<7.0.0'
+        quick_navigation: '<7.0.4'
 installer_ignore:
     - .github
     - .gitignore

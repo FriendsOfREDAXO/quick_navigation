@@ -2,9 +2,9 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
-use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistoryButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonRegistry;
-
+use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
 use rex;
 use rex_be_controller;
 use rex_extension;
@@ -54,7 +54,7 @@ class QuickNavigation
             $catsbutton = new CategoryButton();
             $catsbutton_output = $catsbutton->get();
 
-            $history = new \FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory('linkmap', 15);
+            $history = new ArticleHistoryButton('linkmap', 15);
             $drophistory = $history->get();
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
             return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $drophistory . $catsbutton_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();

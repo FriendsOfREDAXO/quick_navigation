@@ -2,6 +2,8 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\ApiFunction;
 
+use FriendsOfRedaxo\QuickNavigation\QuickNavigation;
+
 use rex_api_function;
 use rex_response;
 

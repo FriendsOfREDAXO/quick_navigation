@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace FriendsOfRedaxo\QuickNavigation;
+namespace FriendsOfRedaxo\QuickNavigation\Minibar;
 
 use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory;
 use rex_minibar_element;
 use rex_response;
 
-class rex_minibar_element_quicknavi extends rex_minibar_element
+class ArticleHistoryElement extends rex_minibar_element
 {
     public function render()
     {

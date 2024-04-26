@@ -11,12 +11,15 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
-use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory;
-use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleNavButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\CatsButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\FavsButton;
+use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
+use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistoryButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonRegistry;
+use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleNavigationButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
+use FriendsOfRedaxo\QuickNavigation\Buttons\FavoritesButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\WatsonButton;
 use FriendsOfRedaxo\QuickNavigation\Buttons\YformButton;
+use FriendsOfRedaxo\QuickNavigation\Minibar\ArticleHistoryElement;
 use rex;
 use rex_addon;
 use rex_api_function;
@@ -30,20 +33,20 @@ use rex_url;
 use rex_view;
 
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
-    rex_api_function::register('quicknavigation_api', QuickNavigationApi::class);
+    rex_api_function::register('quicknavigation_api', MenuRender::class);
     rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
 
     $userId = rex::getUser()->getId();
     if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $userId) != '1') {
-        ButtonRegistry::registerButton(new ArticleNavButton(), 10);
+        ButtonRegistry::registerButton(new ArticleNavigationButton(), 10);
     }
 
     ButtonRegistry::registerButton(new WatsonButton(), 20);
-    ButtonRegistry::registerButton(new CatsButton(), 30);
-    ButtonRegistry::registerButton(new ArticleHistory('structure', 20), 40);
+    ButtonRegistry::registerButton(new CategoryButton(), 30);
+    ButtonRegistry::registerButton(new ArticleHistoryButton('structure', 20), 40);
     ButtonRegistry::registerButton(new YformButton(), 50);
-    ButtonRegistry::registerButton(new FavsButton(), 60);
+    ButtonRegistry::registerButton(new FavoritesButton(), 60);
 
     // Addonrechte (permissions) registieren
     rex_perm::register('quick_navigation[]');
@@ -69,7 +72,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
                 'buster' => time(),
             ];
 
-            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + QuickNavigationApi::getUrlParams()) . '"></div>' . $ep->getSubject();
+            return '<div id="rex-quicknavigation-structure" data-url="' . rex_url::currentBackendPage($params + MenuRender::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigation::linkmap_list(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigation::media_history(...));
@@ -78,5 +81,5 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
 
 /* Minibar */
 if (rex::isFrontend() && rex_addon::get('minibar')->isAvailable()) {
-    rex_minibar::getInstance()->addElement(new rex_minibar_element_quicknavi());
+    rex_minibar::getInstance()->addElement(new ArticleHistoryElement());
 }

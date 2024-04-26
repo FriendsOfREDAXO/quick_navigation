@@ -1,8 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\QuickNavigation;
-
-use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonInterface;
+namespace FriendsOfRedaxo\QuickNavigation\Buttons;
 
 class ButtonRegistry
 {
@@ -15,7 +13,7 @@ class ButtonRegistry
      * Registers a button with an optional priority.
      * Lower priority values cause the button to appear earlier in the list.
      */
-    public static function registerButton(Buttons\ButtonInterface $buttonInstance, int $priority = 10): void
+    public static function registerButton(ButtonInterface $buttonInstance, int $priority = 10): void
     {
         self::$buttons[] = ['instance' => $buttonInstance, 'priority' => $priority];
     }

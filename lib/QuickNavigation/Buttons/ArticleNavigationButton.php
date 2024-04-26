@@ -10,7 +10,7 @@ use rex_url;
 
 use function count;
 
-class ArticleNavButton implements ButtonInterface
+class ArticleNavigationButton implements ButtonInterface
 {
     public function get(): string
     {

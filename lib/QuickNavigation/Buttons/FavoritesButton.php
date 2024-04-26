@@ -12,7 +12,7 @@ use rex_url;
 use function count;
 use function rex_escape;
 
-class FavsButton implements ButtonInterface
+class FavoritesButton implements ButtonInterface
 {
     public function get(): string
     {

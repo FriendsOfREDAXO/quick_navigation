@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\QuickNavigation;
+namespace FriendsOfRedaxo\QuickNavigation\ApiFunction;
 
 use rex_api_function;
 use rex_response;
@@ -8,7 +8,7 @@ use rex_response;
 /**
  * API function for rendering the quick navigation menu.
  */
-class QuickNavigationApi extends rex_api_function
+class MenuRender extends rex_api_function
 {
     /**
      * Executes the API function.

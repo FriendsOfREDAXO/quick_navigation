@@ -38,7 +38,7 @@ For editors the availability of the functions can be defined by role permissions
 Create a button class
 
 ```php
-class MeinButton implements   FriendsOfRedaxo\QuickNavigation\Buttons\ButtonInterface {
+class MeinButton implements  FriendsOfRedaxo\QuickNavigation\Button\ButtonInterface {
     public function get(): string {
         // Logik für deinen Button
         return '<button class="btn btn-primary"><i class="fa-solid fa-egg"></i> Easter Egg</button>';
@@ -49,7 +49,7 @@ class MeinButton implements   FriendsOfRedaxo\QuickNavigation\Buttons\ButtonInte
 Add to boot.php of your AddOn
 
 ```php
-use FriendsOfRedaxo\QuickNavigation\ButtonRegistry;
+use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 ButtonRegistry::registerButton(new MeinButton(), 5);
 ```
 5 is the prio of the button

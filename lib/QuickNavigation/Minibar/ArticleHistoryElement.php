@@ -11,7 +11,7 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Minibar;
 
-use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistory;
+use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistory;
 use rex_minibar_element;
 use rex_response;
 

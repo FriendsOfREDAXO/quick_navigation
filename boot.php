@@ -12,13 +12,13 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
-use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleHistoryButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\ButtonRegistry;
-use FriendsOfRedaxo\QuickNavigation\Buttons\ArticleNavigationButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\CategoryButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\FavoritesButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\WatsonButton;
-use FriendsOfRedaxo\QuickNavigation\Buttons\YformButton;
+use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
+use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
+use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
+use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
+use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
+use FriendsOfRedaxo\QuickNavigation\Button\WatsonButton;
+use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
 use FriendsOfRedaxo\QuickNavigation\Minibar\ArticleHistoryElement;
 use rex;
 use rex_addon;
@@ -46,7 +46,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     ButtonRegistry::registerButton(new CategoryButton(), 30);
     ButtonRegistry::registerButton(new ArticleHistoryButton('structure', 20), 40);
     ButtonRegistry::registerButton(new YformButton(), 50);
-    ButtonRegistry::registerButton(new FavoritesButton(), 60);
+    ButtonRegistry::registerButton(new FavoriteButton(), 60);
 
     // Addonrechte (permissions) registieren
     rex_perm::register('quick_navigation[]');

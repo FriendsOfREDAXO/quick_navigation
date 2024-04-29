@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\QuickNavigation\Buttons;
+namespace FriendsOfRedaxo\QuickNavigation\Button;
 
 use rex;
 use rex_addon;
@@ -12,7 +12,7 @@ use rex_url;
 use function count;
 use function rex_escape;
 
-class FavoritesButton implements ButtonInterface
+class FavoriteButton implements ButtonInterface
 {
     public function get(): string
     {

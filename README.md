@@ -1,7 +1,7 @@
 
 # Quick Navigation 7 for Redaxo
 
-![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/screenshots.png)
+![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/IMG_0202.jpeg)
 
 Complete rewrite of the classic QuickNavigation 
 

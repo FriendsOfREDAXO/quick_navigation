@@ -1,5 +1,5 @@
 
-# Quick Navigation 7 for Redaxo
+# Quick Navigation 8 for Redaxo
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/IMG_0202.jpeg)
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\QuickNavigation\Buttons;
+namespace FriendsOfRedaxo\QuickNavigation\Button;
 
 interface ButtonInterface
 {

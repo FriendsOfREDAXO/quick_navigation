@@ -22,7 +22,6 @@ use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
 use FriendsOfRedaxo\QuickNavigation\Minibar\ArticleHistoryElement;
 use rex;
 use rex_addon;
-use rex_api_function;
 use rex_backend_login;
 use rex_be_controller;
 use rex_clang;

@@ -20,7 +20,7 @@ class ArticleHistoryElement extends rex_minibar_element
     public function render()
     {
         // get article history from fragment
-        $his = new ArticleHistory('minibar', 10);
+        $his = new ArticleHistoryButton('minibar', 10);
         $drophistory = $his->get();
         $nonce = rex_response::getNonce();
         return

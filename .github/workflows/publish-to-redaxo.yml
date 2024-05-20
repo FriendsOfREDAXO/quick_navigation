@@ -1,3 +1,5 @@
+# Instructions: https://github.com/FriendsOfREDAXO/installer-action/
+
 name: Publish to REDAXO.org
 on:
   release:

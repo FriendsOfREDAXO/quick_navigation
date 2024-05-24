@@ -244,3 +244,33 @@ li .watson-btn {
 .quicknavi-btn-group .watson-btn:active {
     margin-right: 0px;
 }
+.quick-navigation-menu {
+    max-width: 360px;
+    min-width: 350px;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-navigation-menu ul > li {
+    /*padding-left: 1rem;*/
+}
+.quick-navigation-menu ul > li:not(:last-child) {
+    border-bottom: 1px solid #dfe3e9;
+}
+
+.quick-navigation-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.quick-navigation-list > li {
+    position: relative;
+}
+
+.quick-navigation-list a {
+    display: block;
+    padding: 8px;
+}

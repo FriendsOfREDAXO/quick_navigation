@@ -10,6 +10,7 @@ use rex_clang;
 use rex_context;
 use rex_fragment;
 use rex_i18n;
+use rex_string;
 use rex_url;
 use rex_yrewrite;
 
@@ -100,33 +101,38 @@ class CategoryButton implements ButtonInterface
     /**
      * @param  array<mixed> $categoriesArray
      */
-    public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): string
+    public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): array
     {
-        if ($categoriesArray === []) {
-            return ''; // Keine Kategorien zu rendern
-        }
-
-        $html = '<ul>';
+        $listItems = [];
         foreach ($categoriesArray as $item) {
-            $current = '';
+            $attributes = [
+                'href' => $item['url'],
+                'title' => 'Domain: ' . $item['domain'],
+            ];
+
             if ($item['current'] === true) {
-                $current = ' bg-primary';
+                $attributes['class'] = 'quick-navigation-current';
             }
 
-            // add indentation
-            $indentation = str_repeat('&nbsp;&nbsp;', $depth); // Erzeugt die Einrückung
-            $html .= '<li class="quickitem">';
-            $html .= '<a class="quicklink' . $current . '" href="' . $item['url'] . '" title="Domain: '. htmlspecialchars($item['domain']).'">' . $indentation . '&nbsp;' . htmlspecialchars($item['name']) . ' <small class="rex-primary-id">(' . htmlspecialchars($item['id']) . ')</small><small class="hidden">' . htmlspecialchars($item['domain']) . '</small></a>';
+            $listItem =
+                '<a' . rex_string::buildAttributes($attributes) . '>
+                    ' . rex_escape($item['name']) . '
+                    <small class="rex-primary-id">(' . rex_escape($item['id']) . ')</small>
+                    <small class="hidden">' . rex_escape($item['domain']) . '</small>
+                </a>';
 
             if (!empty($item['children'])) {
                 // Erhöhe die Tiefe um 1 für die Kinder
-                $html .= self::renderCategoriesAsList($item['children'], $depth + 1);
+                $fragment = new rex_fragment([
+                    'listItems' => self::renderCategoriesAsList($item['children'], $depth + 1),
+                ]);
+                $listItem .= $fragment->parse('QuickNavigation/List.php');
             }
 
-            $html .= '</li>';
+            $listItems[] = $listItem;
         }
 
-        return $html . '</ul>';
+        return $listItems;
     }
 
     public function get(): string
@@ -140,7 +146,7 @@ class CategoryButton implements ButtonInterface
         $currentClangId = rex_clang::getCurrentId();
         $categoriesArray = self::generateBackendNavArray($currentClangId, $ignoreOffline, null); // Argumente nach Bedarf anpassen
 
-        $html = self::renderCategoriesAsList($categoriesArray);
+        $listItems = self::renderCategoriesAsList($categoriesArray);
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
         $fragment->setVar('id', 'qsearch');
@@ -149,15 +155,12 @@ class CategoryButton implements ButtonInterface
 
         $searchbar = $fragment->parse('core/form/search.php');
 
-        $fragment = new rex_fragment();
-        $fragment->setVar('button_prefix', '');
-        $fragment->setVar('header', $searchbar, false);
-        $fragment->setVar('button_label', rex_i18n::msg('quicknavi_title'));
-        $fragment->setVar('content', '<li><ul class="quicknavi-items">' . $html . '</ul></li>', false);
-        $fragment->setVar('right', false, false);
-        $fragment->setVar('icon', 'fa-regular fa-folder-tree');
-        $fragment->setVar('group', true, false);
-
-        return '<div class="btn-group">' . $fragment->parse('quick_cats.php') . '</div>';
+        $fragment = new rex_fragment([
+            'header' => $searchbar,
+            'label' => rex_i18n::msg('quick_navigation_structure'),
+            'icon' => 'fa-regular fa-folder-tree',
+            'listItems' => $listItems,
+        ]);
+        return $fragment->parse('QuickNavigation/Dropdown.php');
     }
 }

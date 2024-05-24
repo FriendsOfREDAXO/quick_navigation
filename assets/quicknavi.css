@@ -1,14 +1,16 @@
 :root {
-  --qn-primary-color: #4b9ad9; /*Standard-Link-Color */
-  --qn-status1: #3bb594;
-  --qn-status2: #e74c3c;
-  --qn-status-default: #ccc;   
-  --qn-background-color: transparent;
-  --qn-watson-btn-background-color: #fff;
-  --qn-border-color: rgba(155, 155, 155, 0.1);
-  --qn-border-width: 0;
-  --gn-border-status-width: 5px;   
+    --qn-primary-color: #4b9ad9; /*Standard-Link-Color */
+    --qn-status-1: #3bb594;
+    --qn-status-2: #e74c3c;
+    --qn-status-default: #ccc;
+    --qn-background-color: transparent;
+    --qn-watson-btn-background-color: #fff;
+    --qn-border-color: rgba(155, 155, 155, 0.1);
+    --qn-border-width: 0;
+    --gn-border-status-width: 5px;
 }
+
+/*
 #qsearch {
   margin-bottom: 0px;
 }
@@ -19,7 +21,7 @@
 
 .quicknavi-btn-group .btn-group {
   border: var(--qn-border-width) solid var(--qn-border-color);
-    
+
 }
 
 .quicknavi-btn-group.transparent .btn,
@@ -60,7 +62,7 @@ li.quickitem {
 
 
 .quicknavi-items li {
-  
+
 
 }
 
@@ -88,7 +90,7 @@ li.quickitem {
   display: block;
   line-height: 1em;
   font-size: 18px;
- 
+
   -webkit-transition:all 0.3s ease;
   -moz-transition:all 0.3s ease-in-out;
   -o-transition:all 0.3s ease-in-out;
@@ -109,12 +111,12 @@ font-weight: bold;
 
 .quicknavi li a.quicklink:hover {
     background-color: rgba(62, 138, 201, 0.12);
-   
+
 }
 
 .quicknavi li a.bg-primary.quicklink:hover {
   background-color: rgb(22, 49, 71);
- 
+
 }
 
 .quicknavi li a.quicklink:focus {
@@ -165,7 +167,7 @@ li.quickitem a.bg-primary {
 
 .quicknavi-items.quicknavi li a.qn_status_2 {
   color: var(--qn-primary-color);
-  border-left:  var(--gn-border-status-width) solid var(--qn-status2); /* Rubinrot */
+  border-left:  var(--gn-border-status-width) solid var(--qn-status2); /* Rubinrot * /
   padding-bottom: 10px;
 }
 
@@ -235,7 +237,7 @@ li.quickitem a.bg-primary {
   border-left: 5px solid;
 }
 
-/* hide default Watson-Button */
+/* hide default Watson-Button * /
 li .watson-btn {
     display: none!important;
 }
@@ -244,7 +246,15 @@ li .watson-btn {
 .quicknavi-btn-group .watson-btn:active {
     margin-right: 0px;
 }
+*/
+
+
+
 .quick-navigation-menu {
+    --radius: 4px;
+    --spacing: 24px;
+    --spacing-list-item-top: 2px;
+
     max-width: 360px;
     min-width: 350px;
     max-height: 400px;
@@ -252,25 +262,71 @@ li .watson-btn {
     overflow-y: auto;
     padding: 0;
     margin: 0;
+    line-height: var(--spacing);
 }
 
-.quick-navigation-menu ul > li {
-    /*padding-left: 1rem;*/
-}
-.quick-navigation-menu ul > li:not(:last-child) {
-    border-bottom: 1px solid #dfe3e9;
+.quick-navigation-menu-header {
+    padding: calc(var(--spacing) / 4);
+    border-bottom: 1px solid #ddd;
 }
 
-.quick-navigation-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.quick-navigation-menu ul {
+    margin-left: calc(var(--radius) - var(--spacing));
+    padding-left: 0;
 }
-.quick-navigation-list > li {
+.quick-navigation-menu > ul {
+    margin-bottom: 0;
+    padding: calc(var(--spacing) / 4) calc(var(--spacing) / 2);
+}
+
+.quick-navigation-menu ul li {
+    display: block;
     position: relative;
+    padding-left : calc(2 * var(--spacing) - var(--radius) - 2px);
+    padding-top: var(--spacing-list-item-top);
+}
+
+.quick-navigation-menu ul li::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--spacing) / 2 - var(--radius) + var(--spacing-list-item-top));
+    left: calc(var(--spacing) - var(--radius) - 1px);
+    width: calc(2 * var(--radius));
+    height: calc(2 * var(--radius));
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.quick-navigation-menu ul ul li {
+    border-left: 2px solid #ddd;
+}
+
+.quick-navigation-menu ul ul li:last-child {
+    border-color: transparent;
+}
+
+.quick-navigation-menu ul ul li::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--spacing) / -2 + var(--spacing-list-item-top));
+    left: -2px;
+    width: calc(var(--spacing) + 2px);
+    height: calc(var(--spacing) + 1px);
+    border: solid #ddd;
+    border-width: 0 0 2px 2px;
 }
 
 .quick-navigation-list a {
     display: block;
-    padding: 8px;
+    margin: 0 -4px;
+    padding: 0 4px;
+}
+
+.quick-navigation-list a:hover,
+.quick-navigation-list a.quick-navigation-current {
+    background-color: rgba(75, 154, 217, .25);
+    border-radius: var(--radius);
+    text-decoration: none;
 }

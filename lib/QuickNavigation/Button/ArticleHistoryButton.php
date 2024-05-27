@@ -2,6 +2,7 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use IntlDateFormatter;
 use rex;
 use rex_addon;
 use rex_clang;
@@ -9,6 +10,7 @@ use rex_formatter;
 use rex_fragment;
 use rex_i18n;
 use rex_sql;
+use rex_string;
 use rex_url;
 use rex_yrewrite;
 
@@ -29,89 +31,104 @@ class ArticleHistoryButton implements ButtonInterface
 
     public function get(): string
     {
-        $date = '';
-        $name = '';
-        $link = '';
-        $minibar = '';
         $where = '';
-        $domaintitle = '';
-        $status_css = '';
-        $icon_prefix = $this->mode === 'minibar' ? 'rex-minibar-icon--fa rex-minibar-icon--' : 'fa ';
+        $whereParams = [];
+        $iconPrefix = $this->mode === 'minibar' ? 'rex-minibar-icon--fa rex-minibar-icon--' : 'fa ';
 
-        if (rex::getUser()->hasPerm('quick_navigation[history]')) {
-            $were = '';
-            if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
-                $where = 'WHERE updateuser="' . rex::getUser()->getValue('login') . '"';
-            }
 
-            $qry = 'SELECT id, status, parent_id, clang_id, startarticle, name, updateuser, updatedate
-                    FROM ' . rex::getTable('article') . '
-                    ' . $where . '
-                    ORDER BY updatedate DESC
-                    LIMIT ' . $this->limit;
-            $datas = rex_sql::factory()->getArray($qry);
-
-            if (count($datas) === 0) {
-                $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
-            }
-
-            $links = [];
-            if (count($datas) > 0) {
-                foreach ($datas as $data) {
-                    $dataID = rex_escape($data['id']);
-                    $langcode = '';
-                    $lang = rex_clang::get($data['clang_id']);
-                    if ($lang !== null) {
-                        $langcode = $lang->getCode();
-                        if ($langcode) {
-                            $langcode = '<i class="' . $icon_prefix . 'fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
-                        }
-                    }
-
-                    $name = rex_escape($data['name']);
-                    $date = rex_formatter::intlDateTime($data['updatedate']);
-                    if ($this->mode === 'linkmap') {
-                        $href = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . ' [' . $dataID . "]');";
-                    } else {
-                        $href = rex_url::backendPage(
-                            'content/edit',
-                            [
-                                'mode' => 'edit',
-                                'clang' => $data['clang_id'],
-                                'category_id' => $data['parent_id'],
-                                'article_id' => $data['id'],
-                            ]
-                        );
-                    }
-
-                    if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 2) {
-                        $domain = rex_yrewrite::getDomainByArticleId($data['id']);
-                        if ($domain) {
-                            $domaintitle = '<br><i class="' . $icon_prefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
-                        }
-                    }
-
-                    $status_css = ' qn_status_' . $data['status'];
-                    $link .= '<li class=""><a class="quicknavi_left ' . $status_css . '" href="' . $href . '" title="' . $name . '">' . $name . '<small>' . $langcode . '<i class="' . $icon_prefix . 'fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . $domaintitle . '</small></a>';
-                    $link .= '<span class="quicknavi_right"><a class ="' . $status_css . '" href="' . rex_getUrl($dataID) . '" title="' . $name . ' ' . rex_i18n::msg('title_eye'). '" target="frontend"><i class="' . $icon_prefix . 'fa-eye" aria-hidden="true"></i></a></span></li>';
-                    $links[] = $link;
-                    $minibar .= $link;
-                    $link = '';
-                }
-            }
-
-            if ($this->mode !== 'minibar') {
-                $fragment = new rex_fragment();
-                $fragment->setVar('items', $links, false);
-                $fragment->setVar('icon', 'fa fa-clock');
-                return $fragment->parse('quick_button.php');
-            }
-
-            return '<ul class="minibar-quicknavi-items">
-            ' . $minibar . '
-        </ul>';
+        if (!rex::getUser()->hasPerm('quick_navigation[history]')) {
+            return '';
         }
 
-        return '';
+        if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
+            $where = 'WHERE updateuser = :user';
+            $whereParams['user'] = rex::getUser()->getValue('login');
+        }
+
+        $qry = 'SELECT id, status, parent_id, clang_id, startarticle, name, updateuser, updatedate
+                FROM ' . rex::getTable('article') . '
+                ' . $where . '
+                ORDER BY updatedate DESC
+                LIMIT ' . $this->limit;
+        $datas = rex_sql::factory()->getArray($qry, $whereParams);
+
+        if (count($datas) === 0) {
+//            $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
+        }
+
+        $listItems = [];
+        if (count($datas) > 0) {
+            foreach ($datas as $data) {
+                $dataID = rex_escape($data['id']);
+                $langcode = '';
+                $lang = rex_clang::get($data['clang_id']);
+                if ($lang && $langcode = $lang->getCode()) {
+                    $langcode = '<i class="' . $iconPrefix . 'fa-flag" aria-hidden="true"></i> ' . $langcode . ' - ';
+                }
+
+                $name = rex_escape($data['name']);
+                $date = rex_formatter::intlDateTime($data['updatedate'], IntlDateFormatter::SHORT);
+
+                $attributesBackend = [
+                    'class' => 'quick-navigation-status-' . $data['status'],
+                    'href' => rex_url::backendPage('content/edit', ['mode' => 'edit', 'clang' => $data['clang_id'], 'category_id' => $data['parent_id'], 'article_id' => $data['id']]),
+                    'title' => $data['name'],
+                ];
+
+                $attributesFrontend = [
+                    'class' => 'quick-navigation-status-' . $data['status'],
+                    'href' => rex_getUrl($data['id']),
+                    'title' => $data['name'] . ' ' . rex_i18n::msg('title_eye'),
+                    'target' => '_blank',
+                ];
+
+                if ($this->mode === 'linkmap') {
+                    $attributesBackend['href'] = "javascript:insertLink('redaxo://" . $dataID . "','" . $name . ' [' . $dataID . "]');";
+                }
+
+
+                $domainTitle = '';
+                if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 2) {
+                    $domain = rex_yrewrite::getDomainByArticleId($data['id']);
+                    if ($domain) {
+                        $domainTitle = '<i class="' . $iconPrefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
+                    }
+                }
+
+                $listItem = '
+                    <div class="quick-navigation-item-row">
+                        <a' . rex_string::buildAttributes($attributesBackend) . '>
+                            ' . $name . '
+                        </a>
+                        <a' . rex_string::buildAttributes($attributesFrontend) . '>
+                            <i class="' . $iconPrefix . 'fa-eye" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="quick-navigation-item-row">
+                        <div class="quick-navigation-item-info">
+                            <small>
+                                ' . $langcode . '
+                                <i class="' . $iconPrefix . 'fa-user" aria-hidden="true"></i> 
+                                ' . rex_escape($data['updateuser']) . ' - ' . $date . $domainTitle . '
+                            </small>
+                        </div>
+                    </div>
+                ';
+
+                $listItems[] = $listItem;
+            }
+        }
+
+        if ($this->mode !== 'minibar') {
+            $fragment = new rex_fragment([
+                'label' => rex_i18n::msg('quick_navigation_article_history'),
+                'icon' => 'fa-regular fa-clock',
+                'listItems' => $listItems,
+            ]);
+            return $fragment->parse('QuickNavigation/Dropdown.php');
+        }
+
+        $minibar = '';
+        return '<ul class="minibar-quicknavi-items">' . $minibar . '</ul>';
     }
 }

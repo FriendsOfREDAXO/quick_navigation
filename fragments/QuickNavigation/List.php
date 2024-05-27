@@ -5,9 +5,9 @@
  */
 ?>
 
-<ul class="quick-navigation-list">
+<ul>
 <?php foreach($this->getVar('listItems', []) as $listItem): ?>
-    <li class="quick-navigation-list-item">
+    <li>
         <div class="quick-navigation-item">
             <?= $listItem ?>
         </div>

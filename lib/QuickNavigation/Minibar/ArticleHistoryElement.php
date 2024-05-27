@@ -12,40 +12,52 @@
 namespace FriendsOfRedaxo\QuickNavigation\Minibar;
 
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
+use rex_i18n;
 use rex_minibar_element;
 use rex_response;
 
 class ArticleHistoryElement extends rex_minibar_element
 {
-    public function render()
+    public function render(): string
     {
         // get article history from fragment
-        $his = new ArticleHistoryButton('minibar', 10);
-        $drophistory = $his->get();
-        $nonce = rex_response::getNonce();
-        return
-        '
-        <style nonce="'.$nonce.'">
-        ul.minibar-quicknavi-items{display:block;font-size:16px;padding:0;margin:0;min-width:300px}.minibar-quicknavi-items li{display:block;margin:0;line-height:16px}.minibar-quicknavi-items small{clear:both;display:block;color:#ccc;font-size:10px}.quicknavi_left{width:88%;display:inline-block}.minibar-quickfiles li a.quicknavi_left.qn_status_1{color:#4b9ad9;border-left:3px solid #3bb594;padding-bottom:10px}.minibar-quickfiles li a.quicknavi_left.qn_status_0{opacity:.6;border-left:3px solid #ccc}.minibar-quickfiles .quicknavi_right{width:12%;display:inline-block}.minibar-quicknavi-items a{color:#fff;text-decoration:none;padding-left:5px;padding-bottom:7px}
-        </style>
-        <div class="rex-minibar-item">
-            <span class="rex-minibar-icon">
-                <i class="rex-minibar-icon--fa rex-minibar-icon--fa-clock"></i>
-            </span>
-            <span class="rex-minibar-value">
-            &nbsp;
-            </span>
-        </div>
-        <div class="rex-minibar-info">
-            <div class="rex-minibar-info-group">
-             '.$drophistory.'
-            </div>
+        $history = new ArticleHistoryButton('minibar', 10);
 
-        </div>
-        ';
+        return '
+            <style nonce="' . rex_response::getNonce() . '">
+                .quick-navigation-minibar-item {
+                    min-width: unset;
+                }
+                .quick-navigation-minibar-item .rex-minibar-icon > i {
+                    line-height: 36px;
+                }
+                
+                .quick-navigation-minibar-info span.title {
+                    min-width: unset;
+                    padding-top: 8px;
+                }
+                .quick-navigation-minibar-info .rex-minibar-info-group + .rex-minibar-info-group {
+                    margin-top: 5px;
+                    padding-top: 5px;
+                }
+                .quick-navigation-minibar-info .rex-minibar-info-piece div {
+                    padding-top: 3px;
+                    color: #9ca5b2;            
+                }
+            </style>
+            <div class="rex-minibar-item quick-navigation-minibar-item">
+                <span class="rex-minibar-icon">
+                    <i class="rex-minibar-icon--fa rex-minibar-icon--fa-clock"></i>
+                </span>
+            </div>
+            <div class="rex-minibar-info quick-navigation-minibar-info">
+                <div class="rex-minibar-info-header">' . rex_i18n::msg('quick_navigation_article_history') . '</div>
+                ' . $history->get() . '
+            </div>
+            ';
     }
 
-    public function getOrientation()
+    public function getOrientation(): string
     {
         return rex_minibar_element::LEFT;
     }

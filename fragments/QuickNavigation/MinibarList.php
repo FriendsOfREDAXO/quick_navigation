@@ -5,12 +5,10 @@
  */
 ?>
 
-<ul class="quick-navigation-minibar-list">
 <?php foreach($this->getVar('listItems', []) as $listItem): ?>
-    <li>
-        <div class="quick-navigation-item">
+    <div class="rex-minibar-info-group">
+        <div class="rex-minibar-info-piece">
             <?= $listItem ?>
         </div>
-    </li>
+    </div>
 <?php endforeach ?>
-</ul>

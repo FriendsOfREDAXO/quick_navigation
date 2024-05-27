@@ -3,8 +3,6 @@ $(document).on('rex:ready', function() {
     if (root) {
         $.get(root.data('url')).done(function(quickNav) {
             root.html(quickNav);
-            // Event quicknavigation:ready auslösen für Addons, die darauf reagieren möchten.
-            $(document).trigger('quicknavigation:ready');
         });
     }
 });

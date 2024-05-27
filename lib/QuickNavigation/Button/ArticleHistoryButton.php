@@ -52,10 +52,6 @@ class ArticleHistoryButton implements ButtonInterface
                 LIMIT ' . $this->limit;
         $datas = rex_sql::factory()->getArray($qry, $whereParams);
 
-        if (count($datas) === 0) {
-//            $link .= '<li class="alert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
-        }
-
         $listItems = [];
         if (count($datas) > 0) {
             foreach ($datas as $data) {
@@ -95,28 +91,53 @@ class ArticleHistoryButton implements ButtonInterface
                     }
                 }
 
-                $listItem = '
-                    <div class="quick-navigation-item-row">
-                        <a' . rex_string::buildAttributes($attributesBackend) . '>
-                            ' . $name . '
-                        </a>
-                        <a' . rex_string::buildAttributes($attributesFrontend) . '>
-                            <i class="' . $iconPrefix . 'fa-eye" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="quick-navigation-item-row">
-                        <div class="quick-navigation-item-info">
-                            <small>
-                                ' . $langcode . '
-                                <i class="' . $iconPrefix . 'fa-user" aria-hidden="true"></i> 
-                                ' . rex_escape($data['updateuser']) . ' - ' . $date . $domainTitle . '
-                            </small>
+                if ($this->mode === 'minibar') {
+                    $listItem = '
+                        <span class="title">
+                            <a' . rex_string::buildAttributes($attributesFrontend) . '>
+                                <i class="' . $iconPrefix . 'fa-eye" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a' . rex_string::buildAttributes($attributesBackend) . '>
+                                ' . $name . '
+                            </a>
+                            <div>
+                                <small>
+                                    ' . $langcode . '
+                                    <i class="' . $iconPrefix . 'fa-user" aria-hidden="true"></i> 
+                                    ' . rex_escape($data['updateuser']) . ' - ' . $date . $domainTitle . '
+                                </small>
+                            </div>                        
+                        </span>
+                    ';
+                } else {
+                    $listItem = '
+                        <div class="quick-navigation-item-row">
+                            <a' . rex_string::buildAttributes($attributesBackend) . '>
+                                ' . $name . '
+                            </a>
+                            <a' . rex_string::buildAttributes($attributesFrontend) . '>
+                                <i class="' . $iconPrefix . 'fa-eye" aria-hidden="true"></i>
+                            </a>
                         </div>
-                    </div>
-                ';
+                        <div class="quick-navigation-item-row">
+                            <div class="quick-navigation-item-info">
+                                <small>
+                                    ' . $langcode . '
+                                    <i class="' . $iconPrefix . 'fa-user" aria-hidden="true"></i> 
+                                    ' . rex_escape($data['updateuser']) . ' - ' . $date . $domainTitle . '
+                                </small>
+                            </div>
+                        </div>
+                    ';
+                }
 
                 $listItems[] = $listItem;
             }
+        } else {
+            $fragment = new rex_fragment();
+            $listItems[] = $fragment->parse('QuickNavigation/NoResult.php');
         }
 
         if ($this->mode === 'minibar') {

@@ -119,16 +119,18 @@ class ArticleHistoryButton implements ButtonInterface
             }
         }
 
-        if ($this->mode !== 'minibar') {
+        if ($this->mode === 'minibar') {
             $fragment = new rex_fragment([
-                'label' => rex_i18n::msg('quick_navigation_article_history'),
-                'icon' => 'fa-regular fa-clock',
                 'listItems' => $listItems,
             ]);
-            return $fragment->parse('QuickNavigation/Dropdown.php');
+            return $fragment->parse('QuickNavigation/MinibarList.php');
         }
 
-        $minibar = '';
-        return '<ul class="minibar-quicknavi-items">' . $minibar . '</ul>';
+        $fragment = new rex_fragment([
+            'label' => rex_i18n::msg('quick_navigation_article_history'),
+            'icon' => 'fa-regular fa-clock',
+            'listItems' => $listItems,
+        ]);
+        return $fragment->parse('QuickNavigation/Dropdown.php');
     }
 }

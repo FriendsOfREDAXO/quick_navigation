@@ -160,6 +160,7 @@ class CategoryButton implements ButtonInterface
             'label' => rex_i18n::msg('quick_navigation_structure'),
             'icon' => 'fa-regular fa-folder-tree',
             'listItems' => $listItems,
+            'listType' => 'tree',
         ]);
         return $fragment->parse('QuickNavigation/Dropdown.php');
     }

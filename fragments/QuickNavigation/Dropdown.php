@@ -2,7 +2,19 @@
 /**
  * @var $this rex_fragment
  * @psalm-scope-this rex_fragment
+ *
+ * Vars
+ *  header - string
+ *  label - string
+ *  icon - string
+ *  listItems - array
+ *  listType - enum -> list, tree
  */
+
+$listType = $this->getVar('listType', 'list');
+if (!in_array($listType, ['list', 'tree'])) {
+    $listType = 'list';
+}
 ?>
 <div class="btn-group open">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,6 +31,8 @@
                 <?= $this->getVar('header') ?>
             </div>
         <?php endif ?>
-        <?php $this->subfragment('QuickNavigation/List.php') ?>
+        <div class="quick-navigation-menu-body quick-navigation-menu-list-type-<?= $listType ?>">
+            <?php $this->subfragment('QuickNavigation/List.php') ?>
+        </div>
     </div>
 </div>

@@ -13,6 +13,7 @@ use rex_formatter;
 use rex_fragment;
 use rex_i18n;
 use rex_sql;
+use rex_string;
 use rex_url;
 
 use function count;
@@ -79,32 +80,42 @@ class QuickNavigation
 
             $qry = 'SELECT category_id, id, title, filename, updateuser, updatedate FROM ' . rex::getTable('media') . ' ' . $where . ' ORDER BY updatedate DESC LIMIT ' . $limit;
             $datas = rex_sql::factory()->getArray($qry);
-            $media = [];
+            $listItems = [];
             if (count($datas) === 0) {
-                $media[] = '<li class="malert">' . rex_i18n::msg('quick_navigation_no_entries') . '</li>';
+                $fragment = new rex_fragment();
+                $listItems[] = $fragment->parse('QuickNavigation/NoResult.php');
             }
 
             foreach ($datas as $data) {
-                $entryname = $data['title'] != '' ? rex_escape($data['title']) : rex_escape($data['filename']);
-                $filename = rex_escape($data['filename']);
-                $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
-                $href = rex_url::backendPage(
-                    'mediapool/media',
-                    [
-                        'opener_input_field' => $opener,
-                        'rex_file_category' => $data['category_id'],
-                        'file_id' => $data['id'],
-                    ]
-                );
+                $attributes = [
+                    'title' => $data['filename'],
+                    'href' => rex_url::backendPage('mediapool/media', ['opener_input_field' => $opener, 'rex_file_category' => $data['category_id'], 'file_id' => $data['id']]),
+                ];
 
-                $media[] = '<li><a href="' . $href . '" title="' . $filename . '">' . $entryname . '<small> <i class="fa fa-user" aria-hidden="true"></i> ' . rex_escape($data['updateuser']) . ' - ' . $date . '</small></a></li>';
+                $date = rex_formatter::intlDateTime(strtotime($data['updatedate']));
+
+                $listItems[] = '
+                    <div class="quick-navigation-item-row">
+                        <a' . rex_string::buildAttributes($attributes). '>
+                            ' . ('' !== $data['title'] ? rex_escape($data['title']) : rex_escape($data['filename'])) . '
+                        </a>
+                    </div>
+                    <div class="quick-navigation-item-row">
+                        <div class="quick-navigation-item-info">
+                            <small>
+                                <i class="fa fa-user" aria-hidden="true"></i> 
+                                ' . rex_escape($data['updateuser']) . ' - ' . $date . '
+                            </small>
+                        </div>
+                    </div>';
             }
 
-            $fragment = new rex_fragment();
-            $fragment->setVar('prepend', $quick_file_nav, false);
-            $fragment->setVar('items', $media, false);
-            $fragment->setVar('icon', 'fa fa-clock');
-            return $fragment->parse('quick_button.php');
+            $fragment = new rex_fragment([
+                'label' => rex_i18n::msg('quick_navigation_media_history'),
+                'icon' => 'fa-regular fa-clock',
+                'listItems' => $listItems,
+            ]);
+            return $quick_file_nav . $fragment->parse('QuickNavigation/Dropdown.php');
         }
 
         return null;
@@ -134,7 +145,7 @@ class QuickNavigation
                 : '<a class="btn btn-default rex-form-aligned disabled"><span class="fa fa-chevron-right"></span></a>';
 
             // Kombinieren der Buttons mit einem Trennzeichen
-            $quick_file_nav = $backButton . ' - ' . $forwardButton;
+            $quick_file_nav = '<div class="btn-group">' . $backButton . $forwardButton . '</div>';
         }
 
         return $quick_file_nav;

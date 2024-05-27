@@ -16,7 +16,7 @@ if (!in_array($listType, ['list', 'tree'])) {
     $listType = 'list';
 }
 ?>
-<div class="btn-group open">
+<div class="btn-group">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="<?= $this->getVar('icon', 'fa fa-bullseye') ?>" aria-hidden="true"></i>
         <?php if ($this->getVar('label', false)): ?>

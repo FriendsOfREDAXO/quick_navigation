@@ -56,13 +56,6 @@ ButtonRegistry::registerButton(new MeinButton(), 5);
 
 To see the default prios, look alt the boot.php
 
-### Quick Navigation Client-Side Event
-
-```js
-$(document).on('quicknavigation:ready', function() { … });
-```
-
-
 ## Author
 
 **Friends Of REDAXO**

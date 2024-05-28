@@ -3,6 +3,7 @@ $(document).on('rex:ready', function() {
     if (root) {
         $.get(root.data('url')).done(function(quickNav) {
             root.html(quickNav);
+            root.find('[data-quick-navigation-toggle="tooltip"]').tooltip();
         });
     }
 });

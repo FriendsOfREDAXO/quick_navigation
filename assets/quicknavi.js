@@ -4,6 +4,7 @@ $(document).on('rex:ready', function() {
         $.get(root.data('url')).done(function(quickNav) {
             root.html(quickNav);
             root.find('[data-quick-navigation-toggle="tooltip"]').tooltip();
+            $(document).trigger('quick-navigation:ready');
         });
     }
 });

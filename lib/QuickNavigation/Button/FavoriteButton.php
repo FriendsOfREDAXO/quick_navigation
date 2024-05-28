@@ -54,14 +54,14 @@ class FavoriteButton implements ButtonInterface
                     'title' => rex_i18n::msg('quick_navigation_favorite_category_add') . ' ' . $name,
                 ];
 
-                $attributesArticleEdit = [
-                    'href' => rex_url::backendPage('content/edit', ['clang' => $clangId, 'category_id' => $categoryId]),
+                $attributesCategoryLink = [
+                    'href' => rex_url::backendPage('structure', ['clang' => $clangId, 'category_id' => $categoryId]),
                     'title' => $name,
                 ];
 
                 $listItem = '
                         <div class="quick-navigation-item-row">
-                            <a' . rex_string::buildAttributes($attributesArticleEdit) . '>
+                            <a' . rex_string::buildAttributes($attributesCategoryLink) . '>
                                 ' . rex_escape($name) . '
                             </a>
                             <a' . rex_string::buildAttributes($attributesCategoryAdd) . '>

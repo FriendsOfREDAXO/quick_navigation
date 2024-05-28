@@ -3,8 +3,7 @@ $(document).on('rex:ready', function() {
     if (root) {
         $.get(root.data('url')).done(function(quickNav) {
             root.html(quickNav);
-            // Event quicknavigation:ready auslösen für Addons, die darauf reagieren möchten.
-            $(document).trigger('quicknavigation:ready');
+            root.find('[data-quick-navigation-toggle="tooltip"]').tooltip();
         });
     }
 });
@@ -20,10 +19,10 @@ $(document).on("shown.bs.dropdown", function() {
         });
     }
 
-    $(this).find(".quick-navigation-current").focus();
+    $(this).find('.quick-navigation-menu a.quick-navigation-current').focus();
 
     $('#qsearch input').delay(200).fadeIn(function() {
-        $('.dropdown-menu.quicknavi li:first-child input').focus();
+        $(this).focus();
     });
 
 });

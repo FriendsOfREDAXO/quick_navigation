@@ -22,15 +22,15 @@ $(document).on("shown.bs.dropdown", function() {
 
     $(this).find('.quick-navigation-menu a.quick-navigation-current').focus();
 
-    $('#qsearch input').delay(200).fadeIn(function() {
+    $('#guick-navigation-search input').delay(200).fadeIn(function() {
         $(this).focus();
     });
 
 });
 
 function quicknavi_filter_init() {
-    $('#qsearch input').keyup(function() {
-        var current_query = $('#qsearch input').val();
+    $('#guick-navigation-search input').keyup(function() {
+        var current_query = $('#guick-navigation-search input').val();
         if (current_query !== "") {
             $('.quick-navigation-menu-body li').hide();
             $('.quick-navigation-menu-body li').each(function() {

@@ -76,9 +76,13 @@ $(document).on('quicknavigation:ready', function() { … });
 
 **Credits**
 
+Thanks to: 
+
 First Release: [Thomas Blum](https://github.com/tbaddade)
 
-Performance Optimization:  [Markus Staab](https://github.com/staabm) 
+Performance Optimization: [Markus Staab](https://github.com/staabm)
 
-"Bugfixes / Testing": [Hirbod](https://github.com/hirbod), [Marco Hanke](https://github.com/marcohanke)
+Styling, Bugfixing, Code Refactoring and more: [Thomas Blum](https://github.com/tbaddade)
+
+Bugfixes / Testing: [Hirbod](https://github.com/hirbod), [Marco Hanke](https://github.com/marcohanke)
 

@@ -9,6 +9,7 @@
     --quick-navigation-spacing-list-item-y: 2px;
 
     --quick-navigation-bootstrap-z-index: 1030;
+    --quick-navigation-color-offline: #b2b8bb;
 }
 
 [data-quick-navigation-toggle="tooltip"] + .tooltip {
@@ -142,4 +143,9 @@
 }
 .rex-nav-top .watson-btn {
     display: none;
+}
+
+.quick-navigation-item  a.quick-navigation-status-0
+{
+   color: var(--quick-navigation-color-offline);
 }

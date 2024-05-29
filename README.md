@@ -14,7 +14,7 @@ Features:
 - Linkmap structure navigation
 - Buttonregistry to easy register buttons sorted by prio in structure view
 - extension points to add classic buttons to structure, linkmap, mediapool
-- Category favorites
+- Category favorites with add buttons for categories and articles
 - YForm quick navigation
 
 ## Description 

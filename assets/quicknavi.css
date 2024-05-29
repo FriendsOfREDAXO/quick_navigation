@@ -132,3 +132,14 @@
     color: var(--quick-navigation-color-base);
     line-height: 1.25;
 }
+
+.quick-navigation-watson-btn svg {
+    fill: currentColor;
+    width: 22px;
+    height: 22px;
+    line-height: 1;
+    vertical-align: top;
+}
+.rex-nav-top .watson-btn {
+    display: none;
+}

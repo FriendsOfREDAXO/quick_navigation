@@ -17,6 +17,6 @@ class WatsonButton implements ButtonInterface
             return '';
         }
 
-        return '<div class="btn-group">' . Watson::getToggleButton(['class' => 'btn btn-default watson-btn']) . '</div>';
+        return '<div class="btn-group">' . Watson::getToggleButton(['class' => 'btn btn-default quick-navigation-watson-btn']) . '</div>';
     }
 }

@@ -21,12 +21,12 @@ Features:
 
 The Quick Navigation provides a category quick selection with a filter field and lists of the last edited articles and media (last modified).
 
-In live filter you can filter by categories, authors or yrewrite domains. For example, if one enters a domain, a tree of the respective domain is quickly displayed. 
+In live filter you can filter by categories, Ids and yrewrite domains. For example, if one enters a domain, a tree of the respective domain is quickly displayed. 
 
-Favorite categories can be maintained individually by the editors in the AddOn settings. The favorites list only appears when favorites have been selected. New articles can be created directly via the (+) symbol next to the category. 
+Favorite categories can be maintained individually by the editors in the AddOn settings. New articles or categories can be created directly via the (+) symbol next to the category link. 
 
 Quick Navigation incorporates functions of other AddOns as well, provided they have been installed and activated. 
-Current: YForm, Watson
+Current included support: YForm, Watson
 
 The Quick Navigation is accessible via the access key **m**.
 

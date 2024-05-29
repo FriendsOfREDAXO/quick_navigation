@@ -149,7 +149,7 @@ class CategoryButton implements ButtonInterface
         $listItems = self::renderCategoriesAsList($categoriesArray);
         $placeholder = rex_i18n::msg('quicknavi_placeholder');
         $fragment = new rex_fragment();
-        $fragment->setVar('id', 'qsearch');
+        $fragment->setVar('id', 'guick-navigation-search');
         $fragment->setVar('placeholder', $placeholder);
         $fragment->setVar('class', 'input-group input-group-xs has-feedback form-clear-button');
 

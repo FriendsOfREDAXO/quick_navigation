@@ -12,10 +12,10 @@ $(document).on('rex:ready', function() {
 
 $(document).on("shown.bs.dropdown", function() {
     quicknavi_filter_init();
-    rex_searchfield_init('#qsearch');
+    rex_searchfield_init('#guick-navigation-search');
     var ctype = getUrlVars()["ctype"];
     if (ctype) {
-        $(".quicknavi a").attr('href', function(i, h) {
+        $(".quick-navigation-item a").attr('href', function(i, h) {
             return h + (h.indexOf('?') != -1 ? "&ctype=" + ctype : "?ctype=" + ctype);
         });
     }

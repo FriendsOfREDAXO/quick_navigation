@@ -57,10 +57,13 @@
 }
 
 .quick-navigation-menu-body ul a:hover,
+.quick-navigation-menu-body ul a:focus,
 .quick-navigation-menu-body ul a.quick-navigation-current {
     background-color: rgba(75, 154, 217, .25);
     border-radius: var(--quick-navigation-radius);
     text-decoration: none;
+    outline: none;
+    outline-offset:0px
 }
 
 .quick-navigation-menu-list-type-tree ul {

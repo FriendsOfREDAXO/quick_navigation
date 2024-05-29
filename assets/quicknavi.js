@@ -1,5 +1,5 @@
 $(document).on('rex:ready', function() {
-    var root = $("#rex-quicknavigation-structure");
+    var root = $("#quick-navigation-structure");
     if (root) {
         $.get(root.data('url')).done(function(quickNav) {
             root.html(quickNav);

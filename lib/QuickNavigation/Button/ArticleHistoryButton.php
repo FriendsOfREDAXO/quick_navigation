@@ -87,7 +87,7 @@ class ArticleHistoryButton implements ButtonInterface
                 if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 2) {
                     $domain = rex_yrewrite::getDomainByArticleId($data['id']);
                     if ($domain) {
-                        $domainTitle = '<i class="' . $iconPrefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
+                        $domainTitle = ' <i class="' . $iconPrefix . 'fa-globe" aria-hidden="true"></i> ' . rex_escape($domain);
                     }
                 }
 

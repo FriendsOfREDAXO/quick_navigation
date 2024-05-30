@@ -12,7 +12,7 @@ $(document).on('rex:ready', function() {
 
 $(document).on("shown.bs.dropdown", function() {
     quicknavi_filter_init();
-    rex_searchfield_init('#guick-navigation-search');
+    rex_searchfield_init('#quick-navigation-search');
     var ctype = getUrlVars()["ctype"];
     if (ctype) {
         $(".quick-navigation-item a").attr('href', function(i, h) {
@@ -22,15 +22,15 @@ $(document).on("shown.bs.dropdown", function() {
 
     $(this).find('.quick-navigation-menu a.quick-navigation-current').focus();
 
-    $('#guick-navigation-search input').delay(200).fadeIn(function() {
+    $('#quick-navigation-search input').delay(200).fadeIn(function() {
         $(this).focus();
     });
 
 });
 
 function quicknavi_filter_init() {
-    $('#guick-navigation-search input').keyup(function() {
-        var current_query = $('#guick-navigation-search input').val();
+    $('#quick-navigation-search input').keyup(function() {
+        var current_query = $('#quick-navigation-search input').val();
         if (current_query !== "") {
             $('.quick-navigation-menu-body li').hide();
             $('.quick-navigation-menu-body li').each(function() {

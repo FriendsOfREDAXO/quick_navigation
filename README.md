@@ -3,8 +3,6 @@
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quickbar.png)
 
-Complete rewrite of the classic QuickNavigation 
-
 Features: 
 - Structure navigation with live search
 - Media history

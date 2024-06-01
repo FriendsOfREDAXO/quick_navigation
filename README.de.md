@@ -2,8 +2,6 @@
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quickbar.png)
 
-Komplette Überarbeitung der klassischen QuickNavigation 
-
 Funktionen: 
 - Struktur-Navigation mit Live-Suche
 - Medienverlauf

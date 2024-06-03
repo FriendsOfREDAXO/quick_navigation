@@ -56,7 +56,7 @@ Um die Standardprioritäten zu sehen, schaue in die boot.php
 ### Client-seitiges Ereignis für Quick Navigation
 
 ```js
-$(document).on('quicknavigation:ready', function() { … });
+$(document).on('quick-navigation:ready', function() { … });
 ```
 
 ## Autor

@@ -57,7 +57,7 @@ To see the default prios, look alt the boot.php
 ### Quick Navigation Client-Side Event
 
 ```js
-$(document).on('quicknavigation:ready', function() { … });
+$(document).on('quickn-avigation:ready', function() { … });
 ```
 
 

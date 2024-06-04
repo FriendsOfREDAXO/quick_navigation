@@ -5,7 +5,9 @@ namespace FriendsOfRedaxo\QuickNavigation;
 use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\LinkMap\QuickNavigationLinkMap;
 use FriendsOfRedaxo\QuickNavigation\Media\QuickNavigationMedia;
+use rex_extension;
 use rex_extension_point;
+
 
 class QuickNavigation
 {

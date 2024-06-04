@@ -41,7 +41,7 @@ class QuickNavigation
             $history = new ArticleHistoryButton('linkmap', 15);
             $drophistory = $history->get();
             $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
-            return '<div class="btn-group quicknavi-btn-group linkmapbt pull-right">' . $drophistory . $catsbutton_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
+            return '<div class="btn-group quick-navigation-btn-group linkmapbt pull-right">' . $drophistory . $catsbutton_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
 
         return null;
@@ -154,6 +154,6 @@ class QuickNavigation
     {
         $custom = '';
         $custom_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM', $custom));
-        return '<div class="btn-group quicknavi-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . $custom_buttons . '</div>';
+        return '<div class="btn-group quick-navigation-btn-group transparent pull-right">' . ButtonRegistry::getButtonsOutput() . $custom_buttons . '</div>';
     }
 }

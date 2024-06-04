@@ -4,6 +4,7 @@ namespace FriendsOfRedaxo\QuickNavigation\Media;
 
 use rex;
 use rex_be_controller;
+use rex_i18n;
 use rex_extension;
 use rex_extension_point;
 use rex_formatter;

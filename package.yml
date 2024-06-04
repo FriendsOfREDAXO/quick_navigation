@@ -5,13 +5,13 @@ supportpage: https://github.com/FriendsOfREDAXO/quick_navigation
 perm: quick_navigation[]
 
 page:
-    title: translate:quicknavi_title
+    title: translate:quick_navigation_title
     icon: rex-icon fa-star
     perm: quick_navigation[settings]
     subpages:
-        config: { title: 'translate:quicknavi_config' }
+        config: { title: 'translate:quick_navigation_config' }
         help:  
-             { title: 'translate:quicknavi_help',  icon: rex-icon fa-question-circle, subPath: README.md} 
+             { title: 'translate:quick_navigation_help',  icon: rex-icon fa-question-circle, subPath: README.md} 
 requires:
     packages:
         structure/content: '^2.17.0'

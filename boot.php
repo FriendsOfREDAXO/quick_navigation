@@ -39,7 +39,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
 
     $userId = rex::getUser()->getId();
-    if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $userId) != '1') {
+    if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_artdirections' . $userId) != '1') {
         ButtonRegistry::registerButton(new ArticleNavigationButton(), 10);
     }
 

@@ -24,7 +24,7 @@ class FavoriteButton implements ButtonInterface
             return '';
         }
 
-        $categoryIds = rex_addon::get('quick_navigation')->getConfig('quicknavi_favs' . $user->getId());
+        $categoryIds = rex_addon::get('quick_navigation')->getConfig('quick_navigation_favs' . $user->getId());
 
         $listItems = [];
         if ($categoryIds && count($categoryIds) > 0) {

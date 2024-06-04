@@ -139,7 +139,7 @@ class CategoryButton implements ButtonInterface
     {
         $ignoreOffline = false;
         $user = rex::getUser()->getId();
-        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $user) == '1') {
+        if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_ignoreoffline' . $user) == '1') {
             $ignoreOffline = true;
         }
 
@@ -147,7 +147,7 @@ class CategoryButton implements ButtonInterface
         $categoriesArray = self::generateBackendNavArray($currentClangId, $ignoreOffline, null); // Argumente nach Bedarf anpassen
 
         $listItems = self::renderCategoriesAsList($categoriesArray);
-        $placeholder = rex_i18n::msg('quicknavi_placeholder');
+        $placeholder = rex_i18n::msg('quick_navigation_placeholder');
         $fragment = new rex_fragment();
         $fragment->setVar('id', 'quick-navigation-search');
         $fragment->setVar('placeholder', $placeholder);

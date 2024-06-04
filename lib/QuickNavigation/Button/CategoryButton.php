@@ -138,8 +138,8 @@ class CategoryButton implements ButtonInterface
     public function get(): string
     {
         $ignoreOffline = false;
-        $qn_user = rex::getUser()->getId();
-        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $qn_user) == '1') {
+        $user = rex::getUser()->getId();
+        if (rex_addon::get('quick_navigation')->getConfig('quicknavi_ignoreoffline' . $user) == '1') {
             $ignoreOffline = true;
         }
 

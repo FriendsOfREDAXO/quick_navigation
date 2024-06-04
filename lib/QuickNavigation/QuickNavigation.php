@@ -71,7 +71,7 @@ class QuickNavigation
             $file_id = rex_request('file_id', 'int');
 
             // Verwendung der neuen Funktion zur Generierung der quick_file_nav
-            $quick_file_nav = self::generateQuickFileNav($file_id, $opener);
+            $quick_file_nav = self::generateQuickFileNavigation($file_id, $opener);
 
             $where = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -121,7 +121,7 @@ class QuickNavigation
         return null;
     }
 
-    protected static function generateQuickFileNav(int $file_id, string $opener): string
+    protected static function generateQuickFileNavigation(int $file_id, string $opener): string
     {
         $quick_file_nav = '';
         if ($file_id !== 0) {

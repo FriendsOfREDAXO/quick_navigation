@@ -17,7 +17,7 @@ class BuildNavigationArray
     /**
      * @return array<mixed>
      */
-    public static function generateBackendNavArray(int $clangId = null, bool $ignoreOffline = true, int $parentId = null, bool $includeHome = true): array
+    public static function GenerateBackendNavArray(int $clangId = null, bool $ignoreOffline = true, int $parentId = null, bool $includeHome = true): array
     {
         $user = rex::getUser();
         if ($clangId === null) {

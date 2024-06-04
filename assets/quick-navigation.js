@@ -11,9 +11,9 @@ $(document).on('rex:ready', function() {
 
 
 $(document).on("shown.bs.dropdown", function() {
-    quicknavi_filter_init();
+    quickNavigationFilterInit();
     rex_searchfield_init('#quick-navigation-search');
-    var ctype = getUrlVars()["ctype"];
+    var ctype = quickNavigationGetUrlVars()["ctype"];
     if (ctype) {
         $(".quick-navigation-item a").attr('href', function(i, h) {
             return h + (h.indexOf('?') != -1 ? "&ctype=" + ctype : "?ctype=" + ctype);
@@ -28,7 +28,7 @@ $(document).on("shown.bs.dropdown", function() {
 
 });
 
-function quicknavi_filter_init() {
+function quickNavigationFilterInit() {
     $('#quick-navigation-search input').keyup(function() {
         var current_query = $('#quick-navigation-search input').val();
         if (current_query !== "") {
@@ -62,7 +62,7 @@ function quicknavi_filter_init() {
     });
 }
 
-function getUrlVars() {
+function quickNavigationGetUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
         vars[key] = value;

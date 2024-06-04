@@ -19,7 +19,7 @@ class QuickNavigationLinkMap
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
 
             $category_list = new CategoryButton();
-            $category_button_output = $category_listn->get();
+            $category_button_output = $category_list->get();
 
             $history_list = new ArticleHistoryButton('linkmap', 15);
             $history_list_output = $history_list->get();

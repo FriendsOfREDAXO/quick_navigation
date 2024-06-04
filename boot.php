@@ -33,6 +33,7 @@ use rex_url;
 use rex_view;
 
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
+    if (rex::getUser()->hasPerm('quick_navigation[]')) {
     rex_api_function::register('quicknavigation_api', MenuRender::class);
     rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
     rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
@@ -52,8 +53,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     rex_perm::register('quick_navigation[]');
     rex_perm::register('quick_navigation[history]');
     rex_perm::register('quick_navigation[all_changes]');
-
-    if (rex::getUser()->hasPerm('quick_navigation[]')) {
+        
         rex_extension::register('PAGE_TITLE', static function ($ep) {
             if (rex_be_controller::getCurrentPageObject()->isPopup()) {
                 return $ep->getSubject();

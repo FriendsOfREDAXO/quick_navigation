@@ -14,7 +14,7 @@ class QuickNavigationLinkMap
     /**
      * @param rex_extension_point<string> $ep
      */
-    public static function LinkMapQuickNavigation(rex_extension_point $ep): ?string
+    public static function LinkMapNavigation(rex_extension_point $ep): ?string
     {
         // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {

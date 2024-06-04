@@ -158,7 +158,7 @@ class CategoryButton implements ButtonInterface
         $fragment = new rex_fragment([
             'header' => $searchbar,
             'label' => rex_i18n::msg('quick_navigation_structure'),
-            'icon' => 'fa-regular fa-folder-tree',
+            'icon' => 'fa-solid fa-folder-tree',
             'listItems' => $listItems,
             'listType' => 'tree',
         ]);

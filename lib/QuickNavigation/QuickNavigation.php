@@ -2,6 +2,9 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
+use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
+use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
+use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
 use rex;
 use rex_be_controller;
 use rex_extension;

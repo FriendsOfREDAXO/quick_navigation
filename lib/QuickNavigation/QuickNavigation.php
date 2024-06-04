@@ -10,7 +10,7 @@ use rex_extension_point;
 class QuickNavigation
 {
     /**
-    * @deprecated since version 7.0, will be removed in version 9.0. Use <FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender> instead.
+    * @deprecated since version 8.1, will be removed in future version. Use <FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender> instead.
     */
     public static function linkmap_list(rex_extension_point $ep): ?string
     {
@@ -18,7 +18,7 @@ class QuickNavigation
     }
   
     /**
-    * @deprecated since version 7.0, will be removed in version 9.0. Use <FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender> instead.
+    * @deprecated since version 8.1, will be removed in future version. Use <FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender> instead.
     */
     public static function media_history(rex_extension_point $ep): ?string
     {

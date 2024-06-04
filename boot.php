@@ -34,8 +34,8 @@ use rex_view;
 
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     rex_api_function::register('quicknavigation_api', MenuRender::class);
-    rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.css'));
-    rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quicknavi.js'));
+    rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
+    rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
 
     $userId = rex::getUser()->getId();
     if (rex_addon::get('quick_navigation')->getConfig('quicknavi_artdirections' . $userId) != '1') {

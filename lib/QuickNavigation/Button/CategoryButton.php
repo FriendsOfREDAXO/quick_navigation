@@ -39,7 +39,7 @@ class CategoryButton implements ButtonInterface
 
             if (!empty($item['children'])) {
                 $fragment = new rex_fragment([
-                    'listItems' => $this->renderCategoriesAsList($item['children'], $depth + 1),
+                    'listItems' => $this->RenderCategoriesAsList($item['children'], $depth + 1),
                 ]);
                 $listItem .= $fragment->parse('QuickNavigation/List.php');
             }
@@ -61,7 +61,7 @@ class CategoryButton implements ButtonInterface
         $currentClangId = rex_clang::getCurrentId();
         $categoriesArray = BuildNavigationArray::GenerateBackendNavArray($currentClangId, $ignoreOffline, null);
 
-        $listItems = $this->renderCategoriesAsList($categoriesArray);
+        $listItems = $this->RenderCategoriesAsList($categoriesArray);
         $placeholder = rex_i18n::msg('quick_navigation_placeholder');
         $fragment = new rex_fragment();
         $fragment->setVar('id', 'quick-navigation-search');

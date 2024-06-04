@@ -17,7 +17,7 @@ use FriendsOfRedaxo\QuickNavigation\Utility\BuildNavigationArray;
 
 class CategoryButton implements ButtonInterface
 {
-    public function renderCategoriesAsList(array $categoriesArray, int $depth = 0): array
+    public function RenderCategoriesAsList(array $categoriesArray, int $depth = 0): array
     {
         $listItems = [];
         foreach ($categoriesArray as $item) {
@@ -59,7 +59,7 @@ class CategoryButton implements ButtonInterface
         }
 
         $currentClangId = rex_clang::getCurrentId();
-        $categoriesArray = BuildNavigationArray::generateBackendNavArray($currentClangId, $ignoreOffline, null);
+        $categoriesArray = BuildNavigationArray::GenerateBackendNavArray($currentClangId, $ignoreOffline, null);
 
         $listItems = $this->renderCategoriesAsList($categoriesArray);
         $placeholder = rex_i18n::msg('quick_navigation_placeholder');

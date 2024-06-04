@@ -76,7 +76,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
             return '<div id="quick-navigation-structure" data-url="' . rex_url::currentBackendPage($params + MenuRender::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigation::LinkMapQuickNavigation(...));
-        rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigation::MediaHistory(...));
+        rex_extension::register('MEDIA_LIST_TOOLBAR', MediaHistory(...));
     }
 }
 

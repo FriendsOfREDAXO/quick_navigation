@@ -23,24 +23,7 @@ class QuickNavigation
     /**
      * @param rex_extension_point<string> $ep
      */
-    public static function media_history(rex_extension_point $ep): ?string
-    {
-        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
-            $subject = $ep->getSubject();
-            $drophistory = self::get_media();
-            $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', ''));
-            $button = $custom_media_buttons . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div><select name="rex_file_category"';
-            return str_replace('<select name="rex_file_category"', $button, $subject);
-        }
-
-        return null;
-    }
-
-    // linkmap catlist
-    /**
-     * @param rex_extension_point<string> $ep
-     */
-    public static function linkmap_list(rex_extension_point $ep): ?string
+    public static function LinkMapQuickNavigation(rex_extension_point $ep): ?string
     {
         // get article history
         if (rex_be_controller::getCurrentPagePart(1) == 'linkmap') {
@@ -63,15 +46,31 @@ class QuickNavigation
 
         return null;
     }
+    
+    /**
+     * @param rex_extension_point<string> $ep
+     */
+    public static function MediaHistory(rex_extension_point $ep): ?string
+    {
+        if (rex_be_controller::getCurrentPagePart(1) == 'mediapool') {
+            $subject = $ep->getSubject();
+            $drophistory = self::GenerateMediaHistoryList();
+            $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', ''));
+            $button = $custom_media_buttons . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div><select name="rex_file_category"';
+            return str_replace('<select name="rex_file_category"', $button, $subject);
+        }
 
-    public static function get_media(int $limit = 15): ?string
+        return null;
+    }
+    
+    public static function GenerateMediaHistoryList(int $limit = 15): ?string
     {
         $opener = rex_request('opener_input_field');
         if (rex::getUser()->hasPerm('quick_navigation[history]')) {
             $file_id = rex_request('file_id', 'int');
 
             // Verwendung der neuen Funktion zur Generierung der quick_file_nav
-            $quick_file_nav = self::generateQuickFileNavigation($file_id, $opener);
+            $quick_file_nav = self::GenerateFileNavigation($file_id, $opener);
 
             $where = '';
             if (!rex::getUser()->hasPerm('quick_navigation[all_changes]')) {
@@ -121,7 +120,7 @@ class QuickNavigation
         return null;
     }
 
-    protected static function generateQuickFileNavigation(int $file_id, string $opener): string
+    protected static function GenerateFileNavigation(int $file_id, string $opener): string
     {
         $quick_file_nav = '';
         if ($file_id !== 0) {

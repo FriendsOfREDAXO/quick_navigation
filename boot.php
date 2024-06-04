@@ -19,6 +19,7 @@ use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
 use FriendsOfRedaxo\QuickNavigation\Button\WatsonButton;
 use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
+use FriendsOfRedaxo\QuickNavigation\Media\QuickNavigationMedia;
 use FriendsOfRedaxo\QuickNavigation\Minibar\ArticleHistoryElement;
 use rex;
 use rex_addon;

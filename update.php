@@ -16,4 +16,8 @@ foreach ($sql as $row) {
         $updateSql->setValue('key', $newKey);
         $updateSql->update();
     }
+
+
 }
+$addon = rex_addon::get("quick_navigation");
+$addon->setConfig('quck_navigation_migrated', '1');

@@ -23,8 +23,8 @@ class QuickNavigationLinkMap
 
             $history_list = new ArticleHistoryButton('linkmap', 15);
             $history_list_output = $history_list->get();
-            
-            $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM'));
+            $custom = '';
+            $custom_linkmap_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_LINKMAP_CUSTOM', $custom));
             return '<div class="btn-group quick-navigation-btn-group linkmapbt pull-right">' . $history_list_output .   $category_button_output . $custom_linkmap_buttons . '</div>' . $ep->getSubject();
         }
         return null;

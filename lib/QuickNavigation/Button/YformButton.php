@@ -68,8 +68,7 @@ class YformButton implements ButtonInterface
         }
 
         if (count($listItems) < 1) {
-            $fragment = new rex_fragment();
-            $listItems[] = $fragment->parse('QuickNavigation/NoResult.php');
+            return '';
         }
 
         $fragment = new rex_fragment([

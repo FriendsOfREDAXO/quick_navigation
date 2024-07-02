@@ -76,8 +76,7 @@ class FavoriteButton implements ButtonInterface
                 $listItems[] = $listItem;
             }
         } else {
-            $fragment = new rex_fragment();
-            $listItems[] = $fragment->parse('QuickNavigation/NoResult.php');
+            return '';
         }
 
         $fragment = new rex_fragment([

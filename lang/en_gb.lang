@@ -18,6 +18,7 @@ quick_navigation_structure = Structure
 quick_navigation_article_history = Last edited articles
 quick_navigation_media_history = Last edited media
 quick_navigation_favorite = Favorites
+quick_navigation_manage_favorite = Add favorites
 quick_navigation_favorite_article_add = Add article to:
 quick_navigation_favorite_category_add = Add category to:
 quick_navigation_yform = YForm

@@ -76,7 +76,7 @@ class FavoriteButton implements ButtonInterface
                 $listItems[] = $listItem;
             }
         } else {
-            return '';
+            $listItems[] = '<a class="btn manage_favortites" href="'.rex_url::backendPage("quick_navigation/config").'">'.rex_i18n::msg('quick_navigation_manage_favorite').'</a>';
         }
 
         $fragment = new rex_fragment([

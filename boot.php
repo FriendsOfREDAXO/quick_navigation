@@ -36,26 +36,26 @@ use rex_view;
 
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     if (rex::getUser()->hasPerm('quick_navigation[]')) {
-    rex_api_function::register('quicknavigation_api', MenuRender::class);
-    rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
-    rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
+        rex_api_function::register('quicknavigation_api', MenuRender::class);
+        rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
+        rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
 
-    $userId = rex::getUser()->getId();
-    if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_artdirections' . $userId) != '1') {
-        ButtonRegistry::registerButton(new ArticleNavigationButton(), 10);
-    }
+        $userId = rex::getUser()->getId();
+        if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_artdirections' . $userId) != '1') {
+            ButtonRegistry::registerButton(new ArticleNavigationButton(), 10);
+        }
 
-    ButtonRegistry::registerButton(new WatsonButton(), 20);
-    ButtonRegistry::registerButton(new CategoryButton(), 30);
-    ButtonRegistry::registerButton(new ArticleHistoryButton('structure', 20), 40);
-    ButtonRegistry::registerButton(new YformButton(), 50);
-    ButtonRegistry::registerButton(new FavoriteButton(), 60);
+        ButtonRegistry::registerButton(new WatsonButton(), 20);
+        ButtonRegistry::registerButton(new CategoryButton(), 30);
+        ButtonRegistry::registerButton(new ArticleHistoryButton('structure', 20), 40);
+        ButtonRegistry::registerButton(new YformButton(), 50);
+        ButtonRegistry::registerButton(new FavoriteButton(), 60);
 
-    // Addonrechte (permissions) registieren
-    rex_perm::register('quick_navigation[]');
-    rex_perm::register('quick_navigation[history]');
-    rex_perm::register('quick_navigation[all_changes]');
-        
+        // Addonrechte (permissions) registieren
+        rex_perm::register('quick_navigation[]');
+        rex_perm::register('quick_navigation[history]');
+        rex_perm::register('quick_navigation[all_changes]');
+
         rex_extension::register('PAGE_TITLE', static function ($ep) {
             if (rex_be_controller::getCurrentPageObject()->isPopup()) {
                 return $ep->getSubject();

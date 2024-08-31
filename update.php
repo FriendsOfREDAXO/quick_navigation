@@ -1,4 +1,5 @@
 <?php
+
 $sql = rex_sql::factory();
 $sql->setQuery('SELECT * FROM rex_config WHERE namespace = :namespace', ['namespace' => 'quick_navigation']);
 

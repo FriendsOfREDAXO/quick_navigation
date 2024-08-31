@@ -31,7 +31,7 @@ jobs:
               run: composer install --prefer-dist --no-progress
 
             - name: Run PHP CS Fixer
-              run: vendor/bin/php-cs-fixer fix  --diff --verbose
+              run: vendor/bin/php-cs-fixer fix . --diff --verbose
 
             - name: Commit and push fixed files
               uses: stefanzweifel/git-auto-commit-action@v4

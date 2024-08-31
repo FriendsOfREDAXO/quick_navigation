@@ -38,7 +38,7 @@ class FavoriteButton implements ButtonInterface
                 $category = rex_category::get($categoryId);
                 if ($category) {
                     $name = $category->getName();
-                } elseif (0 === $categoryId)  {
+                } elseif (0 === $categoryId) {
                     $name = rex_i18n::msg('root_level');
                 } else {
                     continue;

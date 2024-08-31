@@ -8,7 +8,6 @@ use FriendsOfRedaxo\QuickNavigation\Media\QuickNavigationMedia;
 use rex_extension;
 use rex_extension_point;
 
-
 class QuickNavigation
 {
     /**
@@ -18,7 +17,7 @@ class QuickNavigation
     {
         return QuickNavigationLinkMap::LinkMapQuickNavigation($ep);
     }
-  
+
     /**
     * @deprecated since version 8.1, will be removed in future version. Use <FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender> instead.
     */

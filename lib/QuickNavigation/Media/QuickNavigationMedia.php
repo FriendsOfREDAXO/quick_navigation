@@ -82,7 +82,7 @@ class QuickNavigationMedia
                 'icon' => 'fa-regular fa-clock',
                 'listItems' => $listItems,
             ]);
-           return $quick_file_nav . $fragment->parse('QuickNavigation/Dropdown.php');
+            return $quick_file_nav . $fragment->parse('QuickNavigation/Dropdown.php');
         }
 
         return null;

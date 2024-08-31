@@ -1,4 +1,4 @@
-/vendor/** export-ignore
+/vendor/ export-ignore
 composer.json export-ignore
 composer.lock export-ignore
 .php-cs-fixer.cache export-ignore

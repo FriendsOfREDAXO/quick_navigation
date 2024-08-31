@@ -1,36 +1,39 @@
 name: PHP-CS-Fixer
 
 on:
-  push:
-    branches: [ master, main ]
-  pull_request:
-    branches: [ master, main ]
+    push:
+        branches: [ master, main ]
+    pull_request:
+        branches: [ master, main ]
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  code-style:
-    if: github.event.pull_request.draft == false
+    code-style:
+        if: github.event.pull_request.draft == false
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write  # for Git to git apply
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write  # for Git to git apply
 
-    steps:
-      - uses: actions/checkout@v3
+        steps:
+            - uses: actions/checkout@v3
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: gd, intl, pdo_mysql
-          coverage: none # disable xdebug, pcov
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+                  extensions: gd, intl, pdo_mysql
+                  coverage: none # disable xdebug, pcov
 
-      - name: Run PHP CS Fixer
-        run: php-cs-fixer fix lib --diff --verbose
+            - name: Install Composer Dependencies
+              run: composer install --prefer-dist --no-progress
 
-      - name: Commit and push fixed files
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply php-cs-fixer changes
+            - name: Run PHP CS Fixer
+              run: vendor/bin/php-cs-fixer fix lib --diff --verbose
+
+            - name: Commit and push fixed files
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: Apply php-cs-fixer changes

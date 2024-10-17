@@ -58,7 +58,7 @@ To see the default prios, look alt the boot.php
 
 ```js
 $(document).on('quickn-avigation:ready', function() { … });
-```
+```  
 
 
 ## Author
@@ -68,13 +68,15 @@ $(document).on('quickn-avigation:ready', function() { … });
 * http://www.redaxo.org
 * https://github.com/FriendsOfREDAXO
 
+
+## Credits
+
 **Project Lead**
 
-[Thomas Skerbis](https://github.com/skerbis)
+[Thomas Skerbis](https://github.com/skerbis)  
 
-**Credits**
 
-Thanks to: 
+**Thanks to:** 
 
 First Release: [Thomas Blum](https://github.com/tbaddade)
 

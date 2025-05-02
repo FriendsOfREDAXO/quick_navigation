@@ -15,7 +15,7 @@ class MediaSortButton implements ButtonInterface
         $user = rex::getUser()->getId();
         $package = rex_addon::get('quick_navigation');
 
-        if (!rex::getUser() || $package->getConfig('quick_navigation_mediasort' . $user) !== '1') {
+        if (!rex::getUser()) {
             return '';
         }
 

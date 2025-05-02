@@ -226,7 +226,7 @@ class QuickNavigationMedia
 
         $subject = $ep->getSubject();
 
-         // Je nach Sortiermodus die SQL-Abfrage anpassen
+        // Je nach Sortiermodus die SQL-Abfrage anpassen
         if (strpos($subject, 'ORDER BY') !== false) {
             switch ($sortMode) {
                 case 'filename':

@@ -14,18 +14,18 @@ class MediaSortButton implements ButtonInterface
         // Prüfen, ob der Benutzer die Berechtigung hat und ob die Funktion aktiviert ist
         $user = rex::getUser()->getId();
         $package = rex_addon::get('quick_navigation');
-        
+
         if (!rex::getUser() || $package->getConfig('quick_navigation_mediasort' . $user) !== '1') {
             return '';
         }
-        
+
         // Aktuellen Sortierstatus aus dem Cookie oder Session auslesen
         $sortMode = rex_request::cookie('media_sort_alphabetical', 'string', 'false');
-        
+
         // Icon und Titel basierend auf dem aktuellen Status setzen
         $icon = $sortMode === 'true' ? 'fa-sort-alpha-asc' : 'fa-sort-numeric-desc';
         $title = $sortMode === 'true' ? rex_i18n::msg('quick_navigation_media_sort_date') : rex_i18n::msg('quick_navigation_media_sort_alpha');
-        
+
         return '<div class="btn-group">
                   <a class="btn btn-default" id="qn-mediasort-toggle" title="' . $title . '">
                     <i class="fa ' . $icon . '"></i>

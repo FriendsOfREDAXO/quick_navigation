@@ -81,7 +81,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigationLinkMap::LinkMapNavigation(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigationMedia::MediaHistory(...));
-        
+
         // Registriere den Extension Point für die Mediensortierung
         rex_extension::register('MEDIA_LIST_QUERY', [QuickNavigationMedia::class, 'ModifyMediaListQuery']);
     }

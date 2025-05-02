@@ -23,3 +23,8 @@ quick_navigation_favorite_article_add = Artikel hinzufügen in:
 quick_navigation_favorite_category_add = Kategorie hinzufügen in:
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Datensatz hinzufügen in:
+
+# Medienpool-Sortierung (nur die Beschriftungen für den Button beibehalten)
+quick_navigation_media_sort_alpha = Nach Dateinamen sortieren (A-Z)
+quick_navigation_media_sort_date = Nach Datum sortieren (neueste zuerst)
+quick_navigation_media_sort_title = Nach Titel sortieren (A-Z)

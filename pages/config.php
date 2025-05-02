@@ -23,6 +23,7 @@ if (rex_post('formsubmit', 'string') == '1') {
         ['quick_navigation_favs' . $user, 'array[int]'],
         ['quick_navigation_ignoreoffline' . $user, 'int'],
         ['quick_navigation_artdirections' . $user, 'int'],
+        // Medienpool-Sortier-Button-Option entfernt
     ]));
     echo rex_view::success($package->i18n('quick_navigation_config_saved'));
 }
@@ -71,6 +72,8 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/checkbox.php');
+
+// Medienpool-Sortier-Button-Option entfernt
 
 // Save-Button
 $formElements = [];

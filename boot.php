@@ -17,9 +17,11 @@ use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
 use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
+use FriendsOfRedaxo\QuickNavigation\Button\MediaSortButton;
 use FriendsOfRedaxo\QuickNavigation\Button\WatsonButton;
 use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
 use FriendsOfRedaxo\QuickNavigation\Linkmap\QuickNavigationLinkMap;
+use FriendsOfRedaxo\QuickNavigation\Media\MediaSorter;
 use FriendsOfRedaxo\QuickNavigation\Media\QuickNavigationMedia;
 use FriendsOfRedaxo\QuickNavigation\Minibar\ArticleHistoryElement;
 use rex;
@@ -29,6 +31,7 @@ use rex_backend_login;
 use rex_be_controller;
 use rex_clang;
 use rex_extension;
+use rex_extension_point;
 use rex_minibar;
 use rex_perm;
 use rex_url;
@@ -56,7 +59,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
         rex_perm::register('quick_navigation[history]');
         rex_perm::register('quick_navigation[all_changes]');
 
-        rex_extension::register('PAGE_TITLE', static function ($ep) {
+        rex_extension::register('PAGE_TITLE', static function (\rex_extension_point $ep) {
             if (rex_be_controller::getCurrentPageObject()->isPopup()) {
                 return $ep->getSubject();
             }
@@ -78,6 +81,9 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigationLinkMap::LinkMapNavigation(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigationMedia::MediaHistory(...));
+
+        // Registriere den Extension Point für die Mediensortierung
+        rex_extension::register('MEDIA_LIST_QUERY', [QuickNavigationMedia::class, 'ModifyMediaListQuery']);
     }
 }
 

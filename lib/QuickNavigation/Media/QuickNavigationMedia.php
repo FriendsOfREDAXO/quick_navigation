@@ -258,8 +258,6 @@ class QuickNavigationMedia
                     break;
             }
         }
-
-        error_log('Modified SQL: ' . $subject);
         return $subject;
     }
 }

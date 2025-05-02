@@ -12,6 +12,9 @@ use rex_fragment;
 use rex_sql;
 use rex_string;
 use rex_url;
+use rex_addon;
+use rex_request;
+use rex_response;
 
 class QuickNavigationMedia
 {
@@ -24,8 +27,57 @@ class QuickNavigationMedia
             $subject = $ep->getSubject();
             $drophistory = self::GenerateMediaHistoryList();
             $custom_media_buttons = rex_extension::registerPoint(new rex_extension_point('QUICK_NAVI_CUSTOM_MEDIA', ''));
-            $button = $custom_media_buttons . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div><select name="rex_file_category"';
-            return str_replace('<select name="rex_file_category"', $button, $subject);
+            
+            // Sortier-Button erzeugen mit drei Zuständen: date -> filename -> title -> date
+            $sortMode = rex_request::cookie('media_sort_mode', 'string', 'date');
+            
+            // Icon und Titel basierend auf dem aktuellen Status setzen
+            switch ($sortMode) {
+                case 'filename':
+                    $icon = 'fa-sort-alpha-asc';
+                    $title = rex_i18n::msg('quick_navigation_media_sort_title');
+                    $nextMode = 'title';
+                    break;
+                case 'title':
+                    $icon = 'fa-font';
+                    $title = rex_i18n::msg('quick_navigation_media_sort_date');
+                    $nextMode = 'date';
+                    break;
+                case 'date':
+                default:
+                    $icon = 'fa-sort-numeric-desc';
+                    $title = rex_i18n::msg('quick_navigation_media_sort_alpha');
+                    $nextMode = 'filename';
+                    break;
+            }
+            
+            $sortButton = '<div class="btn-group">
+                           <a class="btn btn-default" id="qn-mediasort-toggle" title="' . $title . '">
+                             <i class="fa ' . $icon . '"></i>
+                           </a>
+                         </div>
+                         <script>
+                         document.addEventListener("DOMContentLoaded", function() {
+                             var sortButton = document.getElementById("qn-mediasort-toggle");
+                             if (sortButton) {
+                                 sortButton.addEventListener("click", function() {
+                                     // Nächsten Sortiermodus setzen
+                                     document.cookie = "media_sort_mode=' . $nextMode . '; path=/";
+                                     
+                                     // Seite neu laden
+                                     window.location.reload();
+                                 });
+                             }
+                         });
+                         </script>';
+            
+            // History-Button und Sort-Button zusammen hinzufügen
+            $buttons = $custom_media_buttons . $sortButton . '<div class="input-group-btn quickmedia clearfix">' . $drophistory . '</div>';
+            
+            // Buttons vor der Kategorieauswahl einfügen
+            $result = str_replace('<select name="rex_file_category"', $buttons . '<select name="rex_file_category"', $subject);
+            
+            return $result;
         }
 
         return null;
@@ -116,5 +168,101 @@ class QuickNavigationMedia
         }
 
         return $quick_file_nav;
+    }
+    
+    /**
+     * Generiert den Sortier-Button für den Medienpool
+     * Diese Methode wird nicht mehr verwendet, da der Button direkt in MediaHistory generiert wird
+     */
+    public static function GenerateMediaSortButton(): string
+    {
+        // Konfigurationsprüfung entfernt, da Button immer angezeigt werden soll
+        
+        // Aktuellen Sortierstatus aus dem Cookie oder Session auslesen
+        $sortMode = rex_request::cookie('media_sort_alphabetical', 'string', 'false');
+        
+        // Icon und Titel basierend auf dem aktuellen Status setzen
+        $icon = $sortMode === 'true' ? 'fa-sort-alpha-asc' : 'fa-sort-numeric-desc';
+        $title = $sortMode === 'true' ? rex_i18n::msg('quick_navigation_media_sort_date') : rex_i18n::msg('quick_navigation_media_sort_alpha');
+        
+        return '<div class="btn-group">
+                  <a class="btn btn-default" id="qn-mediasort-toggle" title="' . $title . '">
+                    <i class="fa ' . $icon . '"></i>
+                  </a>
+                </div>
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var sortButton = document.getElementById("qn-mediasort-toggle");
+                    if (sortButton) {
+                        sortButton.addEventListener("click", function() {
+                            // Cookie umschalten
+                            var currentSort = getCookie("media_sort_alphabetical") === "true";
+                            document.cookie = "media_sort_alphabetical=" + (!currentSort) + "; path=/";
+                            
+                            // Seite neu laden
+                            window.location.reload();
+                        });
+                    }
+                    
+                    function getCookie(name) {
+                        var value = "; " + document.cookie;
+                        var parts = value.split("; " + name + "=");
+                        if (parts.length === 2) return parts.pop().split(";").shift();
+                        return "false";
+                    }
+                });
+                </script>';
+    }
+    
+    /**
+     * Verändert die Sortierung der Medienliste je nach Einstellung im Cookie
+     * 
+     * @param rex_extension_point<string> $ep
+     */
+    public static function ModifyMediaListQuery(rex_extension_point $ep): string
+    {
+        // Aktuellen Sortierstatus aus dem Cookie auslesen
+        $sortMode = rex_request::cookie('media_sort_mode', 'string', 'date');
+        
+        $subject = $ep->getSubject();
+        
+        // Debug-Information ausgeben
+        error_log('Original SQL: ' . $subject);
+        
+        // Je nach Sortiermodus die SQL-Abfrage anpassen
+        if (strpos($subject, 'ORDER BY') !== false) {
+            switch ($sortMode) {
+                case 'filename':
+                    // Nach Dateinamen sortieren (A-Z)
+                    $subject = preg_replace('/ORDER BY\s+[^,\s]+(\s+(?:ASC|DESC))?/i', 'ORDER BY m.filename ASC', $subject);
+                    break;
+                case 'title':
+                    // Nach Titel sortieren (A-Z)
+                    $subject = preg_replace('/ORDER BY\s+[^,\s]+(\s+(?:ASC|DESC))?/i', 'ORDER BY m.title ASC', $subject);
+                    break;
+                case 'date':
+                default:
+                    // Standardsortierung beibehalten (nach Datum, neueste zuerst)
+                    // Hier müssen wir nichts ändern, da dies bereits die Standardsortierung ist
+                    break;
+            }
+        } else {
+            // Falls kein ORDER BY vorhanden ist, fügen wir es hinzu
+            switch ($sortMode) {
+                case 'filename':
+                    $subject .= ' ORDER BY m.filename ASC';
+                    break;
+                case 'title':
+                    $subject .= ' ORDER BY m.title ASC';
+                    break;
+                case 'date':
+                default:
+                    $subject .= ' ORDER BY m.updatedate DESC';
+                    break;
+            }
+        }
+        
+        error_log('Modified SQL: ' . $subject);
+        return $subject;
     }
 }

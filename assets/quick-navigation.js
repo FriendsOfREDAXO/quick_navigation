@@ -7,8 +7,41 @@ $(document).on('rex:ready', function() {
             $(document).trigger('quick-navigation:ready');
         });
     }
+    
+    // Mediasort Button Handling
+    $("#qn-mediasort-toggle").on('click', function() {
+        // Nächsten Sortiermodus setzen (vom PHP-Code übergeben)
+        var currentMode = getCookie("media_sort_mode") || "date";
+        var nextMode;
+        
+        switch (currentMode) {
+            case 'filename':
+                nextMode = 'title';
+                break;
+            case 'title':
+                nextMode = 'date';
+                break;
+            case 'date':
+            default:
+                nextMode = 'filename';
+                break;
+        }
+        
+        // Cookie setzen
+        document.cookie = "media_sort_mode=" + nextMode + "; path=/";
+        
+        // Seite neu laden
+        window.location.reload();
+    });
 });
 
+// Cookie-Hilfsfunktion
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+}
 
 $(document).on("shown.bs.dropdown", function() {
     quickNavigationFilterInit();

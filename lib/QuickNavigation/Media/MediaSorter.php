@@ -21,7 +21,7 @@ class MediaSorter
         $user = rex::getUser()->getId();
         $package = rex_addon::get('quick_navigation');
 
-        if (!rex::getUser() {
+        if (!rex::getUser()) {
             return $ep->getSubject();
         }
 

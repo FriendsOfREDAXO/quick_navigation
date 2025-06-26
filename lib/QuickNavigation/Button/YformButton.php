@@ -23,10 +23,8 @@ class YformButton implements ButtonInterface
 return match (true) {
     !$yform->isAvailable() => '',
     version_compare($yform->getVersion(), '5.0.0', '<') && !rex_plugin::get('yform', 'manager')->isAvailable() => '',
-    default => function() {
-         return '';
-    }
-} ();
+    default => '' 
+};
         $tables = rex_yform_manager_table::getAll();
         
         $yperm_suffix = '';

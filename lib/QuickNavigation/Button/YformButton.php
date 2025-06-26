@@ -20,7 +20,7 @@ class YformButton implements ButtonInterface
     public function get(): string
     {
         if (!$yform->isAvailable() || (version_compare($yform->getVersion(), '5.0.0', '<') && !rex_plugin::get('yform', 'manager')->isAvailable())) {
-        return '';
+            return '';
         }
 
         $tables = rex_yform_manager_table::getAll();

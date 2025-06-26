@@ -26,7 +26,7 @@ class YformButton implements ButtonInterface
             }
         }    
         if (version_compare($yform->getVersion(), '5.0.0-beta1', '>=')) {
-            if (!$yform->isAvailable() {
+            if (!$yform->isAvailable()) {
                 return '';
             }
         } 

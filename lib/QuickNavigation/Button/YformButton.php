@@ -21,7 +21,7 @@ class YformButton implements ButtonInterface
     {
         $yform = rex_addon::get('yform');
         if (version_compare($yform->getVersion(), '5.0.0', '<')) {
-            if (!$yform->isAvailable() || !rex_plugin::get('yform', 'manager')->isAvailable()) {
+            if (!$yform->isAvailable() && !rex_plugin::get('yform', 'manager')->isAvailable()) {
                 return '';
             }
         }

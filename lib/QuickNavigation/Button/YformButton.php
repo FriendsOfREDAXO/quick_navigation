@@ -24,12 +24,12 @@ class YformButton implements ButtonInterface
             if (!$yform->isAvailable() || !rex_plugin::get('yform', 'manager')->isAvailable()) {
                 return '';
             }
-        }    
+        }
         if (version_compare($yform->getVersion(), '5.0.0-beta1', '>=')) {
             if (!$yform->isAvailable()) {
                 return '';
             }
-        } 
+        }
         $tables = rex_yform_manager_table::getAll();
 
         $yperm_suffix = '';

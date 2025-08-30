@@ -111,40 +111,17 @@ $(document).on('rex:ready', function() {
         searchInput: null,
         
         init: function() {
-            console.log('StructureTree init called'); // Debug
-            
-            // Check if DOM is ready
-            console.log('Document ready state:', document.readyState);
             
             // Use vanilla JS to check
             var sidebarElement = document.getElementById('structure-tree-sidebar');
-            console.log('Vanilla JS sidebar element:', sidebarElement);
-            
             this.sidebar = $('#structure-tree-sidebar');
             this.trigger = $('.quick-navigation-button[data-target="#structure-tree-sidebar"]');
             this.searchInput = $('.structure-tree-search-input');
-            
-            // Debug: Check if elements exist
-            console.log('Sidebar found:', this.sidebar.length, this.sidebar);
-            console.log('Trigger found:', this.trigger.length, this.trigger);
-            console.log('Search input found:', this.searchInput.length);
-            
-            // Debug: More specific element checks
-            console.log('All divs with structure-tree-sidebar class:', $('.structure-tree-sidebar').length);
-            
             // Force show for testing
             if (this.sidebar.length > 0) {
-                console.log('Sidebar exists, checking visibility...');
-                console.log('Sidebar CSS display:', this.sidebar.css('display'));
-                console.log('Sidebar is visible:', this.sidebar.is(':visible'));
             }
-            
-            // Debug: Check for expand toggle button when sidebar opens
             setTimeout(function() {
-                console.log('Toggle button found:', $('.structure-tree-expand-toggle').length);
-                console.log('Button with data-target found:', $('[data-target="#structure-tree-sidebar"]').length);
             }, 1000);
-            
             this.bindEvents();
         },
         

@@ -31,7 +31,7 @@ class StructureTreeButton implements ButtonInterface
         foreach ($categoriesArray as $item) {
             $attributes = [
                 'href' => $item['url'],
-                'title' => 'Domain: ' . $item['domain'],
+                'title' => rex_i18n::msg('quick_navigation_domain') . ' ' . $item['domain'],
                 'data-category-id' => $item['id'],
                 'data-level' => $depth,
                 'data-status' => $item['status'] ?? 1, // Status für Online/Offline/Gesperrt

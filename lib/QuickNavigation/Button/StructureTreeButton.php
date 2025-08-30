@@ -43,15 +43,15 @@ class StructureTreeButton implements ButtonInterface
 
             $hasChildren = !empty($item['children']);
             $toggleClass = $hasChildren ? ' structure-tree-has-children' : '';
-            
+
             // Prüfe ob dieses Item oder ein Child-Item aktuell ist (für Auto-Expand)
             $isInCurrentPath = $item['current'] === true || $this->hasCurrentInChildren($item['children'] ?? []);
             if ($isInCurrentPath) {
                 $toggleClass .= ' expanded';
             }
-            
+
             $listItem = '<div class="structure-tree-item' . $toggleClass . '">';
-            
+
             // Toggle Button für expandierbare Items - rechts positioniert
             if ($hasChildren) {
                 $expandedState = $isInCurrentPath ? 'true' : 'false';
@@ -60,7 +60,7 @@ class StructureTreeButton implements ButtonInterface
                 $listItem .= '<i class="rex-icon ' . $iconClass . '"></i>';
                 $listItem .= '</button>';
             }
-            
+
             // Category Link (Icons werden via CSS hinzugefügt)
             $listItem .= '<a' . rex_string::buildAttributes($attributes) . '>';
             $listItem .= '<span>' . rex_escape($item['name']) . '</span>';
@@ -69,7 +69,7 @@ class StructureTreeButton implements ButtonInterface
                 $listItem .= '<small class="structure-tree-domain">' . rex_escape($item['domain']) . '</small>';
             }
             $listItem .= '</a>';
-            
+
             // Children als verschachteltes UL INNERHALB des Items
             if ($hasChildren) {
                 $fragment = new rex_fragment([
@@ -78,7 +78,7 @@ class StructureTreeButton implements ButtonInterface
                 ]);
                 $listItem .= $fragment->parse('QuickNavigation/StructureTreeList.php');
             }
-            
+
             $listItem .= '</div>';
 
             $listItems[] = $listItem;
@@ -97,7 +97,7 @@ class StructureTreeButton implements ButtonInterface
 
         // Render Tree Structure
         $treeItems = $this->renderTreeAsList($categoriesArray);
-        
+
         // Search placeholder
         $placeholder = rex_i18n::msg('quick_navigation_placeholder_search');
 
@@ -110,7 +110,7 @@ class StructureTreeButton implements ButtonInterface
             'treeItems' => $treeItems,
             'placeholder' => $placeholder,
         ]);
-        
+
         return $fragment->parse('QuickNavigation/StructureTreeButton.php');
     }
 }

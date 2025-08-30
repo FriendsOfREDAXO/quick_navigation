@@ -1,15 +1,81 @@
+/**
+ * Structure Tree - CSS Variables für Theme Support
+ * Nach Dashboard2 Pattern implementiert
+ */
+
+/* Standard Variables - Light Theme Default */
 :root {
     --quick-navigation-color-light: rgba(223, 227, 233, 0.59);
     --quick-navigation-color-base: #9ca5b2;
     --quick-navigation-color-dark: #324050;
-
+    
     --quick-navigation-radius: 4px;
     --quick-navigation-spacing: 24px;
     --quick-navigation-spacing-list-item-x: 4px;
     --quick-navigation-spacing-list-item-y: 2px;
-
+    
     --quick-navigation-bootstrap-z-index: 1030;
     --quick-navigation-color-offline: #b2b8bb;
+    
+    /* Structure Tree Variables */
+    --structure-tree-bg: rgba(255, 255, 255, 0.98);
+    --structure-tree-header-bg: #4b9ad9;
+    --structure-tree-header-text: #ffffff;
+    --structure-tree-text: #212529;
+    --structure-tree-text-muted: #495057;
+    --structure-tree-border: rgba(108, 117, 125, 0.3);
+    --structure-tree-hover-bg: rgba(0, 0, 0, 0.05);
+    --structure-tree-item-border: rgba(108, 117, 125, 0.2);
+    --structure-tree-domain-color: #0056b3;
+    --structure-tree-domain-bg: rgba(0, 123, 255, 0.15);
+    --structure-tree-domain-border: rgba(0, 123, 255, 0.3);
+}
+
+/* System Dark Mode - Fallback für Browser ohne explizites Theme */
+@media (prefers-color-scheme: dark) {
+    body:not(.rex-theme-light) {
+        --structure-tree-bg: rgba(44, 62, 80, 0.85);
+        --structure-tree-header-bg: #34495e;
+        --structure-tree-header-text: #ecf0f1;
+        --structure-tree-text: #ecf0f1;
+        --structure-tree-text-muted: rgba(255, 255, 255, 0.5);
+        --structure-tree-border: rgba(255, 255, 255, 0.1);
+        --structure-tree-hover-bg: rgba(255, 255, 255, 0.02);
+        --structure-tree-item-border: transparent;
+        --structure-tree-domain-color: rgba(52, 152, 219, 0.8);
+        --structure-tree-domain-bg: rgba(52, 152, 219, 0.1);
+        --structure-tree-domain-border: rgba(52, 152, 219, 0.2);
+    }
+}
+
+/* REDAXO Light Theme - höchste Priorität */
+body.rex-theme-light {
+    --structure-tree-bg: rgba(255, 255, 255, 0.98) !important;
+    --structure-tree-header-bg: #4b9ad9 !important;
+    --structure-tree-header-text: #ffffff !important;
+    --structure-tree-text: #212529 !important;
+    --structure-tree-text-muted: #495057 !important;
+    --structure-tree-border: rgba(108, 117, 125, 0.3) !important;
+    --structure-tree-hover-bg: rgba(0, 0, 0, 0.05) !important;
+    --structure-tree-item-border: rgba(108, 117, 125, 0.2) !important;
+    --structure-tree-domain-color: #0056b3 !important;
+    --structure-tree-domain-bg: rgba(0, 123, 255, 0.15) !important;
+    --structure-tree-domain-border: rgba(0, 123, 255, 0.3) !important;
+}
+
+/* REDAXO Dark Theme - höchste Priorität */
+body.rex-theme-dark {
+    --structure-tree-bg: rgba(44, 62, 80, 0.85) !important;
+    --structure-tree-header-bg: #34495e !important;
+    --structure-tree-header-text: #ecf0f1 !important;
+    --structure-tree-text: #ecf0f1 !important;
+    --structure-tree-text-muted: rgba(255, 255, 255, 0.5) !important;
+    --structure-tree-border: rgba(255, 255, 255, 0.1) !important;
+    --structure-tree-hover-bg: rgba(255, 255, 255, 0.02) !important;
+    --structure-tree-item-border: transparent !important;
+    --structure-tree-domain-color: rgba(52, 152, 219, 0.8) !important;
+    --structure-tree-domain-bg: rgba(52, 152, 219, 0.1) !important;
+    --structure-tree-domain-border: rgba(52, 152, 219, 0.2) !important;
 }
 
 [data-quick-navigation-toggle="tooltip"] + .tooltip {
@@ -151,4 +217,546 @@
 .quick-navigation-item  a.quick-navigation-status-0
 {
    color: var(--quick-navigation-color-offline);
+}
+
+/* Structure Tree Off-Canvas Sidebar Styles */
+.structure-tree-sidebar {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 420px;
+    height: 100%;
+    z-index: 10000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    visibility: visible;
+}
+
+body.structure-tree-open .structure-tree-sidebar {
+    right: 0;
+}
+
+/* Kein Fullscreen Overlay mehr nötig */
+
+body.rex-theme-light .structure-tree-sidebar {
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #6c757d;
+    --sidebar-header-bg: #e9ecef;
+    --sidebar-text: #212529;
+    --sidebar-link-hover: #dee2e6;
+    --sidebar-search-bg: #ffffff;
+    --sidebar-search-border: #6c757d;
+    --sidebar-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+body.structure-tree-open .structure-tree-sidebar {
+    right: 0;
+}
+
+/* Entfernung der alten Transform-basierten Animation */
+
+.structure-tree-content {
+    width: 100%;
+    height: 100%;
+    background: var(--structure-tree-bg);
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    border-left: 1px solid var(--structure-tree-border);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4);
+    color: var(--structure-tree-text);
+    border-radius: 12px 0 0 12px;
+}
+
+
+
+.structure-tree-header {
+    padding: 1rem;
+    background: var(--structure-tree-header-bg);
+    border-bottom: 1px solid var(--structure-tree-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.structure-tree-header h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--structure-tree-header-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.structure-tree-header h4 i {
+    font-size: 1.3rem;
+    color: var(--structure-tree-header-text);
+    opacity: 0.9;
+}
+
+
+
+.structure-tree-close {
+    background: none;
+    border: none;
+    color: var(--sidebar-text, #ecf0f1);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.structure-tree-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+body.rex-theme-light .structure-tree-close {
+    color: #ffffff; /* Weiße Schrift im blauen Header */
+}
+
+body.rex-theme-light .structure-tree-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.structure-tree-search {
+    padding: 1rem;
+    border-bottom: 1px solid var(--sidebar-border, #4a5f7a);
+    flex-shrink: 0;
+    background: var(--sidebar-header-bg, #34495e);
+}
+
+.structure-tree-search .input-group {
+    position: relative;
+    display: flex;
+}
+
+.structure-tree-search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sidebar-search-border, #4a5f7a);
+    border-radius: 4px;
+    background: var(--sidebar-search-bg, #2c3e50);
+    color: var(--sidebar-text, #ecf0f1);
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.structure-tree-search-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.structure-tree-search-input::placeholder {
+    color: rgba(236, 240, 241, 0.5);
+}
+
+body.rex-theme-light .structure-tree-search-input {
+    background: #ffffff;
+    color: #212529;
+    border-color: #6c757d;
+}
+
+body.rex-theme-light .structure-tree-search-input::placeholder {
+    color: #6c757d;
+}
+
+.structure-tree-search .input-group-addon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(236, 240, 241, 0.5);
+    z-index: 3;
+}
+
+body.rex-theme-light .structure-tree-search .input-group-addon {
+    display: none; /* Suchsymbol im Light Theme ausblenden */
+}
+
+/* Light Theme Such-Input anpassen */
+body.rex-theme-light .structure-tree-search-input {
+    padding-left: 1rem; /* Weniger Padding da kein Icon */
+}
+
+/* Header Buttons Container */
+.structure-tree-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Expand Toggle Button im Header */
+.structure-tree-expand-toggle {
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: var(--structure-tree-header-text);
+    transition: all 0.2s ease;
+}
+
+.structure-tree-expand-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--structure-tree-header-text);
+    transform: scale(1.05);
+}
+
+.structure-tree-expand-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.structure-tree-search-input {
+    padding-left: 2.5rem;
+}
+
+.structure-tree-clear-search {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(236, 240, 241, 0.5);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: none;
+    transition: all 0.2s ease;
+    z-index: 3;
+}
+
+.structure-tree-clear-search:hover {
+    color: var(--sidebar-text, #ecf0f1);
+}
+
+body.rex-theme-light .structure-tree-clear-search {
+    color: #6c757d;
+}
+
+body.rex-theme-light .structure-tree-clear-search:hover {
+    color: #212529;
+}
+
+.structure-tree-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 1.2rem 0.5rem 0;
+}
+
+.structure-tree-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.structure-tree-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.structure-tree-item {
+    display: block;
+    position: relative;
+}
+
+.structure-tree-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 7rem 0.8rem 3.2rem;
+    color: var(--structure-tree-text);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 3px solid transparent;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    position: relative;
+    gap: 0.75rem;
+    border-radius: 8px;
+    margin: 0.2rem 0.8rem;
+    background: var(--structure-tree-hover-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--structure-tree-item-border);
+}
+
+.structure-tree-item a:hover {
+    background: var(--structure-tree-hover-bg);
+    text-decoration: none;
+    color: var(--structure-tree-text);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.structure-tree-item.structure-tree-current > a {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.25), rgba(52, 152, 219, 0.15));
+    border-left-color: #3498db;
+    color: #3498db;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    transform: translateX(2px);
+}
+
+.structure-tree-item.structure-tree-current > a:hover {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.35), rgba(52, 152, 219, 0.25));
+    transform: translateX(6px);
+}
+
+/* Light Theme für current State */
+body.rex-theme-light .structure-tree-item.structure-tree-current > a {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.25), rgba(0, 123, 255, 0.15));
+    border-left-color: #007bff;
+    color: #0056b3;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+body.rex-theme-light .structure-tree-item.structure-tree-current > a:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.35), rgba(0, 123, 255, 0.25));
+}
+
+.structure-tree-toggle {
+    position: absolute;
+    right: 0.8rem;
+    top: 0.8rem; /* Feste Top-Position statt 50% */
+    width: 2.2rem;
+    height: 2.2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 4;
+    font-size: 1rem;
+}
+
+/* Rotation für Drei-Punkte-Symbol */
+.structure-tree-toggle .rex-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.structure-tree-item.expanded .structure-tree-toggle .rex-icon {
+    transform: rotate(90deg);
+}
+
+.structure-tree-toggle:hover {
+    background: rgba(52, 152, 219, 0.2);
+    border-color: rgba(52, 152, 219, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+body.rex-theme-light .structure-tree-toggle {
+    background: rgba(108, 117, 125, 0.1);
+    border-color: rgba(108, 117, 125, 0.2);
+    color: #495057;
+}
+
+body.rex-theme-light .structure-tree-toggle:hover {
+    background: rgba(0, 123, 255, 0.15);
+    border-color: rgba(0, 123, 255, 0.3);
+    color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Entfernt, da wir jetzt festes padding für alle Items haben */
+
+.structure-tree-children {
+    display: none;
+    margin: 0.5rem 0 0.5rem 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(52, 152, 219, 0.3);
+    border-radius: 0 0 0 8px;
+    background: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.structure-tree-item.expanded .structure-tree-children {
+    display: block;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 1000px;
+    }
+}
+
+.structure-tree-children .structure-tree-item a {
+    font-size: 1.3rem;
+    padding: 0.6rem 0.8rem;
+    margin: 0.1rem 0.4rem;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+}
+
+.structure-tree-children .structure-tree-item a:hover {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: rgba(52, 152, 219, 0.6);
+    transform: translateX(2px);
+}
+
+/* ID und Domain Styling */
+.rex-primary-id {
+    color: var(--structure-tree-text-muted);
+    font-size: 0.9rem;
+    font-weight: normal;
+    position: absolute;
+    right: 5.2rem;
+    top: 1.2rem;
+    z-index: 2;
+}
+
+.structure-tree-domain {
+    color: var(--structure-tree-domain-color);
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--structure-tree-domain-bg);
+    border-radius: 4px;
+    border: 1px solid var(--structure-tree-domain-border);
+}
+
+/* Status Indicator Styles */
+.structure-tree-item a::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2ecc71; /* Online = Grün */
+    position: absolute;
+    right: 3.8rem; /* Position relativ zu festem Toggle */
+    top: 1.2rem; /* Feste Top-Position */
+    flex-shrink: 0;
+    box-shadow: 0 0 4px rgba(46, 204, 113, 0.5);
+    z-index: 2;
+}
+
+/* Offline Status */
+.structure-tree-item a[data-status="0"]::after {
+    background: #95a5a6; /* Offline = Grau */
+    box-shadow: 0 0 4px rgba(149, 165, 166, 0.5);
+}
+
+/* Gesperrt Status */  
+.structure-tree-item a[data-status="2"]::after {
+    background: #e74c3c; /* Gesperrt = Rot */
+    box-shadow: 0 0 4px rgba(231, 76, 60, 0.5);
+}
+
+/* Offline Text Color */
+.structure-tree-item a[data-status="0"] {
+    color: rgba(149, 165, 166, 0.8);
+}
+
+.structure-tree-item a[data-status="0"] span {
+    opacity: 0.6;
+}
+
+/* Gesperrt Text Color */
+.structure-tree-item a[data-status="2"] {
+    color: rgba(231, 76, 60, 0.8);
+}
+
+.structure-tree-item a[data-status="2"] span {
+    opacity: 0.8;
+}
+
+/* Light Theme Status */
+body.rex-theme-light .structure-tree-item a[data-status="0"] {
+    color: rgba(149, 165, 166, 0.9);
+}
+
+body.rex-theme-light .structure-tree-item a[data-status="2"] {
+    color: rgba(231, 76, 60, 0.9);
+}
+
+.structure-tree-empty {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: rgba(236, 240, 241, 0.6);
+}
+
+body.rex-theme-light .structure-tree-empty {
+    color: rgba(73, 80, 87, 0.6);
+}
+
+.structure-tree-empty p {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.3rem;
+}
+
+/* Level-based indentation for nested items */
+.structure-tree-item[data-level="1"] > a { padding-left: 2.5rem; }
+.structure-tree-item[data-level="2"] > a { padding-left: 3.5rem; }
+.structure-tree-item[data-level="3"] > a { padding-left: 4.5rem; }
+.structure-tree-item[data-level="4"] > a { padding-left: 5.5rem; }
+.structure-tree-item[data-level="5"] > a { padding-left: 6.5rem; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .structure-tree-content {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .structure-tree-sidebar {
+        padding: 0;
+    }
+}
+
+/* Scrollbar Styling */
+.structure-tree-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.structure-tree-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.structure-tree-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.structure-tree-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+body.rex-theme-light .structure-tree-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.rex-theme-light .structure-tree-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
 }

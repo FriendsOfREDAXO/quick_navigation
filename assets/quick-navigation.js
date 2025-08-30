@@ -103,3 +103,256 @@ function quickNavigationGetUrlVars() {
     return vars;
 }
 
+// Structure Tree Off-Canvas functionality
+$(document).on('rex:ready', function() {
+    var StructureTree = {
+        sidebar: null,
+        overlay: null,
+        searchInput: null,
+        
+        init: function() {
+            console.log('StructureTree init called'); // Debug
+            
+            // Check if DOM is ready
+            console.log('Document ready state:', document.readyState);
+            
+            // Use vanilla JS to check
+            var sidebarElement = document.getElementById('structure-tree-sidebar');
+            console.log('Vanilla JS sidebar element:', sidebarElement);
+            
+            this.sidebar = $('#structure-tree-sidebar');
+            this.trigger = $('.quick-navigation-button[data-target="#structure-tree-sidebar"]');
+            this.searchInput = $('.structure-tree-search-input');
+            
+            // Debug: Check if elements exist
+            console.log('Sidebar found:', this.sidebar.length, this.sidebar);
+            console.log('Trigger found:', this.trigger.length, this.trigger);
+            console.log('Search input found:', this.searchInput.length);
+            
+            // Debug: More specific element checks
+            console.log('All divs with structure-tree-sidebar class:', $('.structure-tree-sidebar').length);
+            
+            // Force show for testing
+            if (this.sidebar.length > 0) {
+                console.log('Sidebar exists, checking visibility...');
+                console.log('Sidebar CSS display:', this.sidebar.css('display'));
+                console.log('Sidebar is visible:', this.sidebar.is(':visible'));
+            }
+            
+            // Debug: Check for expand toggle button when sidebar opens
+            setTimeout(function() {
+                console.log('Toggle button found:', $('.structure-tree-expand-toggle').length);
+                console.log('Button with data-target found:', $('[data-target="#structure-tree-sidebar"]').length);
+            }, 1000);
+            
+            this.bindEvents();
+        },
+        
+        initializeExpandedStates: function() {
+            // Alle expanded Items überprüfen und deren direkte Kinder sichtbar machen
+            $('.structure-tree-item.expanded').each(function() {
+                var $item = $(this);
+                var $directChildren = $item.children('.structure-tree-children');
+                $directChildren.show(); // Direkt anzeigen ohne Animation beim Laden
+            });
+        },
+        
+        bindEvents: function() {
+            var self = this;
+            
+            // Open sidebar
+            $(document).on('click', '[data-target="#structure-tree-sidebar"]', function(e) {
+                e.preventDefault();
+                self.open();
+            });
+            
+            // Close sidebar
+            $(document).on('click', '.structure-tree-close, .structure-tree-backdrop', function(e) {
+                e.preventDefault();
+                self.close();
+            });
+            
+            // ESC key
+            $(document).on('keydown', function(e) {
+                if (e.keyCode === 27 && self.sidebar && self.sidebar.is(':visible')) {
+                    self.close();
+                }
+            });
+            
+            // Tree toggle
+            $(document).on('click', '.structure-tree-toggle', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                self.toggleNode($(this));
+            });
+            
+            // Search functionality
+            $(document).on('input', '.structure-tree-search-input', function() {
+                self.search($(this).val());
+            });
+            
+            // Clear search
+            $(document).on('click', '.structure-tree-clear-search', function() {
+                self.clearSearch();
+            });
+            
+            // Toggle expand/collapse all
+            $(document).on('click', '.structure-tree-expand-toggle', function(e) {
+                self.toggleExpandAll();
+            });
+            
+            // Navigate on item click
+            $(document).on('click', '.structure-tree-item a', function(e) {
+                if (!$(e.target).closest('.structure-tree-toggle').length) {
+                    // Navigate to category
+                    self.close();
+                    // Let the default link behavior handle navigation
+                }
+            });
+        },
+        
+        open: function() {
+            if (this.sidebar) {
+                this.sidebar.fadeIn(300);
+                $('body').addClass('structure-tree-open');
+                
+                // Create backdrop if it doesn't exist
+                if (!$('.structure-tree-backdrop').length) {
+                    $('body').append('<div class="structure-tree-backdrop"></div>');
+                }
+                $('.structure-tree-backdrop').fadeIn(300);
+                
+                if (this.searchInput) {
+                    this.searchInput.focus();
+                }
+            }
+        },
+        
+        close: function() {
+            if (this.sidebar) {
+                this.sidebar.fadeOut(300);
+                $('.structure-tree-backdrop').fadeOut(300, function() {
+                    $(this).remove();
+                });
+                $('body').removeClass('structure-tree-open');
+            }
+        },
+        
+        toggleNode: function($toggleBtn) {
+            var $item = $toggleBtn.closest('.structure-tree-item');
+            var $children = $item.children('.structure-tree-children');
+            
+            if ($item.hasClass('expanded')) {
+                $item.removeClass('expanded');
+                $children.slideUp(300);
+                $toggleBtn.attr('aria-expanded', 'false');
+            } else {
+                $item.addClass('expanded');
+                $children.slideDown(300);
+                $toggleBtn.attr('aria-expanded', 'true');
+            }
+        },
+        
+        search: function(query) {
+            var $items = $('.structure-tree-item');
+            
+            if (!query.trim()) {
+                $items.show();
+                $('.structure-tree-clear-search').hide();
+                return;
+            }
+            
+            $('.structure-tree-clear-search').show();
+            query = query.toLowerCase();
+            
+            $items.each(function() {
+                var $item = $(this);
+                var text = $item.find('a').text().toLowerCase();
+                
+                if (text.indexOf(query) !== -1) {
+                    $item.show();
+                    // Show parent items
+                    $item.parents('.structure-tree-children').show();
+                    $item.parents('.structure-tree-item').show();
+                } else {
+                    $item.hide();
+                }
+            });
+        },
+        
+        clearSearch: function() {
+            if (this.searchInput) {
+                this.searchInput.val('');
+                this.search('');
+                this.searchInput.focus();
+            }
+        },
+        
+        toggleExpandAll: function() {
+            var $expandableItems = $('.structure-tree-item:has(.structure-tree-children)');
+            var $expandedItems = $('.structure-tree-item.expanded');
+            var $toggleBtn = $('.structure-tree-expand-toggle');
+            var $icon = $toggleBtn.find('i');
+            
+            // Wenn mehr als die Hälfte expanded ist, collapse all, sonst expand all
+            var shouldCollapse = $expandedItems.length > ($expandableItems.length / 2);
+            
+            if (shouldCollapse) {
+                // Collapse All
+                $expandedItems.each(function() {
+                    var $item = $(this);
+                    var $children = $item.children('.structure-tree-children');
+                    
+                    $item.removeClass('expanded');
+                    $children.hide();
+                    $item.find('.structure-tree-toggle').attr('aria-expanded', 'false');
+                });
+                
+                // Icon auf "expand" ändern
+                $icon.removeClass('fa-compress-arrows-alt').addClass('fa-expand-arrows-alt');
+                $toggleBtn.attr('title', 'Alle aufklappen');
+                
+            } else {
+                // Expand All
+                $expandableItems.each(function() {
+                    var $item = $(this);
+                    var $children = $item.children('.structure-tree-children');
+                    
+                    if (!$item.hasClass('expanded')) {
+                        $item.addClass('expanded');
+                        $children.show();
+                        $item.find('.structure-tree-toggle').attr('aria-expanded', 'true');
+                    }
+                });
+                
+                // Icon auf "collapse" ändern
+                $icon.removeClass('fa-expand-arrows-alt').addClass('fa-compress-arrows-alt');
+                $toggleBtn.attr('title', 'Alle zuklappen');
+            }
+        }
+    };
+    
+    var structureTreeInitialized = false;
+    
+    function initializeStructureTree() {
+        if (structureTreeInitialized) {
+            return;
+        }
+        
+        if ($('#structure-tree-sidebar').length > 0) {
+            structureTreeInitialized = true;
+            StructureTree.init();
+        }
+    }
+    
+    // Initialize Structure Tree when QuickNavigation is ready
+    $(document).on('quick-navigation:ready', function() {
+        setTimeout(initializeStructureTree, 100);
+    });
+    
+    // Also try to initialize on document ready as fallback
+    $(document).ready(function() {
+        setTimeout(initializeStructureTree, 500);
+    });
+});
+

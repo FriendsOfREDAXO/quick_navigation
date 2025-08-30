@@ -89,7 +89,8 @@ class BuildNavigationArray
                 'current' => $current,
                 'domain' => $domainName,
                 'url' => $backendContext->getUrl(),
-                'children' => self::generateBackendNavArray($clangId, $ignoreOffline, $category->getId(), false),
+                'status' => $category->getValue('status'), // Status hinzufügen (0=offline, 1=online, 2=gesperrt)
+                'children' => self::GenerateBackendNavArray($clangId, $ignoreOffline, $category->getId(), false),
             ];
         }
 

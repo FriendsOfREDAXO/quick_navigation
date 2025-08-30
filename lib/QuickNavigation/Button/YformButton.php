@@ -19,19 +19,12 @@ class YformButton implements ButtonInterface
 {
     public function get(): string
     {
-        $yform = rex_addon::get('yform');
-        if (version_compare($yform->getVersion(), '5.0.0-beta1', '<')) {
-            if (!$yform->isAvailable() && !rex_plugin::get('yform', 'manager')->isAvailable()) {
-                return '';
-            }
+        if (!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'manager')->isAvailable()) {
+            return '';
         }
-        if (version_compare($yform->getVersion(), '5.0.0-beta1', '>=')) {
-            if (!$yform->isAvailable()) {
-                return '';
-            }
-        }
-        $tables = rex_yform_manager_table::getAll();
 
+        $tables = rex_yform_manager_table::getAll();
+        $yform = rex_addon::get('yform');
         $yperm_suffix = '';
         if (version_compare($yform->getVersion(), '4.0.0-dev', '>=')) {
             $yperm_suffix = '_edit';

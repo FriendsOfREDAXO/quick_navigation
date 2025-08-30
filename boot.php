@@ -17,6 +17,7 @@ use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
 use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
+use FriendsOfRedaxo\QuickNavigation\Button\StructureTreeButton;
 use FriendsOfRedaxo\QuickNavigation\Button\WatsonButton;
 use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
 use FriendsOfRedaxo\QuickNavigation\Linkmap\QuickNavigationLinkMap;
@@ -48,6 +49,7 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
 
         ButtonRegistry::registerButton(new WatsonButton(), 20);
         ButtonRegistry::registerButton(new CategoryButton(), 30);
+        ButtonRegistry::registerButton(new StructureTreeButton(), 35);
         ButtonRegistry::registerButton(new ArticleHistoryButton('structure', 20), 40);
         ButtonRegistry::registerButton(new YformButton(), 50);
         ButtonRegistry::registerButton(new FavoriteButton(), 60);

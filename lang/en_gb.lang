@@ -23,3 +23,9 @@ quick_navigation_favorite_article_add = Add article to:
 quick_navigation_favorite_category_add = Add category to:
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Add dataset to:
+
+# Structure Tree Navigation
+quick_navigation_structure_tree = Structure Tree
+quick_navigation_placeholder_search = Search categories...
+quick_navigation_expand_toggle = Expand/collapse all
+quick_navigation_no_results = No categories found

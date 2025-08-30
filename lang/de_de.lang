@@ -28,3 +28,9 @@ quick_navigation_yform_add = Datensatz hinzufügen in:
 quick_navigation_media_sort_alpha = Nach Dateinamen sortieren (A-Z)
 quick_navigation_media_sort_date = Nach Datum sortieren (neueste zuerst)
 quick_navigation_media_sort_title = Nach Titel sortieren (A-Z)
+
+# Structure Tree Navigation
+quick_navigation_structure_tree = Strukturbaum
+quick_navigation_placeholder_search = Kategorie suchen...
+quick_navigation_expand_toggle = Alle auf-/zuklappen
+quick_navigation_no_results = Keine Kategorien gefunden

@@ -28,3 +28,10 @@ quick_navigation_yform_add = Datensatz hinzufügen in:
 quick_navigation_media_sort_alpha = Nach Dateinamen sortieren (A-Z)
 quick_navigation_media_sort_date = Nach Datum sortieren (neueste zuerst)
 quick_navigation_media_sort_title = Nach Titel sortieren (A-Z)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Medienpool Live-Suche aktivieren?
+quick_navigation_media_live_search_placeholder = Live-Suche...
+
+# Live Search
+quick_navigation_media_live_search_placeholder = Live-Suche...

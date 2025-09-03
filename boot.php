@@ -12,6 +12,7 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
+use FriendsOfRedaxo\QuickNavigation\ApiFunction\MediaSearch;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
@@ -38,8 +39,16 @@ use rex_view;
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     if (rex::getUser()->hasPerm('quick_navigation[]')) {
         rex_api_function::register('quicknavigation_api', MenuRender::class);
+        rex_api_function::register('quicknavigation_media_search', 'rex_api_quicknavigation_media_search');
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
+        rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.css'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
+        rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.js'));
+
+        // Media Live-Search Einstellung für aktuellen User
+        $userId = rex::getUser()->getId();
+        $mediaLiveSearchEnabled = rex_addon::get('quick_navigation')->getConfig('quick_navigation_media_livesearch' . $userId, 1); // Default: aktiviert
+        rex_view::setJsProperty('QUICKNAV_MEDIA_LIVESEARCH_ENABLED', (bool) $mediaLiveSearchEnabled);
 
         $userId = rex::getUser()->getId();
         if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_artdirections' . $userId) != '1') {

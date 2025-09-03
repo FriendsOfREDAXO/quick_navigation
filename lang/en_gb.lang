@@ -23,3 +23,12 @@ quick_navigation_favorite_article_add = Add article to:
 quick_navigation_favorite_category_add = Add category to:
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Add dataset to:
+
+# Media sorting
+quick_navigation_media_sort_alpha = Sort by filename (A-Z)
+quick_navigation_media_sort_date = Sort by date (newest first)
+quick_navigation_media_sort_title = Sort by title (A-Z)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Enable media live search?
+quick_navigation_media_live_search_placeholder = Live search...

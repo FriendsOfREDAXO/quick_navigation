@@ -21,12 +21,12 @@ $user = rex::getUser()->getId();
 if (rex_post('formsubmit', 'string') == '1') {
     // Standard-Werte für Checkboxen setzen (falls nicht gecheckt)
     $config = rex_post('config', 'array');
-    
+
     // Checkbox-Werte normalisieren
     $config['quick_navigation_ignoreoffline' . $user] = isset($config['quick_navigation_ignoreoffline' . $user]) ? 1 : 0;
     $config['quick_navigation_artdirections' . $user] = isset($config['quick_navigation_artdirections' . $user]) ? 1 : 0;
     $config['quick_navigation_media_livesearch' . $user] = isset($config['quick_navigation_media_livesearch' . $user]) ? 1 : 0;
-    
+
     $package->setConfig($config);
     echo rex_view::success($package->i18n('quick_navigation_config_saved'));
 }

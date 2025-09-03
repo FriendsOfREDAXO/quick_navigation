@@ -24,7 +24,7 @@ class MediaSearch extends rex_api_function
     {
         // Debug-Logging
         error_log('MediaSearch API called');
-        
+
         // Content-Type vor jeder Ausgabe setzen
         if (!headers_sent()) {
             header('Content-Type: application/json; charset=utf-8');
@@ -62,21 +62,21 @@ class MediaSearch extends rex_api_function
         try {
             // Debug: Log search parameters
             error_log('MediaSearch API: term=' . $searchTerm . ', category=' . $categoryId);
-            
+
             // Medien suchen - korrigierter Filter
             $where = [];
-            
+
             // Suchbegriff in Filename und Title
             $searchWildcard = '%' . $searchTerm . '%';
             $where[] = '(m.filename LIKE ? OR m.title LIKE ?)';
             $params = [$searchWildcard, $searchWildcard];
-            
+
             // Kategorie-Filter
             if ($categoryId > 0) {
                 $where[] = 'm.category_id = ?';
                 $params[] = $categoryId;
             }
-            
+
             // Types-Filter (falls vorhanden)
             if (!empty($types)) {
                 $typeArray = explode(',', $types);
@@ -84,7 +84,7 @@ class MediaSearch extends rex_api_function
                 $where[] = 'm.filename REGEXP ?';
                 $params[] = '\.(' . implode('|', array_map('preg_quote', $typeArray)) . ')$';
             }
-            
+
             // SQL Query aufbauen
             $sql = rex_sql::factory();
             $query = 'SELECT m.* FROM ' . rex::getTable('media') . ' m';
@@ -92,26 +92,26 @@ class MediaSearch extends rex_api_function
                 $query .= ' WHERE ' . implode(' AND ', $where);
             }
             $query .= ' ORDER BY m.updatedate DESC LIMIT 10';
-            
+
             error_log('MediaSearch SQL: ' . $query . ' | Params: ' . json_encode($params));
-            
+
             $sql->setQuery($query, $params);
-            
+
             $results = [];
             while ($sql->hasNext()) {
                 $media = rex_media::get($sql->getValue('filename'));
                 if ($media) {
                     $thumbnail = $this->generateThumbnail($media);
-                    
+
                     // Dateigröße formatieren
                     $size = rex_formatter::bytes($media->getSize());
-                    
+
                     // Update-Datum formatieren
                     $updatedate = rex_formatter::intlDate($media->getValue('updatedate'), 'short');
-                    
+
                     // Actions basierend auf opener_input_field
                     $actions = $this->generateActions($media, $openerInputField);
-                    
+
                     $results[] = [
                         'title' => $media->getTitle() ?: $media->getFilename(),
                         'filename' => $media->getFilename(),
@@ -145,7 +145,7 @@ class MediaSearch extends rex_api_function
     private function generateThumbnail($media)
     {
         $isImage = in_array($media->getExtension(), ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg']);
-        
+
         if ($isImage) {
             try {
                 $thumbnailUrl = rex_media_manager::getUrl('rex_mediabutton_preview', $media->getFileName());
@@ -161,7 +161,7 @@ class MediaSearch extends rex_api_function
 
         // Icon basierend auf Dateierweiterung (FontAwesome 6)
         $icon = $this->getFileIcon($media->getExtension());
-        
+
         return [
             'type' => 'icon',
             'icon' => $icon,
@@ -174,14 +174,14 @@ class MediaSearch extends rex_api_function
         $iconMap = [
             // Bilder
             'jpg' => 'fa-regular fa-image',
-            'jpeg' => 'fa-regular fa-image', 
+            'jpeg' => 'fa-regular fa-image',
             'png' => 'fa-regular fa-image',
             'gif' => 'fa-regular fa-image',
             'webp' => 'fa-regular fa-image',
             'svg' => 'fa-regular fa-image',
             'bmp' => 'fa-regular fa-image',
             'tiff' => 'fa-regular fa-image',
-            
+
             // Dokumente
             'pdf' => 'fa-regular fa-file-pdf',
             'doc' => 'fa-regular fa-file-word',
@@ -192,14 +192,14 @@ class MediaSearch extends rex_api_function
             'pptx' => 'fa-regular fa-file-powerpoint',
             'txt' => 'fa-regular fa-file-lines',
             'rtf' => 'fa-regular fa-file-lines',
-            
+
             // Archive
             'zip' => 'fa-regular fa-file-zipper',
             'rar' => 'fa-regular fa-file-zipper',
             '7z' => 'fa-regular fa-file-zipper',
             'tar' => 'fa-regular fa-file-zipper',
             'gz' => 'fa-regular fa-file-zipper',
-            
+
             // Code
             'html' => 'fa-regular fa-file-code',
             'css' => 'fa-regular fa-file-code',
@@ -207,7 +207,7 @@ class MediaSearch extends rex_api_function
             'php' => 'fa-regular fa-file-code',
             'xml' => 'fa-regular fa-file-code',
             'json' => 'fa-regular fa-file-code',
-            
+
             // Video
             'mp4' => 'fa-regular fa-file-video',
             'avi' => 'fa-regular fa-file-video',
@@ -215,7 +215,7 @@ class MediaSearch extends rex_api_function
             'wmv' => 'fa-regular fa-file-video',
             'flv' => 'fa-regular fa-file-video',
             'webm' => 'fa-regular fa-file-video',
-            
+
             // Audio
             'mp3' => 'fa-regular fa-file-audio',
             'wav' => 'fa-regular fa-file-audio',
@@ -230,7 +230,7 @@ class MediaSearch extends rex_api_function
     private function generateActions($media, $openerInputField)
     {
         $actions = [];
-        
+
         // Edit-Link (Details)
         $actions['edit'] = [
             'url' => rex_url::backendPage('mediapool/media', [

@@ -19,12 +19,15 @@ $n = [];
 $user = rex::getUser()->getId();
 // Einstellungen speichern
 if (rex_post('formsubmit', 'string') == '1') {
-    $package->setConfig(rex_post('config', [
-        ['quick_navigation_favs' . $user, 'array[int]'],
-        ['quick_navigation_ignoreoffline' . $user, 'int'],
-        ['quick_navigation_artdirections' . $user, 'int'],
-        // Medienpool-Sortier-Button-Option entfernt
-    ]));
+    // Standard-Werte für Checkboxen setzen (falls nicht gecheckt)
+    $config = rex_post('config', 'array');
+    
+    // Checkbox-Werte normalisieren
+    $config['quick_navigation_ignoreoffline' . $user] = isset($config['quick_navigation_ignoreoffline' . $user]) ? 1 : 0;
+    $config['quick_navigation_artdirections' . $user] = isset($config['quick_navigation_artdirections' . $user]) ? 1 : 0;
+    $config['quick_navigation_media_livesearch' . $user] = isset($config['quick_navigation_media_livesearch' . $user]) ? 1 : 0;
+    
+    $package->setConfig($config);
     echo rex_view::success($package->i18n('quick_navigation_config_saved'));
 }
 
@@ -68,6 +71,19 @@ $formElements = [];
 $n = [];
 $n['label'] = '<label for="quick-navinigation-article-checkbox">' . $package->i18n('quick_navigation_artdirections') . '</label>';
 $n['field'] = '<input type="checkbox" id="quick-navinigation-article-checkbox" name="config[quick_navigation_artdirections' . $user . ']"' . (!empty($package->getConfig('quick_navigation_artdirections' . $user)) && $package->getConfig('quick_navigation_artdirections' . $user) == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$formElements[] = $n;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements, false);
+$content .= $fragment->parse('core/form/checkbox.php');
+
+// Enable / Disable media live search
+$formElements = [];
+$n = [];
+$n['label'] = '<label for="quick-navigation-media-livesearch-checkbox">' . $package->i18n('quick_navigation_media_livesearch') . '</label>';
+// Standard ist aktiviert (1), nur wenn explizit deaktiviert (0) dann nicht checked
+$mediaLiveSearchValue = $package->getConfig('quick_navigation_media_livesearch' . $user);
+$isChecked = ($mediaLiveSearchValue === null || $mediaLiveSearchValue === '' || $mediaLiveSearchValue == '1');
+$n['field'] = '<input type="checkbox" id="quick-navigation-media-livesearch-checkbox" name="config[quick_navigation_media_livesearch' . $user . ']"' . ($isChecked ? ' checked="checked"' : '') . ' value="1" />';
 $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);

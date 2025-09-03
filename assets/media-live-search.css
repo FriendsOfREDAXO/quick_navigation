@@ -1,0 +1,611 @@
+/* Quick Navigation Media Live Search Styles für bestehendes Mediapool Suchfeld */
+
+/* CSS Variables - Standard: Light Theme */
+:root {
+    --qn-dropdown-bg: #fff;
+    --qn-dropdown-border: #ddd;
+    --qn-dropdown-text: #333;
+    --qn-item-border: #f5f5f5;
+    --qn-item-hover-bg: #f8f9fa;
+    --qn-thumb-bg: #f8f9fa;
+    --qn-title-color: #333;
+    --qn-filename-color: #666;
+    --qn-meta-color: #999;
+    --qn-loading-color: #666;
+}
+
+/* Dark Theme Variables */
+.rex-theme-dark,
+.rex-has-theme.rex-theme-dark {
+    --qn-dropdown-bg: #151c22;
+    --qn-dropdown-border: #444;
+    --qn-dropdown-text: #e9ecef;
+    --qn-item-border: #404040;
+    --qn-item-hover-bg: #1e2a32;
+    --qn-thumb-bg: #1e2a32;
+    --qn-title-color: #e9ecef;
+    --qn-filename-color: #adb5bd;
+    --qn-meta-color: #6c757d;
+    --qn-loading-color: #adb5bd;
+}
+
+/* Auto Theme (rex-has-theme ohne spezifische Theme-Klasse) */
+@media (prefers-color-scheme: dark) {
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) {
+        --qn-dropdown-bg: #151c22;
+        --qn-dropdown-border: #444;
+        --qn-dropdown-text: #e9ecef;
+        --qn-item-border: #404040;
+        --qn-item-hover-bg: #1e2a32;
+        --qn-thumb-bg: #1e2a32;
+        --qn-title-color: #e9ecef;
+        --qn-filename-color: #adb5bd;
+        --qn-meta-color: #6c757d;
+        --qn-loading-color: #adb5bd;
+    }
+    
+    /* Fallback für Browser ohne REDAXO Theme System */
+    body:not([class*="rex-theme"]):not([class*="rex-has-theme"]) {
+        --qn-dropdown-bg: #151c22;
+        --qn-dropdown-border: #444;
+        --qn-dropdown-text: #e9ecef;
+        --qn-item-border: #404040;
+        --qn-item-hover-bg: #1e2a32;
+        --qn-thumb-bg: #1e2a32;
+        --qn-title-color: #e9ecef;
+        --qn-filename-color: #adb5bd;
+        --qn-meta-color: #6c757d;
+        --qn-loading-color: #adb5bd;
+    }
+}
+
+.qn-media-live-search-results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 340px;
+    width: 340px;
+    background: var(--qn-dropdown-bg);
+    border: 1px solid var(--qn-dropdown-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 9999;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 2px;
+    color: var(--qn-dropdown-text);
+}
+
+/* Responsive Anpassung für schmale Bildschirme */
+@media screen and (max-width: 480px) {
+    .qn-media-live-search-results {
+        left: 0;
+        right: 0;
+        width: auto;
+        min-width: auto;
+    }
+}
+
+.qn-live-search-item {
+    display: block;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--qn-item-border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.qn-live-search-item-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.qn-live-search-item-content:last-child {
+    margin-bottom: 0;
+}
+
+.qn-live-search-item:hover {
+    background-color: var(--qn-item-hover-bg);
+}
+
+.qn-live-search-item:last-child {
+    border-bottom: none;
+}
+
+.qn-live-search-thumb {
+    flex: 0 0 45px;
+    height: 35px;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--qn-thumb-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.qn-live-search-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.qn-live-search-thumb i {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.qn-live-search-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.qn-live-search-title {
+    font-weight: 500;
+    color: var(--qn-title-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.qn-live-search-filename {
+    color: var(--qn-filename-color);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.qn-live-search-meta {
+    color: var(--qn-meta-color);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.qn-live-search-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    justify-content: flex-start;
+}
+
+.qn-live-search-actions .btn {
+    margin: 0;
+    padding: 4px 12px;
+    font-size: 11px;
+}
+
+.qn-live-search-actions .btn-select {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.qn-live-search-actions .btn-select:hover {
+    background: #218838;
+    border-color: #1e7e34;
+}
+
+.qn-live-search-loading,
+.qn-live-search-no-results {
+    padding: 16px;
+    text-align: center;
+    color: var(--qn-loading-color);
+    font-size: 13px;
+}
+
+.qn-live-search-loading i {
+    margin-right: 5px;
+}
+
+.qn-live-search-item {
+    display: block;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.qn-live-search-item-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.qn-live-search-item-content:last-child {
+    margin-bottom: 0;
+}
+
+.qn-live-search-item:hover {
+    background-color: #f8f9fa;
+}
+
+.qn-live-search-item:last-child {
+    border-bottom: none;
+}
+
+.qn-live-search-thumb {
+    flex: 0 0 45px;
+    height: 35px;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.qn-live-search-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.qn-live-search-thumb i {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.qn-live-search-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.qn-live-search-title {
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.qn-live-search-filename {
+    color: #666;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.qn-live-search-meta {
+    color: #999;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.qn-live-search-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    justify-content: flex-start;
+}
+
+.qn-live-search-actions .btn {
+    margin: 0;
+    padding: 4px 12px;
+    font-size: 11px;
+}
+
+.qn-live-search-actions .btn-select {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.qn-live-search-actions .btn-select:hover {
+    background: #218838;
+    border-color: #1e7e34;
+}
+
+.qn-live-search-loading,
+.qn-live-search-no-results {
+    padding: 16px;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+
+.qn-live-search-loading i {
+    margin-right: 5px;
+}
+
+/* Light Theme Support - explizit hell, auch bei prefers-color-scheme: dark */
+body.rex-theme-light .qn-media-live-search-results,
+html.rex-theme-light .qn-media-live-search-results,
+.rex-theme-light .qn-media-live-search-results,
+body.rex-has-theme.rex-theme-light .qn-media-live-search-results,
+html.rex-has-theme.rex-theme-light .qn-media-live-search-results,
+.rex-has-theme.rex-theme-light .qn-media-live-search-results {
+    background: #fff !important;
+    border-color: #ddd !important;
+    color: #333 !important;
+}
+
+body.rex-theme-light .qn-live-search-item,
+html.rex-theme-light .qn-live-search-item,
+.rex-theme-light .qn-live-search-item,
+body.rex-has-theme.rex-theme-light .qn-live-search-item,
+html.rex-has-theme.rex-theme-light .qn-live-search-item,
+.rex-has-theme.rex-theme-light .qn-live-search-item {
+    border-bottom-color: #f5f5f5 !important;
+}
+
+body.rex-theme-light .qn-live-search-item:hover,
+html.rex-theme-light .qn-live-search-item:hover,
+.rex-theme-light .qn-live-search-item:hover,
+body.rex-has-theme.rex-theme-light .qn-live-search-item:hover,
+html.rex-has-theme.rex-theme-light .qn-live-search-item:hover,
+.rex-has-theme.rex-theme-light .qn-live-search-item:hover {
+    background-color: #f8f9fa !important;
+}
+
+body.rex-theme-light .qn-live-search-thumb,
+html.rex-theme-light .qn-live-search-thumb,
+.rex-theme-light .qn-live-search-thumb,
+body.rex-has-theme.rex-theme-light .qn-live-search-thumb,
+html.rex-has-theme.rex-theme-light .qn-live-search-thumb,
+.rex-has-theme.rex-theme-light .qn-live-search-thumb {
+    background: #f8f9fa !important;
+}
+
+body.rex-theme-light .qn-live-search-title,
+html.rex-theme-light .qn-live-search-title,
+.rex-theme-light .qn-live-search-title,
+body.rex-has-theme.rex-theme-light .qn-live-search-title,
+html.rex-has-theme.rex-theme-light .qn-live-search-title,
+.rex-has-theme.rex-theme-light .qn-live-search-title {
+    color: #333 !important;
+}
+
+body.rex-theme-light .qn-live-search-filename,
+html.rex-theme-light .qn-live-search-filename,
+.rex-theme-light .qn-live-search-filename,
+body.rex-has-theme.rex-theme-light .qn-live-search-filename,
+html.rex-has-theme.rex-theme-light .qn-live-search-filename,
+.rex-has-theme.rex-theme-light .qn-live-search-filename {
+    color: #666 !important;
+}
+
+body.rex-theme-light .qn-live-search-meta,
+html.rex-theme-light .qn-live-search-meta,
+.rex-theme-light .qn-live-search-meta,
+body.rex-has-theme.rex-theme-light .qn-live-search-meta,
+html.rex-has-theme.rex-theme-light .qn-live-search-meta,
+.rex-has-theme.rex-theme-light .qn-live-search-meta {
+    color: #999 !important;
+}
+
+body.rex-theme-light .qn-live-search-loading,
+body.rex-theme-light .qn-live-search-no-results,
+html.rex-theme-light .qn-live-search-loading,
+html.rex-theme-light .qn-live-search-no-results,
+.rex-theme-light .qn-live-search-loading,
+.rex-theme-light .qn-live-search-no-results,
+body.rex-has-theme.rex-theme-light .qn-live-search-loading,
+body.rex-has-theme.rex-theme-light .qn-live-search-no-results,
+html.rex-has-theme.rex-theme-light .qn-live-search-loading,
+html.rex-has-theme.rex-theme-light .qn-live-search-no-results,
+.rex-has-theme.rex-theme-light .qn-live-search-loading,
+.rex-has-theme.rex-theme-light .qn-live-search-no-results {
+    color: #666 !important;
+}
+
+/* Dark Theme Support - spezifische Selektoren */
+/* Explizites Dark Theme */
+body.rex-theme-dark .qn-media-live-search-results,
+html.rex-theme-dark .qn-media-live-search-results,
+.rex-theme-dark .qn-media-live-search-results,
+body.rex-has-theme.rex-theme-dark .qn-media-live-search-results,
+html.rex-has-theme.rex-theme-dark .qn-media-live-search-results,
+.rex-has-theme.rex-theme-dark .qn-media-live-search-results {
+    background: #151c22 !important;
+    border-color: #444 !important;
+    color: #e9ecef !important;
+}
+
+body.rex-theme-dark .qn-live-search-item,
+html.rex-theme-dark .qn-live-search-item,
+.rex-theme-dark .qn-live-search-item,
+body.rex-has-theme.rex-theme-dark .qn-live-search-item,
+html.rex-has-theme.rex-theme-dark .qn-live-search-item,
+.rex-has-theme.rex-theme-dark .qn-live-search-item {
+    border-bottom-color: #404040 !important;
+}
+
+body.rex-theme-dark .qn-live-search-item:hover,
+html.rex-theme-dark .qn-live-search-item:hover,
+.rex-theme-dark .qn-live-search-item:hover,
+body.rex-has-theme.rex-theme-dark .qn-live-search-item:hover,
+html.rex-has-theme.rex-theme-dark .qn-live-search-item:hover,
+.rex-has-theme.rex-theme-dark .qn-live-search-item:hover {
+    background-color: #1e2a32 !important;
+}
+
+body.rex-theme-dark .qn-live-search-thumb,
+html.rex-theme-dark .qn-live-search-thumb,
+.rex-theme-dark .qn-live-search-thumb,
+body.rex-has-theme.rex-theme-dark .qn-live-search-thumb,
+html.rex-has-theme.rex-theme-dark .qn-live-search-thumb,
+.rex-has-theme.rex-theme-dark .qn-live-search-thumb {
+    background: #1e2a32 !important;
+}
+
+body.rex-theme-dark .qn-live-search-title,
+html.rex-theme-dark .qn-live-search-title,
+.rex-theme-dark .qn-live-search-title,
+body.rex-has-theme.rex-theme-dark .qn-live-search-title,
+html.rex-has-theme.rex-theme-dark .qn-live-search-title,
+.rex-has-theme.rex-theme-dark .qn-live-search-title {
+    color: #e9ecef !important;
+}
+
+body.rex-theme-dark .qn-live-search-filename,
+html.rex-theme-dark .qn-live-search-filename,
+.rex-theme-dark .qn-live-search-filename,
+body.rex-has-theme.rex-theme-dark .qn-live-search-filename,
+html.rex-has-theme.rex-theme-dark .qn-live-search-filename,
+.rex-has-theme.rex-theme-dark .qn-live-search-filename {
+    color: #adb5bd !important;
+}
+
+body.rex-theme-dark .qn-live-search-meta,
+html.rex-theme-dark .qn-live-search-meta,
+.rex-theme-dark .qn-live-search-meta,
+body.rex-has-theme.rex-theme-dark .qn-live-search-meta,
+html.rex-has-theme.rex-theme-dark .qn-live-search-meta,
+.rex-has-theme.rex-theme-dark .qn-live-search-meta {
+    color: #6c757d !important;
+}
+
+body.rex-theme-dark .qn-live-search-loading,
+body.rex-theme-dark .qn-live-search-no-results,
+html.rex-theme-dark .qn-live-search-loading,
+html.rex-theme-dark .qn-live-search-no-results,
+.rex-theme-dark .qn-live-search-loading,
+.rex-theme-dark .qn-live-search-no-results,
+body.rex-has-theme.rex-theme-dark .qn-live-search-loading,
+body.rex-has-theme.rex-theme-dark .qn-live-search-no-results,
+html.rex-has-theme.rex-theme-dark .qn-live-search-loading,
+html.rex-has-theme.rex-theme-dark .qn-live-search-no-results,
+.rex-has-theme.rex-theme-dark .qn-live-search-loading,
+.rex-has-theme.rex-theme-dark .qn-live-search-no-results {
+    color: #adb5bd !important;
+}
+
+/* Direkter prefers-color-scheme Support für alle Fälle */
+@media (prefers-color-scheme: dark) {
+    .qn-media-live-search-results {
+        background: #151c22 !important;
+        border-color: #444 !important;
+        color: #e9ecef !important;
+    }
+
+    .qn-live-search-item {
+        border-bottom-color: #404040 !important;
+    }
+
+    .qn-live-search-item:hover {
+        background-color: #1e2a32 !important;
+    }
+
+    .qn-live-search-thumb {
+        background: #1e2a32 !important;
+    }
+
+    .qn-live-search-title {
+        color: #e9ecef !important;
+    }
+
+    .qn-live-search-filename {
+        color: #adb5bd !important;
+    }
+
+    .qn-live-search-meta {
+        color: #6c757d !important;
+    }
+
+    .qn-live-search-loading,
+    .qn-live-search-no-results {
+        color: #adb5bd !important;
+    }
+}
+
+/* Auto Theme Support (rex-has-theme ohne explizite Theme-Klasse hört auf prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+    body.rex-theme-auto .qn-media-live-search-results,
+    html.rex-theme-auto .qn-media-live-search-results,
+    .rex-theme-auto .qn-media-live-search-results,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-media-live-search-results,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-media-live-search-results,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-media-live-search-results,
+    .qn-media-live-search-results {
+        background: #151c22 !important;
+        border-color: #444 !important;
+        color: #e9ecef !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-item,
+    html.rex-theme-auto .qn-live-search-item,
+    .rex-theme-auto .qn-live-search-item,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item,
+    .qn-live-search-item {
+        border-bottom-color: #404040 !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-item:hover,
+    html.rex-theme-auto .qn-live-search-item:hover,
+    .rex-theme-auto .qn-live-search-item:hover,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item:hover,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item:hover,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-item:hover,
+    .qn-live-search-item:hover {
+        background-color: #1e2a32 !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-thumb,
+    html.rex-theme-auto .qn-live-search-thumb,
+    .rex-theme-auto .qn-live-search-thumb,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-thumb,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-thumb,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-thumb,
+    .qn-live-search-thumb {
+        background: #1e2a32 !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-title,
+    html.rex-theme-auto .qn-live-search-title,
+    .rex-theme-auto .qn-live-search-title,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-title,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-title,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-title,
+    .qn-live-search-title {
+        color: #e9ecef !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-filename,
+    html.rex-theme-auto .qn-live-search-filename,
+    .rex-theme-auto .qn-live-search-filename,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-filename,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-filename,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-filename,
+    .qn-live-search-filename {
+        color: #adb5bd !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-meta,
+    html.rex-theme-auto .qn-live-search-meta,
+    .rex-theme-auto .qn-live-search-meta,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-meta,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-meta,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-meta,
+    .qn-live-search-meta {
+        color: #6c757d !important;
+    }
+
+    body.rex-theme-auto .qn-live-search-loading,
+    body.rex-theme-auto .qn-live-search-no-results,
+    html.rex-theme-auto .qn-live-search-loading,
+    html.rex-theme-auto .qn-live-search-no-results,
+    .rex-theme-auto .qn-live-search-loading,
+    .rex-theme-auto .qn-live-search-no-results,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-loading,
+    body.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-no-results,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-loading,
+    html.rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-no-results,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-loading,
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) .qn-live-search-no-results,
+    .qn-live-search-loading,
+    .qn-live-search-no-results {
+        color: #adb5bd !important;
+    }
+}

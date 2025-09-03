@@ -137,6 +137,9 @@ function initQuickNavigationMediaLiveSearch() {
             
             if (item.thumbnail.type === 'image') {
                 thumbnail = '<img src="' + item.thumbnail.src + '" alt="' + item.thumbnail.alt + '" loading="lazy">';
+            } else if (item.thumbnail.type === 'svg') {
+                // inline SVG markup - already sanitized server-side
+                thumbnail = item.thumbnail.svg;
             } else if (item.thumbnail.type === 'icon') {
                 thumbnail = '<i class="' + item.thumbnail.icon + '" title="' + item.thumbnail.title + '"></i>';
             } else if (item.thumbnail.type === 'error') {

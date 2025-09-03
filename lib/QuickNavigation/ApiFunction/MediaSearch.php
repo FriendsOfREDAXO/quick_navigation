@@ -144,8 +144,37 @@ class MediaSearch extends rex_api_function
 
     private function generateThumbnail($media)
     {
-        $isImage = in_array($media->getExtension(), ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg']);
-        
+        $ext = strtolower($media->getExtension());
+
+        // SVG: read file and return inline SVG markup (sanitized) so MediaManager effects are not used
+        if ($ext === 'svg') {
+            try {
+                $filePath = \rex_path::media($media->getFileName());
+                if (is_file($filePath) && is_readable($filePath)) {
+                    $svg = (string) @file_get_contents($filePath);
+                    if ($svg !== '') {
+                        // Basic sanitization: remove <script> tags and on* attributes to avoid JS execution
+                        $svg = preg_replace('#<\s*script[^>]*>.*?<\s*/\s*script\s*>#is', '', $svg);
+                        // remove javascript: URIs
+                        $svg = preg_replace_callback('#(<[^>]+>)#', function ($m) {
+                            return preg_replace('#\s(on[a-z]+)\s*=\s*("[^"]*"|' . "'[^']*'" . ')#i', '', $m[1]);
+                        }, $svg);
+                        // strip xml prolog
+                        $svg = preg_replace('/^\s*<\?xml[^>]+>\s*/i', '', $svg);
+
+                        return [
+                            'type' => 'svg',
+                            'svg' => $svg,
+                            'alt' => $media->getTitle() ?: $media->getFilename()
+                        ];
+                    }
+                }
+            } catch (Exception $e) {
+                // fall through to icon
+            }
+        }
+
+        $isImage = in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
         if ($isImage) {
             try {
                 $thumbnailUrl = rex_media_manager::getUrl('rex_mediabutton_preview', $media->getFileName());

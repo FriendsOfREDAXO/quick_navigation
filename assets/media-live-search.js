@@ -87,7 +87,7 @@ function initQuickNavigationMediaLiveSearch() {
                .show();
         
         // Parameter aus der aktuellen Seite holen
-        var categoryId = $('#rex_file_category').val() || 0;
+        var categoryId = 0; // Live-Suche immer über alle Kategorien hinweg
         var openerInputField = $('input[name="opener_input_field"]').val() || '';
         var types = $('input[name="args[types]"]').val() || '';
         

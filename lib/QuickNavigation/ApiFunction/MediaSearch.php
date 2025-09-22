@@ -41,7 +41,7 @@ class MediaSearch extends rex_api_function
         $types = rex_request('types', 'string', '');
 
         // Berechtigung prüfen
-        if (!rex::getUser() || !rex::getUser()->hasPerm('media[read]')) {
+        if (!rex::getUser()) {
             $result = [
                 'success' => false,
                 'error' => 'Keine Berechtigung'

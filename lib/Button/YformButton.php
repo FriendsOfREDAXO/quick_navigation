@@ -2,18 +2,20 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use function count;
+
 use rex;
 use rex_addon;
-use rex_plugin;
 use rex_csrf_token;
+
+use function rex_escape;
+
 use rex_fragment;
 use rex_i18n;
+use rex_plugin;
 use rex_string;
 use rex_url;
 use rex_yform_manager_table;
-
-use function count;
-use function rex_escape;
 
 class YformButton implements ButtonInterface
 {

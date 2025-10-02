@@ -2,17 +2,19 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use function count;
+
 use rex;
 use rex_addon;
 use rex_category;
 use rex_clang;
+
+use function rex_escape;
+
 use rex_fragment;
 use rex_i18n;
 use rex_string;
 use rex_url;
-
-use function count;
-use function rex_escape;
 
 class FavoriteButton implements ButtonInterface
 {
@@ -76,7 +78,7 @@ class FavoriteButton implements ButtonInterface
                 $listItems[] = $listItem;
             }
         } else {
-            $listItems[] = '<a class="btn manage_favortites" href="'.rex_url::backendPage("quick_navigation/config").'">'.rex_i18n::msg('quick_navigation_manage_favorite').'</a>';
+            $listItems[] = '<a class="btn manage_favortites" href="'.rex_url::backendPage('quick_navigation/config').'">'.rex_i18n::msg('quick_navigation_manage_favorite').'</a>';
         }
 
         $fragment = new rex_fragment([

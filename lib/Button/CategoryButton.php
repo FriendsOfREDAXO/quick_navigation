@@ -2,18 +2,13 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use FriendsOfRedaxo\QuickNavigation\Utility\BuildNavigationArray;
 use rex;
 use rex_addon;
-use rex_article;
-use rex_category;
 use rex_clang;
-use rex_context;
 use rex_fragment;
 use rex_i18n;
 use rex_string;
-use rex_url;
-use rex_yrewrite;
-use FriendsOfRedaxo\QuickNavigation\Utility\BuildNavigationArray;
 
 class CategoryButton implements ButtonInterface
 {

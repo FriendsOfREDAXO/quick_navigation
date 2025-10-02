@@ -2,6 +2,8 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use function count;
+
 use IntlDateFormatter;
 use rex;
 use rex_addon;
@@ -13,8 +15,6 @@ use rex_sql;
 use rex_string;
 use rex_url;
 use rex_yrewrite;
-
-use function count;
 
 class ArticleHistoryButton implements ButtonInterface
 {

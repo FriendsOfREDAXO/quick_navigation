@@ -33,8 +33,8 @@ class MediaSorter
             $subject = $ep->getSubject();
 
             // Ab REDAXO 5.13.3 ist das korrekte Feld 'f.filename'
-            $subject = str_replace("f.updatedate", "f.filename, f.updatedate", $subject);
-            $subject = str_replace("desc", "asc", $subject);
+            $subject = str_replace('f.updatedate', 'f.filename, f.updatedate', $subject);
+            $subject = str_replace('desc', 'asc', $subject);
 
             return $subject;
         }

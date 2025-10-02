@@ -2,18 +2,14 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\ApiFunction;
 
+use Exception;
 use rex;
 use rex_api_function;
-use rex_api_result;
+use rex_formatter;
 use rex_media;
 use rex_media_manager;
-use rex_media_service;
-use rex_request;
-use rex_response;
-use rex_formatter;
-use rex_url;
 use rex_sql;
-use Exception;
+use rex_url;
 
 /**
  * API function for media live search in Quick Navigation.
@@ -44,7 +40,7 @@ class MediaSearch extends rex_api_function
         if (!rex::getUser()) {
             $result = [
                 'success' => false,
-                'error' => 'Keine Berechtigung'
+                'error' => 'Keine Berechtigung',
             ];
             echo json_encode($result);
             exit;
@@ -53,7 +49,7 @@ class MediaSearch extends rex_api_function
         if (strlen($searchTerm) < 2) {
             $result = [
                 'success' => false,
-                'error' => 'Suchbegriff zu kurz'
+                'error' => 'Suchbegriff zu kurz',
             ];
             echo json_encode($result);
             exit;
@@ -118,7 +114,7 @@ class MediaSearch extends rex_api_function
                         'size' => $size,
                         'updatedate' => $updatedate,
                         'thumbnail' => $thumbnail,
-                        'actions' => $actions
+                        'actions' => $actions,
                     ];
                 }
                 $sql->next();
@@ -126,7 +122,7 @@ class MediaSearch extends rex_api_function
 
             $result = [
                 'success' => true,
-                'results' => array_slice($results, 0, 10) // Maximal 10 Ergebnisse
+                'results' => array_slice($results, 0, 10), // Maximal 10 Ergebnisse
             ];
 
             echo json_encode($result);
@@ -135,7 +131,7 @@ class MediaSearch extends rex_api_function
         } catch (Exception $e) {
             $result = [
                 'success' => false,
-                'error' => 'Fehler bei der Suche: ' . $e->getMessage()
+                'error' => 'Fehler bei der Suche: ' . $e->getMessage(),
             ];
             echo json_encode($result);
             exit;
@@ -165,7 +161,7 @@ class MediaSearch extends rex_api_function
                         return [
                             'type' => 'svg',
                             'svg' => $svg,
-                            'alt' => $media->getTitle() ?: $media->getFilename()
+                            'alt' => $media->getTitle() ?: $media->getFilename(),
                         ];
                     }
                 }
@@ -181,7 +177,7 @@ class MediaSearch extends rex_api_function
                 return [
                     'type' => 'image',
                     'src' => $thumbnailUrl,
-                    'alt' => $media->getTitle() ?: $media->getFilename()
+                    'alt' => $media->getTitle() ?: $media->getFilename(),
                 ];
             } catch (Exception $e) {
                 // Fallback zu Icon
@@ -194,7 +190,7 @@ class MediaSearch extends rex_api_function
         return [
             'type' => 'icon',
             'icon' => $icon,
-            'title' => strtoupper($media->getExtension()) . ' Datei'
+            'title' => strtoupper($media->getExtension()) . ' Datei',
         ];
     }
 
@@ -265,8 +261,8 @@ class MediaSearch extends rex_api_function
             'url' => rex_url::backendPage('mediapool/media', [
                 'opener_input_field' => $openerInputField,
                 'file_id' => $media->getId(),
-                'file_category_id' => $media->getCategoryId()
-            ])
+                'file_category_id' => $media->getCategoryId(),
+            ]),
         ];
 
         // Wenn opener_input_field gesetzt ist, dann Auswahl-Modus
@@ -277,7 +273,7 @@ class MediaSearch extends rex_api_function
                     'type' => 'medialist',
                     'filename' => $media->getFilename(),
                     'title' => $media->getTitle() ?: $media->getFilename(),
-                    'label' => 'Übernehmen'
+                    'label' => 'Übernehmen',
                 ];
             } else {
                 // Einzelmedium
@@ -285,7 +281,7 @@ class MediaSearch extends rex_api_function
                     'type' => 'media',
                     'filename' => $media->getFilename(),
                     'title' => $media->getTitle() ?: $media->getFilename(),
-                    'label' => 'Übernehmen'
+                    'label' => 'Übernehmen',
                 ];
             }
         }

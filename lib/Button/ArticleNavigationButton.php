@@ -2,14 +2,14 @@
 
 namespace FriendsOfRedaxo\QuickNavigation\Button;
 
+use function count;
+
 use rex_article;
 use rex_be_controller;
 use rex_category;
 use rex_clang;
 use rex_string;
 use rex_url;
-
-use function count;
 
 class ArticleNavigationButton implements ButtonInterface
 {
@@ -41,7 +41,7 @@ class ArticleNavigationButton implements ButtonInterface
                         $attributes = [
                             'class' => 'btn btn-default',
                             'href' => rex_url::backendPage('content/edit', ['mode' => 'edit', 'clang' => rex_clang::getCurrentId(), 'category_id' => rex_request('category_id'), 'article_id' => $article->getId()]),
-                            'title' => $article->getName()
+                            'title' => $article->getName(),
                         ];
                         $prev = '<a' . rex_string::buildAttributes($attributes). '><span class="fa fa-chevron-left"></span></a>';
                     }
@@ -52,7 +52,7 @@ class ArticleNavigationButton implements ButtonInterface
                         $attributes = [
                             'class' => 'btn btn-default',
                             'href' => rex_url::backendPage('content/edit', ['mode' => 'edit', 'clang' => rex_clang::getCurrentId(), 'category_id' => rex_request('category_id'), 'article_id' => $article->getId()]),
-                            'title' => $article->getName()
+                            'title' => $article->getName(),
                         ];
                         $next = '<a' . rex_string::buildAttributes($attributes). '><span class="fa fa-chevron-right"></span></a>';
                     }

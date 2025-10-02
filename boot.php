@@ -11,11 +11,11 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
-use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
 use FriendsOfRedaxo\QuickNavigation\ApiFunction\MediaSearch;
+use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
-use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
+use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\CategoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
 use FriendsOfRedaxo\QuickNavigation\Button\WatsonButton;
@@ -30,7 +30,6 @@ use rex_backend_login;
 use rex_be_controller;
 use rex_clang;
 use rex_extension;
-use rex_extension_point;
 use rex_minibar;
 use rex_perm;
 use rex_url;
@@ -39,7 +38,7 @@ use rex_view;
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
     if (rex::getUser()->hasPerm('quick_navigation[]')) {
         rex_api_function::register('quicknavigation_api', MenuRender::class);
-        rex_api_function::register('quicknavigation_media_search', 'rex_api_quicknavigation_media_search');
+        rex_api_function::register('quicknavigation_media_search', MediaSearch::class);
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.css'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));

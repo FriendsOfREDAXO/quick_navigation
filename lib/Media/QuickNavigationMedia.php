@@ -4,17 +4,15 @@ namespace FriendsOfRedaxo\QuickNavigation\Media;
 
 use rex;
 use rex_be_controller;
-use rex_i18n;
 use rex_extension;
 use rex_extension_point;
 use rex_formatter;
 use rex_fragment;
+use rex_i18n;
+use rex_request;
 use rex_sql;
 use rex_string;
 use rex_url;
-use rex_addon;
-use rex_request;
-use rex_response;
 
 class QuickNavigationMedia
 {

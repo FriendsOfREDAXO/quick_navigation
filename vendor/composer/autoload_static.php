@@ -57,6 +57,7 @@ class ComposerStaticInitafbb2dec878898133753608e8bcea93e
         ),
         'F' => 
         array (
+            'FriendsOfRedaxo\\QuickNavigation\\' => 32,
             'Fidry\\CpuCoreCounter\\' => 21,
         ),
         'E' => 
@@ -180,6 +181,10 @@ class ComposerStaticInitafbb2dec878898133753608e8bcea93e
         'PhpCsFixer\\' => 
         array (
             0 => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src',
+        ),
+        'FriendsOfRedaxo\\QuickNavigation\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
         ),
         'Fidry\\CpuCoreCounter\\' => 
         array (

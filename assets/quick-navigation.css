@@ -170,9 +170,7 @@
 }
 
 .quick-navigation-section-divider {
-    height: 0;
-    border-top: 1px solid #e0e0e0;
-    margin: 4px 0;
+    display: none;
 }
 
 .quick-navigation-addon-fav {
@@ -202,10 +200,6 @@
 .rex-theme-dark .quick-navigation-section-header {
     color: #aaa;
     background-color: #2a2d33;
-    border-top-color: #404040;
-}
-
-.rex-theme-dark .quick-navigation-section-divider {
     border-top-color: #404040;
 }
 

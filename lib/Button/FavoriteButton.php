@@ -32,51 +32,8 @@ class FavoriteButton implements ButtonInterface
 
         $listItems = [];
         
-        // AddOn-Seiten Favoriten
-        if (is_array($addonPages) && count($addonPages) > 0) {
-            $listItems[] = '<div class="quick-navigation-section-header">' . rex_i18n::msg('quick_navigation_addon_pages') . '</div>';
-            
-            foreach ($addonPages as $pageKey) {
-                $pageInfo = $this->parsePageKey($pageKey);
-                if (!$pageInfo) {
-                    continue;
-                }
-                
-                // Check permission
-                $page = rex_be_controller::getPageObject($pageInfo['fullKey']);
-                if (!$page || $page->isHidden()) {
-                    continue;
-                }
-                
-                // Check user permission
-                $requiredPerms = $page->getRequiredPermissions();
-                if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
-                    continue;
-                }
-                
-                $attributes = [
-                    'href' => rex_url::backendPage($pageInfo['fullKey']),
-                    'title' => $pageInfo['title'],
-                ];
-                
-                $listItem = '
-                    <div class="quick-navigation-item-row quick-navigation-addon-fav">
-                        <a' . rex_string::buildAttributes($attributes) . '>
-                            <i class="' . rex_escape($pageInfo['icon']) . '" aria-hidden="true"></i>
-                            ' . rex_escape($pageInfo['title']) . '
-                        </a>
-                    </div>
-                ';
-                
-                $listItems[] = $listItem;
-            }
-        }
-        
-        // Struktur-Favoriten
+        // Struktur-Favoriten zuerst
         if ($categoryIds && count($categoryIds) > 0) {
-            if (count($listItems) > 0) {
-                $listItems[] = '<div class="quick-navigation-section-divider"></div>';
-            }
             $listItems[] = '<div class="quick-navigation-section-header">' . rex_i18n::msg('quick_navigation_structure_favs') . '</div>';
             
             $clangId = rex_request('clang', 'int', rex_clang::getStartId());
@@ -124,6 +81,49 @@ class FavoriteButton implements ButtonInterface
                         </div>
                     ';
 
+                $listItems[] = $listItem;
+            }
+        }
+        
+        // AddOn-Seiten Favoriten danach
+        if (is_array($addonPages) && count($addonPages) > 0) {
+            if (count($listItems) > 0) {
+                $listItems[] = '<div class="quick-navigation-section-divider"></div>';
+            }
+            $listItems[] = '<div class="quick-navigation-section-header">' . rex_i18n::msg('quick_navigation_addon_pages') . '</div>';
+            
+            foreach ($addonPages as $pageKey) {
+                $pageInfo = $this->parsePageKey($pageKey);
+                if (!$pageInfo) {
+                    continue;
+                }
+                
+                // Check permission
+                $page = rex_be_controller::getPageObject($pageInfo['fullKey']);
+                if (!$page || $page->isHidden()) {
+                    continue;
+                }
+                
+                // Check user permission
+                $requiredPerms = $page->getRequiredPermissions();
+                if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
+                    continue;
+                }
+                
+                $attributes = [
+                    'href' => rex_url::backendPage($pageInfo['fullKey']),
+                    'title' => $pageInfo['title'],
+                ];
+                
+                $listItem = '
+                    <div class="quick-navigation-item-row quick-navigation-addon-fav">
+                        <a' . rex_string::buildAttributes($attributes) . '>
+                            <i class="' . rex_escape($pageInfo['icon']) . '" aria-hidden="true"></i>
+                            ' . rex_escape($pageInfo['title']) . '
+                        </a>
+                    </div>
+                ';
+                
                 $listItems[] = $listItem;
             }
         }

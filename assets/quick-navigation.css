@@ -155,28 +155,45 @@
 
 /* Favoriten Sections */
 .quick-navigation-section-header {
-    padding: 8px 12px 4px;
+    padding: 10px 12px 6px;
     font-weight: 600;
     font-size: 11px;
     text-transform: uppercase;
-    color: var(--quick-navigation-color-base);
-    background-color: var(--quick-navigation-color-light);
-    border-bottom: 1px solid #ddd;
+    color: #666;
+    background-color: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    margin: 0;
+}
+
+.quick-navigation-section-header:first-child {
+    border-top: none;
 }
 
 .quick-navigation-section-divider {
-    height: 1px;
-    background-color: #ddd;
-    margin: 8px 0;
+    height: 0;
+    border-top: 1px solid #e0e0e0;
+    margin: 4px 0;
+}
+
+.quick-navigation-addon-fav {
+    padding: 0;
 }
 
 .quick-navigation-addon-fav a {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 6px 12px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.quick-navigation-addon-fav a:hover {
+    background-color: #f0f0f0;
 }
 
 .quick-navigation-addon-fav a i {
-    width: 20px;
+    width: 16px;
     text-align: center;
+    flex-shrink: 0;
 }

@@ -21,6 +21,9 @@ quick_navigation_favorite = Favoriten
 quick_navigation_manage_favorite = Favoriten anlegen
 quick_navigation_favorite_article_add = Artikel hinzufügen in:
 quick_navigation_favorite_category_add = Kategorie hinzufügen in:
+quick_navigation_addon_pages = AddOn-Seiten
+quick_navigation_structure_favs = Struktur
+quick_navigation_addon_pages_selection = AddOn-Seiten Favoriten
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Datensatz hinzufügen in:
 
@@ -35,3 +38,13 @@ quick_navigation_media_live_search_placeholder = Live-Suche...
 
 # Live Search
 quick_navigation_media_live_search_placeholder = Live-Suche...
+
+# Button Management
+quick_navigation_button_management = Buttons ausblenden (Opt-Out)
+quick_navigation_button_management_note = Wähle die Buttons aus, die du NICHT sehen möchtest. Alle anderen Buttons bleiben sichtbar.
+quick_navigation_button_article_navigation = Artikelnavigation (Blättern)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Kategorie
+quick_navigation_button_article_history = Artikel-Historie
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Favoriten

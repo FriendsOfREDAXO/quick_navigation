@@ -6,6 +6,7 @@ use function count;
 
 use rex;
 use rex_addon;
+use rex_be_controller;
 use rex_category;
 use rex_clang;
 
@@ -27,9 +28,14 @@ class FavoriteButton implements ButtonInterface
         }
 
         $categoryIds = rex_addon::get('quick_navigation')->getConfig('quick_navigation_favs' . $user->getId());
+        $addonPages = rex_addon::get('quick_navigation')->getConfig('quick_navigation_addon_favs' . $user->getId(), []);
 
         $listItems = [];
+        
+        // Struktur-Favoriten zuerst
         if ($categoryIds && count($categoryIds) > 0) {
+            $listItems[] = '<div class="quick-navigation-section-header">' . rex_i18n::msg('quick_navigation_structure_favs') . '</div>';
+            
             $clangId = rex_request('clang', 'int', rex_clang::getStartId());
             foreach ($categoryIds as $categoryId) {
 
@@ -77,7 +83,53 @@ class FavoriteButton implements ButtonInterface
 
                 $listItems[] = $listItem;
             }
-        } else {
+        }
+        
+        // AddOn-Seiten Favoriten danach
+        if (is_array($addonPages) && count($addonPages) > 0) {
+            if (count($listItems) > 0) {
+                $listItems[] = '<div class="quick-navigation-section-divider"></div>';
+            }
+            $listItems[] = '<div class="quick-navigation-section-header">' . rex_i18n::msg('quick_navigation_addon_pages') . '</div>';
+            
+            foreach ($addonPages as $pageKey) {
+                $pageInfo = $this->parsePageKey($pageKey);
+                if (!$pageInfo) {
+                    continue;
+                }
+                
+                // Check permission
+                $page = rex_be_controller::getPageObject($pageInfo['fullKey']);
+                if (!$page || $page->isHidden()) {
+                    continue;
+                }
+                
+                // Check user permission
+                $requiredPerms = $page->getRequiredPermissions();
+                if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
+                    continue;
+                }
+                
+                $attributes = [
+                    'href' => rex_url::backendPage($pageInfo['fullKey']),
+                    'title' => $pageInfo['title'],
+                ];
+                
+                $listItem = '
+                    <div class="quick-navigation-item-row quick-navigation-addon-fav">
+                        <a' . rex_string::buildAttributes($attributes) . '>
+                            <i class="' . rex_escape($pageInfo['icon']) . '" aria-hidden="true"></i>
+                            ' . rex_escape($pageInfo['title']) . '
+                        </a>
+                    </div>
+                ';
+                
+                $listItems[] = $listItem;
+            }
+        }
+        
+        // Keine Favoriten
+        if (count($listItems) === 0) {
             $listItems[] = '<a class="btn manage_favortites" href="'.rex_url::backendPage('quick_navigation/config').'">'.rex_i18n::msg('quick_navigation_manage_favorite').'</a>';
         }
 
@@ -87,5 +139,85 @@ class FavoriteButton implements ButtonInterface
             'listItems' => $listItems,
         ]);
         return $fragment->parse('QuickNavigation/Dropdown.php');
+    }
+    
+    /**
+     * Parse page key and return info
+     * @return array{fullKey: string, title: string, icon: string}|null
+     */
+    private function parsePageKey(string $pageKey): ?array
+    {
+        $page = rex_be_controller::getPageObject($pageKey);
+        if (!$page) {
+            return null;
+        }
+        
+        return [
+            'fullKey' => $pageKey,
+            'title' => $page->getTitle(),
+            'icon' => $page->getIcon() ?: 'rex-icon fa-cube',
+        ];
+    }
+    
+    /**
+     * Get all available backend pages for favorites
+     * @return array<array{key: string, title: string, icon: string, addon: string}>
+     */
+    public static function getAvailablePages(): array
+    {
+        $user = rex::getUser();
+        if (!$user) {
+            return [];
+        }
+        
+        $pages = [];
+        $pageContainer = rex_be_controller::getPages();
+        
+        foreach ($pageContainer as $pageKey => $page) {
+            // Skip system pages
+            if (in_array($pageKey, ['setup', 'login', 'logout', '2factor_auth', '2factor_auth_verify'], true)) {
+                continue;
+            }
+            
+            // Skip if user has no permission
+            if ($page->isHidden()) {
+                continue;
+            }
+            
+            $requiredPerms = $page->getRequiredPermissions();
+            if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
+                continue;
+            }
+            
+            $addonName = $pageKey;
+            $pages[] = [
+                'key' => $pageKey,
+                'title' => $page->getTitle(),
+                'icon' => $page->getIcon() ?: 'rex-icon fa-cube',
+                'addon' => $addonName,
+            ];
+            
+            // Add subpages
+            foreach ($page->getSubpages() as $subpageKey => $subpage) {
+                if ($subpage->isHidden()) {
+                    continue;
+                }
+                
+                $subRequiredPerms = $subpage->getRequiredPermissions();
+                if (!empty($subRequiredPerms) && !$user->hasPerm($subRequiredPerms)) {
+                    continue;
+                }
+                
+                $fullKey = $pageKey . '/' . $subpageKey;
+                $pages[] = [
+                    'key' => $fullKey,
+                    'title' => '  → ' . $subpage->getTitle(),
+                    'icon' => $subpage->getIcon() ?: 'rex-icon fa-cube',
+                    'addon' => $addonName,
+                ];
+            }
+        }
+        
+        return $pages;
     }
 }

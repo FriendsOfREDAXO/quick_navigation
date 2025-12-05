@@ -214,3 +214,33 @@
 .rex-theme-dark .quick-navigation-no-results {
     background-color: rgba(42, 45, 51, 0.59);
 }
+
+/* Icon Badge für Kalender-Tag */
+.quick-navigation-icon-badge {
+    position: relative;
+    display: inline-block;
+}
+
+.quick-navigation-badge-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: currentColor;
+    pointer-events: none;
+}
+
+/* Button Fixes in Dropdown */
+.quick-navigation-menu-body .btn-primary {
+    color: #fff !important;
+}
+
+.quick-navigation-menu-body .btn-primary:hover,
+.quick-navigation-menu-body .btn-primary:focus {
+    color: #fff !important;
+    background-color: #286090 !important;
+    border-color: #204d74 !important;
+}

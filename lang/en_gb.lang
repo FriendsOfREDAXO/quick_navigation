@@ -21,6 +21,9 @@ quick_navigation_favorite = Favorites
 quick_navigation_manage_favorite = Add favorites
 quick_navigation_favorite_article_add = Add article to:
 quick_navigation_favorite_category_add = Add category to:
+quick_navigation_addon_pages = AddOn Pages
+quick_navigation_structure_favs = Structure
+quick_navigation_addon_pages_selection = AddOn Pages Favorites
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Add dataset to:
 

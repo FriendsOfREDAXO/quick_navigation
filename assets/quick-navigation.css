@@ -152,3 +152,31 @@
 {
    color: var(--quick-navigation-color-offline);
 }
+
+/* Favoriten Sections */
+.quick-navigation-section-header {
+    padding: 8px 12px 4px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--quick-navigation-color-base);
+    background-color: var(--quick-navigation-color-light);
+    border-bottom: 1px solid #ddd;
+}
+
+.quick-navigation-section-divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 8px 0;
+}
+
+.quick-navigation-addon-fav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quick-navigation-addon-fav a i {
+    width: 20px;
+    text-align: center;
+}

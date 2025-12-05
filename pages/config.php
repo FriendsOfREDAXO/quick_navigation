@@ -3,6 +3,7 @@
 namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
+use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
 use rex;
 use rex_addon;
 use rex_category_select;
@@ -62,6 +63,38 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/container.php');
+
+// AddOn-Seiten Favoriten
+$formElements = [];
+$n = [];
+$n['label'] = '<label for="quick-navigation-config-addon-favs">' . $package->i18n('quick_navigation_addon_pages_selection') . '</label>';
+
+// Get all available pages
+$availablePages = FavoriteButton::getAvailablePages();
+$selectedPages = $package->getConfig('quick_navigation_addon_favs' . $user, []);
+if (!is_array($selectedPages)) {
+    $selectedPages = [];
+}
+
+$selectHtml = '<select name="config[quick_navigation_addon_favs' . $user . '][]" id="quick-navigation-config-addon-favs" class="selectpicker show-menu-arrow form-control" multiple="multiple" data-live-search="true" data-size="15" data-actions-box="false" size="10">';
+
+foreach ($availablePages as $page) {
+    $selected = in_array($page['key'], $selectedPages, true) ? ' selected="selected"' : '';
+    $selectHtml .= sprintf(
+        '<option value="%s"%s>%s</option>',
+        rex_escape($page['key']),
+        $selected,
+        rex_escape($page['title'])
+    );
+}
+
+$selectHtml .= '</select>';
+$n['field'] = $selectHtml;
+$formElements[] = $n;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements, false);
+$content .= $fragment->parse('core/form/container.php');
+
 // Ignore offline cats
 $formElements = [];
 $n = [];

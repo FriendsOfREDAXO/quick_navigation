@@ -187,7 +187,7 @@ class FavoriteButton implements ButtonInterface
             if (in_array($pageKey, ['setup', 'login', 'logout', '2factor_auth', '2factor_auth_verify'], true)) {
                 continue;
             }
-            
+
             // Skip mediapool and adminer - they are central and easily accessible
             if (in_array($pageKey, ['mediapool', 'adminer'], true)) {
                 continue;

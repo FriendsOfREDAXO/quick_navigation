@@ -106,8 +106,17 @@ class FavoriteButton implements ButtonInterface
 
                 // Check user permission
                 $requiredPerms = $page->getRequiredPermissions();
-                if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
-                    continue;
+                if (!empty($requiredPerms)) {
+                    $hasAllPerms = true;
+                    foreach ($requiredPerms as $perm) {
+                        if (!$user->hasPerm($perm)) {
+                            $hasAllPerms = false;
+                            break;
+                        }
+                    }
+                    if (!$hasAllPerms) {
+                        continue;
+                    }
                 }
 
                 $attributes = [
@@ -178,6 +187,11 @@ class FavoriteButton implements ButtonInterface
             if (in_array($pageKey, ['setup', 'login', 'logout', '2factor_auth', '2factor_auth_verify'], true)) {
                 continue;
             }
+            
+            // Skip mediapool and adminer - they are central and easily accessible
+            if (in_array($pageKey, ['mediapool', 'adminer'], true)) {
+                continue;
+            }
 
             // Skip if user has no permission
             if ($page->isHidden()) {
@@ -185,8 +199,17 @@ class FavoriteButton implements ButtonInterface
             }
 
             $requiredPerms = $page->getRequiredPermissions();
-            if (!empty($requiredPerms) && !$user->hasPerm($requiredPerms)) {
-                continue;
+            if (!empty($requiredPerms)) {
+                $hasAllPerms = true;
+                foreach ($requiredPerms as $perm) {
+                    if (!$user->hasPerm($perm)) {
+                        $hasAllPerms = false;
+                        break;
+                    }
+                }
+                if (!$hasAllPerms) {
+                    continue;
+                }
             }
 
             $addonName = $pageKey;
@@ -204,8 +227,17 @@ class FavoriteButton implements ButtonInterface
                 }
 
                 $subRequiredPerms = $subpage->getRequiredPermissions();
-                if (!empty($subRequiredPerms) && !$user->hasPerm($subRequiredPerms)) {
-                    continue;
+                if (!empty($subRequiredPerms)) {
+                    $hasAllPerms = true;
+                    foreach ($subRequiredPerms as $perm) {
+                        if (!$user->hasPerm($perm)) {
+                            $hasAllPerms = false;
+                            break;
+                        }
+                    }
+                    if (!$hasAllPerms) {
+                        continue;
+                    }
                 }
 
                 $fullKey = $pageKey . '/' . $subpageKey;

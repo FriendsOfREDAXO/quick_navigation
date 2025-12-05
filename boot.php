@@ -52,41 +52,41 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
         $userId = rex::getUser()->getId();
         if (rex_addon::get('quick_navigation')->getConfig('quick_navigation_artdirections' . $userId) != '1') {
             ButtonRegistry::registerButton(
-                new ArticleNavigationButton(), 
-                10, 
-                'article_navigation', 
+                new ArticleNavigationButton(),
+                10,
+                'article_navigation',
                 rex_addon::get('quick_navigation')->i18n('quick_navigation_button_article_navigation')
             );
         }
 
         ButtonRegistry::registerButton(
-            new WatsonButton(), 
-            20, 
-            'watson', 
+            new WatsonButton(),
+            20,
+            'watson',
             rex_addon::get('quick_navigation')->i18n('quick_navigation_button_watson')
         );
         ButtonRegistry::registerButton(
-            new CategoryButton(), 
-            30, 
-            'category', 
+            new CategoryButton(),
+            30,
+            'category',
             rex_addon::get('quick_navigation')->i18n('quick_navigation_button_category')
         );
         ButtonRegistry::registerButton(
-            new ArticleHistoryButton('structure', 20), 
-            40, 
-            'article_history', 
+            new ArticleHistoryButton('structure', 20),
+            40,
+            'article_history',
             rex_addon::get('quick_navigation')->i18n('quick_navigation_button_article_history')
         );
         ButtonRegistry::registerButton(
-            new YformButton(), 
-            50, 
-            'yform', 
+            new YformButton(),
+            50,
+            'yform',
             rex_addon::get('quick_navigation')->i18n('quick_navigation_button_yform')
         );
         ButtonRegistry::registerButton(
-            new FavoriteButton(), 
-            60, 
-            'favorite', 
+            new FavoriteButton(),
+            60,
+            'favorite',
             rex_addon::get('quick_navigation')->i18n('quick_navigation_button_favorite')
         );
 

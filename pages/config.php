@@ -28,7 +28,7 @@ if (rex_post('formsubmit', 'string') == '1') {
     $config['quick_navigation_ignoreoffline' . $user] = isset($config['quick_navigation_ignoreoffline' . $user]) ? 1 : 0;
     $config['quick_navigation_artdirections' . $user] = isset($config['quick_navigation_artdirections' . $user]) ? 1 : 0;
     $config['quick_navigation_media_livesearch' . $user] = isset($config['quick_navigation_media_livesearch' . $user]) ? 1 : 0;
-    
+
     // Disabled Buttons speichern (Array bleibt als Array)
     if (!isset($config['quick_navigation_disabled_buttons' . $user])) {
         $config['quick_navigation_disabled_buttons' . $user] = [];

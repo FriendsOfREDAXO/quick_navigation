@@ -15,7 +15,7 @@ class ButtonRegistry
     /**
      * Registers a button with an optional priority.
      * Lower priority values cause the button to appear earlier in the list.
-     * 
+     *
      * @param string $id Unique identifier for the button (e.g. 'article_navigation', 'watson')
      * @param string $label Human readable label for config (e.g. 'Artikelnavigation', 'Watson')
      */
@@ -26,17 +26,17 @@ class ButtonRegistry
             $className = get_class($buttonInstance);
             $id = strtolower(str_replace('Button', '', substr($className, strrpos($className, '\\') + 1)));
         }
-        
+
         // Use ID as label if not provided
         if ($label === '') {
             $label = ucfirst(str_replace('_', ' ', $id));
         }
-        
+
         self::$buttons[] = [
             'id' => $id,
             'label' => $label,
             'instance' => $buttonInstance,
-            'priority' => $priority
+            'priority' => $priority,
         ];
     }
 
@@ -49,16 +49,16 @@ class ButtonRegistry
         if (!$user) {
             return '';
         }
-        
+
         $userId = $user->getId();
         $addon = rex_addon::get('quick_navigation');
-        
+
         // Get disabled buttons for this user (Opt-Out)
         $disabledButtons = $addon->getConfig('quick_navigation_disabled_buttons' . $userId, []);
         if (!is_array($disabledButtons)) {
             $disabledButtons = [];
         }
-        
+
         // Sorts the buttons based on their priority
         usort(self::$buttons, static function (array $a, array $b): int {
             return $a['priority'] <=> $b['priority'];
@@ -70,14 +70,14 @@ class ButtonRegistry
             if (in_array($button['id'], $disabledButtons, true)) {
                 continue;
             }
-            
+
             // Since all instances implement ButtonInterface, it's guaranteed that get() exists.
             $resultString .= $button['instance']->get();
         }
 
         return $resultString;
     }
-    
+
     /**
      * Returns all available buttons with their metadata for configuration.
      * @return array<array{id: string, label: string, priority: int}>
@@ -89,16 +89,16 @@ class ButtonRegistry
         usort($sortedButtons, static function (array $a, array $b): int {
             return $a['priority'] <=> $b['priority'];
         });
-        
+
         $result = [];
         foreach ($sortedButtons as $button) {
             $result[] = [
                 'id' => $button['id'],
                 'label' => $button['label'],
-                'priority' => $button['priority']
+                'priority' => $button['priority'],
             ];
         }
-        
+
         return $result;
     }
 }

@@ -197,3 +197,26 @@
     text-align: center;
     flex-shrink: 0;
 }
+
+/* Dark Theme Support */
+.rex-theme-dark .quick-navigation-section-header {
+    color: #aaa;
+    background-color: #2a2d33;
+    border-top-color: #404040;
+}
+
+.rex-theme-dark .quick-navigation-section-divider {
+    border-top-color: #404040;
+}
+
+.rex-theme-dark .quick-navigation-addon-fav a:hover {
+    background-color: #35383e;
+}
+
+.rex-theme-dark .quick-navigation-menu-header {
+    border-bottom-color: #404040;
+}
+
+.rex-theme-dark .quick-navigation-no-results {
+    background-color: rgba(42, 45, 51, 0.59);
+}

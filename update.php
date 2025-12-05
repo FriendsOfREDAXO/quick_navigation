@@ -20,5 +20,3 @@ foreach ($sql as $row) {
 
 
 }
-$addon = rex_addon::get('quick_navigation');
-$addon->setConfig('quck_navigation_migrated', '1');

@@ -7,7 +7,6 @@ use function count;
 use rex_clang;
 use rex_fragment;
 use rex_i18n;
-use rex_request;
 use rex_string;
 use rex_url;
 

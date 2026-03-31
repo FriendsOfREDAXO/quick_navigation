@@ -15,6 +15,7 @@ quick_navigation_artdirections = Disable article browsing?
 quick_navigation_ignoreoffline = Ignore offline categories?
 quick_navigation_no_entries = No entries found
 quick_navigation_structure = Structure
+quick_navigation_clang = Language
 quick_navigation_article_history = Last edited articles
 quick_navigation_media_history = Last edited media
 quick_navigation_favorite = Favorites

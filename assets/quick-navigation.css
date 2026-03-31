@@ -242,3 +242,14 @@
 .quick-navigation-menu-list-type-tree ul li:has(> .quick-navigation-item > a.quick-navigation-status-restricted)::after {
     background: var(--quick-navigation-color-restricted);
 }
+
+/* ClangButton Badge */
+.quick-navigation-button-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    margin-left: 3px;
+    vertical-align: middle;
+}

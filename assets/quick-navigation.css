@@ -10,6 +10,8 @@
 
     --quick-navigation-bootstrap-z-index: 1030;
     --quick-navigation-color-offline: #b2b8bb;
+    --quick-navigation-color-online: #6abf69;
+    --quick-navigation-color-restricted: #d9534f;
 }
 
 [data-quick-navigation-toggle="tooltip"] + .tooltip {
@@ -213,4 +215,30 @@
 
 .rex-theme-dark .quick-navigation-no-results {
     background-color: rgba(42, 45, 51, 0.59);
+}
+
+/* Auge-Icon: Statusfarben für Artikel-History */
+.quick-navigation-eye.quick-navigation-status-1 {
+    color: var(--quick-navigation-color-online);
+}
+
+.quick-navigation-eye.quick-navigation-status-0 {
+    color: var(--quick-navigation-color-offline);
+}
+
+.quick-navigation-eye.quick-navigation-status-2 {
+    color: var(--quick-navigation-color-restricted);
+}
+
+/* Status-Dot-Farben (online, offline, gesperrt) */
+.quick-navigation-menu-list-type-tree ul li:has(> .quick-navigation-item > a.quick-navigation-status-online)::after {
+    background: var(--quick-navigation-color-online);
+}
+
+.quick-navigation-menu-list-type-tree ul li:has(> .quick-navigation-item > a.quick-navigation-status-offline)::after {
+    background: var(--quick-navigation-color-offline);
+}
+
+.quick-navigation-menu-list-type-tree ul li:has(> .quick-navigation-item > a.quick-navigation-status-restricted)::after {
+    background: var(--quick-navigation-color-restricted);
 }

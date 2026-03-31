@@ -72,7 +72,7 @@ class ArticleHistoryButton implements ButtonInterface
                 ];
 
                 $attributesFrontend = [
-                    'class' => 'quick-navigation-status-' . $data['status'],
+                    'class' => 'quick-navigation-eye quick-navigation-status-' . $data['status'],
                     'href' => rex_getUrl($data['id']),
                     'title' => $data['name'] . ' ' . rex_i18n::msg('title_eye'),
                     'target' => '_blank',

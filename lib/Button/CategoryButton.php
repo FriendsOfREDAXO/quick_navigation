@@ -15,15 +15,28 @@ class CategoryButton implements ButtonInterface
     public function RenderCategoriesAsList(array $categoriesArray, int $depth = 0): array
     {
         $listItems = [];
+        $accessdeniedAvailable = rex_addon::get('accessdenied')->isAvailable();
+
         foreach ($categoriesArray as $item) {
+            $status = $item['status'] ?? 1;
+
+            $classes = [];
+            if ($item['current'] === true) {
+                $classes[] = 'quick-navigation-current';
+            }
+            if ($status === 1) {
+                $classes[] = 'quick-navigation-status-online';
+            } elseif ($status === 2 && $accessdeniedAvailable) {
+                $classes[] = 'quick-navigation-status-restricted';
+            } else {
+                $classes[] = 'quick-navigation-status-offline';
+            }
+
             $attributes = [
                 'href' => $item['url'],
                 'title' => 'Domain: ' . $item['domain'],
+                'class' => implode(' ', $classes),
             ];
-
-            if ($item['current'] === true) {
-                $attributes['class'] = 'quick-navigation-current';
-            }
 
             $listItem =
                 '<a' . rex_string::buildAttributes($attributes) . '>

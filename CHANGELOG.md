@@ -1,6 +1,6 @@
 # Changelog
 
-## 9.0.2 – 2026-03-31
+## 9.1.0 – 2026-03-31
 
 ### Neu: Sprachschalter (CLANG) in der Linkmap
 

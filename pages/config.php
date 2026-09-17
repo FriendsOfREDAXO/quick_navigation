@@ -34,6 +34,15 @@ if (rex_post('formsubmit', 'string') == '1') {
         $config['quick_navigation_disabled_buttons' . $user] = [];
     }
 
+    // Multi-Selects: bei leerer Auswahl schickt der Browser das Feld gar nicht mit,
+    // ohne diese Normalisierung bliebe der zuletzt gespeicherte Wert stehen.
+    if (!isset($config['quick_navigation_favs' . $user])) {
+        $config['quick_navigation_favs' . $user] = [];
+    }
+    if (!isset($config['quick_navigation_addon_favs' . $user])) {
+        $config['quick_navigation_addon_favs' . $user] = [];
+    }
+
     $package->setConfig($config);
     echo rex_view::success($package->i18n('quick_navigation_config_saved'));
 }

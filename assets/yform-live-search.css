@@ -57,15 +57,17 @@ body.rex-theme-dark .qn-yform-overlay-panel {
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-    border-bottom: 1px solid #c1c9d4;
+    background: #4b9ad9;
+    border-bottom: 1px solid #308bd3;
 }
 
 body.rex-theme-dark .qn-yform-overlay-header {
-    border-bottom-color: rgba(255, 255, 255, 0.15);
+    background: #246eaa;
+    border-bottom-color: #1e2731;
 }
 
 .qn-yform-overlay-icon {
-    color: #8a97a8;
+    color: rgba(255, 255, 255, 0.85);
     font-size: 15px;
     flex-shrink: 0;
     display: inline-flex;
@@ -95,19 +97,19 @@ body.rex-theme-dark .qn-yform-overlay-header {
     font-size: 15px;
     font-family: inherit;
     background: transparent;
-    color: inherit;
+    color: #fff;
     height: 30px;
 }
 
 .qn-yform-overlay-input::placeholder {
-    color: #8a97a8;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .qn-yform-overlay-close,
 .qn-yform-overlay-filters-toggle {
     border: 0;
     background: transparent;
-    color: #8a97a8;
+    color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
     padding: 5px 8px;
     border-radius: 0;
@@ -118,19 +120,13 @@ body.rex-theme-dark .qn-yform-overlay-header {
 
 .qn-yform-overlay-close:hover,
 .qn-yform-overlay-filters-toggle:hover {
-    color: #324050;
-    background: rgba(0, 0, 0, 0.05);
-}
-
-body.rex-theme-dark .qn-yform-overlay-close:hover,
-body.rex-theme-dark .qn-yform-overlay-filters-toggle:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .qn-yform-overlay-filters-toggle.active {
-    color: #fff;
-    background: #556d8c;
+    color: #4b9ad9;
+    background: #fff;
 }
 
 .qn-yform-overlay-filters-toggle.hidden {
@@ -146,15 +142,19 @@ body.rex-theme-dark .qn-yform-overlay-filters-toggle:hover {
     padding: 4px 10px;
     font-size: 13px;
     border-radius: 0;
-    border-color: #c1c9d4;
-    background: #f3f6fb;
-    color: #324050;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
 }
 
-body.rex-theme-dark .qn-yform-overlay-header .qn-yform-overlay-table-select .btn {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #eee;
+.qn-yform-overlay-header .qn-yform-overlay-table-select .btn:hover,
+.qn-yform-overlay-header .qn-yform-overlay-table-select .btn:focus {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.qn-yform-overlay-header .qn-yform-overlay-table-select .caret {
+    border-top-color: #fff;
 }
 
 .qn-yform-overlay-table-scope {

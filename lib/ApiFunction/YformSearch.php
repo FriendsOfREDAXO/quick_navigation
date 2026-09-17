@@ -6,7 +6,6 @@ use FriendsOfRedaxo\QuickNavigation\Yform\Search;
 use rex;
 use rex_api_function;
 use rex_i18n;
-use rex_request;
 
 /**
  * Live-search endpoint for the combined YForm quick-navigation button.

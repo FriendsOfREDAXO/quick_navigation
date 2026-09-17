@@ -5,14 +5,14 @@ namespace FriendsOfRedaxo\QuickNavigation\Yform;
 use rex;
 use rex_addon;
 use rex_be_controller;
-use rex_csrf_token;
-use rex_yform_manager_table;
-use rex_yform_manager_dataset;
-use rex_yform_manager;
-use rex_sql;
 use rex_clang;
-use rex_url;
+use rex_csrf_token;
 use rex_i18n;
+use rex_sql;
+use rex_url;
+use rex_yform_manager;
+use rex_yform_manager_dataset;
+use rex_yform_manager_table;
 
 /**
  * Core search logic for the combined YForm quick-navigation button:

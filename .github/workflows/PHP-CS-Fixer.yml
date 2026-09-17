@@ -10,15 +10,45 @@ permissions:
     contents: read
 
 jobs:
-    code-style:
-        if: github.event.pull_request.draft == false
+    # Pull requests (including from forks) only ever get checked, never
+    # auto-committed to: the workflow token has no push access to a fork's
+    # branch, and even for same-repo PR branches actions/checkout leaves a
+    # detached HEAD, not the real branch ref, which broke the previous
+    # auto-commit step. Contributors run `composer cs-fix` locally instead.
+    check-style:
+        if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.3'
+                  extensions: gd, intl, pdo_mysql
+                  coverage: none # disable xdebug, pcov
+
+            - name: Install Composer Dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: Check code style
+              run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix . --dry-run --diff --verbose
+
+    # Direct pushes to main/master are same-repo by definition, so the
+    # workflow token can push a fix-up commit straight back to that branch.
+    fix-style:
+        if: github.event_name == 'push'
 
         runs-on: ubuntu-latest
         permissions:
-            contents: write  # for Git to git apply
+            contents: write  # for Git to commit and push fixes
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.ref_name }}
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -34,6 +64,7 @@ jobs:
               run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix . --diff --verbose
 
             - name: Commit and push fixed files
-              uses: stefanzweifel/git-auto-commit-action@v4
+              uses: stefanzweifel/git-auto-commit-action@v7
               with:
                   commit_message: Apply php-cs-fixer changes
+                  branch: ${{ github.ref_name }}

@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.2.1 – 2026-09-17
+
+### Fix: "Class rex_api_quicknavigation_render not found" nach Update (#208)
+
+- Die deprecated Kompatibilitätsklassen `rex_api_quicknavigation_render` und `rex_api_quicknavigation_media_search` wurden im Zuge eines CS-Fixer-/Cleanup-Commits versehentlich entfernt (waren ursprünglich als Fix für #165 eingeführt worden)
+- REDAXOs globaler Autoload-Classmap-Cache wird bei einem Addon-Update nicht in jedem Fall zuverlässig für alle betroffenen Klassen neu aufgebaut, insbesondere bei älteren Core-Versionen – dadurch verwies der Cache teils noch auf die alte Klasse, bis ein Safe-Mode-Toggle einen kompletten Cache-Rebuild erzwang
+- Beide `@deprecated`-Klassen wieder hinzugefügt, um Installationen mit veraltetem Autoload-Cache robust abzufangen, bis der Cache sich selbst korrigiert
+
 ## 9.2.0 – 2026-09-17
 
 ### Neu: YForm Live-Suche im YForm-Button

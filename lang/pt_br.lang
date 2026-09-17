@@ -1,4 +1,56 @@
+quick_navigation_title = Quick Navigation
+quick_navigation_help = Ajuda
+quick_navigation_config = Configurações
+quick_navigation_general = Geral
+quick_navigation_placeholder = nome/-id da categoria, usuário, domínio
+quick_navigation_config_save = Salvar configurações
+quick_navigation_config_saved = Favoritos salvos
+quick_navigation_info = Configurações do usuário
 perm_general_quick_navigation[] = Quick Navi
 perm_general_quick_navigation[idinput] = Quick navi: permitir entrada de Ids de artigos
+quick_navigation_categories = Seleção de favoritos
 perm_general_quick_navigation[history] = Quick Navi: artigos e mídias recentemente editados
+perm_general_quick_navigation[all_changes] = Quick Navi: exibir dados recentemente editados de todos os usuários
+perm_general_quick_navigation[settings] = Quick Navi: gerenciar favoritos e configurações
+quick_navigation_artdirections = Desativar a navegação entre artigos?
+quick_navigation_ignoreoffline = Ignorar categorias offline?
 quick_navigation_no_entries = Nenhuma entrada encontrada
+quick_navigation_structure = Estrutura
+quick_navigation_clang = Idioma
+quick_navigation_article_history = Últimos artigos editados
+quick_navigation_media_history = Últimas mídias editadas
+quick_navigation_favorite = Favoritos
+quick_navigation_manage_favorite = Adicionar favoritos
+quick_navigation_favorite_article_add = Adicionar artigo em:
+quick_navigation_favorite_category_add = Adicionar categoria em:
+quick_navigation_addon_pages = Páginas de AddOn
+quick_navigation_structure_favs = Estrutura
+quick_navigation_addon_pages_selection = Favoritos de páginas AddOn
+quick_navigation_yform = YForm
+quick_navigation_yform_add = Adicionar registro em:
+quick_navigation_yform_search_placeholder = Pesquisar registros …
+quick_navigation_yform_scope = Pesquisar nesta tabela
+quick_navigation_yform_all_tables = Todas as tabelas
+quick_navigation_yform_filters = Filtros
+quick_navigation_yform_close = Fechar
+quick_navigation_yform_highlight_fields = Colunas adicionais destacadas
+quick_navigation_yform_highlight_fields_note = Nomes de campos separados por vírgula (ex.: sku, artnr) que são sempre exibidos primeiro e destacados nos resultados da pesquisa, além de name/title/cat/category, caso a tabela os possua.
+
+# Media sorting
+quick_navigation_media_sort_alpha = Ordenar por nome do arquivo (A-Z)
+quick_navigation_media_sort_date = Ordenar por data (mais recentes primeiro)
+quick_navigation_media_sort_title = Ordenar por título (A-Z)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Ativar busca em tempo real na mídiateca?
+quick_navigation_media_live_search_placeholder = Busca em tempo real...
+
+# Button Management
+quick_navigation_button_management = Ocultar botões (Opt-Out)
+quick_navigation_button_management_note = Selecione os botões que você NÃO quer ver. Todos os outros botões permanecem visíveis.
+quick_navigation_button_article_navigation = Navegação entre artigos (folhear)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Categoria
+quick_navigation_button_article_history = Histórico de artigos
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Favoritos

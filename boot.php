@@ -13,6 +13,7 @@ namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\ApiFunction\MediaSearch;
 use FriendsOfRedaxo\QuickNavigation\ApiFunction\MenuRender;
+use FriendsOfRedaxo\QuickNavigation\ApiFunction\YformSearch;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleHistoryButton;
 use FriendsOfRedaxo\QuickNavigation\Button\ArticleNavigationButton;
 use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
@@ -39,10 +40,13 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
     if (rex::getUser()->hasPerm('quick_navigation[]')) {
         rex_api_function::register('quicknavigation_api', MenuRender::class);
         rex_api_function::register('quicknavigation_media_search', MediaSearch::class);
+        rex_api_function::register('quicknavigation_yform_search', YformSearch::class);
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.css'));
+        rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.css'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.js'));
+        rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.js'));
 
         // Media Live-Search Einstellung für aktuellen User
         $userId = rex::getUser()->getId();

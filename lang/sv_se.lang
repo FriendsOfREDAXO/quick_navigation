@@ -5,6 +5,7 @@ quick_navigation_general = Allmänt
 quick_navigation_placeholder = Filtrera efter kategori, ID eller domän
 quick_navigation_config_save = Spara
 quick_navigation_config_saved = Favoriter sparades
+quick_navigation_info = Användarinställningar
 perm_general_quick_navigation[] = Quick Navi
 quick_navigation_categories = Kategori-urval
 perm_general_quick_navigation[history] = Quick Navi: Nyligen redigerade artiklar och media
@@ -14,3 +15,42 @@ title_eye = Öppna i frontend:
 quick_navigation_artdirections = Deaktivera artikelbläddring?
 quick_navigation_ignoreoffline = Ignorera offline-kategorierna?
 quick_navigation_no_entries = Inga inlägg hittades
+quick_navigation_structure = Struktur
+quick_navigation_clang = Språk
+quick_navigation_article_history = Senast redigerade artiklar
+quick_navigation_media_history = Senast redigerade media
+quick_navigation_favorite = Favoriter
+quick_navigation_manage_favorite = Lägg till favoriter
+quick_navigation_favorite_article_add = Lägg till artikel i:
+quick_navigation_favorite_category_add = Lägg till kategori i:
+quick_navigation_addon_pages = AddOn-sidor
+quick_navigation_structure_favs = Struktur
+quick_navigation_addon_pages_selection = AddOn-sidor favoriter
+quick_navigation_yform = YForm
+quick_navigation_yform_add = Lägg till post i:
+quick_navigation_yform_search_placeholder = Sök bland poster …
+quick_navigation_yform_scope = Sök i denna tabell
+quick_navigation_yform_all_tables = Alla tabeller
+quick_navigation_yform_filters = Filter
+quick_navigation_yform_close = Stäng
+quick_navigation_yform_highlight_fields = Ytterligare markerade kolumner
+quick_navigation_yform_highlight_fields_note = Kommaseparerade fältnamn (t.ex. sku, artnr) som alltid visas först och markeras i sökresultaten, utöver name/title/cat/category, om tabellen har dem.
+
+# Media sorting
+quick_navigation_media_sort_alpha = Sortera efter filnamn (A-Ö)
+quick_navigation_media_sort_date = Sortera efter datum (nyaste först)
+quick_navigation_media_sort_title = Sortera efter titel (A-Ö)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Aktivera livesökning i mediearkivet?
+quick_navigation_media_live_search_placeholder = Livesökning...
+
+# Button Management
+quick_navigation_button_management = Dölj knappar (Opt-Out)
+quick_navigation_button_management_note = Välj de knappar du INTE vill se. Alla andra knappar förblir synliga.
+quick_navigation_button_article_navigation = Artikelnavigering (bläddring)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Kategori
+quick_navigation_button_article_history = Artikelhistorik
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Favoriter

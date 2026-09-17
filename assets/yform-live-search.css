@@ -1,0 +1,508 @@
+.qn-yform-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10500;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    line-height: 1.46667;
+    animation: qnYformFadeIn 0.12s ease-out;
+}
+
+.qn-yform-overlay[hidden] {
+    display: none;
+}
+
+@keyframes qnYformFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes qnYformPanelIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.qn-yform-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 18, 22, 0.5);
+}
+
+.qn-yform-overlay-panel {
+    position: relative;
+    width: 680px;
+    max-width: calc(100vw - 32px);
+    max-height: 72vh;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #324050;
+    border-radius: 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: qnYformPanelIn 0.14s ease-out;
+}
+
+body.rex-theme-dark .qn-yform-overlay-panel {
+    background: #2b2f33;
+    color: #eee;
+}
+
+.qn-yform-overlay-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #c1c9d4;
+}
+
+body.rex-theme-dark .qn-yform-overlay-header {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.qn-yform-overlay-icon {
+    color: #8a97a8;
+    font-size: 15px;
+    flex-shrink: 0;
+    display: inline-flex;
+}
+
+.qn-yform-icon-svg {
+    display: inline-block;
+    vertical-align: middle;
+    color: inherit;
+}
+
+#quick-navigation-yform-trigger .qn-yform-icon-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.qn-yform-overlay-icon .qn-yform-icon-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.qn-yform-overlay-input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+    background: transparent;
+    color: inherit;
+    height: 30px;
+}
+
+.qn-yform-overlay-input::placeholder {
+    color: #8a97a8;
+}
+
+.qn-yform-overlay-close,
+.qn-yform-overlay-filters-toggle {
+    border: 0;
+    background: transparent;
+    color: #8a97a8;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 0;
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 1.46667;
+}
+
+.qn-yform-overlay-close:hover,
+.qn-yform-overlay-filters-toggle:hover {
+    color: #324050;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.rex-theme-dark .qn-yform-overlay-close:hover,
+body.rex-theme-dark .qn-yform-overlay-filters-toggle:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.qn-yform-overlay-filters-toggle.active {
+    color: #fff;
+    background: #556d8c;
+}
+
+.qn-yform-overlay-filters-toggle.hidden {
+    display: none;
+}
+
+.qn-yform-overlay-header .qn-yform-overlay-table-select.btn-group {
+    flex-shrink: 0;
+}
+
+.qn-yform-overlay-header .qn-yform-overlay-table-select .btn {
+    height: 30px;
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 0;
+    border-color: #c1c9d4;
+    background: #f3f6fb;
+    color: #324050;
+}
+
+body.rex-theme-dark .qn-yform-overlay-header .qn-yform-overlay-table-select .btn {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #eee;
+}
+
+.qn-yform-overlay-table-scope {
+    border: 0;
+    background: transparent;
+    color: #8a97a8;
+    cursor: pointer;
+    padding: 6px 9px;
+    border-radius: 0;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+.qn-yform-overlay-table-scope:hover {
+    color: #324050;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.qn-yform-overlay-filters {
+    padding: 10px 12px;
+    border-bottom: 1px solid #c1c9d4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    background: #f3f6fb;
+}
+
+body.rex-theme-dark .qn-yform-overlay-filters {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.qn-yform-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 150px;
+}
+
+.qn-yform-filter-field.form-group {
+    margin-bottom: 0;
+}
+
+.qn-yform-filter-field label.control-label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 1px;
+    color: #324050;
+}
+
+body.rex-theme-dark .qn-yform-filter-field label.control-label {
+    color: #eee;
+}
+
+.qn-yform-filter-field .form-control {
+    height: 30px;
+    padding: 4px 8px;
+    font-size: 13px;
+    line-height: 1.46667;
+    border-radius: 0;
+}
+
+.qn-yform-filters-empty {
+    color: #8a97a8;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.qn-yform-overlay-body {
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.qn-yform-overlay-tables {
+    padding: 0;
+}
+
+.qn-yform-overlay-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    border-bottom: 1px solid #dfe3e9;
+}
+
+.qn-yform-overlay-tables .qn-yform-overlay-item-row:last-child {
+    border-bottom: 0;
+}
+
+body.rex-theme-dark .qn-yform-overlay-item-row {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.qn-yform-overlay-item-row:hover {
+    background: rgba(0, 0, 0, 0.035);
+}
+
+body.rex-theme-dark .qn-yform-overlay-item-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.qn-yform-overlay-table-link {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    color: #4b9ad9;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.qn-yform-overlay-table-icon {
+    color: #8a97a8;
+    font-size: 13px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.qn-yform-overlay-table-link:hover,
+.qn-yform-overlay-table-link:focus {
+    color: #3183c8;
+    text-decoration: none;
+    outline: none;
+}
+
+.qn-yform-overlay-table-link:focus {
+    background: rgba(0, 0, 0, 0.035);
+}
+
+body.rex-theme-dark .qn-yform-overlay-table-link:focus {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.qn-yform-overlay-item-row a[title^="Datensatz"],
+.qn-yform-overlay-item-row a[title^="Add dataset"] {
+    padding: 7px 12px;
+    color: #8a97a8;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+.qn-yform-overlay-item-row a[title^="Datensatz"]:hover,
+.qn-yform-overlay-item-row a[title^="Add dataset"]:hover {
+    color: #324050;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.qn-yform-search-loading {
+    padding: 20px;
+    text-align: center;
+    color: #8a97a8;
+    font-size: 16px;
+}
+
+.qn-yform-search-empty {
+    padding: 20px;
+    color: #8a97a8;
+    font-style: italic;
+    text-align: center;
+    font-size: 13px;
+}
+
+.qn-yform-search-group-label {
+    padding: 8px 14px 4px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #8a97a8;
+}
+
+.qn-yform-search-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 14px;
+    color: inherit;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid #dfe3e9;
+}
+
+.qn-yform-search-group .qn-yform-search-item:last-child {
+    border-bottom: 0;
+}
+
+body.rex-theme-dark .qn-yform-search-item {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.qn-yform-search-item:hover,
+.qn-yform-search-item:focus {
+    background: #f3f6fb;
+    border-left-color: #556d8c;
+    color: inherit;
+    text-decoration: none;
+}
+
+body.rex-theme-dark .qn-yform-search-item:hover,
+body.rex-theme-dark .qn-yform-search-item:focus {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.qn-yform-search-item-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.qn-yform-search-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b9ad9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qn-yform-search-item:hover .qn-yform-search-title,
+.qn-yform-search-item:focus .qn-yform-search-title {
+    color: #3183c8;
+}
+
+.qn-yform-search-id {
+    font-size: 11px;
+    color: #8a97a8;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.qn-yform-search-preview {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.qn-yform-search-field-grid {
+    display: grid;
+    grid-template-columns: minmax(70px, max-content) 1fr;
+    column-gap: 10px;
+    row-gap: 3px;
+    align-items: start;
+}
+
+.qn-yform-search-field-label {
+    color: #8a97a8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 1px;
+}
+
+.qn-yform-search-field-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Value badges */
+.qn-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.qn-badge-on {
+    background: rgba(76, 175, 80, 0.15);
+    color: #3d9140;
+}
+
+.qn-badge-off {
+    background: rgba(0, 0, 0, 0.06);
+    color: #8a97a8;
+}
+
+body.rex-theme-dark .qn-badge-off {
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+}
+
+.qn-badge-choice {
+    background: #eef1f5;
+    color: #556d8c;
+}
+
+body.rex-theme-dark .qn-badge-choice {
+    background: rgba(255, 255, 255, 0.1);
+    color: #cfd8e3;
+}
+
+.qn-badge-tag {
+    color: #fff;
+    border-radius: 10px;
+}
+
+/* Language chips (yform_lang_fields preview): one row per language, aligned
+   into their own two-column grid so the code and text line up vertically. */
+.qn-lang-stack {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 6px;
+    row-gap: 2px;
+    white-space: normal;
+}
+
+.qn-lang-chip {
+    display: contents;
+}
+
+.qn-lang-code {
+    display: inline-block;
+    align-self: start;
+    padding: 0 4px;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.07);
+    color: #8a97a8;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+}
+
+body.rex-theme-dark .qn-lang-code {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ccc;
+}
+
+.qn-lang-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* bootstrap-select is detached to <body> (container:'body') so it is never
+   clipped by the overlay panel's overflow:hidden — it then needs a z-index
+   above the overlay itself to render on top of it. */
+body > .bootstrap-select.qn-yform-overlay-table-select.dropdown {
+    z-index: 10600;
+}

@@ -1,0 +1,55 @@
+quick_navigation_title = Quick Navigation
+quick_navigation_help = Help
+quick_navigation_config = Instellingen
+quick_navigation_general = Algemeen
+quick_navigation_placeholder = categorienaam/-id, gebruiker, domein
+quick_navigation_config_save = Instellingen opslaan
+quick_navigation_config_saved = Favorieten opgeslagen
+quick_navigation_info = Gebruikersinstellingen
+perm_general_quick_navigation[] = Quick Navi
+quick_navigation_categories = Favorietenselectie
+perm_general_quick_navigation[history] = Quick Navi: recent bewerkte artikelen en media
+perm_general_quick_navigation[all_changes] = Quick Navi: toon recent bewerkte gegevens van alle gebruikers
+perm_general_quick_navigation[settings] = Quick Navi: favorieten en instellingen
+quick_navigation_artdirections = Artikelnavigatie uitschakelen?
+quick_navigation_ignoreoffline = Offline categorieën negeren?
+quick_navigation_no_entries = Geen resultaten gevonden
+quick_navigation_structure = Structuur
+quick_navigation_clang = Taal
+quick_navigation_article_history = Laatst bewerkte artikelen
+quick_navigation_media_history = Laatst bewerkte media
+quick_navigation_favorite = Favorieten
+quick_navigation_manage_favorite = Favorieten toevoegen
+quick_navigation_favorite_article_add = Artikel toevoegen aan:
+quick_navigation_favorite_category_add = Categorie toevoegen aan:
+quick_navigation_addon_pages = AddOn-pagina's
+quick_navigation_structure_favs = Structuur
+quick_navigation_addon_pages_selection = AddOn-pagina's favorieten
+quick_navigation_yform = YForm
+quick_navigation_yform_add = Record toevoegen aan:
+quick_navigation_yform_search_placeholder = Records doorzoeken …
+quick_navigation_yform_scope = Zoeken binnen deze tabel
+quick_navigation_yform_all_tables = Alle tabellen
+quick_navigation_yform_filters = Filters
+quick_navigation_yform_close = Sluiten
+quick_navigation_yform_highlight_fields = Extra gemarkeerde kolommen
+quick_navigation_yform_highlight_fields_note = Kommagescheiden veldnamen (bijv. sku, artnr) die in de zoekresultaten altijd als eerste en gemarkeerd worden weergegeven, naast name/title/cat/category, mits de tabel deze bevat.
+
+# Media sorting
+quick_navigation_media_sort_alpha = Sorteren op bestandsnaam (A-Z)
+quick_navigation_media_sort_date = Sorteren op datum (nieuwste eerst)
+quick_navigation_media_sort_title = Sorteren op titel (A-Z)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Live-zoeken in mediatheek inschakelen?
+quick_navigation_media_live_search_placeholder = Live zoeken...
+
+# Button Management
+quick_navigation_button_management = Knoppen verbergen (Opt-Out)
+quick_navigation_button_management_note = Selecteer de knoppen die je NIET wilt zien. Alle andere knoppen blijven zichtbaar.
+quick_navigation_button_article_navigation = Artikelnavigatie (Bladeren)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Categorie
+quick_navigation_button_article_history = Artikelgeschiedenis
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Favorieten

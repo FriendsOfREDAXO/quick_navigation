@@ -1,0 +1,55 @@
+quick_navigation_title = Quick Navigation
+quick_navigation_help = Aiuto
+quick_navigation_config = Impostazioni
+quick_navigation_general = Generale
+quick_navigation_placeholder = nome/-id categoria, utente, dominio
+quick_navigation_config_save = Salva impostazioni
+quick_navigation_config_saved = Preferiti salvati
+quick_navigation_info = Impostazioni utente
+perm_general_quick_navigation[] = Quick Navi
+quick_navigation_categories = Selezione preferiti
+perm_general_quick_navigation[history] = Quick Navi: articoli e media modificati di recente
+perm_general_quick_navigation[all_changes] = Quick Navi: mostra i dati modificati di recente da tutti gli utenti
+perm_general_quick_navigation[settings] = Quick Navi: preferiti e impostazioni
+quick_navigation_artdirections = Disattivare la navigazione tra articoli?
+quick_navigation_ignoreoffline = Ignorare le categorie offline?
+quick_navigation_no_entries = Nessun risultato trovato
+quick_navigation_structure = Struttura
+quick_navigation_clang = Lingua
+quick_navigation_article_history = Ultimi articoli modificati
+quick_navigation_media_history = Ultimi media modificati
+quick_navigation_favorite = Preferiti
+quick_navigation_manage_favorite = Aggiungi preferiti
+quick_navigation_favorite_article_add = Aggiungi articolo a:
+quick_navigation_favorite_category_add = Aggiungi categoria a:
+quick_navigation_addon_pages = Pagine AddOn
+quick_navigation_structure_favs = Struttura
+quick_navigation_addon_pages_selection = Preferiti pagine AddOn
+quick_navigation_yform = YForm
+quick_navigation_yform_add = Aggiungi record a:
+quick_navigation_yform_search_placeholder = Cerca nei record …
+quick_navigation_yform_scope = Cerca in questa tabella
+quick_navigation_yform_all_tables = Tutte le tabelle
+quick_navigation_yform_filters = Filtri
+quick_navigation_yform_close = Chiudi
+quick_navigation_yform_highlight_fields = Colonne aggiuntive evidenziate
+quick_navigation_yform_highlight_fields_note = Nomi di campo separati da virgola (es. sku, artnr) che vengono sempre mostrati per primi ed evidenziati nei risultati di ricerca, oltre a name/title/cat/category, se la tabella li possiede.
+
+# Media sorting
+quick_navigation_media_sort_alpha = Ordina per nome file (A-Z)
+quick_navigation_media_sort_date = Ordina per data (più recenti prima)
+quick_navigation_media_sort_title = Ordina per titolo (A-Z)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Attivare la ricerca live nella mediateca?
+quick_navigation_media_live_search_placeholder = Ricerca live...
+
+# Button Management
+quick_navigation_button_management = Nascondi pulsanti (Opt-Out)
+quick_navigation_button_management_note = Seleziona i pulsanti che NON vuoi vedere. Tutti gli altri pulsanti restano visibili.
+quick_navigation_button_article_navigation = Navigazione articoli (Sfoglia)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Categoria
+quick_navigation_button_article_history = Cronologia articoli
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Preferiti

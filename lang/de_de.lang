@@ -27,6 +27,13 @@ quick_navigation_structure_favs = Struktur
 quick_navigation_addon_pages_selection = AddOn-Seiten Favoriten
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Datensatz hinzufügen in:
+quick_navigation_yform_search_placeholder = Datensätze durchsuchen …
+quick_navigation_yform_scope = In dieser Tabelle suchen
+quick_navigation_yform_all_tables = Alle Tabellen
+quick_navigation_yform_filters = Filter
+quick_navigation_yform_close = Schließen
+quick_navigation_yform_highlight_fields = Zusätzliche hervorgehobene Spalten
+quick_navigation_yform_highlight_fields_note = Kommagetrennte Feldnamen (z. B. sku, artnr), die in den Suchergebnissen zusätzlich zu name/title/cat/category immer zuerst und hervorgehoben angezeigt werden, sofern die Tabelle sie hat.
 
 # Medienpool-Sortierung (nur die Beschriftungen für den Button beibehalten)
 quick_navigation_media_sort_alpha = Nach Dateinamen sortieren (A-Z)

@@ -27,6 +27,13 @@ quick_navigation_structure_favs = Structure
 quick_navigation_addon_pages_selection = AddOn Pages Favorites
 quick_navigation_yform = YForm
 quick_navigation_yform_add = Add dataset to:
+quick_navigation_yform_search_placeholder = Search datasets …
+quick_navigation_yform_scope = Search within this table
+quick_navigation_yform_all_tables = All tables
+quick_navigation_yform_filters = Filters
+quick_navigation_yform_close = Close
+quick_navigation_yform_highlight_fields = Additional highlighted columns
+quick_navigation_yform_highlight_fields_note = Comma-separated field names (e.g. sku, artnr) that are always shown first and highlighted in search results, in addition to name/title/cat/category, if the table has them.
 
 # Media sorting
 quick_navigation_media_sort_alpha = Sort by filename (A-Z)

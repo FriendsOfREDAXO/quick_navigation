@@ -1,0 +1,55 @@
+quick_navigation_title = Quick Navigation
+quick_navigation_help = Справка
+quick_navigation_config = Настройки
+quick_navigation_general = Общие
+quick_navigation_placeholder = название/ID категории, пользователь, домен
+quick_navigation_config_save = Сохранить настройки
+quick_navigation_config_saved = Избранное сохранено
+quick_navigation_info = Настройки пользователя
+perm_general_quick_navigation[] = Quick Navi
+quick_navigation_categories = Выбор избранного
+perm_general_quick_navigation[history] = Quick Navi: недавно изменённые статьи и медиафайлы
+perm_general_quick_navigation[all_changes] = Quick Navi: показывать недавно изменённые данные всех пользователей
+perm_general_quick_navigation[settings] = Quick Navi: управление избранным и настройками
+quick_navigation_artdirections = Отключить пролистывание статей?
+quick_navigation_ignoreoffline = Игнорировать оффлайн-категории?
+quick_navigation_no_entries = Записи не найдены
+quick_navigation_structure = Структура
+quick_navigation_clang = Язык
+quick_navigation_article_history = Последние изменённые статьи
+quick_navigation_media_history = Последние изменённые медиафайлы
+quick_navigation_favorite = Избранное
+quick_navigation_manage_favorite = Добавить в избранное
+quick_navigation_favorite_article_add = Добавить статью в:
+quick_navigation_favorite_category_add = Добавить категорию в:
+quick_navigation_addon_pages = Страницы AddOn
+quick_navigation_structure_favs = Структура
+quick_navigation_addon_pages_selection = Избранные страницы AddOn
+quick_navigation_yform = YForm
+quick_navigation_yform_add = Добавить запись в:
+quick_navigation_yform_search_placeholder = Поиск по записям …
+quick_navigation_yform_scope = Искать в этой таблице
+quick_navigation_yform_all_tables = Все таблицы
+quick_navigation_yform_filters = Фильтры
+quick_navigation_yform_close = Закрыть
+quick_navigation_yform_highlight_fields = Дополнительные выделенные столбцы
+quick_navigation_yform_highlight_fields_note = Имена полей через запятую (например, sku, artnr), которые всегда отображаются первыми и выделяются в результатах поиска, в дополнение к name/title/cat/category, если они есть в таблице.
+
+# Media sorting
+quick_navigation_media_sort_alpha = Сортировать по имени файла (А-Я)
+quick_navigation_media_sort_date = Сортировать по дате (сначала новые)
+quick_navigation_media_sort_title = Сортировать по названию (А-Я)
+
+# Media Live-Search
+quick_navigation_media_livesearch = Включить живой поиск в медиатеке?
+quick_navigation_media_live_search_placeholder = Живой поиск...
+
+# Button Management
+quick_navigation_button_management = Скрыть кнопки (Opt-Out)
+quick_navigation_button_management_note = Выберите кнопки, которые вы НЕ хотите видеть. Все остальные кнопки останутся видимыми.
+quick_navigation_button_article_navigation = Навигация по статьям (пролистывание)
+quick_navigation_button_watson = Watson
+quick_navigation_button_category = Категория
+quick_navigation_button_article_history = История статей
+quick_navigation_button_yform = YForm
+quick_navigation_button_favorite = Избранное

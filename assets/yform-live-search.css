@@ -1,3 +1,82 @@
+/* CSS Variables - Standard: Light Theme */
+:root {
+    --qnyf-backdrop: rgba(15, 18, 22, 0.5);
+    --qnyf-panel-bg: #fff;
+    --qnyf-panel-text: #324050;
+    --qnyf-border: #c1c9d4;
+    --qnyf-border-soft: #dfe3e9;
+    --qnyf-header-bg: #4b9ad9;
+    --qnyf-header-border: #308bd3;
+    --qnyf-header-fg: #fff;
+    --qnyf-header-fg-soft: rgba(255, 255, 255, 0.85);
+    --qnyf-header-fg-softer: rgba(255, 255, 255, 0.75);
+    --qnyf-header-btn-bg: rgba(255, 255, 255, 0.12);
+    --qnyf-header-btn-bg-hover: rgba(255, 255, 255, 0.2);
+    --qnyf-header-btn-border: rgba(255, 255, 255, 0.4);
+    --qnyf-filters-bg: #f3f6fb;
+    --qnyf-muted: #8a97a8;
+    --qnyf-link: #4b9ad9;
+    --qnyf-link-hover: #3183c8;
+    --qnyf-row-hover: rgba(0, 0, 0, 0.035);
+    --qnyf-result-hover-bg: #f3f6fb;
+    --qnyf-result-hover-border: #556d8c;
+    --qnyf-badge-off-bg: rgba(0, 0, 0, 0.06);
+    --qnyf-badge-off-fg: #8a97a8;
+    --qnyf-badge-choice-bg: #eef1f5;
+    --qnyf-badge-choice-fg: #556d8c;
+    --qnyf-lang-code-bg: rgba(0, 0, 0, 0.07);
+    --qnyf-lang-code-fg: #8a97a8;
+    --qnyf-badge-on-bg: rgba(76, 175, 80, 0.15);
+    --qnyf-badge-on-fg: #3d9140;
+}
+
+/* Dark Theme Variables (explicit choice) */
+.rex-theme-dark,
+.rex-has-theme.rex-theme-dark {
+    --qnyf-panel-bg: #2b2f33;
+    --qnyf-panel-text: #eee;
+    --qnyf-border: rgba(255, 255, 255, 0.15);
+    --qnyf-border-soft: rgba(255, 255, 255, 0.1);
+    --qnyf-header-bg: #246eaa;
+    --qnyf-header-border: #1e2731;
+    --qnyf-filters-bg: rgba(255, 255, 255, 0.04);
+    --qnyf-muted: #9aa5b1;
+    --qnyf-row-hover: rgba(255, 255, 255, 0.05);
+    --qnyf-result-hover-bg: rgba(255, 255, 255, 0.06);
+    --qnyf-badge-off-bg: rgba(255, 255, 255, 0.1);
+    --qnyf-badge-off-fg: #b8bfc7;
+    --qnyf-badge-choice-bg: rgba(255, 255, 255, 0.1);
+    --qnyf-badge-choice-fg: #cfd8e3;
+    --qnyf-lang-code-bg: rgba(255, 255, 255, 0.12);
+    --qnyf-lang-code-fg: #ccc;
+    --qnyf-badge-on-bg: rgba(76, 175, 80, 0.25);
+    --qnyf-badge-on-fg: #8fe09a;
+}
+
+/* Auto Theme (system preference, only when no explicit theme was chosen) */
+@media (prefers-color-scheme: dark) {
+    .rex-has-theme:not(.rex-theme-light):not(.rex-theme-dark) {
+        --qnyf-panel-bg: #2b2f33;
+        --qnyf-panel-text: #eee;
+        --qnyf-border: rgba(255, 255, 255, 0.15);
+        --qnyf-border-soft: rgba(255, 255, 255, 0.1);
+        --qnyf-header-bg: #246eaa;
+        --qnyf-header-border: #1e2731;
+        --qnyf-filters-bg: rgba(255, 255, 255, 0.04);
+        --qnyf-muted: #9aa5b1;
+        --qnyf-row-hover: rgba(255, 255, 255, 0.05);
+        --qnyf-result-hover-bg: rgba(255, 255, 255, 0.06);
+        --qnyf-badge-off-bg: rgba(255, 255, 255, 0.1);
+        --qnyf-badge-off-fg: #b8bfc7;
+        --qnyf-badge-choice-bg: rgba(255, 255, 255, 0.1);
+        --qnyf-badge-choice-fg: #cfd8e3;
+        --qnyf-lang-code-bg: rgba(255, 255, 255, 0.12);
+        --qnyf-lang-code-fg: #ccc;
+        --qnyf-badge-on-bg: rgba(76, 175, 80, 0.25);
+        --qnyf-badge-on-fg: #8fe09a;
+    }
+}
+
 .qn-yform-overlay {
     position: fixed;
     inset: 0;
@@ -29,7 +108,7 @@
 .qn-yform-overlay-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(15, 18, 22, 0.5);
+    background: var(--qnyf-backdrop);
 }
 
 .qn-yform-overlay-panel {
@@ -39,17 +118,12 @@
     max-height: 72vh;
     display: flex;
     flex-direction: column;
-    background: #fff;
-    color: #324050;
+    background: var(--qnyf-panel-bg);
+    color: var(--qnyf-panel-text);
     border-radius: 0;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     animation: qnYformPanelIn 0.14s ease-out;
-}
-
-body.rex-theme-dark .qn-yform-overlay-panel {
-    background: #2b2f33;
-    color: #eee;
 }
 
 .qn-yform-overlay-header {
@@ -57,17 +131,12 @@ body.rex-theme-dark .qn-yform-overlay-panel {
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-    background: #4b9ad9;
-    border-bottom: 1px solid #308bd3;
-}
-
-body.rex-theme-dark .qn-yform-overlay-header {
-    background: #246eaa;
-    border-bottom-color: #1e2731;
+    background: var(--qnyf-header-bg);
+    border-bottom: 1px solid var(--qnyf-header-border);
 }
 
 .qn-yform-overlay-icon {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--qnyf-header-fg-soft);
     font-size: 15px;
     flex-shrink: 0;
     display: inline-flex;
@@ -97,19 +166,19 @@ body.rex-theme-dark .qn-yform-overlay-header {
     font-size: 15px;
     font-family: inherit;
     background: transparent;
-    color: #fff;
+    color: var(--qnyf-header-fg);
     height: 30px;
 }
 
 .qn-yform-overlay-input::placeholder {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--qnyf-header-fg-softer);
 }
 
 .qn-yform-overlay-close,
 .qn-yform-overlay-filters-toggle {
     border: 0;
     background: transparent;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--qnyf-header-fg-soft);
     cursor: pointer;
     padding: 5px 8px;
     border-radius: 0;
@@ -120,13 +189,13 @@ body.rex-theme-dark .qn-yform-overlay-header {
 
 .qn-yform-overlay-close:hover,
 .qn-yform-overlay-filters-toggle:hover {
-    color: #fff;
+    color: var(--qnyf-header-fg);
     background: rgba(255, 255, 255, 0.15);
 }
 
 .qn-yform-overlay-filters-toggle.active {
-    color: #4b9ad9;
-    background: #fff;
+    color: var(--qnyf-header-bg);
+    background: var(--qnyf-header-fg);
 }
 
 .qn-yform-overlay-filters-toggle.hidden {
@@ -142,25 +211,25 @@ body.rex-theme-dark .qn-yform-overlay-header {
     padding: 4px 10px;
     font-size: 13px;
     border-radius: 0;
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    border-color: var(--qnyf-header-btn-border);
+    background: var(--qnyf-header-btn-bg);
+    color: var(--qnyf-header-fg);
 }
 
 .qn-yform-overlay-header .qn-yform-overlay-table-select .btn:hover,
 .qn-yform-overlay-header .qn-yform-overlay-table-select .btn:focus {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: var(--qnyf-header-btn-bg-hover);
+    color: var(--qnyf-header-fg);
 }
 
 .qn-yform-overlay-header .qn-yform-overlay-table-select .caret {
-    border-top-color: #fff;
+    border-top-color: var(--qnyf-header-fg);
 }
 
 .qn-yform-overlay-table-scope {
     border: 0;
     background: transparent;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     cursor: pointer;
     padding: 6px 9px;
     border-radius: 0;
@@ -169,22 +238,17 @@ body.rex-theme-dark .qn-yform-overlay-header {
 }
 
 .qn-yform-overlay-table-scope:hover {
-    color: #324050;
-    background: rgba(0, 0, 0, 0.05);
+    color: var(--qnyf-panel-text);
+    background: var(--qnyf-row-hover);
 }
 
 .qn-yform-overlay-filters {
     padding: 10px 12px;
-    border-bottom: 1px solid #c1c9d4;
+    border-bottom: 1px solid var(--qnyf-border);
     display: flex;
     flex-wrap: wrap;
     gap: 10px 14px;
-    background: #f3f6fb;
-}
-
-body.rex-theme-dark .qn-yform-overlay-filters {
-    border-bottom-color: rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--qnyf-filters-bg);
 }
 
 .qn-yform-filter-field {
@@ -202,11 +266,7 @@ body.rex-theme-dark .qn-yform-overlay-filters {
     font-size: 12px;
     font-weight: 700;
     margin-bottom: 1px;
-    color: #324050;
-}
-
-body.rex-theme-dark .qn-yform-filter-field label.control-label {
-    color: #eee;
+    color: var(--qnyf-panel-text);
 }
 
 .qn-yform-filter-field .form-control {
@@ -218,7 +278,7 @@ body.rex-theme-dark .qn-yform-filter-field label.control-label {
 }
 
 .qn-yform-filters-empty {
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     font-size: 13px;
     font-style: italic;
 }
@@ -237,23 +297,15 @@ body.rex-theme-dark .qn-yform-filter-field label.control-label {
     align-items: center;
     justify-content: space-between;
     gap: 4px;
-    border-bottom: 1px solid #dfe3e9;
+    border-bottom: 1px solid var(--qnyf-border-soft);
 }
 
 .qn-yform-overlay-tables .qn-yform-overlay-item-row:last-child {
     border-bottom: 0;
 }
 
-body.rex-theme-dark .qn-yform-overlay-item-row {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
 .qn-yform-overlay-item-row:hover {
-    background: rgba(0, 0, 0, 0.035);
-}
-
-body.rex-theme-dark .qn-yform-overlay-item-row:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--qnyf-row-hover);
 }
 
 .qn-yform-overlay-table-link {
@@ -263,7 +315,7 @@ body.rex-theme-dark .qn-yform-overlay-item-row:hover {
     align-items: center;
     gap: 8px;
     padding: 8px 14px;
-    color: #4b9ad9;
+    color: var(--qnyf-link);
     text-decoration: none;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -272,7 +324,7 @@ body.rex-theme-dark .qn-yform-overlay-item-row:hover {
 }
 
 .qn-yform-overlay-table-icon {
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     font-size: 13px;
     width: 16px;
     text-align: center;
@@ -281,43 +333,39 @@ body.rex-theme-dark .qn-yform-overlay-item-row:hover {
 
 .qn-yform-overlay-table-link:hover,
 .qn-yform-overlay-table-link:focus {
-    color: #3183c8;
+    color: var(--qnyf-link-hover);
     text-decoration: none;
     outline: none;
 }
 
 .qn-yform-overlay-table-link:focus {
-    background: rgba(0, 0, 0, 0.035);
-}
-
-body.rex-theme-dark .qn-yform-overlay-table-link:focus {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--qnyf-row-hover);
 }
 
 .qn-yform-overlay-item-row a[title^="Datensatz"],
 .qn-yform-overlay-item-row a[title^="Add dataset"] {
     padding: 7px 12px;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     flex-shrink: 0;
     font-size: 13px;
 }
 
 .qn-yform-overlay-item-row a[title^="Datensatz"]:hover,
 .qn-yform-overlay-item-row a[title^="Add dataset"]:hover {
-    color: #324050;
-    background: rgba(0, 0, 0, 0.05);
+    color: var(--qnyf-panel-text);
+    background: var(--qnyf-row-hover);
 }
 
 .qn-yform-search-loading {
     padding: 20px;
     text-align: center;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     font-size: 16px;
 }
 
 .qn-yform-search-empty {
     padding: 20px;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     font-style: italic;
     text-align: center;
     font-size: 13px;
@@ -329,7 +377,7 @@ body.rex-theme-dark .qn-yform-overlay-table-link:focus {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
 }
 
 .qn-yform-search-item {
@@ -340,28 +388,19 @@ body.rex-theme-dark .qn-yform-overlay-table-link:focus {
     color: inherit;
     text-decoration: none;
     border-left: 3px solid transparent;
-    border-bottom: 1px solid #dfe3e9;
+    border-bottom: 1px solid var(--qnyf-border-soft);
 }
 
 .qn-yform-search-group .qn-yform-search-item:last-child {
     border-bottom: 0;
 }
 
-body.rex-theme-dark .qn-yform-search-item {
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
 .qn-yform-search-item:hover,
 .qn-yform-search-item:focus {
-    background: #f3f6fb;
-    border-left-color: #556d8c;
+    background: var(--qnyf-result-hover-bg);
+    border-left-color: var(--qnyf-result-hover-border);
     color: inherit;
     text-decoration: none;
-}
-
-body.rex-theme-dark .qn-yform-search-item:hover,
-body.rex-theme-dark .qn-yform-search-item:focus {
-    background: rgba(255, 255, 255, 0.06);
 }
 
 .qn-yform-search-item-head {
@@ -374,7 +413,7 @@ body.rex-theme-dark .qn-yform-search-item:focus {
 .qn-yform-search-title {
     font-size: 14px;
     font-weight: 600;
-    color: #4b9ad9;
+    color: var(--qnyf-link);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -382,12 +421,12 @@ body.rex-theme-dark .qn-yform-search-item:focus {
 
 .qn-yform-search-item:hover .qn-yform-search-title,
 .qn-yform-search-item:focus .qn-yform-search-title {
-    color: #3183c8;
+    color: var(--qnyf-link-hover);
 }
 
 .qn-yform-search-id {
     font-size: 11px;
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     font-variant-numeric: tabular-nums;
     flex-shrink: 0;
 }
@@ -406,7 +445,7 @@ body.rex-theme-dark .qn-yform-search-item:focus {
 }
 
 .qn-yform-search-field-label {
-    color: #8a97a8;
+    color: var(--qnyf-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -432,32 +471,25 @@ body.rex-theme-dark .qn-yform-search-item:focus {
 }
 
 .qn-badge-on {
-    background: rgba(76, 175, 80, 0.15);
-    color: #3d9140;
+    background: var(--qnyf-badge-on-bg);
+    color: var(--qnyf-badge-on-fg);
 }
 
 .qn-badge-off {
-    background: rgba(0, 0, 0, 0.06);
-    color: #8a97a8;
-}
-
-body.rex-theme-dark .qn-badge-off {
-    background: rgba(255, 255, 255, 0.1);
-    color: #aaa;
+    background: var(--qnyf-badge-off-bg);
+    color: var(--qnyf-badge-off-fg);
 }
 
 .qn-badge-choice {
-    background: #eef1f5;
-    color: #556d8c;
-}
-
-body.rex-theme-dark .qn-badge-choice {
-    background: rgba(255, 255, 255, 0.1);
-    color: #cfd8e3;
+    background: var(--qnyf-badge-choice-bg);
+    color: var(--qnyf-badge-choice-fg);
 }
 
 .qn-badge-tag {
+    /* Background color is admin-controlled (fields_tagging), can be any hue —
+       the text shadow keeps white text readable even on light tag colors. */
     color: #fff;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
 }
 
@@ -480,18 +512,13 @@ body.rex-theme-dark .qn-badge-choice {
     align-self: start;
     padding: 0 4px;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.07);
-    color: #8a97a8;
+    background: var(--qnyf-lang-code-bg);
+    color: var(--qnyf-lang-code-fg);
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     line-height: 1.6;
-}
-
-body.rex-theme-dark .qn-lang-code {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ccc;
 }
 
 .qn-lang-text {

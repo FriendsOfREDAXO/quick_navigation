@@ -1,4 +1,4 @@
-# Quick Navigation 8 für Redaxo
+# Quick Navigation für REDAXO
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quickbar.png)
 
@@ -12,7 +12,7 @@ Funktionen:
 - Button-Registry zur einfachen Registrierung von Schaltflächen, sortiert nach Priorität in der Strukturansicht
 - Erweiterungspunkte zum Hinzufügen klassischer Schaltflächen zu Struktur, Linkmap, Mediapool
 - Kategoriefavoriten mit Hinzufügen-Schaltflächen für Kategorien und Artikel
-- YForm-Schnellnavigation
+- YForm-Schnellnavigation: Tabellen-Dropdown plus eine Spotlight-artige Live-Suche über Datensätze aller berechtigten YForm-Tabellen, mit feldtyp-abhängigen Filtern, farbigen Badges/Tags in der Ergebnisvorschau und Unterstützung mehrsprachiger Felder
 
 ## Beschreibung 
 

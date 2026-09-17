@@ -35,6 +35,12 @@ if (rex_post('formsubmit', 'string') == '1') {
     }
 
     $package->setConfig($config);
+
+    if (rex::getUser()->isAdmin()) {
+        $highlightFields = trim(rex_post('quick_navigation_yform_highlight_fields', 'string', ''));
+        $package->setConfig('quick_navigation_yform_highlight_fields', $highlightFields);
+    }
+
     echo rex_view::success($package->i18n('quick_navigation_config_saved'));
 }
 
@@ -163,6 +169,19 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/container.php');
+
+if (rex::getUser()->isAdmin()) {
+    // YForm-Suche: zusätzliche, immer priorisierte Vorschau-Spalten (admin-weit)
+    $formElements = [];
+    $n = [];
+    $n['label'] = '<label for="quick-navigation-yform-highlight-fields">' . $package->i18n('quick_navigation_yform_highlight_fields') . '</label>';
+    $n['field'] = '<input class="form-control" type="text" id="quick-navigation-yform-highlight-fields" name="quick_navigation_yform_highlight_fields" value="' . rex_escape($package->getConfig('quick_navigation_yform_highlight_fields', '')) . '" placeholder="z. B. sku, artnr" />';
+    $n['note'] = $package->i18n('quick_navigation_yform_highlight_fields_note');
+    $formElements[] = $n;
+    $fragment = new rex_fragment();
+    $fragment->setVar('elements', $formElements, false);
+    $content .= $fragment->parse('core/form/container.php');
+}
 
 $content .= '</fieldset>';
 

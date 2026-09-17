@@ -1,5 +1,5 @@
 
-# Quick Navigation 8 for Redaxo
+# Quick Navigation for REDAXO
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/quickbar.png)
 
@@ -13,7 +13,7 @@ Features:
 - Buttonregistry to easy register buttons sorted by prio in structure view
 - extension points to add classic buttons to structure, linkmap, mediapool
 - Category favorites with add buttons for categories and articles
-- YForm quick navigation
+- YForm quick navigation: table dropdown plus a Spotlight-style live search across datasets of all permitted YForm tables, with field-type-aware filters, colored badges/tags in the result preview, and multi-language field support
 
 ## Description 
 

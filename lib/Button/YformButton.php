@@ -127,6 +127,10 @@ class YformButton implements ButtonInterface
             'title' => rex_i18n::msg('quick_navigation_yform_add') . ' ' . $table->getTableName(),
         ];
 
+        $addLink = Search::canEdit($table)
+            ? '<a' . rex_string::buildAttributes($attributesAdd) . '><i class="fa fa-plus" aria-hidden="true"></i></a>'
+            : '';
+
         $customIcon = method_exists($table, 'getCustomIcon') ? $table->getCustomIcon() : null;
         $iconClass = $customIcon ? trim($customIcon) : 'rex-icon fa-database';
         $icon = '<i class="' . rex_escape($iconClass) . ' qn-yform-overlay-table-icon" aria-hidden="true"></i>';
@@ -139,9 +143,7 @@ class YformButton implements ButtonInterface
                 <button type="button" class="qn-yform-overlay-table-scope" data-quick-navigation-yform-scope="' . rex_escape($table->getTableName()) . '" title="' . rex_escape(rex_i18n::msg('quick_navigation_yform_scope')) . '">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-                <a' . rex_string::buildAttributes($attributesAdd) . '>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                </a>
+                ' . $addLink . '
             </div>
         ';
     }

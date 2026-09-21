@@ -30,14 +30,6 @@ class Search
      */
     public static function searchableTables(): array
     {
-        $user = rex::getUser();
-        if (!$user) {
-            return [];
-        }
-
-        $yform = rex_addon::get('yform');
-        $yperm_suffix = version_compare($yform->getVersion(), '4.0.0-dev', '>=') ? '_edit' : '';
-
         $tables = [];
         foreach (rex_yform_manager_table::getAll() as $table) {
             if (!$table->isActive()) {
@@ -45,13 +37,44 @@ class Search
             }
             // NOTE: isHidden() only means "no menu entry in YForm manager" — it must NOT
             // gate search/access. Access control is solely the permission check below.
-            if (!$user->isAdmin() && !$user->getComplexPerm('yform_manager_table' . $yperm_suffix)->hasPerm($table->getTableName())) {
+            if (!self::canView($table)) {
                 continue;
             }
             $tables[] = $table;
         }
 
         return $tables;
+    }
+
+    /**
+     * Explicit view or edit permission on the table. Deliberately stricter than
+     * YForm's isGranted('VIEW'), which also grants implicit access to relation tables.
+     */
+    public static function canView(rex_yform_manager_table $table): bool
+    {
+        return self::canEdit($table) || self::hasTablePerm($table, 'yform_manager_table_view');
+    }
+
+    public static function canEdit(rex_yform_manager_table $table): bool
+    {
+        $legacy = version_compare(rex_addon::get('yform')->getVersion(), '4.0.0-dev', '<');
+
+        return self::hasTablePerm($table, $legacy ? 'yform_manager_table' : 'yform_manager_table_edit');
+    }
+
+    private static function hasTablePerm(rex_yform_manager_table $table, string $permKey): bool
+    {
+        $user = rex::getUser();
+        if (!$user) {
+            return false;
+        }
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        $complexPerm = $user->getComplexPerm($permKey);
+
+        return null !== $complexPerm && $complexPerm->hasPerm($table->getTableName());
     }
 
     public static function findTableByName(string $tableName): ?rex_yform_manager_table

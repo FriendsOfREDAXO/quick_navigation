@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.2.2 – 2026-09-21
+
+### Fix: YForm-Tabellenrechte in Button und Live-Suche (#213)
+
+- Tabellen erscheinen nur noch mit explizitem Ansehen- (`yform_manager_table_view`) oder Bearbeiten-Recht (`yform_manager_table_edit`); bisher wurde nur das Bearbeiten-Recht ausgewertet, Nutzer mit reinem Leserecht sahen keine Tabellen
+- Der „+“-Link (Datensatz anlegen) wird nur noch bei Bearbeiten-Recht ausgegeben
+- Implizite Leserechte über Relationen (YForm `isGranted('VIEW')`) werden bewusst nicht übernommen
+
 ## 9.2.1 – 2026-09-17
 
 ### Fix: "Class rex_api_quicknavigation_render not found" nach Update (#208)

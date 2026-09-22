@@ -1,11 +1,9 @@
 $(document).on('rex:ready', function() {
+    // Das Menü ist bereits serverseitig gerendert, hier nur noch initialisieren
     var root = $("#quick-navigation-structure");
-    if (root) {
-        $.get(root.data('url')).done(function(quickNav) {
-            root.html(quickNav);
-            root.find('[data-quick-navigation-toggle="tooltip"]').tooltip();
-            $(document).trigger('quick-navigation:ready');
-        });
+    if (root.length) {
+        root.find('[data-quick-navigation-toggle="tooltip"]').tooltip();
+        $(document).trigger('quick-navigation:ready');
     }
     
     // Mediasort Button Handling

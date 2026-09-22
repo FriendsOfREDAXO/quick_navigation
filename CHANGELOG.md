@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.3.1 – 2026-09-22
+
+### Menü wird direkt gerendert statt per XHR nachgeladen
+
+- Das Quick-Navigation-Menü wird jetzt serverseitig im Seitentitel ausgegeben; der bisherige zusätzliche Request `rex-api-call=quicknavigation_api` bei jedem Seitenaufruf entfällt
+- Hintergrund: Jeder API-Aufruf bootet das komplette Backend und hält währenddessen die PHP-Session-Sperre, wodurch alle weiteren Requests derselben Session warten mussten (spürbar langsame Backend-Navigation, besonders zusammen mit anderen AddOns, die ebenfalls bei jedem Seitenaufruf API-Requests absetzen)
+- Das Ereignis `quick-navigation:ready` wird weiterhin ausgelöst, die API `quicknavigation_api` bleibt aus Kompatibilitätsgründen registriert
+
 ## 9.3.0 – 2026-09-22
 
 ### Klassisches YForm-Dropdown ist wieder Standard, Live-Suche als Opt-in

@@ -43,6 +43,10 @@ quick_navigation_media_sort_title = Sortera efter titel (A-Ö)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Aktivera livesökning i mediearkivet?
+quick_navigation_yform_mode = YForm-läge
+quick_navigation_yform_mode_dropdown = Klassisk rullgardinsmeny (tabellista)
+quick_navigation_yform_mode_livesearch = Livesökning (overlay med sökning i poster)
+quick_navigation_yform_mode_note = Standard är den klassiska rullgardinsmenyn. Livesökning måste aktiveras per användare.
 quick_navigation_media_live_search_placeholder = Livesökning...
 
 # Button Management

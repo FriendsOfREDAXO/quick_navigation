@@ -42,6 +42,10 @@ quick_navigation_media_sort_title = Ordina per titolo (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Attivare la ricerca live nella mediateca?
+quick_navigation_yform_mode = Modalità YForm
+quick_navigation_yform_mode_dropdown = Menu a discesa classico (elenco tabelle)
+quick_navigation_yform_mode_livesearch = Ricerca live (overlay con ricerca dei record)
+quick_navigation_yform_mode_note = L'impostazione predefinita è il menu a discesa classico. La ricerca live va attivata per ogni utente.
 quick_navigation_media_live_search_placeholder = Ricerca live...
 
 # Button Management

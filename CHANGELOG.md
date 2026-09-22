@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.3.0 – 2026-09-22
+
+### Klassisches YForm-Dropdown ist wieder Standard, Live-Suche als Opt-in
+
+- Neue Einstellung „YForm-Modus" je Benutzer: „Klassisches Dropdown" (Standard) oder „Live-Suche"
+- Das Tabellen-Dropdown aus 9.1 ist zurück (inkl. „+"-Link bei Bearbeiten-Recht, versteckte Tabellen bleiben wie in YForm selbst ausgeblendet); die Rechteprüfung aus 9.2.2 gilt in beiden Modi
+- Die Assets der Live-Suche werden nur noch geladen, wenn der Benutzer den Modus aktiviert hat
+
 ## 9.2.2 – 2026-09-21
 
 ### Fix: YForm-Tabellenrechte in Button und Live-Suche (#213)

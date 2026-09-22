@@ -12,7 +12,7 @@ Funktionen:
 - Button-Registry zur einfachen Registrierung von Schaltflächen, sortiert nach Priorität in der Strukturansicht
 - Erweiterungspunkte zum Hinzufügen klassischer Schaltflächen zu Struktur, Linkmap, Mediapool
 - Kategoriefavoriten mit Hinzufügen-Schaltflächen für Kategorien und Artikel
-- YForm-Schnellnavigation: Tabellen-Dropdown plus eine Spotlight-artige Live-Suche über Datensätze aller berechtigten YForm-Tabellen, mit feldtyp-abhängigen Filtern, farbigen Badges/Tags in der Ergebnisvorschau und Unterstützung mehrsprachiger Felder
+- YForm-Schnellnavigation: klassisches Tabellen-Dropdown (Standard) oder – je Benutzer in den Einstellungen aktivierbar – eine Spotlight-artige Live-Suche über Datensätze aller berechtigten YForm-Tabellen, mit feldtyp-abhängigen Filtern, farbigen Badges/Tags in der Ergebnisvorschau und Unterstützung mehrsprachiger Felder
 
 ## Beschreibung 
 

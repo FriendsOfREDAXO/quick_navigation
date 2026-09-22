@@ -43,10 +43,14 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
         rex_api_function::register('quicknavigation_yform_search', YformSearch::class);
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.css'));
         rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.css'));
-        rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.css'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('quick-navigation.js'));
         rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('media-live-search.js'));
-        rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.js'));
+
+        // YForm Live-Suche ist Opt-in je Benutzer, Standard ist das klassische Dropdown
+        if (YformButton::isLiveSearchEnabled()) {
+            rex_view::addCssFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.css'));
+            rex_view::addJsFile(rex_addon::get('quick_navigation')->getAssetsUrl('yform-live-search.js'));
+        }
 
         // Media Live-Search Einstellung für aktuellen User
         $userId = rex::getUser()->getId();

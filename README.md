@@ -13,7 +13,7 @@ Features:
 - Buttonregistry to easy register buttons sorted by prio in structure view
 - extension points to add classic buttons to structure, linkmap, mediapool
 - Category favorites with add buttons for categories and articles
-- YForm quick navigation: table dropdown plus a Spotlight-style live search across datasets of all permitted YForm tables, with field-type-aware filters, colored badges/tags in the result preview, and multi-language field support
+- YForm quick navigation: classic table dropdown (default) or – opt-in per user in the settings – a Spotlight-style live search across datasets of all permitted YForm tables, with field-type-aware filters, colored badges/tags in the result preview, and multi-language field support
 
 ## Description 
 

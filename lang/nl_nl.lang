@@ -42,6 +42,10 @@ quick_navigation_media_sort_title = Sorteren op titel (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Live-zoeken in mediatheek inschakelen?
+quick_navigation_yform_mode = YForm-modus
+quick_navigation_yform_mode_dropdown = Klassiek dropdownmenu (tabellenlijst)
+quick_navigation_yform_mode_livesearch = Live-zoeken (overlay met zoeken in records)
+quick_navigation_yform_mode_note = Standaard is het klassieke dropdownmenu. Live-zoeken moet per gebruiker worden ingeschakeld.
 quick_navigation_media_live_search_placeholder = Live zoeken...
 
 # Button Management

@@ -42,6 +42,10 @@ quick_navigation_media_sort_title = Sort by title (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Enable media live search?
+quick_navigation_yform_mode = YForm mode
+quick_navigation_yform_mode_dropdown = Classic dropdown (table list)
+quick_navigation_yform_mode_livesearch = Live search (overlay with dataset search)
+quick_navigation_yform_mode_note = Default is the classic dropdown. Live search has to be enabled per user.
 quick_navigation_media_live_search_placeholder = Live search...
 
 # Button Management

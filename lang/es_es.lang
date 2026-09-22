@@ -43,6 +43,10 @@ quick_navigation_media_sort_title = Ordenar por título (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = ¿Activar la búsqueda en directo del gestor de medios?
+quick_navigation_yform_mode = Modo YForm
+quick_navigation_yform_mode_dropdown = Menú desplegable clásico (lista de tablas)
+quick_navigation_yform_mode_livesearch = Búsqueda en directo (overlay con búsqueda de registros)
+quick_navigation_yform_mode_note = Por defecto se usa el menú desplegable clásico. La búsqueda en directo debe activarse por usuario.
 quick_navigation_media_live_search_placeholder = Búsqueda en directo...
 
 # Button Management

@@ -42,6 +42,10 @@ quick_navigation_media_sort_title = Nach Titel sortieren (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Medienpool Live-Suche aktivieren?
+quick_navigation_yform_mode = YForm-Modus
+quick_navigation_yform_mode_dropdown = Klassisches Dropdown (Tabellenliste)
+quick_navigation_yform_mode_livesearch = Live-Suche (Overlay mit Datensatzsuche)
+quick_navigation_yform_mode_note = Standard ist das klassische Dropdown. Die Live-Suche muss je Benutzer aktiviert werden.
 quick_navigation_media_live_search_placeholder = Live-Suche...
 
 # Live Search

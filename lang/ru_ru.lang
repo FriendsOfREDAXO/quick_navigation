@@ -42,6 +42,10 @@ quick_navigation_media_sort_title = Сортировать по названию
 
 # Media Live-Search
 quick_navigation_media_livesearch = Включить живой поиск в медиатеке?
+quick_navigation_yform_mode = Режим YForm
+quick_navigation_yform_mode_dropdown = Классический выпадающий список (список таблиц)
+quick_navigation_yform_mode_livesearch = Живой поиск (оверлей с поиском записей)
+quick_navigation_yform_mode_note = По умолчанию используется классический выпадающий список. Живой поиск включается для каждого пользователя отдельно.
 quick_navigation_media_live_search_placeholder = Живой поиск...
 
 # Button Management

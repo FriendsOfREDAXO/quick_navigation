@@ -4,6 +4,7 @@ namespace FriendsOfRedaxo\QuickNavigation;
 
 use FriendsOfRedaxo\QuickNavigation\Button\ButtonRegistry;
 use FriendsOfRedaxo\QuickNavigation\Button\FavoriteButton;
+use FriendsOfRedaxo\QuickNavigation\Button\YformButton;
 use rex;
 use rex_addon;
 use rex_category_select;
@@ -28,6 +29,10 @@ if (rex_post('formsubmit', 'string') == '1') {
     $config['quick_navigation_ignoreoffline' . $user] = isset($config['quick_navigation_ignoreoffline' . $user]) ? 1 : 0;
     $config['quick_navigation_artdirections' . $user] = isset($config['quick_navigation_artdirections' . $user]) ? 1 : 0;
     $config['quick_navigation_media_livesearch' . $user] = isset($config['quick_navigation_media_livesearch' . $user]) ? 1 : 0;
+
+    // YForm-Modus: nur bekannte Werte zulassen, Standard ist das klassische Dropdown
+    $yformMode = $config['quick_navigation_yform_mode' . $user] ?? YformButton::MODE_DROPDOWN;
+    $config['quick_navigation_yform_mode' . $user] = YformButton::MODE_LIVESEARCH === $yformMode ? YformButton::MODE_LIVESEARCH : YformButton::MODE_DROPDOWN;
 
     // Disabled Buttons speichern (Array bleibt als Array)
     if (!isset($config['quick_navigation_disabled_buttons' . $user])) {
@@ -142,6 +147,27 @@ $formElements[] = $n;
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/checkbox.php');
+
+// YForm-Modus: klassisches Dropdown (Standard) oder Live-Suche (Opt-in)
+$formElements = [];
+$n = [];
+$n['label'] = '<label for="quick-navigation-yform-mode">' . $package->i18n('quick_navigation_yform_mode') . '</label>';
+$yformMode = YformButton::mode();
+$yformModeOptions = [
+    YformButton::MODE_DROPDOWN => $package->i18n('quick_navigation_yform_mode_dropdown'),
+    YformButton::MODE_LIVESEARCH => $package->i18n('quick_navigation_yform_mode_livesearch'),
+];
+$yformModeSelect = '<select class="form-control selectpicker" id="quick-navigation-yform-mode" name="config[quick_navigation_yform_mode' . $user . ']">';
+foreach ($yformModeOptions as $value => $label) {
+    $yformModeSelect .= '<option value="' . rex_escape($value) . '"' . ($yformMode === $value ? ' selected="selected"' : '') . '>' . rex_escape($label) . '</option>';
+}
+$yformModeSelect .= '</select>';
+$n['field'] = $yformModeSelect;
+$n['note'] = $package->i18n('quick_navigation_yform_mode_note');
+$formElements[] = $n;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements, false);
+$content .= $fragment->parse('core/form/container.php');
 
 // Button-Management
 $formElements = [];

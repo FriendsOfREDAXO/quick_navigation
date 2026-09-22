@@ -43,6 +43,10 @@ quick_navigation_media_sort_title = Ordenar por título (A-Z)
 
 # Media Live-Search
 quick_navigation_media_livesearch = Ativar busca em tempo real na mídiateca?
+quick_navigation_yform_mode = Modo YForm
+quick_navigation_yform_mode_dropdown = Menu suspenso clássico (lista de tabelas)
+quick_navigation_yform_mode_livesearch = Busca em tempo real (overlay com busca de registros)
+quick_navigation_yform_mode_note = O padrão é o menu suspenso clássico. A busca em tempo real precisa ser ativada por usuário.
 quick_navigation_media_live_search_placeholder = Busca em tempo real...
 
 # Button Management

@@ -29,9 +29,11 @@ use rex_addon;
 use rex_api_function;
 use rex_backend_login;
 use rex_be_controller;
+use rex_clang;
 use rex_extension;
 use rex_minibar;
 use rex_perm;
+use rex_url;
 use rex_view;
 
 if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex_be_controller::getCurrentPage() != '2factor_auth_verify') {
@@ -106,9 +108,20 @@ if (rex::isBackend() && rex::getUser() && rex_backend_login::hasSession() && rex
                 return $ep->getSubject();
             }
 
-            // Direkt rendern statt per XHR nachladen: jeder API-Aufruf bootet das komplette Backend
-            // und hält dabei die Session-Sperre, was alle weiteren Requests der Session verzögert
-            return '<div id="quick-navigation-structure">' . QuickNavigation::get() . '</div>' . $ep->getSubject();
+            $clang = rex_request('clang', 'int');
+            $clang = rex_clang::exists($clang) ? $clang : rex_clang::getStartId();
+
+            $category_id = rex_request('category_id', 'int');
+            $article_id = rex_request('article_id', 'int');
+
+            $params = [
+                'clang' => $clang,
+                'category_id' => $category_id,
+                'article_id' => $article_id,
+                'buster' => time(),
+            ];
+
+            return '<div id="quick-navigation-structure" data-url="' . rex_url::currentBackendPage($params + MenuRender::getUrlParams()) . '"></div>' . $ep->getSubject();
         });
         rex_extension::register('PAGE_TITLE_SHOWN', QuickNavigationLinkMap::LinkMapNavigation(...));
         rex_extension::register('MEDIA_LIST_TOOLBAR', QuickNavigationMedia::MediaHistory(...));

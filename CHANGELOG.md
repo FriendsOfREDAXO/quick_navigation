@@ -1,5 +1,12 @@
 # Changelog
 
+## Unveröffentlicht
+
+### Fix: Verzeichnisschutz-Check des Cores meldet `redaxo/null` als unsicher
+
+- `quick-navigation.js` definierte eine globale Funktion `getCookie()` und überschrieb damit die gleichnamige Funktion aus der `standard.js` des Cores. Die Addon-Version liefert bei fehlendem Cookie `null` statt `''`, der Verzeichnisschutz-Check ab REDAXO 5.21.5 prüfte dadurch `redaxo/null` statt eines echten Verzeichnisses und merkte sich den Wert im Cookie `rex_directory_protection_check`
+- Die Hilfsfunktion heißt jetzt `quickNavigationGetCookie()`
+
 ## 9.3.0 – 2026-09-22
 
 ### Klassisches YForm-Dropdown ist wieder Standard, Live-Suche als Opt-in

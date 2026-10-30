@@ -11,7 +11,7 @@ $(document).on('rex:ready', function() {
     // Mediasort Button Handling
     $("#qn-mediasort-toggle").on('click', function() {
         // Nächsten Sortiermodus setzen (vom PHP-Code übergeben)
-        var currentMode = getCookie("media_sort_mode") || "date";
+        var currentMode = quickNavigationGetCookie("media_sort_mode") || "date";
         var nextMode;
         
         switch (currentMode) {
@@ -35,8 +35,8 @@ $(document).on('rex:ready', function() {
     });
 });
 
-// Cookie-Hilfsfunktion
-function getCookie(name) {
+// Cookie-Hilfsfunktion (eigener Name, damit getCookie() aus der standard.js des Cores nicht überschrieben wird)
+function quickNavigationGetCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length === 2) return parts.pop().split(";").shift();

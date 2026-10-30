@@ -1,6 +1,17 @@
 # Changelog
 
-## Unveröffentlicht
+## 9.3.1 – 2026-10-30
+
+### Fix: Medien-Live-Suche bricht ab – „Call to undefined function …\error_log()“ (#214)
+
+- Die Medien-Live-Suche rief bei jeder Suche `error_log()` auf (Debug-Reste). Ist die Funktion beim Hoster per `disable_functions` gesperrt, brach die Suche mit einem Fehler ab. Die Aufrufe sind entfernt – sie schrieben außerdem Suchbegriffe und SQL ins Server-Log
+
+### Sicherheit: Medien-Live-Suche maskiert alle Werte
+
+- Titel, Dateinamen und Meldungen werden vor der Ausgabe maskiert; Titel mit `'`, `"` oder `<` brechen die Trefferliste nicht mehr
+- „Übernehmen“ arbeitet mit `data`-Attributen statt Inline-JavaScript (`onclick`)
+- SVG-Vorschauen werden als Bild (`<img>`) eingebunden statt als SVG-Markup, Skripte in SVG-Dateien werden so nicht ausgeführt
+
 
 ### Fix: Verzeichnisschutz-Check des Cores meldet `redaxo/null` als unsicher
 

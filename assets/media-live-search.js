@@ -109,7 +109,7 @@ function initQuickNavigationMediaLiveSearch() {
                 if (response.success) {
                     displayQuickNavSearchResults(response.results, container);
                 } else {
-                    container.html('<div class="qn-live-search-no-results">Fehler: ' + (response.error || 'Unbekannter Fehler') + '</div>');
+                    container.html('<div class="qn-live-search-no-results">Fehler: ' + qnEscape(response.error || 'Unbekannter Fehler') + '</div>');
                 }
             },
             error: function(xhr, status, error) {
@@ -123,91 +123,75 @@ function initQuickNavigationMediaLiveSearch() {
     }
 }
 
+    // Werte aus der Datenbank (Titel, Dateiname …) immer maskieren
+    function qnEscape(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
     function displayQuickNavSearchResults(results, container) {
         if (results.length === 0) {
             container.html('<div class="qn-live-search-no-results">Keine Ergebnisse gefunden</div>');
             container.show();
             return;
         }
-        
+
         var html = '';
-        
+
         $.each(results, function(index, item) {
             var thumbnail = '';
-            
-            if (item.thumbnail.type === 'image') {
-                thumbnail = '<img src="' + item.thumbnail.src + '" alt="' + item.thumbnail.alt + '" loading="lazy">';
-            } else if (item.thumbnail.type === 'svg') {
-                // inline SVG markup - already sanitized server-side
-                thumbnail = item.thumbnail.svg;
-            } else if (item.thumbnail.type === 'icon') {
-                thumbnail = '<i class="' + item.thumbnail.icon + '" title="' + item.thumbnail.title + '"></i>';
-            } else if (item.thumbnail.type === 'error') {
-                thumbnail = '<i class="' + item.thumbnail.icon + '" title="' + item.thumbnail.title + '" style="color: #dc3545;"></i>';
+            var thumb = item.thumbnail || {};
+
+            if (thumb.type === 'image') {
+                thumbnail = '<img src="' + qnEscape(thumb.src) + '" alt="' + qnEscape(thumb.alt) + '" loading="lazy">';
+            } else if (thumb.type === 'icon') {
+                thumbnail = '<i class="' + qnEscape(thumb.icon) + '" title="' + qnEscape(thumb.title) + '"></i>';
+            } else if (thumb.type === 'error') {
+                thumbnail = '<i class="' + qnEscape(thumb.icon) + '" title="' + qnEscape(thumb.title) + '" style="color: #dc3545;"></i>';
             }
-            
-            var detailUrl = '';
-            if (item.actions.edit) {
-                detailUrl = item.actions.edit.url;
-            }
-            
-            if (item.actions.select) {
-                // Widget-Modus: Buttons untereinander anzeigen
-                html += '<div class="qn-live-search-item">' +
-                           '<div class="qn-live-search-item-content">' +
-                               '<div class="qn-live-search-thumb">' + thumbnail + '</div>' +
-                               '<div class="qn-live-search-info">' +
-                                   '<div class="qn-live-search-title">' + item.title + '</div>' +
-                                   '<div class="qn-live-search-filename">' + item.filename + '</div>' +
-                                   '<div class="qn-live-search-meta">' + item.size + ' • ' + item.updatedate + '</div>' +
-                               '</div>' +
-                           '</div>' +
-                           '<div class="qn-live-search-actions">';
-                
-                // Übernehmen-Button
-                html += '<button type="button" class="btn btn-xs btn-select" onclick="';
-                
-                if (item.actions.select.type === 'media') {
-                    html += 'selectMedia(\'' + item.actions.select.filename + '\', \'' + item.actions.select.title + '\'); $(this).closest(\'.qn-media-live-search-results\').hide(); return false;';
-                } else if (item.actions.select.type === 'medialist') {
-                    html += 'selectMedialist(\'' + item.actions.select.filename + '\', this); $(this).closest(\'.qn-media-live-search-results\').hide(); return false;';
-                }
-                
-                html += '">' + item.actions.select.label + '</button>';
-                
-                // Details-Button
-                if (detailUrl) {
-                    html += '<a href="' + detailUrl + '" class="btn btn-xs btn-default">Details</a>';
-                }
-                
-                html += '</div></div>';
-                
+
+            var detailUrl = item.actions && item.actions.edit ? item.actions.edit.url : '';
+            var content = '<div class="qn-live-search-item-content">' +
+                    '<div class="qn-live-search-thumb">' + thumbnail + '</div>' +
+                    '<div class="qn-live-search-info">' +
+                        '<div class="qn-live-search-title">' + qnEscape(item.title) + '</div>' +
+                        '<div class="qn-live-search-filename">' + qnEscape(item.filename) + '</div>' +
+                        '<div class="qn-live-search-meta">' + qnEscape(item.size) + ' • ' + qnEscape(item.updatedate) + '</div>' +
+                    '</div>' +
+                '</div>';
+
+            if (item.actions && item.actions.select) {
+                // Widget-Modus: Übernehmen + Details; Auswahl über data-Attribute (kein Inline-JavaScript)
+                var select = item.actions.select;
+                html += '<div class="qn-live-search-item">' + content +
+                    '<div class="qn-live-search-actions">' +
+                        '<button type="button" class="btn btn-xs btn-select qn-media-select"' +
+                            ' data-type="' + qnEscape(select.type) + '"' +
+                            ' data-filename="' + qnEscape(select.filename) + '"' +
+                            ' data-title="' + qnEscape(select.title) + '">' + qnEscape(select.label) + '</button>' +
+                        (detailUrl ? '<a href="' + qnEscape(detailUrl) + '" class="btn btn-xs btn-default">Details</a>' : '') +
+                    '</div></div>';
             } else if (detailUrl) {
                 // Normaler Modus: Komplettes Element als Link zur Detailansicht
-                html += '<a href="' + detailUrl + '" class="qn-live-search-item" style="color: inherit; text-decoration: none;">' +
-                           '<div class="qn-live-search-item-content">' +
-                               '<div class="qn-live-search-thumb">' + thumbnail + '</div>' +
-                               '<div class="qn-live-search-info">' +
-                                   '<div class="qn-live-search-title">' + item.title + '</div>' +
-                                   '<div class="qn-live-search-filename">' + item.filename + '</div>' +
-                                   '<div class="qn-live-search-meta">' + item.size + ' • ' + item.updatedate + '</div>' +
-                               '</div>' +
-                           '</div>' +
-                        '</a>';
+                html += '<a href="' + qnEscape(detailUrl) + '" class="qn-live-search-item" style="color: inherit; text-decoration: none;">' + content + '</a>';
             } else {
                 // Fallback ohne Link
-                html += '<div class="qn-live-search-item">' +
-                           '<div class="qn-live-search-item-content">' +
-                               '<div class="qn-live-search-thumb">' + thumbnail + '</div>' +
-                               '<div class="qn-live-search-info">' +
-                                   '<div class="qn-live-search-title">' + item.title + '</div>' +
-                                   '<div class="qn-live-search-filename">' + item.filename + '</div>' +
-                                   '<div class="qn-live-search-meta">' + item.size + ' • ' + item.updatedate + '</div>' +
-                               '</div>' +
-                           '</div>' +
-                        '</div>';
+                html += '<div class="qn-live-search-item">' + content + '</div>';
             }
         });
-        
+
         container.html(html).show();
     }
+
+    // Übernehmen-Knopf (Medien-Widget): Core-Funktionen selectMedia / selectMedialist des Medienpools
+    $(document).off('click.quicknavselect').on('click.quicknavselect', '.qn-media-select', function (e) {
+        e.preventDefault();
+        var btn = $(this);
+        if (btn.attr('data-type') === 'medialist' && typeof window.selectMedialist === 'function') {
+            window.selectMedialist(String(btn.attr('data-filename')), this);
+        } else if (typeof window.selectMedia === 'function') {
+            window.selectMedia(String(btn.attr('data-filename')), String(btn.attr('data-title')));
+        }
+        btn.closest('.qn-media-live-search-results').hide();
+    });

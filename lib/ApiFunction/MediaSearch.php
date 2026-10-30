@@ -18,9 +18,6 @@ class MediaSearch extends rex_api_function
 {
     public function execute()
     {
-        // Debug-Logging
-        error_log('MediaSearch API called');
-
         // Content-Type vor jeder Ausgabe setzen
         if (!headers_sent()) {
             header('Content-Type: application/json; charset=utf-8');
@@ -56,9 +53,6 @@ class MediaSearch extends rex_api_function
         }
 
         try {
-            // Debug: Log search parameters
-            error_log('MediaSearch API: term=' . $searchTerm . ', category=' . $categoryId);
-
             // Medien suchen - korrigierter Filter
             $where = [];
 
@@ -76,20 +70,14 @@ class MediaSearch extends rex_api_function
             // Types-Filter (falls vorhanden)
             if (!empty($types)) {
                 $typeArray = explode(',', $types);
-                $typePlaceholders = str_repeat('?,', count($typeArray) - 1) . '?';
                 $where[] = 'm.filename REGEXP ?';
                 $params[] = '\.(' . implode('|', array_map('preg_quote', $typeArray)) . ')$';
             }
 
             // SQL Query aufbauen
             $sql = rex_sql::factory();
-            $query = 'SELECT m.* FROM ' . rex::getTable('media') . ' m';
-            if (!empty($where)) {
-                $query .= ' WHERE ' . implode(' AND ', $where);
-            }
+            $query = 'SELECT m.* FROM ' . rex::getTable('media') . ' m WHERE ' . implode(' AND ', $where);
             $query .= ' ORDER BY m.updatedate DESC LIMIT 10';
-
-            error_log('MediaSearch SQL: ' . $query . ' | Params: ' . json_encode($params));
 
             $sql->setQuery($query, $params);
 
@@ -142,32 +130,13 @@ class MediaSearch extends rex_api_function
     {
         $ext = strtolower($media->getExtension());
 
-        // SVG: read file and return inline SVG markup (sanitized) so MediaManager effects are not used
+        // SVG als Bild einbinden (<img> führt keine Skripte im SVG aus) – kein Inline-Markup, keine MediaManager-Effekte
         if ($ext === 'svg') {
-            try {
-                $filePath = \rex_path::media($media->getFileName());
-                if (is_file($filePath) && is_readable($filePath)) {
-                    $svg = (string) @file_get_contents($filePath);
-                    if ($svg !== '') {
-                        // Basic sanitization: remove <script> tags and on* attributes to avoid JS execution
-                        $svg = preg_replace('#<\s*script[^>]*>.*?<\s*/\s*script\s*>#is', '', $svg);
-                        // remove javascript: URIs
-                        $svg = preg_replace_callback('#(<[^>]+>)#', function ($m) {
-                            return preg_replace('#\s(on[a-z]+)\s*=\s*("[^"]*"|' . "'[^']*'" . ')#i', '', $m[1]);
-                        }, $svg);
-                        // strip xml prolog
-                        $svg = preg_replace('/^\s*<\?xml[^>]+>\s*/i', '', $svg);
-
-                        return [
-                            'type' => 'svg',
-                            'svg' => $svg,
-                            'alt' => $media->getTitle() ?: $media->getFilename(),
-                        ];
-                    }
-                }
-            } catch (Exception $e) {
-                // fall through to icon
-            }
+            return [
+                'type' => 'image',
+                'src' => rex_url::media($media->getFileName()),
+                'alt' => $media->getTitle() ?: $media->getFilename(),
+            ];
         }
 
         $isImage = in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']);

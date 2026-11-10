@@ -61,9 +61,14 @@ wer das Kürzel tippt, sieht die Auswahl mitgehen. Eine Zahl findet den Artikel 
 
 ### Favoriten
 
-Jeder Benutzer hat eigene Favoriten – auf dem Server gespeichert, also in jedem Browser gleich. Gemerkt wird mit dem
-Stern an einem Treffer oder mit **⌘D / Strg+D**: Seiten, Artikel, Kategorien, Medien, Medienkategorien, YForm-Datensätze
-und Befehle wie „Neuer Datensatz: Projekte“. Der Befehl **„Aktuelle Seite merken“** (`>`) merkt die Seite, auf der man
+Jeder Benutzer hat eigene Favoriten – auf dem Server gespeichert, also in jedem Browser gleich.
+
+Der **Stern in der Kopfleiste** ist gefüllt, wenn die aktuelle Seite gemerkt ist. Ein Klick öffnet die Favoriten: oben
+„Diese Seite merken“ bzw. „Gemerkt – entfernen“, darunter die Favoriten zum Springen (× entfernt, ab acht mit Filter),
+unten „In der Palette durchsuchen“.
+
+In der Palette wird mit dem Stern an einem Treffer oder mit **⌘D / Strg+D** gemerkt: Seiten, Artikel, Kategorien, Medien, Medienkategorien, YForm-Datensätze
+und Befehle wie „Neuer Datensatz: Projekte“. Der Befehl **„Diese Seite merken“** (`>`) merkt die Seite, auf der man
 gerade ist – auch eine gefilterte YForm-Liste oder die Seite eines AddOns. Ohne Eingabe stehen die Favoriten ganz oben,
 `f:` zeigt nur sie; derselbe Stern entfernt sie wieder.
 
@@ -277,7 +282,7 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 
 ## Technik
 
-- Lupe, Strukturbaum und YForm-Tabellen als Knöpfe in der Kopfleiste des Backends – ohne Eingriff in den Core
+- Lupe, Favoriten, Strukturbaum und YForm-Tabellen als Knöpfe in der Kopfleiste des Backends – ohne Eingriff in den Core
 - `<dialog>` mit ARIA-Combobox und Listbox, Baum als ARIA-Tree, Ansagen für Screenreader, `prefers-reduced-motion`
 - Farben und Komponenten des Cores (Tokens, Select) – hell und dunkel ohne eigene Regeln
 - keine Inline-Styles und -Handler (Content-Security-Policy des Backends)

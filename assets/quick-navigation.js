@@ -441,17 +441,32 @@
 
     // ---------------------------------------------------------------------------------------------- Favoriten
 
-    const favoriteRequest = async (data) => {
+    // Stern in der Kopfleiste: gefüllt, wenn die aktuelle Seite gemerkt ist
+    const starTrigger = document.querySelector('.qn-fav-trigger');
+    const setStar = (on) => {
+        if (!starTrigger) {
+            return;
+        }
+        starTrigger.classList.toggle('is-on', on);
+        starTrigger.querySelector('.rex-icon').className = 'rex-icon fa-' + (on ? 'solid' : 'regular') + ' fa-star';
+    };
+
+    /** Favorit umschalten (mit url) bzw. nur die Liste holen – Antwort {favorite, current, favorites} */
+    const favoriteCall = async (data = {}) => {
         const body = new FormData();
-        for (const [k, v] of Object.entries(data)) {
+        for (const [k, v] of Object.entries({ ...data, current: location.href })) {
             body.append(k, v ?? '');
         }
         const res = await fetch(cfg.favoriteUrl, { method: 'POST', body, credentials: 'same-origin', headers: { Accept: 'application/json' } });
         if (!res.ok) {
             throw new Error(String(res.status));
         }
-        return (await res.json()).favorite;
+        const json = await res.json();
+        setStar(json.current);
+        document.dispatchEvent(new CustomEvent('qn:favorites', { detail: json }));
+        return json;
     };
+    const favoriteRequest = async (data) => (await favoriteCall(data)).favorite;
 
     const toggleFavorite = async (entry) => {
         if (!entry?.star) {
@@ -1037,6 +1052,119 @@
         search.addEventListener('click', () => {
             panel.hidePopover();
             document.dispatchEvent(new CustomEvent('qn:search', { detail: 'y: ' }));
+        });
+    }
+
+    // ======================================================================================== Favoriten (Stern)
+
+    if (starTrigger) {
+        initFavorites(starTrigger);
+    }
+
+    function initFavorites(button) {
+        const pageTitle = () => (document.querySelector('.rex-pageheader-title')?.textContent || document.title.split(' · ')[0] || '').trim();
+        const pageMeta = () => [...document.querySelectorAll('#rex-js-nav-main a[aria-current="page"]')]
+            .map((a) => a.textContent.trim()).filter((text) => text && text !== pageTitle()).join(' › ');
+
+        const toggleLabel = el('span', { class: 'qn-fav-page-label' });
+        const toggleTitle = el('span', { class: 'qn-fav-page-title' });
+        const toggle = el('button', { type: 'button', class: 'qn-fav-page' }, el('i', { class: 'rex-icon fa-regular fa-star', 'aria-hidden': 'true' }), el('span', { class: 'qn-fav-page-text' }, toggleLabel, toggleTitle));
+        const filter = el('input', { type: 'search', class: 'qn-tree-input', placeholder: t.favoritesFilter, 'aria-label': t.favoritesFilter, autocomplete: 'off', spellcheck: 'false' });
+        const filterRow = el('div', { class: 'qn-tree-search', hidden: true }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), filter);
+        const list = el('ul', { class: 'qn-yform-list qn-fav-list', 'aria-label': t.favorites });
+        const all = el('button', { type: 'button', class: 'qn-yform-search' }, icon('rex-icon rex-icon-search'), ' ' + t.favoritesAll + ' ', el('kbd', { text: 'f:' }));
+
+        const panel = el('div', { id: 'qn-favorites', class: 'qn-tree-panel qn-yform-panel', popover: 'auto' },
+            el('div', { class: 'qn-fav-head' }, toggle),
+            filterRow,
+            el('div', { class: 'qn-tree-scroll' }, list),
+            el('div', { class: 'qn-yform-foot' }, all),
+        );
+        document.body.append(panel);
+        button.popoverTargetElement = panel;
+
+        const renderToggle = (on) => {
+            toggle.classList.toggle('is-on', on);
+            toggle.setAttribute('aria-pressed', String(on));
+            toggle.querySelector('.rex-icon').className = 'rex-icon fa-' + (on ? 'solid' : 'regular') + ' fa-star';
+            toggleLabel.textContent = on ? t.favoritePageOn : t.favoritePage;
+            toggleTitle.textContent = pageTitle();
+        };
+
+        const renderList = (favorites) => {
+            list.replaceChildren(...favorites.map((f) => el('li', { class: 'qn-yform-row', 'data-label': (f.title + ' ' + (f.meta || '')).toLowerCase() },
+                el('a', { class: 'qn-yform-link', href: f.url }, icon(f.icon || 'rex-icon fa-solid fa-star'),
+                    el('span', { class: 'qn-fav-text' }, el('span', { text: f.title }), f.meta ? el('small', { text: f.meta }) : null)),
+                el('button', { type: 'button', class: 'qn-action qn-fav-remove', 'data-url': f.url, title: t.favoriteRemove, 'aria-label': t.favoriteRemove + ': ' + f.title }, icon('rex-icon fa-solid fa-xmark')),
+            )));
+            if (!favorites.length) {
+                list.append(el('li', { class: 'qn-tree-empty', text: t.favoritesEmpty }));
+            }
+            filterRow.hidden = favorites.length < 8;
+        };
+
+        const apply = (data) => {
+            renderToggle(data.current);
+            renderList(data.favorites || []);
+        };
+        document.addEventListener('qn:favorites', (e) => apply(e.detail));
+
+        const place = () => {
+            const r = button.getBoundingClientRect();
+            const width = Math.min(340, window.innerWidth - 16);
+            const left = Math.max(8, Math.min(r.right - width, window.innerWidth - width - 8));
+            // CSSOM, kein style-Attribut im Markup (CSP)
+            panel.style.top = Math.round(r.bottom + 8) + 'px';
+            panel.style.left = Math.round(left) + 'px';
+            panel.style.width = width + 'px';
+        };
+
+        panel.addEventListener('beforetoggle', (e) => {
+            if (e.newState === 'open') {
+                place();
+                filter.value = '';
+                renderToggle(button.classList.contains('is-on'));
+                favoriteCall().catch(() => {});
+            }
+        });
+        panel.addEventListener('toggle', (e) => {
+            button.setAttribute('aria-expanded', String(e.newState === 'open'));
+            if (e.newState === 'open') {
+                toggle.focus();
+            }
+        });
+        window.addEventListener('resize', () => panel.matches(':popover-open') && place());
+
+        toggle.addEventListener('click', () => {
+            favoriteCall({ url: location.href, title: pageTitle(), meta: pageMeta(), icon: 'rex-icon fa-solid fa-star' }).catch(() => {});
+        });
+        list.addEventListener('click', (e) => {
+            const remove = e.target.closest('.qn-fav-remove');
+            if (remove) {
+                e.preventDefault();
+                favoriteCall({ url: remove.dataset.url, title: '-' }).catch(() => {});
+            }
+        });
+        filter.addEventListener('input', () => {
+            const q = filter.value.trim().toLowerCase();
+            list.querySelectorAll('.qn-yform-row').forEach((r) => { r.hidden = q !== '' && !r.dataset.label.includes(q); });
+        });
+        // ↑ ↓ zwischen „Diese Seite merken“, Filter, Favoriten und „In der Palette“
+        panel.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') {
+                return;
+            }
+            const items = [toggle, ...(filterRow.hidden ? [] : [filter]), ...list.querySelectorAll('.qn-yform-row:not([hidden]) .qn-yform-link'), all];
+            const i = items.indexOf(document.activeElement);
+            const next = items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length];
+            if (next) {
+                e.preventDefault();
+                next.focus();
+            }
+        });
+        all.addEventListener('click', () => {
+            panel.hidePopover();
+            document.dispatchEvent(new CustomEvent('qn:search', { detail: 'f: ' }));
         });
     }
 })();

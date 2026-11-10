@@ -17,6 +17,7 @@
 
 /* zwei Symbol-Knöpfe: Suche (Palette, ⌘K) und Strukturbaum */
 .qn-trigger,
+.qn-fav-trigger,
 .qn-tree-trigger,
 .qn-yform-trigger {
     display: inline-grid;
@@ -60,6 +61,7 @@
     }
 
     .qn-trigger,
+    .qn-fav-trigger,
     .qn-tree-trigger,
     .qn-yform-trigger {
         inline-size: 40px;
@@ -1253,4 +1255,85 @@
     @media (hover: none) {
         opacity: 1;
     }
+}
+
+/* Favoriten: Stern-Knopf in der Kopfleiste und Panel */
+.qn-fav-trigger.is-on .rex-icon {
+    color: var(--rex-color-warning);
+}
+
+.qn-fav-head {
+    padding: 6px;
+    border-bottom: 1px solid var(--rex-color-border);
+    background: var(--rex-color-surface-muted);
+}
+
+.qn-fav-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    inline-size: 100%;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 2px;
+    background: none;
+    color: var(--rex-color-text);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+
+    > .rex-icon {
+        flex: none;
+        font-size: 16px;
+        color: var(--rex-color-text-muted);
+    }
+
+    &.is-on > .rex-icon {
+        color: var(--rex-color-warning);
+    }
+
+    &:hover,
+    &:focus-visible {
+        background: var(--rex-color-surface-strong);
+        outline: none;
+    }
+}
+
+.qn-fav-page-text,
+.qn-fav-text {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+
+    > * {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.qn-fav-page-label {
+    font-weight: 600;
+}
+
+.qn-fav-page-title,
+.qn-fav-text small {
+    color: var(--rex-color-text-muted);
+    font-size: var(--rex-font-size-small);
+}
+
+.qn-fav-remove {
+    opacity: 0;
+
+    .qn-yform-row:is(:hover, :focus-within) & {
+        opacity: 1;
+    }
+
+    @media (hover: none) {
+        opacity: 1;
+    }
+}
+
+.qn-tree-search[hidden] {
+    display: none;
 }

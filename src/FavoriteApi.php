@@ -10,7 +10,17 @@ use Redaxo\Core\Core;
 use Redaxo\Core\Http\Request;
 use Redaxo\Core\Http\Response;
 
-/** Favorit umschalten (POST url, title, meta, icon) – Antwort {favorite: bool} */
+use function array_column;
+use function array_reverse;
+use function in_array;
+
+/**
+ * Favoriten (POST):
+ *  - mit `url`, `title`, `meta`, `icon`: Favorit umschalten
+ *  - mit `current`: nur die Liste, dazu ob diese Adresse (die Seite des Stern-Knopfs) ein Favorit ist
+ *
+ * Antwort {favorite: bool, current: bool, favorites: [{url, title, meta, icon}]} – neueste zuerst.
+ */
 #[AsApiFunction('quick_navigation_favorite')]
 final class FavoriteApi extends ApiFunction
 {
@@ -18,16 +28,26 @@ final class FavoriteApi extends ApiFunction
     public function execute(): Result
     {
         $user = Core::requireUser();
-        $favorite = Favorites::toggle(
-            $user,
-            Request::post('url', 'string', ''),
-            Request::post('title', 'string', ''),
-            Request::post('meta', 'string', '') ?: null,
-            Request::post('icon', 'string', '') ?: null,
-        );
+        $url = Request::post('url', 'string', '');
+        $favorite = false;
+        if ('' !== $url) {
+            $favorite = Favorites::toggle(
+                $user,
+                $url,
+                Request::post('title', 'string', ''),
+                Request::post('meta', 'string', '') ?: null,
+                Request::post('icon', 'string', '') ?: null,
+            );
+        }
+        $current = Favorites::normalize(Request::post('current', 'string', ''));
+        $favorites = array_reverse(Favorites::all($user));
 
         Response::cleanOutputBuffers();
-        Response::sendJson(['favorite' => $favorite]);
+        Response::sendJson([
+            'favorite' => $favorite,
+            'current' => null !== $current && in_array($current, array_column($favorites, 'url'), true),
+            'favorites' => $favorites,
+        ]);
         exit;
     }
 }

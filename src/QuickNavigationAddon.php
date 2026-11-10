@@ -8,6 +8,7 @@ use Redaxo\Core\Core;
 use Redaxo\Core\ExtensionPoint\Extension;
 use Redaxo\Core\ExtensionPoint\ExtensionPoint;
 use Redaxo\Core\Filesystem\Url;
+use Redaxo\Core\Http\Request;
 use Redaxo\Core\Translation\I18n;
 use Redaxo\Core\View\Asset;
 
@@ -137,13 +138,30 @@ final class QuickNavigationAddon extends Addon
                 . '</button>';
         }
 
+        // Favoriten: Stern-Knopf – gefüllt, wenn die aktuelle Seite gemerkt ist
+        $current = Favorites::normalize('index.php?' . Request::server('QUERY_STRING', 'string', ''));
+        $isFavorite = null !== $current && isset(Favorites::urls($user)[$current]);
+        $config['i18n'] += [
+            'favorites' => I18n::msg('quick_navigation_group_favorites'),
+            'favoritePage' => I18n::msg('quick_navigation_cmd_favorite'),
+            'favoritePageOn' => I18n::msg('quick_navigation_favorite_page_on'),
+            'favoritesEmpty' => I18n::msg('quick_navigation_favorites_empty'),
+            'favoritesAll' => I18n::msg('quick_navigation_favorites_all'),
+            'favoritesFilter' => I18n::msg('quick_navigation_favorites_filter'),
+        ];
+        $star = '<button type="button" class="qn-fav-trigger' . ($isFavorite ? ' is-on' : '') . '" aria-haspopup="true" aria-expanded="false" aria-controls="qn-favorites"'
+            . ' title="' . escape(I18n::msg('quick_navigation_group_favorites')) . '">'
+            . '<i class="rex-icon fa-' . ($isFavorite ? 'solid' : 'regular') . ' fa-star" aria-hidden="true"></i>'
+            . '<span class="rex-u-visually-hidden">' . escape(I18n::msg('quick_navigation_group_favorites')) . '</span>'
+            . '</button>';
+
         $label = I18n::msg('quick_navigation_label');
 
         return '<div class="qn-slot"><button type="button" class="qn-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"'
             . ' title="' . escape($label) . '" data-quick-navigation="' . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '">'
             . '<i class="rex-icon rex-icon-search" aria-hidden="true"></i>'
             . '<span class="rex-u-visually-hidden">' . escape($label) . '</span>'
-            . '</button>' . $tree . $yform . '</div>';
+            . '</button>' . $star . $tree . $yform . '</div>';
     }
 
     /** Adresse einer Datei aus assets/ mit Version gegen veraltete Caches */

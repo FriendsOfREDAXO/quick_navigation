@@ -20,3 +20,4 @@ Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für R
 - Unveröffentlicht (w:): Seiten mit abweichender Arbeitsversion, ohne Eingabe gleich in der Palette
 - Palette: Auswahl der Quelle neben dem Suchfeld (Dropdown des Cores, Kürzel klein daneben) statt Kürzel-Chips im Fuß
 - Favoriten je Benutzer (Stern, ⌘D, „Aktuelle Seite merken“, f:), Medienkategorien in der Suche, Favoriten ganz oben
+- Favoriten-Stern in der Kopfleiste: gefüllt bei gemerkter Seite, Panel mit „Diese Seite merken“ und den Favoriten

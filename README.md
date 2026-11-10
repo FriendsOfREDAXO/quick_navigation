@@ -1,40 +1,31 @@
 # Quick Navigation für REDAXO 6
 
-Eine Befehlspalette für das Backend: **⌘K** (Mac) bzw. **Strg+K** oder die Lupe in der Kopfleiste öffnet ein
-Suchfeld, das live über Backend-Seiten, Struktur, Medienpool und Benutzer sucht – immer nur über das, was der
-angemeldete Benutzer auch öffnen darf.
+Schnell überall hin im Backend: eine **Befehlspalette** mit Live-Suche über Seiten, Struktur, Medien und Benutzer, ein
+**Strukturbaum** mit Suche und eine **Live-Suche im Medienpool** – immer nur über das, was der angemeldete Benutzer auch
+öffnen darf. Andere AddOns erweitern die Suche um eigene Quellen und tragen ihre Domains ein.
 
-> Version 10 (Branch `redaxo-6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x für REDAXO 5.
+![Lupe und Strukturbaum in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
-## Strukturbaum
+> Version 10 (Branch `redaxo-6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x
+> für REDAXO 5.
 
-Der Knopf neben der Lupe öffnet die Struktur als Baum – aufgeklappt bis zum Artikel bzw. zur Kategorie, auf der man
-gerade ist. Unterebenen werden erst beim Aufklappen geladen. Klick auf eine Kategorie öffnet sie in der Struktur, auf
-einen Artikel dessen Inhalt; „Inhalt bearbeiten“ und „Ansehen“ erscheinen beim Überfahren. Bei mehreren Sprachen wird
-oben umgeschaltet. Wer nur Teile der Struktur darf, sieht seine Mountpoints.
+## Installation
 
-Das Suchfeld oben im Baum durchsucht die ganze Struktur (Name oder ID) und zeigt nur die Treffer mit ihren Kategorien,
-aufgeklappt; ↓ springt in den Baum, ↵ öffnet den ersten Treffer.
+```bash
+composer require friendsofredaxo/quick_navigation:10.x-dev
+php bin/console migrate
+```
 
-Tastatur: ↑ ↓, → aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), Buchstabe springt
-zum nächsten Eintrag mit diesem Anfang, esc schließt.
+## Befehlspalette
 
-## Medienpool
+**⌘K** (Mac) bzw. **Strg+K** – oder die Lupe in der Kopfleiste – öffnet die Palette. Ohne Eingabe zeigt sie die
+**zuletzt geöffneten** Treffer (im Browser gespeichert) und die **zuletzt bearbeiteten** Artikel; beim Tippen sucht sie
+live, gruppiert nach Quelle, die Fundstellen hervorgehoben.
 
-Der Medienpool läuft in REDAXO 6 als eigenes Fenster bzw. als Overlay beim Auswählen eines Mediums. Dort erweitert
-Quick Navigation das vorhandene Suchfeld:
-
-- **Live-Suche:** Treffer erscheinen beim Tippen unter dem Feld (Vorschaubild, Dateiname, Kategorie, Größe), ↑ ↓ wählen,
-  ↵ öffnet das Medium.
-- **Zuletzt bearbeitet:** ins leere Suchfeld klicken zeigt die zuletzt geänderten Medien.
-- **Auswählen:** im Auswahl-Modus eines Medienfelds hat jeder Treffer „übernehmen“, ↵ übernimmt direkt; die erlaubten
-  Dateitypen des Felds gelten auch hier.
-- **Sortierung:** der Knopf neben der Suche schaltet die Liste zwischen „neueste zuerst“, Dateiname und Titel um
-  (bleibt gespeichert).
-
-Es erscheinen nur Medien aus Kategorien, für die der Benutzer Rechte hat.
-
-## Bedienung
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-empty.png" width="49%" alt="Palette ohne Eingabe: zuletzt bearbeitet">
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette.png" width="49%" alt="Palette mit Treffern aus Seiten und Struktur">
+</p>
 
 | Taste | Wirkung |
 | --- | --- |
@@ -46,8 +37,7 @@ Es erscheinen nur Medien aus Kategorien, für die der Benutzer Rechte hat.
 | → / ← | Zusatzaktionen des Treffers (z. B. „In der Struktur zeigen“, „Ansehen“) |
 | esc | Eingabe leeren, dann schließen |
 
-Ohne Eingabe zeigt die Palette die **zuletzt geöffneten** Treffer (im Browser gespeichert) und die **zuletzt
-bearbeiteten** Artikel. Mit einem Kürzel sucht sie nur in einer Quelle:
+Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Artikel mit dieser ID.
 
 | Kürzel | Quelle |
 | --- | --- |
@@ -56,16 +46,53 @@ bearbeiteten** Artikel. Mit einem Kürzel sucht sie nur in einer Quelle:
 | `m:` | Medienpool – nach Titel und Dateiname, mit Vorschaubild |
 | `u:` | Benutzer (nur mit Recht auf die Benutzerverwaltung) |
 
-Eine Zahl findet den Artikel mit dieser ID.
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-media.png" width="49%" alt="Nur im Medienpool suchen mit m:">
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-dark.png" width="49%" alt="Palette im dunklen Design">
+</p>
+
+## Strukturbaum
+
+Der Knopf neben der Lupe öffnet die Struktur als Baum – aufgeklappt bis zum Artikel bzw. zur Kategorie, auf der man
+gerade ist. Unterebenen werden erst beim Aufklappen geladen. Ein Klick auf eine Kategorie öffnet sie in der Struktur,
+auf einen Artikel dessen Inhalt; „Inhalt bearbeiten“ und „Ansehen“ erscheinen beim Überfahren. Bei mehreren Sprachen
+wird oben umgeschaltet. Wer nur Teile der Struktur darf, sieht seine Mountpoints.
+
+Das Suchfeld oben im Baum durchsucht die ganze Struktur (Name oder ID) und zeigt nur die Treffer mit ihren Kategorien,
+aufgeklappt.
+
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-tree.png" width="40%" alt="Strukturbaum, aufgeklappt bis zur aktuellen Seite">
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-tree-search.png" width="40%" alt="Suche im Strukturbaum">
+</p>
+
+Tastatur: Das Suchfeld hat beim Öffnen den Fokus, ↓ springt in den Baum, ↵ öffnet den ersten Treffer. Im Baum: ↑ ↓,
+→ aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), ein Buchstabe springt zum
+nächsten Eintrag mit diesem Anfang, esc schließt.
+
+## Medienpool
+
+Der Medienpool läuft in REDAXO 6 als eigenes Fenster bzw. als Overlay beim Auswählen eines Mediums. Dort erweitert
+Quick Navigation das vorhandene Suchfeld:
+
+- **Live-Suche:** Treffer erscheinen beim Tippen unter dem Feld (Vorschaubild, Dateiname, Kategorie, Größe), ↑ ↓ wählen,
+  ↵ öffnet das Medium.
+- **Zuletzt bearbeitet:** ein Klick ins leere Suchfeld zeigt die zuletzt geänderten Medien.
+- **Auswählen:** im Auswahl-Modus eines Medienfelds hat jeder Treffer „übernehmen“, ↵ übernimmt direkt; die erlaubten
+  Dateitypen des Felds gelten auch hier.
+- **Sortierung:** der Knopf neben der Suche schaltet die Liste zwischen „neueste zuerst“, Dateiname und Titel um
+  (bleibt gespeichert).
+
+![Live-Suche im Medienpool beim Auswählen eines Bildes](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-mediapool.png)
 
 ## Rechte
 
-Die Suche läuft über eine API-Funktion (nur lesend, mit CSRF-Token). Jede Quelle prüft selbst:
+Die Suche läuft über API-Funktionen (nur lesend, mit CSRF-Token). Jede Quelle prüft selbst:
 
-- **Seiten**: `Page::checkPermission()` – wie die Navigation; versteckte Seiten und Popups bleiben draußen
-- **Struktur**: Kategorie-Rechte (`StructurePermission`) und Sprach-Rechte
-- **Medien**: Medienpool-Rechte je Kategorie (`MediaPoolPermission`)
-- **Benutzer**: Recht `users[]`; Administratoren sehen nur Administratoren
+- **Seiten:** `Page::checkPermission()` – wie die Navigation; versteckte Seiten und Popups bleiben draußen
+- **Struktur und Baum:** Kategorie-Rechte (`StructurePermission`, Mountpoints) und Sprach-Rechte
+- **Medien:** Medienpool-Rechte je Kategorie (`MediaPoolPermission`)
+- **Benutzer:** Recht `users[]`; Administratoren sehen nur Administratoren
 
 ## Eigene Quellen
 
@@ -118,8 +145,10 @@ final class NewsProvider implements Provider
 - `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Struktur 90, Medien 80, Benutzer 50),
   ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`.
 - `Query` – `term`, `words`, `user`, `limit`, `scoped` (per Kürzel gewählt), `isEmpty()`, `isId()`, `like()` (fertiges
-  Muster für SQL `LIKE`) und `score()` für die Reihenfolge (gleich > beginnt mit > Wortanfang > enthalten, 0 = passt nicht).
-- `Item` – Titel, Adresse, zweite Zeile, Icon oder Vorschaubild, Badge, Zusatzaktionen; `score` sortiert innerhalb der Gruppe.
+  Muster für SQL `LIKE`) und `score()` für die Reihenfolge (gleich > beginnt mit > Wortanfang > enthalten, 0 = passt
+  nicht).
+- `Item` – Titel, Adresse, zweite Zeile, Icon oder Vorschaubild, Badge, Zusatzaktionen; `score` sortiert innerhalb der
+  Gruppe.
 - Bei leerer Eingabe darf eine Quelle Vorschläge liefern (z. B. „zuletzt bearbeitet“) oder nichts.
 
 Ohne Attribut, etwa abhängig von der Konfiguration, im `boot()` des eigenen AddOns:
@@ -135,9 +164,14 @@ Wirft eine Quelle eine Exception, fehlt nur ihre Gruppe (im Entwicklungsmodus wi
 
 Quick Navigation kennt selbst keine Domains – AddOns, die welche verwalten (fluid, yrewrite …), tragen sie über den
 Extension Point `QuickNavigationDomains` ein. Ab zwei Domains zeigt der Strukturbaum oben eine Auswahl (vorgewählt ist
-die Domain der aktuellen Seite, dazu „Alle Domains“): der Baum beginnt dann in der Einstiegskategorie der Domain, die
+die Domain der aktuellen Seite, dazu „Alle Domains“): Der Baum beginnt dann in der Einstiegskategorie der Domain, die
 Einstiegskategorien der anderen Domains sind ausgeblendet, und die Suche im Baum bleibt in der Domain. In der Palette
 tragen Artikel und Kategorien die Domain als Badge.
+
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-tree-domains.png" width="40%" alt="Domain-Auswahl im Strukturbaum">
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-domains.png" width="58%" alt="Domain als Badge in der Palette">
+</p>
 
 Eine Domain hat einen Schlüssel, einen Namen, ihre Einstiegskategorie (`0` = ganze Struktur) und die Adresse. Die
 Anmeldung schadet nicht, wenn Quick Navigation fehlt – `::class` lädt keine Klasse, die Closure läuft nur, wenn der
@@ -165,9 +199,9 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 
 ## Technik
 
-- Suchknopf in der Kopfleiste des Backends, auf schmalen Bildschirmen als Lupe
-- `<dialog>` mit ARIA-Combobox und Listbox, Ansagen für Screenreader, `prefers-reduced-motion`
-- Farben aus den Tokens des Cores – hell und dunkel ohne eigene Regeln
+- Lupe und Strukturbaum als Knöpfe in der Kopfleiste des Backends – ohne Eingriff in den Core
+- `<dialog>` mit ARIA-Combobox und Listbox, Baum als ARIA-Tree, Ansagen für Screenreader, `prefers-reduced-motion`
+- Farben und Komponenten des Cores (Tokens, Select) – hell und dunkel ohne eigene Regeln
 - keine Inline-Styles und -Handler (Content-Security-Policy des Backends)
 
 ## Lizenz

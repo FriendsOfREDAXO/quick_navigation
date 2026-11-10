@@ -1147,3 +1147,10 @@
         outline: none;
     }
 }
+
+/* Aktionen auf der blauen Zeile der aktuellen Seite im Baum */
+.qn-node.is-current .qn-action:is(:hover, :focus-visible) {
+    background: color-mix(in srgb, var(--rex-color-on-accent) 22%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rex-color-on-accent) 70%, transparent);
+    color: var(--rex-color-on-accent);
+}

@@ -1,7 +1,7 @@
 # Quick Navigation für REDAXO 6
 
 Schnell überall hin im Backend: eine **Befehlspalette** mit Live-Suche über Seiten, Struktur, Medien, YForm-Datensätze
-und Benutzer, ein **Strukturbaum** mit Suche, **YForm-Tabellen** mit „+“ für neue Datensätze und eine **Live-Suche im
+und Benutzer und mit **Befehlen** (`>`), ein **Strukturbaum** mit Suche, **YForm-Tabellen** mit „+“ für neue Datensätze und eine **Live-Suche im
 Medienpool** – immer nur über das, was der angemeldete Benutzer auch öffnen darf. Andere AddOns erweitern die Suche um eigene Quellen und tragen ihre Domains ein.
 
 ![Lupe, Strukturbaum und YForm-Tabellen in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
@@ -62,6 +62,10 @@ ausführen darf:
 - Medium hochladen
 - Neuer Datensatz für jede YForm-Tabelle mit Bearbeitungsrecht
 - nur Admins: Tabellenstruktur bearbeiten (YForm-Designer), neuer Benutzer, Cache löschen
+
+Befehle landen nicht unter „Zuletzt geöffnet“.
+
+![Befehle in der Palette](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-commands.png)
 
 Weitere Befehle trägt ein AddOn über den Extension Point `QuickNavigationCommands` ein (Liste von `Item`, Rechte über
 `$ep->query->user`):
@@ -135,6 +139,8 @@ Die Suche läuft über API-Funktionen (nur lesend, mit CSRF-Token). Jede Quelle 
 - **Medien:** Medienpool-Rechte je Kategorie (`MediaPoolPermission`)
 - **YForm:** Lese- bzw. Bearbeitungsrecht je Tabelle (`Access::canView()`/`canEdit()`); „+“ nur mit Bearbeitungsrecht
 - **Benutzer:** Recht `users[]`; Administratoren sehen nur Administratoren
+- **Befehle:** je Befehl das passende Recht (Anlegen in der Kategorie, Medienpool, YForm-Bearbeitung); Designer, neuer
+  Benutzer und Cache löschen nur für Admins
 
 ## Eigene Quellen
 
@@ -184,8 +190,8 @@ final class NewsProvider implements Provider
 }
 ```
 
-- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Struktur 90, Medien 80, YForm 60,
-  Benutzer 50),
+- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Befehle 95, Struktur 90, Medien 80,
+  YForm 60, Benutzer 50),
   ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`.
 - `Query` – `term`, `words`, `user`, `limit`, `scoped` (per Kürzel gewählt), `isEmpty()`, `isId()`, `like()` (fertiges
   Muster für SQL `LIKE`) und `score()` für die Reihenfolge (gleich > beginnt mit > Wortanfang > enthalten, 0 = passt

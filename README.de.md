@@ -10,7 +10,9 @@ mit „+“ für neue Datensätze und eine **Live-Suche im Medienpool** – imme
 ![Lupe, Favoriten, Strukturbaum und YForm-Tabellen in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
 > Version 10 (Branch `main`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x
-> für REDAXO 5 – die steht im Branch [`redaxo-5.x`](https://github.com/FriendsOfREDAXO/quick_navigation/tree/redaxo-5.x).
+> für REDAXO 5. **Quick Navigation für REDAXO 5 wird weiter gepflegt** – im Branch
+> [`redaxo-5.x`](https://github.com/FriendsOfREDAXO/quick_navigation/tree/redaxo-5.x); Updates kommen wie gewohnt über den
+> Installer.
 
 ## Installation
 

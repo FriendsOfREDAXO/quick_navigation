@@ -10,7 +10,9 @@ open. Other addons add their own search sources and register their domains.
 ![Search, favorites, structure tree and YForm tables in the top bar](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
 > Version 10 (branch `main`) is a rewrite for REDAXO 6 and not compatible with Quick Navigation 9.x for
-> REDAXO 5 – that one lives in the branch [`redaxo-5.x`](https://github.com/FriendsOfREDAXO/quick_navigation/tree/redaxo-5.x). The screenshots show the German backend.
+> REDAXO 5. **Quick Navigation for REDAXO 5 is still maintained** – in the branch
+> [`redaxo-5.x`](https://github.com/FriendsOfREDAXO/quick_navigation/tree/redaxo-5.x); updates arrive through the
+> installer as usual. The screenshots show the German backend.
 
 ## Installation
 

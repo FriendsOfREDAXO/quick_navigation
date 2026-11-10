@@ -158,6 +158,7 @@
                 hint(['↑', '↓', '↵'], t.open),
                 hint([mod + '↵'], t.newTab),
                 hint(['→'], t.actions),
+                hint([mod + 'D'], t.favorite),
                 hint(['esc'], t.close),
             ),
         );
@@ -232,6 +233,11 @@
                 return;
             }
             const entry = entries[Number(row.dataset.index)];
+            if (link.getAttribute('href') === '#qn-favorite-page') {
+                e.preventDefault();
+                favoriteCurrentPage();
+                return;
+            }
             if (entry && link.classList.contains('qn-item')) {
                 recentSave(entry.item);
             }
@@ -296,12 +302,28 @@
                     rel: a.external ? 'noopener noreferrer' : null,
                 }, icon(a.icon)));
 
+                // Stern: Favorit an/aus (⌘D)
+                const star = item.favoritable ? el('button', {
+                    type: 'button',
+                    class: 'qn-fav' + (item.favorite ? ' is-on' : ''),
+                    tabindex: '-1',
+                    'aria-pressed': String(!!item.favorite),
+                    title: (item.favorite ? t.favoriteRemove : t.favoriteAdd) + ' (' + mod + 'D)',
+                    'aria-label': item.favorite ? t.favoriteRemove : t.favoriteAdd,
+                }, icon('rex-icon fa-' + (item.favorite ? 'solid' : 'regular') + ' fa-star')) : null;
+
                 const row = el('div', { class: 'qn-row', role: 'none', 'data-index': index },
                     main,
                     actions.length ? el('span', { class: 'qn-actions', role: 'none' }, ...actions) : null,
+                    star,
                 );
                 box.append(row);
-                entries.push({ item, el: main, row, actions });
+                const entry = { item, el: main, row, actions, star, group: group.key };
+                star?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleFavorite(entry);
+                });
+                entries.push(entry);
             }
             list.append(box);
         });
@@ -399,7 +421,10 @@
             if (mine !== seq) {
                 return;
             }
-            render([...recentGroup(query), ...data.groups], query, data.scope);
+            // Favoriten ganz oben, dann der eigene Verlauf, dann die übrigen Quellen
+            const favorites = data.groups.filter((g) => g.key === 'favorites');
+            const others = data.groups.filter((g) => g.key !== 'favorites');
+            render([...favorites, ...recentGroup(query), ...others], query, data.scope);
         } catch (e) {
             if (e.name === 'AbortError' || mine !== seq) {
                 return;
@@ -414,6 +439,58 @@
         }
     };
 
+    // ---------------------------------------------------------------------------------------------- Favoriten
+
+    const favoriteRequest = async (data) => {
+        const body = new FormData();
+        for (const [k, v] of Object.entries(data)) {
+            body.append(k, v ?? '');
+        }
+        const res = await fetch(cfg.favoriteUrl, { method: 'POST', body, credentials: 'same-origin', headers: { Accept: 'application/json' } });
+        if (!res.ok) {
+            throw new Error(String(res.status));
+        }
+        return (await res.json()).favorite;
+    };
+
+    const toggleFavorite = async (entry) => {
+        if (!entry?.star) {
+            return;
+        }
+        const { item } = entry;
+        try {
+            const on = await favoriteRequest({ url: item.url, title: item.title, meta: item.meta, icon: item.icon });
+            item.favorite = on;
+            entry.star.classList.toggle('is-on', on);
+            entry.star.setAttribute('aria-pressed', String(on));
+            entry.star.title = (on ? t.favoriteRemove : t.favoriteAdd) + ' (' + mod + 'D)';
+            entry.star.replaceChildren(icon('rex-icon fa-' + (on ? 'solid' : 'regular') + ' fa-star'));
+            live.textContent = (on ? t.favoriteAdded : t.favoriteRemoved).replace('{0}', item.title);
+            // Liste der Favoriten aktuell halten
+            if (entry.group === 'favorites' || !input.value.trim()) {
+                schedule(0);
+            }
+        } catch {
+            live.textContent = t.error;
+        }
+    };
+
+    // Befehl „Aktuelle Seite merken“: die Seite, auf der die Palette geöffnet wurde
+    const favoriteCurrentPage = async () => {
+        const title = (document.querySelector('.rex-pageheader-title')?.textContent || document.title.split(' · ')[0] || '').trim();
+        // Bereich aus der Hauptnavigation, dazu der aktive Reiter der Seite (falls vorhanden)
+        const crumbs = [...document.querySelectorAll('#rex-js-nav-main a[aria-current="page"], .rex-main [role="tablist"] [aria-selected="true"], .rex-main .rex-tabs [aria-current="page"]')]
+            .map((a) => a.textContent.trim()).filter((text, i, all) => text && text !== title && all.indexOf(text) === i);
+        try {
+            const on = await favoriteRequest({ url: location.href, title, meta: crumbs.join(' › '), icon: 'rex-icon fa-solid fa-star' });
+            live.textContent = (on ? t.favoriteAdded : t.favoriteRemoved).replace('{0}', title);
+            input.value = '';
+            schedule(0);
+        } catch {
+            live.textContent = t.error;
+        }
+    };
+
     // ---------------------------------------------------------------------------------------------- Tastatur
 
     const go = (newTab) => {
@@ -423,6 +500,10 @@
         }
         const action = entry.actions[actionIndex];
         const link = action || entry.el;
+        if (link.getAttribute('href') === '#qn-favorite-page') {
+            favoriteCurrentPage();
+            return;
+        }
         if (!action) {
             recentSave(entry.item);
         }
@@ -435,6 +516,11 @@
     };
 
     const onKey = (e) => {
+        if ((e.metaKey || e.ctrlKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 'd') {
+            e.preventDefault();
+            toggleFavorite(entries[active]);
+            return;
+        }
         switch (e.key) {
             case 'ArrowDown':
             case 'ArrowUp': {

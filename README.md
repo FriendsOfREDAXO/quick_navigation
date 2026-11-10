@@ -45,11 +45,12 @@ wer das Kürzel tippt, sieht die Auswahl mitgehen. Eine Zahl findet den Artikel 
 
 | Kürzel | Quelle |
 | --- | --- |
+| `f:` | Favoriten |
 | `>` | Befehle – siehe unten |
 | `w:` | Unveröffentlicht – Seiten, deren Arbeitsversion vom Live-Stand abweicht (nur mit aktiver Arbeitsversion) |
 | `p:` | Backend-Seiten (auch Unterseiten von AddOns) |
 | `a:` | Artikel und Kategorien – nach Name oder ID |
-| `m:` | Medienpool – nach Titel und Dateiname, mit Vorschaubild |
+| `m:` | Medienpool – Medien nach Titel und Dateiname (mit Vorschaubild) und Medienkategorien |
 | `y:` | YForm-Datensätze – Textfelder aller Tabellen, die man sehen darf, oder die ID (nur mit YForm) |
 | `u:` | Benutzer (nur mit Recht auf die Benutzerverwaltung) |
 
@@ -57,6 +58,18 @@ wer das Kürzel tippt, sieht die Auswahl mitgehen. Eine Zahl findet den Artikel 
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-media.png" width="49%" alt="Nur im Medienpool suchen mit m:">
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-dark.png" width="49%" alt="Palette im dunklen Design">
 </p>
+
+### Favoriten
+
+Jeder Benutzer hat eigene Favoriten – auf dem Server gespeichert, also in jedem Browser gleich. Gemerkt wird mit dem
+Stern an einem Treffer oder mit **⌘D / Strg+D**: Seiten, Artikel, Kategorien, Medien, Medienkategorien, YForm-Datensätze
+und Befehle wie „Neuer Datensatz: Projekte“. Der Befehl **„Aktuelle Seite merken“** (`>`) merkt die Seite, auf der man
+gerade ist – auch eine gefilterte YForm-Liste oder die Seite eines AddOns. Ohne Eingabe stehen die Favoriten ganz oben,
+`f:` zeigt nur sie; derselbe Stern entfernt sie wieder.
+
+Gespeichert wird die Adresse ohne Sicherheitstoken. Seiten zum Ansehen, Bearbeiten und Anlegen brauchen keins
+(YForm prüft das Token erst beim Speichern und Löschen per POST), Befehle mit Token wie „Cache löschen“ lassen sich nicht
+merken.
 
 ### Unveröffentlicht
 
@@ -205,9 +218,10 @@ final class NewsProvider implements Provider
 }
 ```
 
-- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Befehle 95, Unveröffentlicht 92, Struktur 90, Medien 80,
+- `AsProvider(key, priority, prefix, limit)` – `priority` ordnet die Gruppen (Favoriten 110, Seiten 100, Befehle 95, Unveröffentlicht 92, Struktur 90, Medien 80,
   YForm 60, Benutzer 50),
-  ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`.
+  ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`, `limit` die
+  Zahl der Treffer ohne Kürzel (Standard 6).
 - `Query` – `term`, `words`, `user`, `limit`, `scoped` (per Kürzel gewählt), `isEmpty()`, `isId()`, `like()` (fertiges
   Muster für SQL `LIKE`) und `score()` für die Reihenfolge (gleich > beginnt mit > Wortanfang > enthalten, 0 = passt
   nicht).

@@ -19,3 +19,4 @@ Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für R
 - Befehle mit > (neuer Artikel/Kategorie hier, Medium hochladen, neuer Datensatz; Admins: Designer, neuer Benutzer, Cache löschen), erweiterbar per QuickNavigationCommands
 - Unveröffentlicht (w:): Seiten mit abweichender Arbeitsversion, ohne Eingabe gleich in der Palette
 - Palette: Auswahl der Quelle neben dem Suchfeld (Dropdown des Cores, Kürzel klein daneben) statt Kürzel-Chips im Fuß
+- Favoriten je Benutzer (Stern, ⌘D, „Aktuelle Seite merken“, f:), Medienkategorien in der Suche, Favoriten ganz oben

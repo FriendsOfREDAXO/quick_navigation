@@ -1208,3 +1208,49 @@
 .qn-panel:has(.qn-scope.open) {
     min-block-size: min(420px, 76vh);
 }
+
+/* Favoriten: Stern am Treffer – gesetzt immer sichtbar, sonst beim Überfahren bzw. am aktiven Treffer */
+.qn-fav {
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: 30px;
+    block-size: 30px;
+    margin-inline-end: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--rex-radius);
+    background: none;
+    color: var(--rex-color-text-muted);
+    cursor: pointer;
+    opacity: 0;
+
+    .qn-row:is(.is-active, :hover) &,
+    &.is-on {
+        opacity: 1;
+    }
+
+    &.is-on {
+        color: var(--rex-color-warning);
+    }
+
+    &:hover {
+        background: var(--rex-color-surface-muted);
+    }
+
+    .qn-row.is-active & {
+        color: color-mix(in srgb, var(--rex-color-on-accent) 85%, transparent);
+
+        &.is-on {
+            color: var(--rex-color-on-accent);
+        }
+
+        &:hover {
+            background: color-mix(in srgb, var(--rex-color-on-accent) 22%, transparent);
+        }
+    }
+
+    @media (hover: none) {
+        opacity: 1;
+    }
+}

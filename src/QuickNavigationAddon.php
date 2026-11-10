@@ -59,6 +59,7 @@ final class QuickNavigationAddon extends Addon
         $user = Core::requireUser();
         $config = [
             'url' => Url::backendController(SearchApi::getUrlParams()),
+            'favoriteUrl' => Url::backendController(FavoriteApi::getUrlParams()),
             'storage' => 'quick-navigation:' . Core::getProject()->instanceName . ':' . $user->id,
             'prefixes' => QuickNavigation::prefixes(),
             'i18n' => [
@@ -72,6 +73,11 @@ final class QuickNavigationAddon extends Addon
                 'newTab' => I18n::msg('quick_navigation_hint_new_tab'),
                 'actions' => I18n::msg('quick_navigation_hint_actions'),
                 'close' => I18n::msg('quick_navigation_hint_close'),
+                'favorite' => I18n::msg('quick_navigation_hint_favorite'),
+                'favoriteAdd' => I18n::msg('quick_navigation_favorite_add'),
+                'favoriteRemove' => I18n::msg('quick_navigation_favorite_remove'),
+                'favoriteAdded' => I18n::msg('quick_navigation_favorite_added'),
+                'favoriteRemoved' => I18n::msg('quick_navigation_favorite_removed'),
                 'scopeAll' => I18n::msg('quick_navigation_scope_all'),
                 'scopeLabel' => I18n::msg('quick_navigation_scope_label'),
                 'results' => I18n::msg('quick_navigation_results'),

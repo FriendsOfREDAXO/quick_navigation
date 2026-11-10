@@ -18,5 +18,7 @@ final readonly class AsProvider
         public string $key,
         public int $priority = 0,
         public ?string $prefix = null,
+        /** Treffer ohne Kürzel (sonst {@see QuickNavigation::LIMIT}) */
+        public ?int $limit = null,
     ) {}
 }

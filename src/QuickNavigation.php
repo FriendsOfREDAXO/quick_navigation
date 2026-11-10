@@ -32,7 +32,7 @@ final class QuickNavigation
     public const int LIMIT = 6;
     public const int LIMIT_SCOPED = 30;
 
-    /** @var array<string, array{provider: Provider|class-string<Provider>, priority: int, prefix: ?string}> */
+    /** @var array<string, array{provider: Provider|class-string<Provider>, priority: int, prefix: ?string, limit?: ?int}> */
     private static array $registered = [];
 
     /** @var list<string> */
@@ -52,14 +52,14 @@ final class QuickNavigation
     /**
      * Alle Quellen, höchste Priorität zuerst.
      *
-     * @return array<string, array{provider: Provider|class-string<Provider>, priority: int, prefix: ?string}>
+     * @return array<string, array{provider: Provider|class-string<Provider>, priority: int, prefix: ?string, limit?: ?int}>
      */
     public static function providers(): array
     {
         $all = [];
         foreach (ClassDiscovery::getInstance()->discoverByAttribute(AsProvider::class, Provider::class) as $class => $attr) {
             if (!isset($all[$attr->key]) || $all[$attr->key]['priority'] < $attr->priority) {
-                $all[$attr->key] = ['provider' => $class, 'priority' => $attr->priority, 'prefix' => $attr->prefix];
+                $all[$attr->key] = ['provider' => $class, 'priority' => $attr->priority, 'prefix' => $attr->prefix, 'limit' => $attr->limit];
             }
         }
         $all = self::$registered + $all;
@@ -110,12 +110,15 @@ final class QuickNavigation
             }
         }
 
+        // Favoriten markieren (Stern an jedem Treffer)
+        $favorites = Favorites::urls($user);
+
         $groups = [];
         foreach ($providers as $key => $entry) {
             if (null !== $scope && $scope !== $key) {
                 continue;
             }
-            $query = new Query($input, $user, null !== $scope ? self::LIMIT_SCOPED : self::LIMIT, null !== $scope);
+            $query = new Query($input, $user, null !== $scope ? self::LIMIT_SCOPED : ($entry['limit'] ?? self::LIMIT), null !== $scope);
             try {
                 $provider = self::instance($entry['provider']);
                 $items = [];
@@ -140,7 +143,11 @@ final class QuickNavigation
             $groups[] = [
                 'key' => $key,
                 'label' => $provider->label($query),
-                'items' => array_map(static fn (Item $i) => $i->toArray(), $items),
+                'items' => array_map(static function (Item $i) use ($favorites): array {
+                    $url = Favorites::normalize($i->url);
+
+                    return $i->toArray() + ['favorite' => null !== $url && isset($favorites[$url]), 'favoritable' => null !== $url];
+                }, $items),
             ];
         }
 

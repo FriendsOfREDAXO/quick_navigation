@@ -59,8 +59,10 @@ final class CommandProvider implements Provider
     private function commands(Query $query): array
     {
         $user = $query->user;
-        $list = [];
         $msg = I18n::msg(...);
+
+        // die Seite, auf der die Palette geöffnet wurde, als Favorit merken (erledigt das Skript)
+        $list = [new Item($msg('quick_navigation_cmd_favorite'), '#qn-favorite-page', $msg('quick_navigation_group_favorites'), 'rex-icon fa-solid fa-star')];
 
         // Struktur: in der Kategorie, in der man gerade ist (sonst Hauptebene)
         $perm = $user->getComplexPerm('structure');

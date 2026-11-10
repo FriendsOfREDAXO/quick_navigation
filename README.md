@@ -1,5 +1,7 @@
 <p align="right">🌎 <a href="https://github.com/FriendsOfREDAXO/quick_navigation/blob/main/README.de.md">Deutsch</a></p>
 
+![Quick Navigation for REDAXO 6 – command palette, favorites, structure tree](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-title-en.png)
+
 # Quick Navigation for REDAXO 6
 
 Get anywhere in the backend fast: a **command palette** with live search across pages, structure, media, YForm records

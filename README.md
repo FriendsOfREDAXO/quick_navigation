@@ -6,6 +6,16 @@ angemeldete Benutzer auch öffnen darf.
 
 > Branch `6.x` ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x für REDAXO 5.
 
+## Strukturbaum
+
+Der Knopf neben der Suche öffnet die Struktur als Baum – aufgeklappt bis zum Artikel bzw. zur Kategorie, auf der man
+gerade ist. Unterebenen werden erst beim Aufklappen geladen. Klick auf eine Kategorie öffnet sie in der Struktur, auf
+einen Artikel dessen Inhalt; „Inhalt bearbeiten“ und „Ansehen“ erscheinen beim Überfahren. Bei mehreren Sprachen wird
+oben umgeschaltet. Wer nur Teile der Struktur darf, sieht seine Mountpoints.
+
+Tastatur: ↑ ↓, → aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), Buchstabe springt
+zum nächsten Eintrag mit diesem Anfang, esc schließt.
+
 ## Bedienung
 
 | Taste | Wirkung |

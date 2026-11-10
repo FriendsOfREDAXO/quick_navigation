@@ -10,3 +10,4 @@ Neuentwicklung für REDAXO 6 (nicht kompatibel zu 9.x für REDAXO 5).
 - Zuletzt geöffnet (im Browser) und zuletzt bearbeitet
 - Zusatzaktionen je Treffer, Öffnen in neuem Tab
 - Erweiterbar über `#[AsProvider]` bzw. `QuickNavigation::register()`
+- Strukturbaum neben der Suche: aufgeklappt bis zur aktuellen Seite, lädt Ebenen nach, Sprachumschaltung, Mountpoints

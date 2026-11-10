@@ -11,6 +11,7 @@ use Redaxo\Core\Filesystem\Url;
 use Redaxo\Core\Translation\I18n;
 use Redaxo\Core\View\Asset;
 
+use function array_map;
 use function filemtime;
 use function is_file;
 use function json_encode;
@@ -75,12 +76,38 @@ final class QuickNavigationAddon extends Addon
             ],
         ];
 
+        // Strukturbaum – nur mit Rechten auf die Struktur
+        $tree = '';
+        if (StructureTree::allowed($user)) {
+            $config['tree'] = [
+                'url' => Url::backendController(TreeApi::getUrlParams()),
+                'structure' => Url::backendPage('structure'),
+                'languages' => array_map(
+                    static fn ($l) => ['id' => $l->id, 'code' => $l->code, 'name' => $l->name],
+                    StructureTree::languages($user),
+                ),
+            ];
+            $config['i18n'] += [
+                'tree' => I18n::msg('quick_navigation_tree'),
+                'treeOpen' => I18n::msg('quick_navigation_tree_open'),
+                'treeEmpty' => I18n::msg('quick_navigation_tree_empty'),
+                'edit' => I18n::msg('quick_navigation_action_edit'),
+                'view' => I18n::msg('quick_navigation_action_view'),
+                'offline' => I18n::msg('quick_navigation_offline'),
+            ];
+            $tree = '<button type="button" class="qn-tree-trigger" aria-haspopup="tree" aria-expanded="false" aria-controls="qn-tree"'
+                . ' title="' . escape(I18n::msg('quick_navigation_tree')) . '">'
+                . '<i class="rex-icon fa-solid fa-sitemap" aria-hidden="true"></i>'
+                . '<span class="rex-u-visually-hidden">' . escape(I18n::msg('quick_navigation_tree')) . '</span>'
+                . '</button>';
+        }
+
         return '<div class="qn-slot"><button type="button" class="qn-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"'
             . ' data-quick-navigation="' . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '">'
             . '<i class="rex-icon rex-icon-search" aria-hidden="true"></i>'
             . '<span class="qn-trigger-label">' . escape(I18n::msg('quick_navigation_trigger')) . '</span>'
             . '<kbd class="qn-trigger-kbd" aria-hidden="true">Strg K</kbd>'
-            . '</button></div>';
+            . '</button>' . $tree . '</div>';
     }
 
     /** Adresse einer Datei aus assets/ mit Version gegen veraltete Caches */

@@ -23,3 +23,7 @@ quick_navigation_root = Root level
 quick_navigation_media_root = No category
 quick_navigation_admin = Admin
 quick_navigation_recent_edits = Recently edited
+quick_navigation_tree = Structure tree
+quick_navigation_tree_open = Open structure
+quick_navigation_tree_empty = No categories
+quick_navigation_action_edit = Edit content

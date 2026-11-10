@@ -23,3 +23,7 @@ quick_navigation_root = Hauptebene
 quick_navigation_media_root = Keine Kategorie
 quick_navigation_admin = Admin
 quick_navigation_recent_edits = Zuletzt bearbeitet
+quick_navigation_tree = Strukturbaum
+quick_navigation_tree_open = Struktur öffnen
+quick_navigation_tree_empty = Keine Kategorien
+quick_navigation_action_edit = Inhalt bearbeiten

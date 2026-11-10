@@ -1,0 +1,42 @@
+{
+    "name": "friendsofredaxo/quick_navigation",
+    "description": "Befehlspalette für das REDAXO-6-Backend: Live-Suche über Seiten, Struktur, Medien und mehr – mit ⌘K/Strg+K aus der Kopfleiste, nach den Rechten des Benutzers, erweiterbar durch andere AddOns",
+    "type": "redaxo-addon",
+    "license": "MIT",
+    "keywords": [
+        "redaxo",
+        "redaxo-addon",
+        "redaxo6",
+        "backend",
+        "search",
+        "command-palette"
+    ],
+    "homepage": "https://github.com/FriendsOfREDAXO/quick_navigation",
+    "authors": [
+        {
+            "name": "Friends Of REDAXO",
+            "homepage": "https://friendsofredaxo.github.io"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/FriendsOfREDAXO/quick_navigation/issues",
+        "source": "https://github.com/FriendsOfREDAXO/quick_navigation"
+    },
+    "require": {
+        "php": "^8.5",
+        "redaxo/core": "^6.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "FriendsOfRedaxo\\QuickNavigation\\": "src/"
+        }
+    },
+    "extra": {
+        "redaxo": {
+            "addon-class": "FriendsOfRedaxo\\QuickNavigation\\QuickNavigationAddon"
+        },
+        "branch-alias": {
+            "dev-6.x": "6.x-dev"
+        }
+    }
+}

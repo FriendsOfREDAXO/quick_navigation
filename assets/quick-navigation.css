@@ -6,20 +6,21 @@
     flex: 0 0 auto;
 }
 
+/* rechts vor der Meta-Navigation – links steht der (absolut gesetzte) Name der Instanz */
 .qn-slot {
     display: flex;
     flex: 1 1 auto;
-    justify-content: center;
+    justify-content: flex-end;
     min-width: 0;
-    padding-inline: 24px;
+    padding-inline: 24px 20px;
 }
 
 .qn-trigger {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    inline-size: min(100%, 420px);
-    block-size: 34px;
+    inline-size: min(100%, 280px);
+    block-size: 30px;
     padding: 0 6px 0 12px;
     border: 1px solid color-mix(in srgb, var(--rex-topbar-text) 22%, transparent);
     border-radius: var(--rex-radius);
@@ -73,8 +74,8 @@
     display: inline-grid;
     flex: none;
     place-items: center;
-    inline-size: 34px;
-    block-size: 34px;
+    inline-size: 30px;
+    block-size: 30px;
     padding: 0;
     border: 1px solid color-mix(in srgb, var(--rex-topbar-text) 22%, transparent);
     border-radius: var(--rex-radius);
@@ -131,7 +132,22 @@
     }
 }
 
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .qn-trigger {
+        inline-size: min(100%, 200px);
+    }
+}
+
+/* mittlere Breite: nur Symbole */
 @media (min-width: 992px) and (max-width: 1199px) {
+    .qn-trigger {
+        justify-content: center;
+        inline-size: 30px;
+        padding: 0;
+        color: var(--rex-topbar-text);
+    }
+
+    .qn-trigger-label,
     .qn-trigger-kbd {
         display: none;
     }

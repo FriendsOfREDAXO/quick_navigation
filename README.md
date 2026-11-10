@@ -1,10 +1,10 @@
 # Quick Navigation für REDAXO 6
 
-Schnell überall hin im Backend: eine **Befehlspalette** mit Live-Suche über Seiten, Struktur, Medien und Benutzer, ein
-**Strukturbaum** mit Suche und eine **Live-Suche im Medienpool** – immer nur über das, was der angemeldete Benutzer auch
-öffnen darf. Andere AddOns erweitern die Suche um eigene Quellen und tragen ihre Domains ein.
+Schnell überall hin im Backend: eine **Befehlspalette** mit Live-Suche über Seiten, Struktur, Medien, YForm-Datensätze
+und Benutzer, ein **Strukturbaum** mit Suche, **YForm-Tabellen** mit „+“ für neue Datensätze und eine **Live-Suche im
+Medienpool** – immer nur über das, was der angemeldete Benutzer auch öffnen darf. Andere AddOns erweitern die Suche um eigene Quellen und tragen ihre Domains ein.
 
-![Lupe und Strukturbaum in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
+![Lupe, Strukturbaum und YForm-Tabellen in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
 > Version 10 (Branch `redaxo-6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x
 > für REDAXO 5.
@@ -44,6 +44,7 @@ Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Ar
 | `p:` | Backend-Seiten (auch Unterseiten von AddOns) |
 | `a:` | Artikel und Kategorien – nach Name oder ID |
 | `m:` | Medienpool – nach Titel und Dateiname, mit Vorschaubild |
+| `y:` | YForm-Datensätze – Textfelder aller Tabellen, die man sehen darf, oder die ID (nur mit YForm) |
 | `u:` | Benutzer (nur mit Recht auf die Benutzerverwaltung) |
 
 <p>
@@ -70,6 +71,18 @@ Tastatur: Das Suchfeld hat beim Öffnen den Fokus, ↓ springt in den Baum, ↵ 
 → aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), ein Buchstabe springt zum
 nächsten Eintrag mit diesem Anfang, esc schließt.
 
+## YForm
+
+Mit YForm erscheint ein dritter Knopf in der Kopfleiste: Er listet die Tabellen, die der Benutzer sehen darf (ab sieben
+mit Filter), „+“ legt direkt einen neuen Datensatz an (nur mit Bearbeitungsrecht), und „In Datensätzen suchen“ öffnet die
+Palette mit `y:`. Die Suche geht über alle Textfelder der erlaubten Tabellen; ohne Suchbegriff zeigt `y:` die neuesten
+Datensätze je Tabelle.
+
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-yform.png" width="34%" alt="YForm-Tabellen mit + für neue Datensätze">
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-yform-search.png" width="64%" alt="Suche in YForm-Datensätzen mit y:">
+</p>
+
 ## Medienpool
 
 Der Medienpool läuft in REDAXO 6 als eigenes Fenster bzw. als Overlay beim Auswählen eines Mediums. Dort erweitert
@@ -95,6 +108,7 @@ Die Suche läuft über API-Funktionen (nur lesend, mit CSRF-Token). Jede Quelle 
 - **Seiten:** `Page::checkPermission()` – wie die Navigation; versteckte Seiten und Popups bleiben draußen
 - **Struktur und Baum:** Kategorie-Rechte (`StructurePermission`, Mountpoints) und Sprach-Rechte
 - **Medien:** Medienpool-Rechte je Kategorie (`MediaPoolPermission`)
+- **YForm:** Lese- bzw. Bearbeitungsrecht je Tabelle (`Access::canView()`/`canEdit()`); „+“ nur mit Bearbeitungsrecht
 - **Benutzer:** Recht `users[]`; Administratoren sehen nur Administratoren
 
 ## Eigene Quellen
@@ -145,7 +159,8 @@ final class NewsProvider implements Provider
 }
 ```
 
-- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Struktur 90, Medien 80, Benutzer 50),
+- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Struktur 90, Medien 80, YForm 60,
+  Benutzer 50),
   ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`.
 - `Query` – `term`, `words`, `user`, `limit`, `scoped` (per Kürzel gewählt), `isEmpty()`, `isId()`, `like()` (fertiges
   Muster für SQL `LIKE`) und `score()` für die Reihenfolge (gleich > beginnt mit > Wortanfang > enthalten, 0 = passt
@@ -202,7 +217,7 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 
 ## Technik
 
-- Lupe und Strukturbaum als Knöpfe in der Kopfleiste des Backends – ohne Eingriff in den Core
+- Lupe, Strukturbaum und YForm-Tabellen als Knöpfe in der Kopfleiste des Backends – ohne Eingriff in den Core
 - `<dialog>` mit ARIA-Combobox und Listbox, Baum als ARIA-Tree, Ansagen für Screenreader, `prefers-reduced-motion`
 - Farben und Komponenten des Cores (Tokens, Select) – hell und dunkel ohne eigene Regeln
 - keine Inline-Styles und -Handler (Content-Security-Policy des Backends)

@@ -17,7 +17,8 @@
 
 /* zwei Symbol-Knöpfe: Suche (Palette, ⌘K) und Strukturbaum */
 .qn-trigger,
-.qn-tree-trigger {
+.qn-tree-trigger,
+.qn-yform-trigger {
     display: inline-grid;
     flex: none;
     place-items: center;
@@ -59,7 +60,8 @@
     }
 
     .qn-trigger,
-    .qn-tree-trigger {
+    .qn-tree-trigger,
+    .qn-yform-trigger {
         inline-size: 40px;
         block-size: 40px;
         border-color: transparent;
@@ -1040,5 +1042,108 @@
 
     @media (hover: none) {
         display: none !important;
+    }
+}
+
+/* YForm-Tabellen */
+.qn-yform-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.qn-yform-row {
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+
+    &:hover,
+    &:focus-within {
+        background: var(--rex-color-surface-muted);
+    }
+}
+
+.qn-yform-link {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 8px;
+    min-inline-size: 0;
+    padding: 6px 8px;
+    color: inherit;
+    text-decoration: none;
+
+    > .rex-icon {
+        flex: none;
+        inline-size: 16px;
+        color: var(--rex-color-text-muted);
+        text-align: center;
+    }
+
+    span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &:hover,
+    &:focus {
+        color: var(--rex-color-link);
+        text-decoration: none;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.qn-yform-row:has(.qn-yform-link:focus-visible) {
+    background: var(--rex-color-surface-strong);
+}
+
+.qn-yform-add {
+    flex: none;
+    margin-inline-end: 4px;
+
+    &:focus-visible {
+        background: var(--rex-color-surface-strong);
+        outline: none;
+    }
+}
+
+.qn-yform-foot {
+    padding: 6px;
+    border-top: 1px solid var(--rex-color-border);
+    background: var(--rex-color-surface-subtle);
+}
+
+.qn-yform-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    inline-size: 100%;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 2px;
+    background: none;
+    color: var(--rex-color-link);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+
+    kbd {
+        margin-inline-start: auto;
+        padding: 0 5px;
+        border: 1px solid var(--rex-color-border);
+        border-radius: 2px;
+        background: var(--rex-color-surface);
+        color: var(--rex-color-text-muted);
+        font: 600 11px/1.6 var(--rex-font-sans);
+    }
+
+    &:hover,
+    &:focus-visible {
+        background: var(--rex-color-surface-strong);
+        outline: none;
     }
 }

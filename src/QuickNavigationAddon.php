@@ -107,13 +107,36 @@ final class QuickNavigationAddon extends Addon
                 . '</button>';
         }
 
+        // YForm: Tabellen nach Rechten, „+“ für neue Datensätze
+        $yform = '';
+        $tables = YForm\YFormTables::visible($user);
+        if ($tables) {
+            $config['yform'] = array_map(static fn ($table) => [
+                'label' => $table->label(),
+                'icon' => YForm\YFormTables::icon($table),
+                'url' => YForm\YFormTables::url($table),
+                'add' => YForm\YFormTables::canEdit($table, $user) ? YForm\YFormTables::url($table, ['func' => 'add']) : null,
+            ], $tables);
+            $config['i18n'] += [
+                'yform' => I18n::msg('quick_navigation_yform'),
+                'yformFilter' => I18n::msg('quick_navigation_yform_filter'),
+                'yformAdd' => I18n::msg('quick_navigation_yform_add'),
+                'yformSearch' => I18n::msg('quick_navigation_yform_search'),
+            ];
+            $yform = '<button type="button" class="qn-yform-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="qn-yform"'
+                . ' title="' . escape(I18n::msg('quick_navigation_yform')) . '">'
+                . '<i class="rex-icon fa-solid fa-table-list" aria-hidden="true"></i>'
+                . '<span class="rex-u-visually-hidden">' . escape(I18n::msg('quick_navigation_yform')) . '</span>'
+                . '</button>';
+        }
+
         $label = I18n::msg('quick_navigation_label');
 
         return '<div class="qn-slot"><button type="button" class="qn-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"'
             . ' title="' . escape($label) . '" data-quick-navigation="' . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '">'
             . '<i class="rex-icon rex-icon-search" aria-hidden="true"></i>'
             . '<span class="rex-u-visually-hidden">' . escape($label) . '</span>'
-            . '</button>' . $tree . '</div>';
+            . '</button>' . $tree . $yform . '</div>';
     }
 
     /** Adresse einer Datei aus assets/ mit Version gegen veraltete Caches */

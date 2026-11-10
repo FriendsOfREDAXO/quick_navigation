@@ -500,6 +500,14 @@
 
     trigger.addEventListener('click', show);
 
+    // andere Teile (z. B. das YForm-Panel) öffnen die Palette mit einer Eingabe: qn:search mit detail = Text
+    document.addEventListener('qn:search', (e) => {
+        show();
+        input.value = String(e.detail ?? '');
+        input.setSelectionRange(input.value.length, input.value.length);
+        schedule(0);
+    });
+
     document.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k') {
             e.preventDefault();
@@ -849,5 +857,89 @@
 
         // gleich anlegen (ohne Daten): so übernimmt popovertarget das Öffnen und Schließen per Knopf
         build();
+    }
+
+    // ======================================================================================== YForm-Tabellen
+
+    const yformTrigger = document.querySelector('.qn-yform-trigger');
+    if (yformTrigger && cfg.yform) {
+        initYForm(yformTrigger, cfg.yform);
+    }
+
+    function initYForm(button, tables) {
+        const filter = el('input', { type: 'search', class: 'qn-tree-input', placeholder: t.yformFilter, 'aria-label': t.yformFilter, autocomplete: 'off', spellcheck: 'false' });
+        const list = el('ul', { class: 'qn-yform-list', 'aria-label': t.yform });
+        const rows = tables.map((table) => {
+            const li = el('li', { class: 'qn-yform-row', 'data-label': table.label.toLowerCase() },
+                el('a', { class: 'qn-yform-link', href: table.url }, icon(table.icon), el('span', { text: table.label })),
+                table.add ? el('a', { class: 'qn-action qn-yform-add', href: table.add, title: t.yformAdd + ': ' + table.label, 'aria-label': t.yformAdd + ': ' + table.label }, icon('rex-icon rex-icon-add')) : null,
+            );
+            list.append(li);
+            return li;
+        });
+        const search = el('button', { type: 'button', class: 'qn-yform-search' }, icon('rex-icon rex-icon-search'), ' ' + t.yformSearch + ' ', el('kbd', { text: 'y:' }));
+
+        const panel = el('div', { id: 'qn-yform', class: 'qn-tree-panel qn-yform-panel', popover: 'auto' },
+            el('div', { class: 'qn-tree-head' }, el('strong', { text: t.yform })),
+            tables.length > 6 ? el('div', { class: 'qn-tree-search' }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), filter) : null,
+            el('div', { class: 'qn-tree-scroll' }, list),
+            el('div', { class: 'qn-yform-foot' }, search),
+        );
+        document.body.append(panel);
+        button.popoverTargetElement = panel;
+
+        const place = () => {
+            const r = button.getBoundingClientRect();
+            const width = Math.min(320, window.innerWidth - 16);
+            const left = Math.max(8, Math.min(r.right - width, window.innerWidth - width - 8));
+            // CSSOM, kein style-Attribut im Markup (CSP)
+            panel.style.top = Math.round(r.bottom + 8) + 'px';
+            panel.style.left = Math.round(left) + 'px';
+            panel.style.width = width + 'px';
+        };
+        const links = () => [...list.querySelectorAll('.qn-yform-row:not([hidden]) a, .qn-yform-search')].concat(search).filter((a, i, all) => all.indexOf(a) === i);
+
+        panel.addEventListener('beforetoggle', (e) => {
+            if (e.newState === 'open') {
+                place();
+                filter.value = '';
+                rows.forEach((r) => { r.hidden = false; });
+            }
+        });
+        panel.addEventListener('toggle', (e) => {
+            button.setAttribute('aria-expanded', String(e.newState === 'open'));
+            if (e.newState === 'open') {
+                (panel.contains(filter) ? filter : list.querySelector('a'))?.focus();
+            }
+        });
+        window.addEventListener('resize', () => panel.matches(':popover-open') && place());
+
+        filter.addEventListener('input', () => {
+            const q = filter.value.trim().toLowerCase();
+            rows.forEach((r) => { r.hidden = q !== '' && !r.dataset.label.includes(q); });
+        });
+        // ↑ ↓ zwischen Filter, Tabellen und „In Datensätzen suchen“
+        panel.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') {
+                return;
+            }
+            const all = [...(panel.contains(filter) ? [filter] : []), ...links()];
+            const i = all.indexOf(document.activeElement);
+            const next = all[(i + (e.key === 'ArrowDown' ? 1 : -1) + all.length) % all.length];
+            if (next) {
+                e.preventDefault();
+                next.focus();
+            }
+        });
+        filter.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                list.querySelector('.qn-yform-row:not([hidden]) .qn-yform-link')?.click();
+            }
+        });
+        search.addEventListener('click', () => {
+            panel.hidePopover();
+            document.dispatchEvent(new CustomEvent('qn:search', { detail: 'y: ' }));
+        });
     }
 })();

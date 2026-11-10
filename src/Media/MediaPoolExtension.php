@@ -55,12 +55,12 @@ final class MediaPoolExtension
         Extension::register(MediaListToolbar::class, static fn (MediaListToolbar $ep): string => self::toolbar((string) $ep->subject));
         Extension::register(MediaListQuery::class, static function (MediaListQuery $ep): string {
             $query = (string) $ep->subject;
-            $sort = self::sort();
-            if ($ep->count || 'date' === $sort) {
+            if ($ep->count) {
                 return $query;
             }
 
-            return str_replace(' ORDER BY m.updatedate DESC', ' ORDER BY ' . self::ORDER[$sort], $query);
+            // mit eindeutiger Folgesortierung, damit das Blättern (MediaPager) dieselbe Reihenfolge hat
+            return str_replace(' ORDER BY m.updatedate DESC', ' ORDER BY ' . self::ORDER[self::sort()] . ', m.id DESC', $query);
         });
     }
 
@@ -98,6 +98,14 @@ final class MediaPoolExtension
                 . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '"',
             $toolbar,
         );
+
+        // Detailansicht: blättern statt sortieren
+        $fileId = Request::request('file_id', 'int', 0);
+        if ($fileId > 0) {
+            $pager = MediaPager::render($fileId, self::ORDER[self::sort()]);
+
+            return '' === $pager ? $toolbar : str_replace('<div class="rex-field">', '<div class="rex-field qn-media-tools">' . $pager, $toolbar);
+        }
 
         // Sortieren: Link auf dieselbe Liste mit der nächsten Sortierung
         $sort = self::sort();

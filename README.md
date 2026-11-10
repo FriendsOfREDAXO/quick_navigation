@@ -82,6 +82,9 @@ Quick Navigation das vorhandene Suchfeld:
   Dateitypen des Felds gelten auch hier.
 - **Sortierung:** der Knopf neben der Suche schaltet die Liste zwischen „neueste zuerst“, Dateiname und Titel um
   (bleibt gespeichert).
+- **Blättern:** in der Detailansicht eines Mediums führen ‹ › (oder die Pfeiltasten ← →) zum vorigen bzw. nächsten
+  Medium – in derselben Reihenfolge wie die Liste (Kategorie, Dateitypen, Sortierung); beim Überfahren zeigt eine
+  Vorschau, wohin es geht. Auch im Auswahl-Modus, „übernehmen“ bleibt.
 
 ![Live-Suche im Medienpool beim Auswählen eines Bildes](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-mediapool.png)
 

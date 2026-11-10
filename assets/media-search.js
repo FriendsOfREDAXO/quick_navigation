@@ -216,6 +216,22 @@
         input.closest('.rex-overlay-body, .rex-main')?.addEventListener('scroll', () => panel.matches(':popover-open') && place(), { passive: true });
     };
 
+    // Blättern in der Detailansicht: ← / → – nicht beim Tippen, im Overlay das oberste
+    document.addEventListener('keydown', (e) => {
+        if ((e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey || e.defaultPrevented) {
+            return;
+        }
+        if (e.target.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="tree"], [role="listbox"], .rex-select')) {
+            return;
+        }
+        const scope = [...document.querySelectorAll('dialog[open]')].pop() || document;
+        const link = scope.querySelector('.qn-media-pager [data-qn-pager="' + (e.key === 'ArrowLeft' ? 'prev' : 'next') + '"]');
+        if (link) {
+            e.preventDefault();
+            link.click();
+        }
+    });
+
     const scan = (root = document) => root.querySelectorAll?.('#be_search-media-name[data-qn-media]').forEach(init);
 
     scan();

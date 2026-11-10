@@ -14,3 +14,4 @@ Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für R
 - Medienpool: Live-Suche im Suchfeld mit „zuletzt bearbeitet“, Übernehmen im Auswahl-Modus, Sortierung (neueste, Dateiname, Titel)
 - Strukturbaum mit Suche (ganze Struktur, Treffer mit ihren Kategorien); Kopfleiste nur mit Symbol-Knöpfen (Lupe, Baum)
 - Domains: Extension Point QuickNavigationDomains für AddOns (fluid, yrewrite …) – Domain-Auswahl im Strukturbaum, Domain-Badge in der Palette
+- Medienpool: Blättern in der Detailansicht (‹ ›, Pfeiltasten, Vorschau), Liste mit eindeutiger Reihenfolge

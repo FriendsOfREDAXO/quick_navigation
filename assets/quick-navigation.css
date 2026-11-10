@@ -956,3 +956,89 @@
         font-size: var(--rex-font-size-small);
     }
 }
+
+/* Medienpool: Blättern in der Detailansicht */
+.qn-media-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.qn-media-pager {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.qn-media-pager-step {
+    position: relative;
+
+    &[aria-disabled="true"] {
+        opacity: .4;
+        pointer-events: none;
+    }
+}
+
+.qn-media-pager-pos {
+    min-inline-size: 4.5em;
+    color: inherit;
+    opacity: .85;
+    font-size: var(--rex-font-size-small);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+/* Vorschau des Nachbarn beim Überfahren */
+.qn-media-peek {
+    position: absolute;
+    inset: calc(100% + 6px) auto auto 50%;
+    z-index: 20;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    inline-size: 140px;
+    padding: 6px;
+    border: 1px solid var(--rex-color-border-strong);
+    border-radius: var(--rex-radius);
+    background: var(--rex-color-surface-raised);
+    box-shadow: var(--rex-shadow-md);
+    color: var(--rex-color-text);
+    font-size: var(--rex-font-size-small);
+    font-weight: 400;
+    white-space: normal;
+    translate: -50% 0;
+    pointer-events: none;
+
+    img {
+        inline-size: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 2px;
+        background: var(--rex-color-surface-muted);
+    }
+
+    > .rex-icon {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 4 / 3;
+        background: var(--rex-color-surface-muted);
+        color: var(--rex-color-text-muted);
+        font-size: 22px;
+    }
+
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .qn-media-pager-step:is(:hover, :focus-visible) > & {
+        display: flex;
+    }
+
+    @media (hover: none) {
+        display: none !important;
+    }
+}

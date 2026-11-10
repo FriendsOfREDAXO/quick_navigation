@@ -35,3 +35,6 @@ quick_navigation_media_sort_next = umschalten auf „{0}“
 quick_navigation_tree_search = Struktur durchsuchen …
 quick_navigation_all_domains = Alle Domains
 quick_navigation_domain = Domain
+quick_navigation_media_pager = Medien blättern
+quick_navigation_media_prev = Voriges Medium
+quick_navigation_media_next = Nächstes Medium

@@ -94,6 +94,8 @@ final class QuickNavigationAddon extends Addon
                 'treeOpen' => I18n::msg('quick_navigation_tree_open'),
                 'treeEmpty' => I18n::msg('quick_navigation_tree_empty'),
                 'treeSearch' => I18n::msg('quick_navigation_tree_search'),
+                'allDomains' => I18n::msg('quick_navigation_all_domains'),
+                'domain' => I18n::msg('quick_navigation_domain'),
                 'edit' => I18n::msg('quick_navigation_action_edit'),
                 'view' => I18n::msg('quick_navigation_action_view'),
                 'offline' => I18n::msg('quick_navigation_offline'),

@@ -131,6 +131,38 @@ QuickNavigation::unregister('users'); // eingebaute Quelle abschalten
 
 Wirft eine Quelle eine Exception, fehlt nur ihre Gruppe (im Entwicklungsmodus wird der Fehler angezeigt).
 
+## Domains
+
+Quick Navigation kennt selbst keine Domains – AddOns, die welche verwalten (fluid, yrewrite …), tragen sie über den
+Extension Point `QuickNavigationDomains` ein. Ab zwei Domains zeigt der Strukturbaum oben eine Auswahl (vorgewählt ist
+die Domain der aktuellen Seite, dazu „Alle Domains“): der Baum beginnt dann in der Einstiegskategorie der Domain, die
+Einstiegskategorien der anderen Domains sind ausgeblendet, und die Suche im Baum bleibt in der Domain. In der Palette
+tragen Artikel und Kategorien die Domain als Badge.
+
+Eine Domain hat einen Schlüssel, einen Namen, ihre Einstiegskategorie (`0` = ganze Struktur) und die Adresse. Die
+Anmeldung schadet nicht, wenn Quick Navigation fehlt – `::class` lädt keine Klasse, die Closure läuft nur, wenn der
+Extension Point ausgelöst wird. Für yrewrite zum Beispiel:
+
+```php
+use FriendsOfRedaxo\QuickNavigation\Domain\Domain;
+use FriendsOfRedaxo\QuickNavigation\ExtensionPoint\QuickNavigationDomains;
+use Redaxo\Core\ExtensionPoint\Extension;
+use Yakamara\YRewrite\YRewrite;
+
+Extension::register(QuickNavigationDomains::class, static function (QuickNavigationDomains $ep): array {
+    $domains = $ep->subject;
+    foreach (YRewrite::getDomains() as $name => $domain) {
+        if ('default' !== $name) {
+            $domains[] = new Domain($name, $domain->getHost(), $domain->getMountId(), $domain->getUrl());
+        }
+    }
+
+    return $domains;
+});
+```
+
+Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseiten mit ihrer Kategorie.
+
 ## Technik
 
 - Suchknopf in der Kopfleiste des Backends, auf schmalen Bildschirmen als Lupe

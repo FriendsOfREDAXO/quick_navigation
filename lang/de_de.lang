@@ -33,3 +33,5 @@ quick_navigation_media_sort_name = Sortiert: Dateiname
 quick_navigation_media_sort_title = Sortiert: Titel
 quick_navigation_media_sort_next = umschalten auf „{0}“
 quick_navigation_tree_search = Struktur durchsuchen …
+quick_navigation_all_domains = Alle Domains
+quick_navigation_domain = Domain

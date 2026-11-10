@@ -4,6 +4,7 @@ namespace FriendsOfRedaxo\QuickNavigation\Provider;
 
 use FriendsOfRedaxo\QuickNavigation\Action;
 use FriendsOfRedaxo\QuickNavigation\AsProvider;
+use FriendsOfRedaxo\QuickNavigation\Domain\Domains;
 use FriendsOfRedaxo\QuickNavigation\Item;
 use FriendsOfRedaxo\QuickNavigation\Provider;
 use FriendsOfRedaxo\QuickNavigation\Query;
@@ -137,6 +138,9 @@ final class StructureProvider implements Provider
         );
 
         $badges = [];
+        if (Domains::multiple()) {
+            $badges[] = Domains::forPath([...$article->path, $article->id])?->label;
+        }
         if ($showLanguage) {
             $badges[] = Language::get($languageId)?->code;
         }

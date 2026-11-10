@@ -2,6 +2,8 @@
 
 namespace FriendsOfRedaxo\QuickNavigation;
 
+use FriendsOfRedaxo\QuickNavigation\Domain\Domain;
+use FriendsOfRedaxo\QuickNavigation\Domain\Domains;
 use Redaxo\Core\Content\Article;
 use Redaxo\Core\Content\Category;
 use Redaxo\Core\Content\StructurePermission;
@@ -29,12 +31,18 @@ final readonly class StructureTree
     /** @phpstan-ignore property.unusedType (für Benutzer ohne Struktur-Rechte vorgesehen) */
     private ?StructurePermission $perm;
 
+    /** @var list<int> Einstiegskategorien anderer Domains (ausgeblendet) */
+    private array $exclude;
+
     public function __construct(
         private User $user,
         private int $languageId,
+        /** nur diese Domain (null = ganze Struktur) */
+        private ?Domain $domain = null,
     ) {
         $perm = $user->getComplexPerm('structure');
         $this->perm = $perm instanceof StructurePermission ? $perm : null;
+        $this->exclude = $domain ? Domains::otherMounts($domain) : [];
     }
 
     public static function allowed(User $user): bool
@@ -71,7 +79,10 @@ final readonly class StructureTree
      */
     public function level(int $categoryId, array $open = [], ?array $filter = null): array
     {
-        if (0 === $categoryId) {
+        if (0 === $categoryId && $this->domain && 0 !== $this->domain->mountId) {
+            // Domain mit eigener Einstiegskategorie: deren Inhalt ist die oberste Ebene
+            [$categories, $articles] = $this->domainRoot($this->domain->mountId);
+        } elseif (0 === $categoryId) {
             $categories = $this->rootCategories();
             $articles = $this->all() ? Article::getRootArticles(false, $this->languageId) : [];
         } else {
@@ -85,6 +96,9 @@ final readonly class StructureTree
 
         $nodes = [];
         foreach ($categories as $category) {
+            if (in_array($category->id, $this->exclude, true)) {
+                continue;
+            }
             if (null !== $filter && !isset($filter['show'][$category->id])) {
                 continue;
             }
@@ -143,6 +157,9 @@ final readonly class StructureTree
             if ($categoryId && !$this->may($categoryId)) {
                 continue;
             }
+            if (!$this->inDomain($article)) {
+                continue;
+            }
             if (!$categoryId && !$this->all()) {
                 continue;
             }
@@ -158,6 +175,46 @@ final readonly class StructureTree
         }
 
         return ['items' => $count ? $this->level(0, [], $filter) : [], 'count' => $count];
+    }
+
+    /**
+     * Inhalt der Einstiegskategorie einer Domain – wer sie nicht darf, sieht seine Mountpoints darin.
+     *
+     * @return array{list<Category>, list<Article>}
+     */
+    private function domainRoot(int $mountId): array
+    {
+        $mount = Category::get($mountId, $this->languageId);
+        if (!$mount) {
+            return [[], []];
+        }
+        if ($this->may($mountId)) {
+            return [$mount->getChildren(), $mount->getArticles()];
+        }
+
+        return [array_values(array_filter(
+            $this->rootCategories(),
+            static fn (Category $c) => in_array($mountId, $c->path, true),
+        )), []];
+    }
+
+    /** Gehört die Seite zur gewählten Domain? */
+    private function inDomain(Article $article): bool
+    {
+        if (!$this->domain) {
+            return true;
+        }
+        $path = [...$article->path, $article->id];
+        if (0 !== $this->domain->mountId && !in_array($this->domain->mountId, $path, true)) {
+            return false;
+        }
+        foreach ($this->exclude as $mount) {
+            if (in_array($mount, $path, true)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @return list<Category> */

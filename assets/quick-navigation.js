@@ -519,7 +519,8 @@
     }
 
     function initTree(button, tc) {
-        let panel, tree, langBox, search;
+        let panel, tree, langBox, search, domainBox, titleEl;
+        let domainKey = '';
         let query = '';
         let searchTimer = 0;
         let seq = 0;
@@ -532,7 +533,7 @@
 
         const fetchLevel = async (categoryId, open = 0, q = '') => {
             const url = tc.url + '&category_id=' + categoryId + '&qn_language=' + languageId + (open ? '&open=' + open : '')
-                + (q ? '&q=' + encodeURIComponent(q) : '');
+                + (q ? '&q=' + encodeURIComponent(q) : '') + (domainKey ? '&domain=' + encodeURIComponent(domainKey) : '');
             const res = await fetch(url, { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
             if (!res.ok) {
                 throw new Error(String(res.status));
@@ -643,6 +644,7 @@
                 }
                 query = q;
                 languageId = data.language;
+                renderDomains(data.domains || [], data.domain);
                 langBox?.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.id) === languageId)));
                 tree.replaceChildren(...data.items.map((n) => node(n, 1)));
                 if (!data.items.length) {
@@ -663,6 +665,25 @@
                     panel.classList.remove('is-loading');
                 }
             }
+        };
+
+        // Auswahl der Domain (erst ab zwei Domains), ersetzt den Titel im Kopf
+        const renderDomains = (domains, selected) => {
+            domainKey = selected || '';
+            if (domains.length < 2) {
+                domainBox.hidden = true;
+                titleEl.hidden = false;
+                return;
+            }
+            if (domainBox.options.length !== domains.length + 1) {
+                domainBox.replaceChildren(
+                    el('option', { value: '*', text: t.allDomains }),
+                    ...domains.map((d) => el('option', { value: d.key, text: d.label })),
+                );
+            }
+            domainBox.value = domainKey || '*';
+            domainBox.hidden = false;
+            titleEl.hidden = true;
         };
 
         const place = () => {
@@ -688,7 +709,13 @@
                 enterkeyhint: 'go',
             });
             const searchRow = el('div', { class: 'qn-tree-search' }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), search);
-            const head = el('div', { class: 'qn-tree-head' }, el('strong', { text: t.tree }));
+            titleEl = el('strong', { text: t.tree });
+            domainBox = el('select', { class: 'qn-tree-domain', 'aria-label': t.domain, hidden: true });
+            domainBox.addEventListener('change', () => {
+                domainKey = domainBox.value;
+                load();
+            });
+            const head = el('div', { class: 'qn-tree-head' }, titleEl, domainBox);
             if (tc.languages.length > 1) {
                 langBox = el('div', { class: 'qn-tree-langs', role: 'group' });
                 for (const l of tc.languages) {

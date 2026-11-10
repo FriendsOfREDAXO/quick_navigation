@@ -292,6 +292,10 @@ For fluid accordingly: the primary domain with `0`, landing domains with subpage
 - colors and components of the core (tokens, select, dropdown) – light and dark without own rules
 - no inline styles or handlers (content security policy of the backend)
 
+## Author
+
+**Thomas Skerbis** ([skerbis](https://github.com/skerbis)) for [Friends Of REDAXO](https://friendsofredaxo.github.io)
+
 ## License
 
 MIT, see [LICENSE](LICENSE).

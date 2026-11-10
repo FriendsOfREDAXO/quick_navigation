@@ -14,6 +14,11 @@
     "homepage": "https://github.com/FriendsOfREDAXO/quick_navigation",
     "authors": [
         {
+            "name": "Thomas Skerbis",
+            "homepage": "https://github.com/skerbis",
+            "role": "Lead"
+        },
+        {
             "name": "Friends Of REDAXO",
             "homepage": "https://friendsofredaxo.github.io"
         }

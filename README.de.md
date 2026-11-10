@@ -299,6 +299,10 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 - Farben und Komponenten des Cores (Tokens, Select, Dropdown) – hell und dunkel ohne eigene Regeln
 - keine Inline-Styles und -Handler (Content-Security-Policy des Backends)
 
+## Autor
+
+**Thomas Skerbis** ([skerbis](https://github.com/skerbis)) für [Friends Of REDAXO](https://friendsofredaxo.github.io)
+
 ## Lizenz
 
 MIT, siehe [LICENSE](LICENSE).

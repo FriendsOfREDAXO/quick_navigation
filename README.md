@@ -37,7 +37,11 @@ live, gruppiert nach Quelle, die Fundstellen hervorgehoben.
 | → / ← | Zusatzaktionen des Treffers (z. B. „In der Struktur zeigen“, „Ansehen“) |
 | esc | Eingabe leeren, dann schließen |
 
-Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Artikel mit dieser ID.
+Nur in einer Quelle suchen: entweder über die Auswahl links neben dem Suchfeld („Alles“, „Seiten“, „Medien“ …, das
+Kürzel steht klein daneben) oder direkt mit dem Kürzel. Die Auswahl setzt das Kürzel ins Feld und behält den Suchbegriff;
+wer das Kürzel tippt, sieht die Auswahl mitgehen. Eine Zahl findet den Artikel mit dieser ID.
+
+![Auswahl der Quelle mit Kürzeln](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-scope.png)
 
 | Kürzel | Quelle |
 | --- | --- |

@@ -18,3 +18,4 @@ Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für R
 - YForm: Knopf mit den erlaubten Tabellen und „+“ für neue Datensätze, Suche in Datensätzen mit y:
 - Befehle mit > (neuer Artikel/Kategorie hier, Medium hochladen, neuer Datensatz; Admins: Designer, neuer Benutzer, Cache löschen), erweiterbar per QuickNavigationCommands
 - Unveröffentlicht (w:): Seiten mit abweichender Arbeitsversion, ohne Eingabe gleich in der Palette
+- Palette: Auswahl der Quelle neben dem Suchfeld (Dropdown des Cores, Kürzel klein daneben) statt Kürzel-Chips im Fuß

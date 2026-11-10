@@ -22,7 +22,7 @@
 
     trigger.title = t.label + ' (' + (isMac ? '⌘K' : 'Strg+K') + ')';
 
-    let dialog, input, list, live, scopeChip, chips;
+    let dialog, input, list, live, scopeToggle, scopeMenu;
     let entries = [];     // [{item, el, group, actions: [el]}]
     let active = -1;      // Index in entries
     let actionIndex = -1; // gewählte Zusatzaktion des aktiven Treffers
@@ -139,16 +139,18 @@
             spellcheck: 'false',
             enterkeyhint: 'go',
         });
-        scopeChip = el('span', { class: 'qn-scope', hidden: true });
+        // Auswahl der Quelle (Dropdown des Cores): Name und klein das Kürzel – setzt das Kürzel ins Suchfeld
+        const prefixText = (p) => (p === '>' ? '>' : p + ':');
+        scopeToggle = el('button', { type: 'button', class: 'rex-button qn-scope-toggle', 'data-rex-dropdown': true, 'aria-haspopup': 'menu', 'aria-expanded': 'false', title: t.scopeLabel },
+            el('span', { class: 'qn-scope-label', text: t.scopeAll }), el('span', { class: 'rex-caret', 'aria-hidden': 'true' }));
+        scopeMenu = el('ul', { class: 'rex-dropdown-menu qn-scope-menu' },
+            el('li', {}, el('a', { href: '#', 'data-prefix': '', 'aria-current': 'true' }, el('span', { text: t.scopeAll }))),
+            ...cfg.prefixes.map((p) => el('li', {}, el('a', { href: '#', 'data-prefix': p.prefix, 'data-key': p.key },
+                el('span', { text: p.label }), el('kbd', { text: prefixText(p.prefix) })))),
+        );
+        const scopeBox = el('div', { class: 'rex-dropdown qn-scope' }, scopeToggle, scopeMenu);
         list = el('div', { class: 'qn-list', id: 'qn-list', role: 'listbox', 'aria-label': t.results });
         live = el('div', { class: 'rex-u-visually-hidden', 'aria-live': 'polite', 'aria-atomic': 'true' });
-
-        chips = el('div', { class: 'qn-prefixes' });
-        for (const p of cfg.prefixes) {
-            const b = el('button', { type: 'button', class: 'qn-prefix', 'data-prefix': p.prefix, title: t.scope.replace('%s', p.label) },
-                el('kbd', { text: p.prefix === '>' ? '>' : p.prefix + ':' }), ' ' + p.label);
-            chips.append(b);
-        }
 
         const hint = (keys, label) => el('span', { class: 'qn-hint' }, ...keys.map((k) => el('kbd', { text: k })), ' ' + label);
         const footer = el('div', { class: 'qn-footer' },
@@ -158,7 +160,6 @@
                 hint(['→'], t.actions),
                 hint(['esc'], t.close),
             ),
-            chips,
         );
 
         const close = el('button', { type: 'button', class: 'qn-close', 'aria-label': t.close }, el('kbd', { text: 'esc' }));
@@ -167,7 +168,7 @@
             el('div', { class: 'qn-panel' },
                 el('div', { class: 'qn-head' },
                     el('i', { class: 'rex-icon rex-icon-search qn-head-icon', 'aria-hidden': 'true' }),
-                    scopeChip,
+                    scopeBox,
                     input,
                     el('span', { class: 'qn-spinner', 'aria-hidden': 'true' }),
                     close,
@@ -200,13 +201,17 @@
                 hide();
             }
         });
-        chips.addEventListener('click', (e) => {
-            const b = e.target.closest('.qn-prefix');
-            if (b) {
-                input.value = b.dataset.prefix === '>' ? '> ' : b.dataset.prefix + ': ';
-                input.focus();
-                schedule(0);
+        scopeMenu.addEventListener('click', (e) => {
+            const a = e.target.closest('a[data-prefix]');
+            if (!a) {
+                return;
             }
+            e.preventDefault();
+            // Suchbegriff behalten, nur das Kürzel tauschen
+            const term = input.value.replace(/^(>|[a-z]+:)\s*/i, '');
+            input.value = a.dataset.prefix ? (a.dataset.prefix === '>' ? '> ' : a.dataset.prefix + ': ') + term : term;
+            input.focus();
+            schedule(0);
         });
         list.addEventListener('pointermove', (e) => {
             const row = e.target.closest('.qn-row');
@@ -243,8 +248,10 @@
         entries = [];
         list.replaceChildren();
 
-        scopeChip.hidden = !scope;
-        scopeChip.textContent = scope ? (cfg.prefixes.find((p) => p.key === scope)?.label ?? scope) : '';
+        const current = cfg.prefixes.find((p) => p.key === scope);
+        scopeToggle.querySelector('.qn-scope-label').textContent = current ? current.label : t.scopeAll;
+        scopeToggle.classList.toggle('is-scoped', !!current);
+        scopeMenu.querySelectorAll('a').forEach((a) => a.setAttribute('aria-current', String((a.dataset.key || '') === (current?.key || ''))));
 
         groups.forEach((group, g) => {
             const headId = 'qn-g' + g;

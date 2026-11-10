@@ -55,3 +55,6 @@ quick_navigation_cmd_designer = Edit table structure: {0}
 quick_navigation_cmd_user = New user
 quick_navigation_cmd_cache = Clear cache
 quick_navigation_cmd_cache_meta = System · regenerate articles, templates and caches
+quick_navigation_group_workversion = Unpublished
+quick_navigation_workversion_changed = changed {0} by {1}
+quick_navigation_workversion_new = new

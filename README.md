@@ -42,6 +42,7 @@ Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Ar
 | Kürzel | Quelle |
 | --- | --- |
 | `>` | Befehle – siehe unten |
+| `w:` | Unveröffentlicht – Seiten, deren Arbeitsversion vom Live-Stand abweicht (nur mit aktiver Arbeitsversion) |
 | `p:` | Backend-Seiten (auch Unterseiten von AddOns) |
 | `a:` | Artikel und Kategorien – nach Name oder ID |
 | `m:` | Medienpool – nach Titel und Dateiname, mit Vorschaubild |
@@ -52,6 +53,15 @@ Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Ar
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-media.png" width="49%" alt="Nur im Medienpool suchen mit m:">
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-dark.png" width="49%" alt="Palette im dunklen Design">
 </p>
+
+### Unveröffentlicht
+
+Ist die Arbeitsversion aktiv (System → Einstellungen), listet die Palette Seiten, deren Arbeitsversion vom Live-Stand
+abweicht – Blöcke, Reihenfolge, Inhalte oder Status, „neu“ für Seiten ohne Live-Stand. Ohne Eingabe stehen die neuesten
+gleich mit in der Palette, `w:` zeigt alle; Pfad, Zeitpunkt und wer zuletzt geändert hat stehen in der zweiten Zeile.
+Das gilt für die Arbeitsversion des Cores und damit auch für fluid.
+
+![Unveröffentlichte Arbeitsversionen](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-workversion.png)
 
 ### Befehle
 
@@ -139,6 +149,7 @@ Die Suche läuft über API-Funktionen (nur lesend, mit CSRF-Token). Jede Quelle 
 - **Medien:** Medienpool-Rechte je Kategorie (`MediaPoolPermission`)
 - **YForm:** Lese- bzw. Bearbeitungsrecht je Tabelle (`Access::canView()`/`canEdit()`); „+“ nur mit Bearbeitungsrecht
 - **Benutzer:** Recht `users[]`; Administratoren sehen nur Administratoren
+- **Unveröffentlicht:** Kategorie- und Sprach-Rechte wie in der Struktur
 - **Befehle:** je Befehl das passende Recht (Anlegen in der Kategorie, Medienpool, YForm-Bearbeitung); Designer, neuer
   Benutzer und Cache löschen nur für Admins
 
@@ -190,7 +201,7 @@ final class NewsProvider implements Provider
 }
 ```
 
-- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Befehle 95, Struktur 90, Medien 80,
+- `AsProvider(key, priority, prefix)` – `priority` ordnet die Gruppen (Seiten 100, Befehle 95, Unveröffentlicht 92, Struktur 90, Medien 80,
   YForm 60, Benutzer 50),
   ein gleicher `key` mit höherer Priorität ersetzt eine vorhandene Quelle, `prefix` ist das Kürzel für `x:`.
 - `Query` – `term`, `words`, `user`, `limit`, `scoped` (per Kürzel gewählt), `isEmpty()`, `isId()`, `like()` (fertiges

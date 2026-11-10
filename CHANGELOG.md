@@ -17,3 +17,4 @@ Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für R
 - Medienpool: Blättern in der Detailansicht (‹ ›, Pfeiltasten, Vorschau), Liste mit eindeutiger Reihenfolge
 - YForm: Knopf mit den erlaubten Tabellen und „+“ für neue Datensätze, Suche in Datensätzen mit y:
 - Befehle mit > (neuer Artikel/Kategorie hier, Medium hochladen, neuer Datensatz; Admins: Designer, neuer Benutzer, Cache löschen), erweiterbar per QuickNavigationCommands
+- Unveröffentlicht (w:): Seiten mit abweichender Arbeitsversion, ohne Eingabe gleich in der Palette

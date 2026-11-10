@@ -55,3 +55,6 @@ quick_navigation_cmd_designer = Tabellenstruktur bearbeiten: {0}
 quick_navigation_cmd_user = Neuer Benutzer
 quick_navigation_cmd_cache = Cache löschen
 quick_navigation_cmd_cache_meta = System · Artikel, Templates und Caches neu erzeugen
+quick_navigation_group_workversion = Unveröffentlicht
+quick_navigation_workversion_changed = geändert {0} von {1}
+quick_navigation_workversion_new = neu

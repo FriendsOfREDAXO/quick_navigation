@@ -711,13 +711,12 @@
     padding: 0 4px;
     border-radius: 2px;
 
-    &:hover,
-    .qn-tree-item:focus > & {
+    &:hover {
         background: var(--rex-color-surface-muted);
     }
 
     &.is-current,
-    .qn-tree-item:focus > &.is-current {
+    &.is-current:hover {
         background: var(--rex-color-accent);
         color: var(--rex-color-on-accent);
 

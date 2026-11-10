@@ -862,3 +862,124 @@
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rex-color-on-accent) 70%, transparent);
     color: var(--rex-color-on-accent);
 }
+
+/* Medienpool: Live-Suche ----------------------------------------------------------------------------------------- */
+
+.qn-media-panel {
+    position: fixed;
+    inset: auto;
+    max-block-size: min(60vh, 460px);
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--rex-color-border-strong);
+    border-radius: var(--rex-radius);
+    background: var(--rex-color-surface-raised);
+    color: var(--rex-color-text);
+    box-shadow: var(--rex-shadow-md);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.qn-media-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--rex-color-border);
+    background: var(--rex-color-surface-muted);
+    font-size: var(--rex-font-size-small);
+}
+
+.qn-media-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-inline-end: 10px;
+
+    &.is-active {
+        background: var(--rex-color-accent);
+        color: var(--rex-color-on-accent);
+
+        .qn-media-meta {
+            color: color-mix(in srgb, var(--rex-color-on-accent) 85%, transparent);
+        }
+
+        mark {
+            color: inherit;
+        }
+    }
+}
+
+.qn-media-link {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 10px;
+    min-inline-size: 0;
+    padding: 5px 12px;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.qn-media-thumb {
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: 40px;
+    block-size: 40px;
+    border-radius: 2px;
+    background: var(--rex-color-surface-muted);
+    color: var(--rex-color-text-muted);
+    overflow: hidden;
+
+    img {
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+    }
+}
+
+.qn-media-text {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+}
+
+.qn-media-title,
+.qn-media-meta {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.qn-media-meta {
+    color: var(--rex-color-text-muted);
+    font-size: var(--rex-font-size-small);
+}
+
+.qn-media-panel mark {
+    padding: 0;
+    background: none;
+    color: var(--rex-color-link);
+    font-weight: 700;
+}
+
+.qn-media-pick {
+    flex: none;
+
+    .is-active & {
+        box-shadow: inset 0 0 0 1px var(--rex-color-on-accent);
+    }
+}
+
+.qn-media-empty {
+    margin: 0;
+    padding: 16px 12px;
+    color: var(--rex-color-text-muted);
+}

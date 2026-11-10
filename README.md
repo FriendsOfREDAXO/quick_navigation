@@ -16,6 +16,21 @@ oben umgeschaltet. Wer nur Teile der Struktur darf, sieht seine Mountpoints.
 Tastatur: ↑ ↓, → aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), Buchstabe springt
 zum nächsten Eintrag mit diesem Anfang, esc schließt.
 
+## Medienpool
+
+Der Medienpool läuft in REDAXO 6 als eigenes Fenster bzw. als Overlay beim Auswählen eines Mediums. Dort erweitert
+Quick Navigation das vorhandene Suchfeld:
+
+- **Live-Suche:** Treffer erscheinen beim Tippen unter dem Feld (Vorschaubild, Dateiname, Kategorie, Größe), ↑ ↓ wählen,
+  ↵ öffnet das Medium.
+- **Zuletzt bearbeitet:** ins leere Suchfeld klicken zeigt die zuletzt geänderten Medien.
+- **Auswählen:** im Auswahl-Modus eines Medienfelds hat jeder Treffer „übernehmen“, ↵ übernimmt direkt; die erlaubten
+  Dateitypen des Felds gelten auch hier.
+- **Sortierung:** der Knopf neben der Suche schaltet die Liste zwischen „neueste zuerst“, Dateiname und Titel um
+  (bleibt gespeichert).
+
+Es erscheinen nur Medien aus Kategorien, für die der Benutzer Rechte hat.
+
 ## Bedienung
 
 | Taste | Wirkung |

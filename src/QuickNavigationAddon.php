@@ -40,6 +40,8 @@ final class QuickNavigationAddon extends Addon
         }
         Asset::addCssFile($this->asset('quick-navigation.css'));
         Asset::addJsFile($this->asset('quick-navigation.js'), [Asset::JS_DEFERED => true]);
+        Asset::addJsFile($this->asset('media-search.js'), [Asset::JS_DEFERED => true]);
+        Media\MediaPoolExtension::boot();
 
         Extension::register('OUTPUT_FILTER', function (ExtensionPoint $ep): string {
             $html = (string) $ep->subject;

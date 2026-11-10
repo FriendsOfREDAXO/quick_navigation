@@ -9,7 +9,7 @@ use Attribute;
  *
  *  - key       eindeutiger Schlüssel (überschreibt eine gleichnamige Quelle mit geringerer Priorität)
  *  - priority  Reihenfolge der Gruppen, hohe Werte zuerst (Seiten 100, Struktur 90, Medien 80, Benutzer 50)
- *  - prefix    Kürzel, um nur in dieser Quelle zu suchen: „m: logo“ (nur Buchstaben)
+ *  - prefix    Kürzel, um nur in dieser Quelle zu suchen: „m: logo“ (Buchstaben); „>“ ist den Befehlen vorbehalten
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final readonly class AsProvider

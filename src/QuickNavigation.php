@@ -98,9 +98,9 @@ final class QuickNavigation
         $providers = self::providers();
         $input = trim($input);
 
-        // „m: logo“ → nur in der Quelle mit dem Kürzel m
+        // „m: logo“ → nur in der Quelle mit dem Kürzel m; „> cache“ → nur Befehle
         $scope = null;
-        if (1 === preg_match('/^([a-z]+):\s*(.*)$/iu', $input, $m)) {
+        if (1 === preg_match('/^(>)\s*(.*)$/su', $input, $m) || 1 === preg_match('/^([a-z]+):\s*(.*)$/iu', $input, $m)) {
             foreach ($providers as $key => $entry) {
                 if (null !== $entry['prefix'] && strtolower($m[1]) === strtolower($entry['prefix'])) {
                     $scope = $key;

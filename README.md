@@ -41,6 +41,7 @@ Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Ar
 
 | Kürzel | Quelle |
 | --- | --- |
+| `>` | Befehle – siehe unten |
 | `p:` | Backend-Seiten (auch Unterseiten von AddOns) |
 | `a:` | Artikel und Kategorien – nach Name oder ID |
 | `m:` | Medienpool – nach Titel und Dateiname, mit Vorschaubild |
@@ -51,6 +52,30 @@ Mit einem Kürzel sucht die Palette nur in einer Quelle; eine Zahl findet den Ar
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-palette-media.png" width="49%" alt="Nur im Medienpool suchen mit m:">
   <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-dark.png" width="49%" alt="Palette im dunklen Design">
 </p>
+
+### Befehle
+
+Mit `>` zeigt die Palette Befehle, passende erscheinen auch in der normalen Suche – jeweils nur, wenn der Benutzer sie
+ausführen darf:
+
+- Neuer Artikel / neue Kategorie – in der Kategorie, in der man gerade ist (sonst Hauptebene)
+- Medium hochladen
+- Neuer Datensatz für jede YForm-Tabelle mit Bearbeitungsrecht
+- nur Admins: Tabellenstruktur bearbeiten (YForm-Designer), neuer Benutzer, Cache löschen
+
+Weitere Befehle trägt ein AddOn über den Extension Point `QuickNavigationCommands` ein (Liste von `Item`, Rechte über
+`$ep->query->user`):
+
+```php
+Extension::register(QuickNavigationCommands::class, static function (QuickNavigationCommands $ep): array {
+    $commands = $ep->subject;
+    if ($ep->query->user->admin) {
+        $commands[] = new Item('Sitemap neu erzeugen', Url::backendPage('seo/sitemap', ['func' => 'generate']), icon: 'rex-icon fa-sitemap');
+    }
+
+    return $commands;
+});
+```
 
 ## Strukturbaum
 

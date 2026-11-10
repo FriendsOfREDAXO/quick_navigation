@@ -83,7 +83,7 @@
         return span;
     };
 
-    const words = (q) => q.replace(/^[a-z]+:\s*/i, '').toLowerCase().split(/\s+/).filter(Boolean);
+    const words = (q) => q.replace(/^(>|[a-z]+:)\s*/i, '').toLowerCase().split(/\s+/).filter(Boolean);
 
     const language = () => {
         const p = new URLSearchParams(location.search);
@@ -101,7 +101,8 @@
     };
 
     const recentSave = (item) => {
-        if (item.external) {
+        // Befehle nicht merken (einige tragen ein CSRF-Token, das später nicht mehr gilt)
+        if (item.external || item.command) {
             return;
         }
         const keep = { title: item.title, url: item.url, meta: item.meta, icon: item.icon, thumbnail: item.thumbnail };
@@ -145,7 +146,7 @@
         chips = el('div', { class: 'qn-prefixes' });
         for (const p of cfg.prefixes) {
             const b = el('button', { type: 'button', class: 'qn-prefix', 'data-prefix': p.prefix, title: t.scope.replace('%s', p.label) },
-                el('kbd', { text: p.prefix + ':' }), ' ' + p.label);
+                el('kbd', { text: p.prefix === '>' ? '>' : p.prefix + ':' }), ' ' + p.label);
             chips.append(b);
         }
 
@@ -202,7 +203,7 @@
         chips.addEventListener('click', (e) => {
             const b = e.target.closest('.qn-prefix');
             if (b) {
-                input.value = b.dataset.prefix + ': ';
+                input.value = b.dataset.prefix === '>' ? '> ' : b.dataset.prefix + ': ';
                 input.focus();
                 schedule(0);
             }
@@ -254,6 +255,7 @@
             const box = el('div', { class: 'qn-group', role: 'group', 'aria-labelledby': headId }, head);
 
             for (const item of group.items) {
+                item.command = group.key === 'commands';
                 const index = entries.length;
                 const media = item.thumbnail
                     ? el('span', { class: 'qn-thumb' }, el('img', { src: item.thumbnail, alt: '', loading: 'lazy', decoding: 'async' }))
@@ -375,7 +377,9 @@
         }
 
         try {
-            const url = cfg.url + '&q=' + encodeURIComponent(query) + (language() ? '&qn_language=' + encodeURIComponent(language()) : '');
+            const category = new URLSearchParams(location.search).get('category_id');
+            const url = cfg.url + '&q=' + encodeURIComponent(query) + (language() ? '&qn_language=' + encodeURIComponent(language()) : '')
+                + (category ? '&qn_category=' + encodeURIComponent(category) : '');
             const res = await fetch(url, {
                 headers: { Accept: 'application/json' },
                 credentials: 'same-origin',
@@ -465,7 +469,7 @@
                 break;
             case 'Backspace':
                 // „m: “ als Ganzes entfernen
-                if (/^[a-z]+:\s?$/i.test(input.value) && input.selectionStart === input.value.length) {
+                if (/^(>|[a-z]+:)\s?$/i.test(input.value) && input.selectionStart === input.value.length) {
                     e.preventDefault();
                     input.value = '';
                     schedule(0);

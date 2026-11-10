@@ -944,17 +944,15 @@
     }
 }
 
-/* Domain-Auswahl im Kopf des Baums */
+/* Domain-Auswahl im Kopf des Baums (Select-Komponente des Cores) */
 .qn-tree-domain {
     flex: 1 1 auto;
     min-inline-size: 0;
-    max-inline-size: 100%;
-    block-size: 26px;
-    padding: 0 22px 0 6px;
-    border: 1px solid var(--rex-color-border-input);
-    border-radius: var(--rex-radius);
-    background-color: var(--rex-color-surface);
-    color: var(--rex-color-text);
-    font: inherit;
-    font-weight: 600;
+
+    .rex-select-toggle {
+        min-block-size: 0;
+        block-size: 28px;
+        padding-block: 0;
+        font-size: var(--rex-font-size-small);
+    }
 }

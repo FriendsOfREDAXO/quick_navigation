@@ -519,7 +519,7 @@
     }
 
     function initTree(button, tc) {
-        let panel, tree, langBox, search, domainBox, titleEl;
+        let panel, tree, langBox, search, domainSelect, domainWrap, titleEl;
         let domainKey = '';
         let query = '';
         let searchTimer = 0;
@@ -667,22 +667,18 @@
             }
         };
 
-        // Auswahl der Domain (erst ab zwei Domains), ersetzt den Titel im Kopf
+        // Auswahl der Domain (erst ab zwei Domains) – Select-Komponente des Cores, ersetzt den Titel im Kopf
         const renderDomains = (domains, selected) => {
             domainKey = selected || '';
             if (domains.length < 2) {
-                domainBox.hidden = true;
+                domainWrap.hidden = true;
                 titleEl.hidden = false;
                 return;
             }
-            if (domainBox.options.length !== domains.length + 1) {
-                domainBox.replaceChildren(
-                    el('option', { value: '*', text: t.allDomains }),
-                    ...domains.map((d) => el('option', { value: d.key, text: d.label })),
-                );
-            }
-            domainBox.value = domainKey || '*';
-            domainBox.hidden = false;
+            const value = domainKey || '*';
+            domainSelect.replaceChildren(...[{ key: '*', label: t.allDomains }, ...domains].map((d) => el('option', { value: d.key, selected: d.key === value, text: d.label })));
+            domainSelect.value = value;
+            domainWrap.hidden = false;
             titleEl.hidden = true;
         };
 
@@ -710,12 +706,13 @@
             });
             const searchRow = el('div', { class: 'qn-tree-search' }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), search);
             titleEl = el('strong', { text: t.tree });
-            domainBox = el('select', { class: 'qn-tree-domain', 'aria-label': t.domain, hidden: true });
-            domainBox.addEventListener('change', () => {
-                domainKey = domainBox.value;
+            domainSelect = el('select', { class: 'rex-input', 'data-rex-select': true, 'aria-label': t.domain });
+            domainSelect.addEventListener('change', () => {
+                domainKey = domainSelect.value;
                 load();
             });
-            const head = el('div', { class: 'qn-tree-head' }, titleEl, domainBox);
+            domainWrap = el('div', { class: 'qn-tree-domain', hidden: true }, domainSelect);
+            const head = el('div', { class: 'qn-tree-head' }, titleEl, domainWrap);
             if (tc.languages.length > 1) {
                 langBox = el('div', { class: 'qn-tree-langs', role: 'group' });
                 for (const l of tc.languages) {
@@ -740,6 +737,10 @@
                 if (e.newState === 'open') {
                     place();
                     search.value = '';
+                    // Select-Komponente des Cores für die Domain-Auswahl (erst jetzt: das Skript des Cores ist sicher geladen)
+                    if (!domainSelect.closest('.rex-select')) {
+                        domainWrap.dispatchEvent(new CustomEvent('rex:ready', { bubbles: true }));
+                    }
                     load();
                 }
             });

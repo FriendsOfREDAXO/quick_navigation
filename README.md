@@ -1,10 +1,10 @@
 # Quick Navigation für REDAXO 6
 
 Schnell überall hin im Backend: eine **Befehlspalette** mit Live-Suche über Seiten, Struktur, Medien, YForm-Datensätze
-und Benutzer und mit **Befehlen** (`>`), ein **Strukturbaum** mit Suche, **YForm-Tabellen** mit „+“ für neue Datensätze und eine **Live-Suche im
+und Benutzer und mit **Befehlen** (`>`), **Favoriten** je Benutzer, ein **Strukturbaum** mit Suche, **YForm-Tabellen** mit „+“ für neue Datensätze und eine **Live-Suche im
 Medienpool** – immer nur über das, was der angemeldete Benutzer auch öffnen darf. Andere AddOns erweitern die Suche um eigene Quellen und tragen ihre Domains ein.
 
-![Lupe, Strukturbaum und YForm-Tabellen in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
+![Lupe, Favoriten, Strukturbaum und YForm-Tabellen in der Kopfleiste](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
 > Version 10 (Branch `redaxo-6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x
 > für REDAXO 5.
@@ -66,6 +66,10 @@ Jeder Benutzer hat eigene Favoriten – auf dem Server gespeichert, also in jede
 Der **Stern in der Kopfleiste** ist gefüllt, wenn die aktuelle Seite gemerkt ist. Ein Klick öffnet die Favoriten: oben
 „Diese Seite merken“ bzw. „Gemerkt – entfernen“, darunter die Favoriten zum Springen (× entfernt, ab acht mit Filter),
 unten „In der Palette durchsuchen“.
+
+<p>
+  <img src="https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-favorites.png" width="40%" alt="Favoriten-Panel am Stern in der Kopfleiste">
+</p>
 
 In der Palette wird mit dem Stern an einem Treffer oder mit **⌘D / Strg+D** gemerkt: Seiten, Artikel, Kategorien, Medien, Medienkategorien, YForm-Datensätze
 und Befehle wie „Neuer Datensatz: Projekte“. Der Befehl **„Diese Seite merken“** (`>`) merkt die Seite, auf der man

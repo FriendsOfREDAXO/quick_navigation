@@ -697,14 +697,13 @@
 .qn-tree-item {
     outline: none;
 
-    /* Tastaturfokus: hellblau mit Strich links – die aktuelle Seite ist kräftig blau, Überfahren grau */
+    /* Tastaturfokus wie im Dropdown des Cores: graue Fläche, wie beim Überfahren */
     &:focus-visible > .qn-node:not(.is-current) {
-        background: var(--rex-color-accent-subtle);
-        box-shadow: inset 3px 0 0 var(--rex-color-accent);
+        background: var(--rex-color-surface-strong);
     }
 
     &:focus-visible > .qn-node.is-current {
-        box-shadow: inset 3px 0 0 var(--rex-color-on-accent);
+        background: var(--rex-color-accent-hover);
     }
 }
 

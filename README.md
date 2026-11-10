@@ -4,7 +4,7 @@ Eine Befehlspalette für das Backend: **⌘K** (Mac) bzw. **Strg+K** oder die Lu
 Suchfeld, das live über Backend-Seiten, Struktur, Medienpool und Benutzer sucht – immer nur über das, was der
 angemeldete Benutzer auch öffnen darf.
 
-> Version 10 (Branch `6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x für REDAXO 5.
+> Version 10 (Branch `redaxo-6.x`) ist eine Neuentwicklung für REDAXO 6 und nicht kompatibel zu Quick Navigation 9.x für REDAXO 5.
 
 ## Strukturbaum
 

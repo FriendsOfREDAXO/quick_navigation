@@ -14,11 +14,14 @@ use Redaxo\Core\Http\Response;
 
 use function array_map;
 use function in_array;
+use function mb_substr;
+use function trim;
 
 /**
  * Strukturbaum (nur lesend): ?rex-api-call=quick_navigation_tree&category_id=…&qn_language=….
  *
  *  - category_id  Ebene, die geladen wird (0 = oberste)
+ *  - q            Suche: nur Treffer und ihre Kategorien, aufgeklappt
  *  - open         Artikel- oder Kategorie-ID, bis zu der der Baum aufgeklappt geliefert wird (nur mit category_id=0)
  */
 #[AsApiFunction('quick_navigation_tree')]
@@ -49,7 +52,12 @@ final class TreeApi extends ApiFunction
                 }
                 $result['open'] = $openId;
             }
-            $result['items'] = $tree->level($categoryId, $open);
+            $term = mb_substr(Request::get('q', 'string', ''), 0, 100);
+            if ('' !== trim($term)) {
+                $result = [...$result, ...$tree->search($term)];
+            } else {
+                $result['items'] = $tree->level($categoryId, $open);
+            }
         }
         $result['language'] = $languageId;
 

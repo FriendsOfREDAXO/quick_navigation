@@ -20,7 +20,7 @@
     const RECENT_MAX = 8;
     const DEBOUNCE = 90;
 
-    trigger.querySelector('.qn-trigger-kbd').textContent = isMac ? '⌘K' : 'Strg K';
+    trigger.title = t.label + ' (' + (isMac ? '⌘K' : 'Strg+K') + ')';
 
     let dialog, input, list, live, scopeChip, chips;
     let entries = [];     // [{item, el, group, actions: [el]}]
@@ -519,7 +519,10 @@
     }
 
     function initTree(button, tc) {
-        let panel, tree, langBox;
+        let panel, tree, langBox, search;
+        let query = '';
+        let searchTimer = 0;
+        let seq = 0;
         let languageId = Number(language()) || tc.languages[0]?.id || 0;
 
         const params = new URLSearchParams(location.search);
@@ -527,8 +530,9 @@
 
         const typeIcon = { category: 'rex-icon rex-icon-category', article: 'rex-icon rex-icon-article', home: 'rex-icon rex-icon-sitestartarticle' };
 
-        const fetchLevel = async (categoryId, open = 0) => {
-            const url = tc.url + '&category_id=' + categoryId + '&qn_language=' + languageId + (open ? '&open=' + open : '');
+        const fetchLevel = async (categoryId, open = 0, q = '') => {
+            const url = tc.url + '&category_id=' + categoryId + '&qn_language=' + languageId + (open ? '&open=' + open : '')
+                + (q ? '&q=' + encodeURIComponent(q) : '');
             const res = await fetch(url, { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
             if (!res.ok) {
                 throw new Error(String(res.status));
@@ -547,10 +551,10 @@
                 'data-id': n.id,
                 'data-url': n.url,
             });
-            const row = el('div', { class: 'qn-node' + (n.online ? '' : ' is-offline') + (n.id === current ? ' is-current' : '') },
+            const row = el('div', { class: 'qn-node' + (n.online ? '' : ' is-offline') + (n.id === current ? ' is-current' : '') + (query && n.match ? ' is-match' : '') },
                 n.children ? el('span', { class: 'qn-twisty', 'aria-hidden': 'true' }) : el('span', { class: 'qn-twisty is-leaf', 'aria-hidden': 'true' }),
                 icon(typeIcon[n.type]),
-                el('a', { class: 'qn-node-link', href: n.url, tabindex: '-1' }, n.name),
+                el('a', { class: 'qn-node-link', href: n.url, tabindex: '-1' }, query && n.match ? highlight(n.name, words(query)) : n.name),
                 n.online ? null : el('span', { class: 'qn-node-badge', text: t.offline }),
                 el('span', { class: 'qn-node-actions' },
                     n.edit ? el('a', { class: 'qn-action', href: n.edit, tabindex: '-1', title: t.edit, 'aria-label': t.edit }, icon('rex-icon rex-icon-edit')) : null,
@@ -626,30 +630,38 @@
             }
         };
 
+        // ohne Suche: Baum bis zur aktuellen Seite; mit Suche: nur Treffer und ihre Kategorien
         const load = async () => {
+            const q = search.value.trim();
+            const mine = ++seq;
             tree.setAttribute('aria-busy', 'true');
             panel.classList.add('is-loading');
             try {
-                const data = await fetchLevel(0, current);
+                const data = await fetchLevel(0, q ? 0 : current, q);
+                if (mine !== seq) {
+                    return;
+                }
+                query = q;
                 languageId = data.language;
                 langBox?.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.id) === languageId)));
                 tree.replaceChildren(...data.items.map((n) => node(n, 1)));
                 if (!data.items.length) {
-                    tree.append(el('li', { class: 'qn-tree-empty', role: 'none', text: t.treeEmpty }));
+                    tree.append(el('li', { class: 'qn-tree-empty', role: 'none', text: q ? t.empty : t.treeEmpty }));
                 }
-                const target = tree.querySelector('[aria-current="page"]') || tree.querySelector('.qn-tree-item');
+                const target = q
+                    ? tree.querySelector('.qn-node.is-match')?.parentElement
+                    : tree.querySelector('[aria-current="page"]') || tree.querySelector('.qn-tree-item');
                 if (target) {
                     target.setAttribute('tabindex', '0');
-                    if (panel.matches(':popover-open')) {
-                        focusItem(target);
-                        target.firstElementChild.scrollIntoView({ block: 'center' });
-                    }
+                    target.firstElementChild.scrollIntoView({ block: q ? 'nearest' : 'center' });
                 }
             } catch {
                 tree.replaceChildren(el('li', { class: 'qn-tree-empty is-error', role: 'none', text: t.error }));
             } finally {
-                tree.removeAttribute('aria-busy');
-                panel.classList.remove('is-loading');
+                if (mine === seq) {
+                    tree.removeAttribute('aria-busy');
+                    panel.classList.remove('is-loading');
+                }
             }
         };
 
@@ -664,7 +676,18 @@
         };
 
         const build = () => {
-            tree = el('ul', { class: 'qn-tree', role: 'tree', 'aria-label': t.tree });
+            tree = el('ul', { class: 'qn-tree', id: 'qn-tree-list', role: 'tree', 'aria-label': t.tree });
+            search = el('input', {
+                type: 'search',
+                class: 'qn-tree-input',
+                placeholder: t.treeSearch,
+                'aria-label': t.treeSearch,
+                'aria-controls': 'qn-tree-list',
+                autocomplete: 'off',
+                spellcheck: 'false',
+                enterkeyhint: 'go',
+            });
+            const searchRow = el('div', { class: 'qn-tree-search' }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), search);
             const head = el('div', { class: 'qn-tree-head' }, el('strong', { text: t.tree }));
             if (tc.languages.length > 1) {
                 langBox = el('div', { class: 'qn-tree-langs', role: 'group' });
@@ -682,25 +705,42 @@
             }
             head.append(el('a', { class: 'qn-tree-all', href: tc.structure }, t.treeOpen));
 
-            panel = el('div', { id: 'qn-tree', class: 'qn-tree-panel', popover: 'auto' }, head, el('div', { class: 'qn-tree-scroll' }, tree), el('span', { class: 'qn-spinner', 'aria-hidden': 'true' }));
+            panel = el('div', { id: 'qn-tree', class: 'qn-tree-panel', popover: 'auto' }, head, searchRow, el('div', { class: 'qn-tree-scroll' }, tree), el('span', { class: 'qn-spinner', 'aria-hidden': 'true' }));
             document.body.append(panel);
             button.popoverTargetElement = panel;
 
             panel.addEventListener('beforetoggle', (e) => {
                 if (e.newState === 'open') {
                     place();
+                    search.value = '';
                     load();
                 }
             });
             panel.addEventListener('toggle', (e) => {
                 button.setAttribute('aria-expanded', String(e.newState === 'open'));
                 if (e.newState === 'open') {
-                    focusItem(tree.querySelector('.qn-tree-item[tabindex="0"]') || tree.querySelector('.qn-tree-item'));
+                    search.focus();
                 } else if (panel.contains(document.activeElement) || document.activeElement === document.body) {
                     button.focus();
                 }
             });
             window.addEventListener('resize', () => panel.matches(':popover-open') && place());
+
+            // Suche: tippen filtert, ↓ geht in den Baum, ↵ öffnet den ersten Treffer
+            search.addEventListener('input', () => {
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(load, 160);
+            });
+            search.addEventListener('keydown', (e) => {
+                const first = tree.querySelector('.qn-tree-item[tabindex="0"]') || tree.querySelector('.qn-tree-item');
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    focusItem(first);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    go(first, e.metaKey || e.ctrlKey || e.shiftKey);
+                }
+            });
 
             tree.addEventListener('click', (e) => {
                 const li = e.target.closest('.qn-tree-item');
@@ -735,7 +775,11 @@
                         focusItem(items[i + 1]);
                         break;
                     case 'ArrowUp':
-                        focusItem(items[i - 1]);
+                        if (i === 0) {
+                            search.focus();
+                        } else {
+                            focusItem(items[i - 1]);
+                        }
                         break;
                     case 'Home':
                         focusItem(items[0]);

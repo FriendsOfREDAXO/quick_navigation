@@ -15,61 +15,8 @@
     padding-inline: 24px 20px;
 }
 
-.qn-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    inline-size: min(100%, 280px);
-    block-size: 30px;
-    padding: 0 6px 0 12px;
-    border: 1px solid color-mix(in srgb, var(--rex-topbar-text) 22%, transparent);
-    border-radius: var(--rex-radius);
-    background: color-mix(in srgb, var(--rex-topbar-text) 12%, transparent);
-    color: var(--rex-topbar-text-muted);
-    font: inherit;
-    font-size: var(--rex-font-size-small);
-    text-align: start;
-    cursor: pointer;
-    transition: background var(--rex-duration) var(--rex-ease-out), border-color var(--rex-duration) var(--rex-ease-out);
-
-    &:hover {
-        background: color-mix(in srgb, var(--rex-topbar-text) 20%, transparent);
-        border-color: color-mix(in srgb, var(--rex-topbar-text) 34%, transparent);
-        color: var(--rex-topbar-text);
-    }
-
-    &:focus-visible {
-        outline: 2px solid var(--rex-topbar-text);
-        outline-offset: 2px;
-    }
-
-    .rex-icon {
-        opacity: .9;
-    }
-}
-
-.qn-trigger-label {
-    flex: 1 1 auto;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.qn-trigger-kbd {
-    flex: none;
-    padding: 2px 8px;
-    border-radius: var(--rex-radius);
-    background: color-mix(in srgb, var(--rex-topbar-text) 16%, transparent);
-    color: var(--rex-topbar-text);
-    font: inherit;
-    font-size: 11px;
-    letter-spacing: .02em;
-}
-
-.qn-slot {
-    gap: 6px;
-}
-
+/* zwei Symbol-Knöpfe: Suche (Palette, ⌘K) und Strukturbaum */
+.qn-trigger,
 .qn-tree-trigger {
     display: inline-grid;
     flex: none;
@@ -95,7 +42,11 @@
     }
 }
 
-/* schmal: nur die Lupe, neben dem Menü-Knopf der Navigation */
+.qn-slot {
+    gap: 6px;
+}
+
+/* schmal: neben dem Menü-Knopf der Navigation */
 @media (max-width: 991px) {
     .qn-slot {
         flex: 0 0 auto;
@@ -107,49 +58,13 @@
         }
     }
 
-    .qn-trigger {
-        justify-content: center;
-        inline-size: 40px;
-        block-size: 40px;
-        padding: 0;
-        border-color: transparent;
-        background: transparent;
-        color: var(--rex-topbar-text);
-        font-size: 16px;
-    }
-
-    .qn-trigger-label,
-    .qn-trigger-kbd {
-        display: none;
-    }
-
+    .qn-trigger,
     .qn-tree-trigger {
         inline-size: 40px;
         block-size: 40px;
         border-color: transparent;
         background: transparent;
-        font-size: 15px;
-    }
-}
-
-@media (min-width: 1200px) and (max-width: 1399px) {
-    .qn-trigger {
-        inline-size: min(100%, 200px);
-    }
-}
-
-/* mittlere Breite: nur Symbole */
-@media (min-width: 992px) and (max-width: 1199px) {
-    .qn-trigger {
-        justify-content: center;
-        inline-size: 30px;
-        padding: 0;
-        color: var(--rex-topbar-text);
-    }
-
-    .qn-trigger-label,
-    .qn-trigger-kbd {
-        display: none;
+        font-size: 16px;
     }
 }
 
@@ -982,4 +897,49 @@
     margin: 0;
     padding: 16px 12px;
     color: var(--rex-color-text-muted);
+}
+
+/* Suche im Strukturbaum */
+.qn-tree-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--rex-color-border);
+
+    > .rex-icon {
+        color: var(--rex-color-text-muted);
+    }
+}
+
+.qn-tree-input {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    block-size: 38px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    outline: none;
+
+    &::placeholder {
+        color: var(--rex-color-text-muted);
+    }
+}
+
+.qn-tree-search:focus-within {
+    box-shadow: inset 0 -2px 0 var(--rex-color-accent);
+}
+
+.qn-node-link mark {
+    padding: 0;
+    background: none;
+    color: var(--rex-color-link);
+    font-weight: 700;
+
+    .is-current & {
+        color: inherit;
+    }
 }

@@ -93,6 +93,7 @@ final class QuickNavigationAddon extends Addon
                 'tree' => I18n::msg('quick_navigation_tree'),
                 'treeOpen' => I18n::msg('quick_navigation_tree_open'),
                 'treeEmpty' => I18n::msg('quick_navigation_tree_empty'),
+                'treeSearch' => I18n::msg('quick_navigation_tree_search'),
                 'edit' => I18n::msg('quick_navigation_action_edit'),
                 'view' => I18n::msg('quick_navigation_action_view'),
                 'offline' => I18n::msg('quick_navigation_offline'),
@@ -104,11 +105,12 @@ final class QuickNavigationAddon extends Addon
                 . '</button>';
         }
 
+        $label = I18n::msg('quick_navigation_label');
+
         return '<div class="qn-slot"><button type="button" class="qn-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"'
-            . ' data-quick-navigation="' . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '">'
+            . ' title="' . escape($label) . '" data-quick-navigation="' . escape(json_encode($config, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) . '">'
             . '<i class="rex-icon rex-icon-search" aria-hidden="true"></i>'
-            . '<span class="qn-trigger-label">' . escape(I18n::msg('quick_navigation_trigger')) . '</span>'
-            . '<kbd class="qn-trigger-kbd" aria-hidden="true">Strg K</kbd>'
+            . '<span class="rex-u-visually-hidden">' . escape($label) . '</span>'
             . '</button>' . $tree . '</div>';
     }
 

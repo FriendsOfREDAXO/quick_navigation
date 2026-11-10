@@ -1,6 +1,6 @@
 # Quick Navigation für REDAXO 6
 
-Eine Befehlspalette für das Backend: **⌘K** (Mac) bzw. **Strg+K** oder der Suchknopf in der Kopfleiste öffnet ein
+Eine Befehlspalette für das Backend: **⌘K** (Mac) bzw. **Strg+K** oder die Lupe in der Kopfleiste öffnet ein
 Suchfeld, das live über Backend-Seiten, Struktur, Medienpool und Benutzer sucht – immer nur über das, was der
 angemeldete Benutzer auch öffnen darf.
 
@@ -8,10 +8,13 @@ angemeldete Benutzer auch öffnen darf.
 
 ## Strukturbaum
 
-Der Knopf neben der Suche öffnet die Struktur als Baum – aufgeklappt bis zum Artikel bzw. zur Kategorie, auf der man
+Der Knopf neben der Lupe öffnet die Struktur als Baum – aufgeklappt bis zum Artikel bzw. zur Kategorie, auf der man
 gerade ist. Unterebenen werden erst beim Aufklappen geladen. Klick auf eine Kategorie öffnet sie in der Struktur, auf
 einen Artikel dessen Inhalt; „Inhalt bearbeiten“ und „Ansehen“ erscheinen beim Überfahren. Bei mehreren Sprachen wird
 oben umgeschaltet. Wer nur Teile der Struktur darf, sieht seine Mountpoints.
+
+Das Suchfeld oben im Baum durchsucht die ganze Struktur (Name oder ID) und zeigt nur die Treffer mit ihren Kategorien,
+aufgeklappt; ↓ springt in den Baum, ↵ öffnet den ersten Treffer.
 
 Tastatur: ↑ ↓, → aufklappen bzw. hinein, ← zuklappen bzw. hinauf, Pos1/Ende, ↵ öffnen (⌘↵ neuer Tab), Buchstabe springt
 zum nächsten Eintrag mit diesem Anfang, esc schließt.

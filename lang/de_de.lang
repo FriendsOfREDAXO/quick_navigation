@@ -1,5 +1,4 @@
 quick_navigation_label = Schnellsuche
-quick_navigation_trigger = Suchen …
 quick_navigation_placeholder = Seiten, Artikel, Medien suchen …
 quick_navigation_recent = Zuletzt geöffnet
 quick_navigation_clear_recent = Verlauf leeren
@@ -33,3 +32,4 @@ quick_navigation_media_sort_date = Sortiert: neueste zuerst
 quick_navigation_media_sort_name = Sortiert: Dateiname
 quick_navigation_media_sort_title = Sortiert: Titel
 quick_navigation_media_sort_next = umschalten auf „{0}“
+quick_navigation_tree_search = Struktur durchsuchen …

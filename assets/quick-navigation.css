@@ -697,9 +697,14 @@
 .qn-tree-item {
     outline: none;
 
-    &:focus-visible > .qn-node {
-        outline: 2px solid var(--rex-color-focus);
-        outline-offset: -2px;
+    /* Tastaturfokus: hellblau mit Strich links – die aktuelle Seite ist kräftig blau, Überfahren grau */
+    &:focus-visible > .qn-node:not(.is-current) {
+        background: var(--rex-color-accent-subtle);
+        box-shadow: inset 3px 0 0 var(--rex-color-accent);
+    }
+
+    &:focus-visible > .qn-node.is-current {
+        box-shadow: inset 3px 0 0 var(--rex-color-on-accent);
     }
 }
 

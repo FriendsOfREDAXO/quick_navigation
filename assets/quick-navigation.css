@@ -1122,18 +1122,27 @@
     color: var(--rex-color-on-accent);
 }
 
-/* Auswahl der Quelle neben dem Suchfeld (Dropdown des Cores) */
+/* Auswahl der Quelle neben dem Suchfeld (Dropdown des Cores) – schlicht, wie ein Teil des Suchkopfs */
 .qn-scope {
     flex: none;
+    padding-inline-end: 10px;
+    border-inline-end: 1px solid var(--rex-color-border);
 }
 
-.qn-scope-toggle {
+.qn-head .qn-scope-toggle {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     max-inline-size: 11em;
-    padding-inline: 10px 8px;
-    font-size: var(--rex-font-size-small);
+    min-block-size: 0;
+    padding: 4px 6px;
+    border: 0;
+    border-radius: var(--rex-radius);
+    background: none;
+    box-shadow: none;
+    color: var(--rex-color-text-muted);
+    font: inherit;
+    font-size: var(--rex-font-size);
 
     .qn-scope-label {
         overflow: hidden;
@@ -1141,9 +1150,24 @@
         text-overflow: ellipsis;
     }
 
+    .rex-caret {
+        opacity: .7;
+    }
+
+    &:hover,
+    &[aria-expanded="true"] {
+        background: var(--rex-color-surface-muted);
+        color: var(--rex-color-text);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--rex-color-focus);
+        outline-offset: 0;
+    }
+
     &.is-scoped {
-        border-color: var(--rex-color-accent);
-        color: var(--rex-color-accent);
+        color: var(--rex-color-link);
+        font-weight: 600;
     }
 }
 
@@ -1175,7 +1199,7 @@
 }
 
 @media (max-width: 600px) {
-    .qn-scope-toggle {
+    .qn-head .qn-scope-toggle {
         max-inline-size: 7em;
     }
 }

@@ -2,7 +2,7 @@
 
 ## 10.0.0-dev
 
-Neuentwicklung für REDAXO 6 (Branch redaxo-6.x), nicht kompatibel zu 9.x für REDAXO 5.
+Neuentwicklung für REDAXO 6 (Branch main; REDAXO 5 in redaxo-5.x), nicht kompatibel zu 9.x für REDAXO 5.
 
 - Befehlspalette mit ⌘K / Strg+K und Suchknopf in der Kopfleiste
 - Live-Suche über Backend-Seiten, Artikel und Kategorien, Medienpool und Benutzer – nach den Rechten des Benutzers

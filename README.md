@@ -1,4 +1,4 @@
-<p align="right">🌎 <a href="https://github.com/FriendsOfREDAXO/quick_navigation/blob/redaxo-6.x/README.de.md">Deutsch</a></p>
+<p align="right">🌎 <a href="https://github.com/FriendsOfREDAXO/quick_navigation/blob/main/README.de.md">Deutsch</a></p>
 
 # Quick Navigation for REDAXO 6
 
@@ -9,8 +9,8 @@ open. Other addons add their own search sources and register their domains.
 
 ![Search, favorites, structure tree and YForm tables in the top bar](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-header.png)
 
-> Version 10 (branch `redaxo-6.x`) is a rewrite for REDAXO 6 and not compatible with Quick Navigation 9.x for
-> REDAXO 5. The screenshots show the German backend.
+> Version 10 (branch `main`) is a rewrite for REDAXO 6 and not compatible with Quick Navigation 9.x for
+> REDAXO 5 – that one lives in the branch [`redaxo-5.x`](https://github.com/FriendsOfREDAXO/quick_navigation/tree/redaxo-5.x). The screenshots show the German backend.
 
 ## Installation
 

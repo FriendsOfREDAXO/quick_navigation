@@ -1,5 +1,5 @@
 /**
- * Quick Navigation – Live-Suche im Medienpool.
+ * Quick Navigation – Live-Suche im Medienpool und in der Linkmap.
  *
  * Das Suchfeld des Medienpools (#be_search-media-name mit data-qn-media) zeigt beim Tippen Treffer, ohne Eingabe die
  * zuletzt bearbeiteten Medien. Im Auswahl-Modus (Overlay eines Medienfelds) hat jeder Treffer „übernehmen“ – ein
@@ -91,16 +91,17 @@
 
         const select = (i) => {
             rows[active]?.classList.remove('is-active');
-            rows[active]?.setAttribute('aria-selected', 'false');
+            rows[active]?.querySelector('[role="option"]')?.setAttribute('aria-selected', 'false');
             active = i;
             const row = rows[active];
             if (!row) {
                 input.removeAttribute('aria-activedescendant');
                 return;
             }
+            const option = row.querySelector('[role="option"]');
             row.classList.add('is-active');
-            row.setAttribute('aria-selected', 'true');
-            input.setAttribute('aria-activedescendant', row.id);
+            option.setAttribute('aria-selected', 'true');
+            input.setAttribute('aria-activedescendant', option.id);
             row.scrollIntoView({ block: 'nearest' });
         };
 
@@ -111,9 +112,11 @@
             data.items.forEach((item, i) => {
                 const thumb = item.thumbnail
                     ? el('img', { src: item.thumbnail, alt: '', loading: 'lazy', decoding: 'async' })
-                    : el('i', { class: 'rex-icon rex-icon-media', 'aria-hidden': 'true' });
-                const row = el('div', { class: 'qn-media-row', role: 'option', id: id + '-o' + i, 'aria-selected': 'false' },
-                    el('a', { class: 'qn-media-link', href: item.url, tabindex: '-1' },
+                    : el('i', { class: item.icon || 'rex-icon rex-icon-media', 'aria-hidden': 'true' });
+                // wie in der Palette: die Option ist der Link selbst, „übernehmen“ daneben ist für Screenreader
+                // ausgeblendet – ↵ übernimmt im Auswahl-Modus
+                const row = el('div', { class: 'qn-media-row', role: 'none' },
+                    el('a', { class: 'qn-media-link', href: item.url, tabindex: '-1', role: 'option', id: id + '-o' + i, 'aria-selected': 'false' },
                         el('span', { class: 'qn-media-thumb' }, thumb),
                         el('span', { class: 'qn-media-text' },
                             el('span', { class: 'qn-media-title' }, highlight(item.title, term)),
@@ -127,8 +130,9 @@
                         'data-size': 'xs',
                         'data-effect': cfg.picker === 'multiple' ? 'flash' : null,
                         'data-rex-pick': item.pick,
-                        'data-rex-pick-label': item.title,
+                        'data-rex-pick-label': item.pickLabel || item.title,
                         tabindex: '-1',
+                        'aria-hidden': 'true',
                         text: t.pick,
                     }) : null,
                 );
@@ -154,7 +158,7 @@
                 params.set('picker', cfg.picker);
             }
             if (cfg.language) {
-                params.set('language', cfg.language);
+                params.set(cfg.languageParam || 'language', cfg.language);
             }
             try {
                 const res = await fetch(cfg.url + '&' + params, { headers: { Accept: 'application/json' }, credentials: 'same-origin', signal: controller.signal });
@@ -232,7 +236,8 @@
         }
     });
 
-    const scan = (root = document) => root.querySelectorAll?.('#be_search-media-name[data-qn-media]').forEach(init);
+    // Medienpool (Suchfeld des Cores) und Linkmap (eigenes Suchfeld) – gleiche Live-Suche, andere API
+    const scan = (root = document) => root.querySelectorAll?.('input[data-qn-media]').forEach(init);
 
     scan();
     document.addEventListener('rex:ready', (e) => scan(e.target));

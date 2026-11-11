@@ -163,7 +163,7 @@
             ),
         );
 
-        const close = el('button', { type: 'button', class: 'qn-close', 'aria-label': t.close }, el('kbd', { text: 'esc' }));
+        const close = el('button', { type: 'button', class: 'qn-close', 'aria-label': 'esc – ' + t.close }, el('kbd', { text: 'esc' }));
 
         dialog = el('dialog', { class: 'qn-dialog', 'aria-label': t.label },
             el('div', { class: 'qn-panel' },
@@ -263,7 +263,8 @@
             const headId = 'qn-g' + g;
             const head = el('div', { class: 'qn-group-label', id: headId, role: 'presentation' }, group.label);
             if (group.key === '_recent') {
-                head.append(el('button', { type: 'button', class: 'qn-clear', text: t.clear }));
+                // in der Listbox nur Optionen – der Knopf ist für Maus/Touch, Screenreader nutzen die Optionen
+                head.append(el('button', { type: 'button', class: 'qn-clear', tabindex: '-1', 'aria-hidden': 'true', text: t.clear }));
             }
             const box = el('div', { class: 'qn-group', role: 'group', 'aria-labelledby': headId }, head);
 
@@ -305,6 +306,7 @@
                 // Stern: Favorit an/aus (⌘D)
                 const star = item.favoritable ? el('button', {
                     type: 'button',
+                    'aria-hidden': 'true',
                     class: 'qn-fav' + (item.favorite ? ' is-on' : ''),
                     tabindex: '-1',
                     'aria-pressed': String(!!item.favorite),
@@ -314,7 +316,8 @@
 
                 const row = el('div', { class: 'qn-row', role: 'none', 'data-index': index },
                     main,
-                    actions.length ? el('span', { class: 'qn-actions', role: 'none' }, ...actions) : null,
+                    // Zusatzaktionen und Stern: per → bzw. ⌘D erreichbar (mit Ansage), für Screenreader nicht doppelt
+                    actions.length ? el('span', { class: 'qn-actions', 'aria-hidden': 'true' }, ...actions) : null,
                     star,
                 );
                 box.append(row);
@@ -849,7 +852,7 @@
             }
             head.append(el('a', { class: 'qn-tree-all', href: tc.structure }, t.treeOpen));
 
-            panel = el('div', { id: 'qn-tree', class: 'qn-tree-panel', popover: 'auto' }, head, searchRow, el('div', { class: 'qn-tree-scroll' }, tree), el('span', { class: 'qn-spinner', 'aria-hidden': 'true' }));
+            panel = el('div', { id: 'qn-tree', class: 'qn-tree-panel', popover: 'auto', role: 'dialog', 'aria-label': t.tree }, head, searchRow, el('div', { class: 'qn-tree-scroll' }, tree), el('span', { class: 'qn-spinner', 'aria-hidden': 'true' }));
             document.body.append(panel);
             button.popoverTargetElement = panel;
 
@@ -991,7 +994,7 @@
         });
         const search = el('button', { type: 'button', class: 'qn-yform-search' }, icon('rex-icon rex-icon-search'), ' ' + t.yformSearch + ' ', el('kbd', { text: 'y:' }));
 
-        const panel = el('div', { id: 'qn-yform', class: 'qn-tree-panel qn-yform-panel', popover: 'auto' },
+        const panel = el('div', { id: 'qn-yform', class: 'qn-tree-panel qn-yform-panel', popover: 'auto', role: 'dialog', 'aria-label': t.yform },
             el('div', { class: 'qn-tree-head' }, el('strong', { text: t.yform })),
             tables.length > 6 ? el('div', { class: 'qn-tree-search' }, el('i', { class: 'rex-icon rex-icon-search', 'aria-hidden': 'true' }), filter) : null,
             el('div', { class: 'qn-tree-scroll' }, list),
@@ -1074,7 +1077,7 @@
         const list = el('ul', { class: 'qn-yform-list qn-fav-list', 'aria-label': t.favorites });
         const all = el('button', { type: 'button', class: 'qn-yform-search' }, icon('rex-icon rex-icon-search'), ' ' + t.favoritesAll + ' ', el('kbd', { text: 'f:' }));
 
-        const panel = el('div', { id: 'qn-favorites', class: 'qn-tree-panel qn-yform-panel', popover: 'auto' },
+        const panel = el('div', { id: 'qn-favorites', class: 'qn-tree-panel qn-yform-panel', popover: 'auto', role: 'dialog', 'aria-label': t.favorites },
             el('div', { class: 'qn-fav-head' }, toggle),
             filterRow,
             el('div', { class: 'qn-tree-scroll' }, list),

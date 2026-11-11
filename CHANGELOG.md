@@ -22,3 +22,5 @@ Neuentwicklung für REDAXO 6 (Branch main; REDAXO 5 in redaxo-5.x), nicht kompat
 - Favoriten je Benutzer (Stern, ⌘D, „Aktuelle Seite merken“, f:), Medienkategorien in der Suche, Favoriten ganz oben
 - Favoriten-Stern in der Kopfleiste: gefüllt bei gemerkter Seite, Panel mit „Diese Seite merken“ und den Favoriten
 - README auf Englisch (README.md) und Deutsch (README.de.md)
+- Linkmap: Live-Suche über Artikel und Kategorien (Name, ID), zuletzt bearbeitet, „übernehmen“ im Auswahl-Modus
+- Barrierefreiheit: axe-Prüfung ohne Befunde – Listboxen nur mit Optionen, Kontraste (aktive Zeile, Offline, Panel-Köpfe), Panels als Dialog, Schließen-Knopf benannt

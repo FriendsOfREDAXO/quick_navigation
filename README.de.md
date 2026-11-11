@@ -174,6 +174,13 @@ Quick Navigation das vorhandene Suchfeld:
 
 ![Live-Suche im Medienpool beim Auswählen eines Bildes](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-mediapool.png)
 
+## Linkmap
+
+Auch die Linkmap (Artikel auswählen) bekommt oben ein Suchfeld: Artikel und Kategorien nach Name oder ID, mit Pfad, in
+der Sprache der Linkmap und nach den Rechten des Benutzers. Ein Klick ins leere Feld zeigt die zuletzt bearbeiteten
+Artikel. Im Auswahl-Modus hat jeder Treffer „übernehmen“, ↵ übernimmt direkt; ein Klick auf die Zeile springt in der
+Linkmap zur Kategorie des Artikels.
+
 ## Rechte
 
 Die Suche läuft über API-Funktionen (nur lesend, mit CSRF-Token). Jede Quelle prüft selbst:
@@ -298,6 +305,8 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 - `<dialog>` mit ARIA-Combobox und Listbox, Baum als ARIA-Tree, Ansagen für Screenreader, `prefers-reduced-motion`
 - Farben und Komponenten des Cores (Tokens, Select, Dropdown) – hell und dunkel ohne eigene Regeln
 - keine Inline-Styles und -Handler (Content-Security-Policy des Backends)
+- mit axe geprüft (WCAG 2.2 AA und Best Practices, hell und dunkel) – ohne Befunde in Palette, Baum, Favoriten, YForm,
+  Medienpool und Linkmap
 
 ## Autor
 

@@ -170,6 +170,13 @@ extends the existing search field:
 
 ![Live search in the media pool while choosing an image](https://raw.githubusercontent.com/FriendsOfREDAXO/quick_navigation/assets/r6-mediapool.png)
 
+## Linkmap
+
+The linkmap (choosing an article) gets a search field at the top as well: articles and categories by name or ID, with
+path, in the linkmap’s language and according to the user’s permissions. Clicking into the empty field shows the
+recently edited articles. In picker mode every result has “select”, ↵ selects right away; clicking the row jumps to the
+article’s category in the linkmap.
+
 ## Permissions
 
 The search runs through API functions (read-only, with CSRF token). Every source checks on its own:
@@ -291,6 +298,8 @@ For fluid accordingly: the primary domain with `0`, landing domains with subpage
 - `<dialog>` with ARIA combobox and listbox, the tree as ARIA tree, screen reader announcements, `prefers-reduced-motion`
 - colors and components of the core (tokens, select, dropdown) – light and dark without own rules
 - no inline styles or handlers (content security policy of the backend)
+- checked with axe (WCAG 2.2 AA and best practices, light and dark) – no findings in palette, tree, favorites, YForm,
+  media pool and linkmap
 
 ## Author
 

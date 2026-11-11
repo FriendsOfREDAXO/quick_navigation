@@ -268,7 +268,7 @@
         .qn-meta,
         .qn-badge,
         .qn-action {
-            color: color-mix(in srgb, var(--rex-color-on-accent) 85%, transparent);
+            color: var(--rex-color-on-accent);
         }
 
         .qn-badge {
@@ -625,9 +625,10 @@
         text-align: center;
     }
 
+    /* offline: gedämpfte Farbe statt Transparenz (Kontrast bleibt ausreichend) */
     &.is-offline > .rex-icon,
     &.is-offline .qn-node-link {
-        opacity: .6;
+        color: var(--rex-color-text-muted);
     }
 }
 
@@ -787,7 +788,7 @@
         color: var(--rex-color-on-accent);
 
         .qn-media-meta {
-            color: color-mix(in srgb, var(--rex-color-on-accent) 85%, transparent);
+            color: var(--rex-color-on-accent);
         }
 
         mark {
@@ -955,7 +956,6 @@
 .qn-media-pager-pos {
     min-inline-size: 4.5em;
     color: inherit;
-    opacity: .85;
     font-size: var(--rex-font-size-small);
     font-variant-numeric: tabular-nums;
     text-align: center;
@@ -1336,4 +1336,20 @@
 
 .qn-tree-search[hidden] {
     display: none;
+}
+
+/* Linkmap: Suchfeld über der Kategorie-Navigation */
+.qn-linkmap-search {
+    display: block;
+    margin-block-end: 15px;
+}
+
+/* Kontrast: Köpfe der Panels hell, Links darauf lesbar; Zeilen beim Überfahren in Textfarbe */
+.qn-tree-head,
+.qn-fav-head {
+    background: var(--rex-color-surface-subtle);
+}
+
+.qn-yform-link:is(:hover, :focus) {
+    color: var(--rex-color-text);
 }

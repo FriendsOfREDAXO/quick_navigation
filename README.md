@@ -301,6 +301,18 @@ For fluid accordingly: the primary domain with `0`, landing domains with subpage
 - checked with axe (WCAG 2.2 AA and best practices, light and dark) – no findings in palette, tree, favorites, YForm,
   media pool and linkmap
 
+## Tests
+
+Unit tests (search ranking, favorite addresses) run without REDAXO, the integration tests (permissions of all sources,
+favorites per user) need a REDAXO installation with database. They create their own test data (everything named
+“qn-test”) and clean up afterwards:
+
+```bash
+REDAXO_BOOTSTRAP=/path/to/redaxo/.tools/bootstrap.php vendor/bin/phpunit -c /path/to/quick_navigation/phpunit.dist.xml
+```
+
+Without `REDAXO_BOOTSTRAP` the integration tests are skipped.
+
 ## Author
 
 **Thomas Skerbis** ([skerbis](https://github.com/skerbis)) for [Friends Of REDAXO](https://friendsofredaxo.github.io)

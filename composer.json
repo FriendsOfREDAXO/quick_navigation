@@ -31,9 +31,17 @@
         "php": "^8.5",
         "redaxo/core": "^6.0@dev"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5 || ^13.1"
+    },
     "autoload": {
         "psr-4": {
             "FriendsOfRedaxo\\QuickNavigation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FriendsOfRedaxo\\QuickNavigation\\Tests\\": "tests/"
         }
     },
     "extra": {

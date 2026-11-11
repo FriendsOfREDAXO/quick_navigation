@@ -24,3 +24,4 @@ Neuentwicklung für REDAXO 6 (Branch main; REDAXO 5 in redaxo-5.x), nicht kompat
 - README auf Englisch (README.md) und Deutsch (README.de.md)
 - Linkmap: Live-Suche über Artikel und Kategorien (Name, ID), zuletzt bearbeitet, „übernehmen“ im Auswahl-Modus
 - Barrierefreiheit: axe-Prüfung ohne Befunde – Listboxen nur mit Optionen, Kontraste (aktive Zeile, Offline, Panel-Köpfe), Panels als Dialog, Schließen-Knopf benannt
+- Tests: PHPUnit für Query::score(), Favorites::normalize() und die Rechteprüfung aller Quellen (Integration)

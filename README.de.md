@@ -308,6 +308,18 @@ Für fluid entsprechend: die Hauptdomain mit `0`, Landing-Domains mit Unterseite
 - mit axe geprüft (WCAG 2.2 AA und Best Practices, hell und dunkel) – ohne Befunde in Palette, Baum, Favoriten, YForm,
   Medienpool und Linkmap
 
+## Tests
+
+Unit-Tests (Relevanz der Suche, Favoriten-Adressen) laufen ohne REDAXO, die Integrationstests (Rechte aller Quellen,
+Favoriten je Benutzer) brauchen eine REDAXO-Installation mit Datenbank. Sie legen eigene Testdaten an (alles mit
+„qn-test“ im Namen) und räumen danach auf:
+
+```bash
+REDAXO_BOOTSTRAP=/pfad/zu/redaxo/.tools/bootstrap.php vendor/bin/phpunit -c /pfad/zu/quick_navigation/phpunit.dist.xml
+```
+
+Ohne `REDAXO_BOOTSTRAP` werden die Integrationstests übersprungen.
+
 ## Autor
 
 **Thomas Skerbis** ([skerbis](https://github.com/skerbis)) für [Friends Of REDAXO](https://friendsofredaxo.github.io)
